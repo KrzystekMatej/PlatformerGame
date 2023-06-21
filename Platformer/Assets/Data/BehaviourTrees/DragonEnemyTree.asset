@@ -33,7 +33,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 310, y: -59, z: 0}
+  viewPosition: {x: 366, y: -200, z: 0}
   viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
   references:
     version: 2
@@ -173,7 +173,7 @@ MonoBehaviour:
             entries: []
         description: 
         drawGizmos: 0
-        startAttackRangeModifier: 0
+        startAttackRangeModifier: 0.18
     - rid: 5306976957804314657
       type: {class: Attack, ns: , asm: Assembly-CSharp}
       data:

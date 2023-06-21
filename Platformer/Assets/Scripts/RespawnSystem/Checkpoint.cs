@@ -8,11 +8,13 @@ public class Checkpoint : MonoBehaviour
 {
     private GameObject respawnTarget;
     private AudioSource audioSource;
+    private RespawnSystem respawnSystem;
 
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        respawnSystem = GetComponentInParent<RespawnSystem>();
     }
 
 
@@ -32,6 +34,7 @@ public class Checkpoint : MonoBehaviour
     {
         respawnTarget.transform.position = transform.position;
         respawnTarget.SetActive(true);
+        respawnSystem.backgroundController.ShiftTowardsPlayer();
     }
 
     public void ResetCheckpoint()

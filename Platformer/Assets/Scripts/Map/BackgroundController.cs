@@ -93,4 +93,16 @@ public class BackgroundController : MonoBehaviour
     {
         transform.position = new Vector2(cameraPosX * speed, transform.position.y);
     }
+
+    public void ShiftTowardsPlayer()
+    {
+        float currentStartX = currentBounds.first.bounds.center.x - currentBounds.first.bounds.size.x / 2;
+        float nextStartX = nextBounds.first.bounds.center.x - nextBounds.first.bounds.size.x / 2;
+        float cameraPosX = playerCamera.transform.position.x;
+        if (currentStartX > cameraPosX || cameraPosX > nextStartX + nextBounds.length)
+        {
+            next.transform.position += new Vector3(cameraPosX - currentStartX + rightLimit * currentBounds.length, 0, 0);
+            current.transform.position += new Vector3(cameraPosX - currentStartX + rightLimit * currentBounds.length, 0, 0);
+        }
+    }
 }
