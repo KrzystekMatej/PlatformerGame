@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - Grass
+  - CameraConfiner
+  - Climbable
+  - Hittable
+  - Platform
+  - Checkpoint
+  - Collectable
+  - Enemy
+  - Rock
+  - Metal
+  - Trap
+  - Weapon
+  - AgentCollider
+  - Obstacle
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2788494723
+    locked: 0
+  - name: Exit
+    uniqueID: 1866051873
+    locked: 0
+  - name: Weapon
+    uniqueID: 2919025073
+    locked: 0
+  - name: Agent
+    uniqueID: 1917034807
+    locked: 0
+  - name: Player
+    uniqueID: 384768753
+    locked: 0
+  - name: Front
+    uniqueID: 642602087
+    locked: 0
+  - name: Collectable
+    uniqueID: 167798337
+    locked: 0
+  - name: UI
+    uniqueID: 1887120419
+    locked: 0
