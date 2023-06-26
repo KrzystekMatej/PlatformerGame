@@ -11,19 +11,19 @@ namespace TheKiwiCoder {
     // Feel free to extend this class 
     public class Context {
         // Add other game specific systems here
-        public Agent agent;
-        public AIInputController inputController;
-        public AIVision vision;
-        public AISteering steering;
+        public Agent Agent;
+        public AIInputController InputController;
+        public CastDetector RayCastDetector;
+        public AIManager AIManager;
 
         public static Context CreateFromGameObject(GameObject gameObject) {
             // Fetch all commonly used components
             Context context = new Context();
             // Add whatever else you need here...
-            context.agent = gameObject.GetComponentInChildren<Agent>();
-            context.inputController = gameObject.GetComponentInChildren<AIInputController>();
-            context.vision = gameObject.GetComponentInChildren<AIVision>();
-            context.steering = gameObject.GetComponentInChildren<AISteering>();
+            context.Agent = gameObject.GetComponentInChildren<Agent>();
+            context.InputController = gameObject.GetComponentInChildren<AIInputController>();
+            context.RayCastDetector = gameObject.GetComponentInChildren<CastDetector>();
+            context.AIManager = gameObject.GetComponentInChildren<AIManager>();
 
             return context;
         }

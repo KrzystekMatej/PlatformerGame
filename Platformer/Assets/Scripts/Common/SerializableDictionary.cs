@@ -31,7 +31,7 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         }
         set 
         {
-            if (!dictionary.ContainsKey(key))
+            if (!ContainsKey(key))
             {
                 entries.Add(new SerializableDictionaryEntry<TKey, TValue>(key, value));
             }
@@ -39,26 +39,14 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         }
     }
 
-    public bool Remove(TKey key)
-    {
-        if (dictionary.Remove(key))
-        {
-            for (int i = 0; i < entries.Count; i++)
-            {
-                if (entries[i].Key.Equals(key))
-                {
-                    entries.RemoveAt(i);
-                    return true;
-                }
-            }
-            throw new InvalidOperationException();
-        }
-        return false;
-    }
-
     public bool ContainsKey(TKey key)
     {
         return dictionary.ContainsKey(key);
+    }
+
+    public List<SerializableDictionaryEntry<TKey, TValue>> GetAllStartEntries()
+    {
+        return entries;
     }
 }
 

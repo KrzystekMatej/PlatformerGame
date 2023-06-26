@@ -6,7 +6,8 @@ using TheKiwiCoder;
 [System.Serializable]
 public class WaitAfterSuccess : DecoratorNode
 {
-    public float duration = 1.0f;
+    [SerializeField]
+    private float duration = 1.0f;
     private float startTime;
 
     public override void Initialize()

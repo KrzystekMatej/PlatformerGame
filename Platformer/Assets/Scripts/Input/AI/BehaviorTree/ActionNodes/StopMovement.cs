@@ -8,7 +8,7 @@ public class StopMovement : ActionNode
 {
     protected override State OnUpdate()
     {
-        context.inputController.SetMovementVector(Vector2.zero);
+        context.InputController.SetMovementVector(Vector2.zero);
         return State.Success;
     }
 }

@@ -7,7 +7,6 @@ using UnityEngine.Events;
 
 public class AttackState : State
 {
-    public LayerMask hittableLayerMask;
     private Vector2 attackDirection;
 
     protected override StateTransition[] GetTransitions()
@@ -24,20 +23,19 @@ public class AttackState : State
     protected override void HandleEnter()
     {
         agent.Animator.PlayByType(AnimationType.Attack);
-        agent.Animator.OnAnimationAction.AddListener(PerformAttack);
         agent.WeaponManager.SetWeaponVisibility(true);
         attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
         if (agent.GroundDetector.CollisionDetected)
         {
             agent.RigidBody.velocity = Vector3.zero;
         }
+        PerformAttack();
     }
 
     private void PerformAttack()
     {
-        agent.Animator.OnAnimationAction.RemoveListener(PerformAttack);
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
-        agent.WeaponManager.GetWeapon().Attack(agent, hittableLayerMask, attackDirection);
+        agent.WeaponManager.GetWeapon().Attack(agent, attackDirection);
     }
 
     protected override void HandleExit()

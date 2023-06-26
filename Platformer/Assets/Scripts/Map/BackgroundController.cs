@@ -23,8 +23,8 @@ public class BackgroundController : MonoBehaviour
     [Range(0.5f, 1f)]
     private float rightLimit = 0.75f;
 
-    private (SpriteRenderer first, float length) currentBounds;
-    private (SpriteRenderer first, float length) nextBounds;
+    private (SpriteRenderer sprite, float length) currentBounds;
+    private (SpriteRenderer sprite, float length) nextBounds;
     bool isOnLeft;
 
     private void Awake()
@@ -41,7 +41,7 @@ public class BackgroundController : MonoBehaviour
         nextBounds = GetBounds(nextSprites);
     }
 
-    private (SpriteRenderer first, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)
+    private (SpriteRenderer sprite, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)
     {
 
         float rightX = sprites.Last().bounds.center.x + sprites.Last().bounds.size.x / 2;
@@ -51,8 +51,8 @@ public class BackgroundController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float currentStartX = currentBounds.first.bounds.center.x - currentBounds.first.bounds.size.x / 2;
-        float nextStartX = nextBounds.first.bounds.center.x - nextBounds.first.bounds.size.x / 2;
+        float currentStartX = currentBounds.sprite.bounds.center.x - currentBounds.sprite.bounds.size.x / 2;
+        float nextStartX = nextBounds.sprite.bounds.center.x - nextBounds.sprite.bounds.size.x / 2;
         float cameraPosX = playerCamera.transform.position.x;
 
         ShiftNext(currentStartX, cameraPosX);
@@ -96,8 +96,8 @@ public class BackgroundController : MonoBehaviour
 
     public void ShiftTowardsPlayer()
     {
-        float currentStartX = currentBounds.first.bounds.center.x - currentBounds.first.bounds.size.x / 2;
-        float nextStartX = nextBounds.first.bounds.center.x - nextBounds.first.bounds.size.x / 2;
+        float currentStartX = currentBounds.sprite.bounds.center.x - currentBounds.sprite.bounds.size.x / 2;
+        float nextStartX = nextBounds.sprite.bounds.center.x - nextBounds.sprite.bounds.size.x / 2;
         float cameraPosX = playerCamera.transform.position.x;
         if (currentStartX > cameraPosX || cameraPosX > nextStartX + nextBounds.length)
         {

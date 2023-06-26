@@ -6,11 +6,11 @@ using UnityEngine;
 public class ChangeMaxSpeed : ActionNode
 {
     [SerializeField]
-    private float maxSpeed = 2f;
+    private float maxSpeedMultiplier = 2f;
 
     protected override State OnUpdate()
     {
-        context.agent.InstanceData.MaxSpeed = maxSpeed;
+        context.Agent.InstanceData.MaxSpeed = context.Agent.DefaultData.MaxSpeed * maxSpeedMultiplier;
         return State.Success;
     }
 }

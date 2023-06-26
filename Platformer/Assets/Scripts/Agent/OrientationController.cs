@@ -8,7 +8,9 @@ public class OrientationController : MonoBehaviour
 {
     [SerializeField]
     private Collider2D objectCollider;
-    
+    [SerializeField]
+    private float flipThreshold = 0.1f;
+
 
     public float CurrentOrientation { get; private set; } = 1f;
 
@@ -21,8 +23,8 @@ public class OrientationController : MonoBehaviour
 
     public void SetAgentOrientation(Vector2 input)
     {
-
-        if (input.x != 0 && Mathf.Sign(input.x) != Mathf.Sign(CurrentOrientation))
+        
+        if (Mathf.Abs(input.x) > flipThreshold && Mathf.Sign(input.x) != Mathf.Sign(CurrentOrientation))
         {
             Flip();
         }

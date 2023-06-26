@@ -93,7 +93,7 @@ public class Agent : MonoBehaviour, IHittable
     {
         Hit(attackingWeapon.AttackDamage);
         OnHit?.Invoke(gameObject, attackingWeapon);
-        PerformKnockback(gameObject.transform.position, attackingWeapon.knockbackForce);
+        PerformKnockback(gameObject.transform.position, attackingWeapon.KnockbackForce);
     }
 
     public void Hit(int attackDamage)

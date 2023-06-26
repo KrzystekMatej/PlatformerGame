@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9171437082719344016}
+  - component: {fileID: 8564825759158666425}
   m_Layer: 13
   m_Name: AI
   m_TagString: Untagged
@@ -32,6 +33,18 @@ Transform:
   m_Father: {fileID: 499778370858099344}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8564825759158666425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798198228079986418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30daddf41576cc4aa818bb82fd1704d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4559221739932178313
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1827909482312279667}
   - component: {fileID: 5224811623946981951}
+  - component: {fileID: 558925713608223237}
   m_Layer: 13
   m_Name: Vision
   m_TagString: Untagged
@@ -144,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8293736393397937614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06753478, y: -0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -163,37 +177,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a496a13febd677448b9dd6096e1bd90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raycastDelay: 0.1
-  rays:
-  - name: Right
-    length: 5
-    direction: {x: 1, y: 0}
-    offset: {x: 0, y: 0}
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 639048
-  - name: Left
-    length: 5
-    direction: {x: -1, y: 0}
-    offset: {x: 0, y: 0}
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 639048
-  - name: RightDown
-    length: 1
-    direction: {x: 1, y: -1}
-    offset: {x: 0, y: 0}
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 640064
-  - name: LeftDown
-    length: 1
-    direction: {x: -1, y: -1}
-    offset: {x: 0, y: 0}
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 640064
-  rayColor: {r: 0, g: 0.868814, b: 1, a: 1}
+  visionDelay: 0.1
+--- !u!114 &558925713608223237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293736393397937614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  rayTable:
+    entries:
+    - Key: Right
+      Value:
+        size: {x: 0, y: 0}
+        distance: 5.5
+        direction: {x: 1, y: 0}
+        offset: {x: 0, y: 0}
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 640072
+        castType: 0
+    - Key: Left
+      Value:
+        size: {x: 0, y: 0}
+        distance: 5.5
+        direction: {x: -1, y: 0}
+        offset: {x: 0, y: 0}
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 640072
+        castType: 0
+    - Key: LeftDown
+      Value:
+        size: {x: 0, y: 0}
+        distance: 1.2
+        direction: {x: -1, y: -1}
+        offset: {x: 0, y: 0}
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 640064
+        castType: 0
+    - Key: RightDown
+      Value:
+        size: {x: 0, y: 0}
+        distance: 1.2
+        direction: {x: 1, y: -1}
+        offset: {x: 0, y: 0}
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 640064
+        castType: 0
 --- !u!1001 &6980247669020632358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -436,6 +475,34 @@ PrefabInstance:
     - target: {fileID: 7363741092985079734, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 558925713608223237}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AddWeaponDetector
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CastDetector, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8660966007656399279, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size

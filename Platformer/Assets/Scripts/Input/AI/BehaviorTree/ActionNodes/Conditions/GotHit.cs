@@ -10,14 +10,14 @@ public class GotHit : Condition
 
     public override void Initialize()
     {
-        context.agent.OnHit.AddListener(SetHit);
+        context.Agent.OnHit.AddListener(SetHit);
     }
 
     public void SetHit(GameObject gameObject, Weapon attackingWeapon)
     {
         hit = true;
-        blackboard.DataTable["opponent"] = gameObject;
-        blackboard.DataTable["attackingWeapon"] = attackingWeapon;
+        blackboard.DataTable["OpponentPosition"] = gameObject.transform.position;
+        blackboard.DataTable["AttackingWeapon"] = attackingWeapon;
     }
 
     protected override bool IsConditionSatisfied()

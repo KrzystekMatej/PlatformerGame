@@ -9,7 +9,7 @@ public class SetDefaultSpeed : ActionNode
     protected override State OnUpdate()
     {
 
-        context.agent.InstanceData.MaxSpeed = context.agent.DefaultData.MaxSpeed;
+        context.Agent.InstanceData.MaxSpeed = context.Agent.DefaultData.MaxSpeed;
         return State.Success;
     }
 }

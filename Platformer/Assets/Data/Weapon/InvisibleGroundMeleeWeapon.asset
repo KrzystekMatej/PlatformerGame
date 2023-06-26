@@ -15,8 +15,12 @@ MonoBehaviour:
   IsGroundWeapon: 1
   WeaponName: InvisibleWeapon
   AttackDamage: 1
-  AttackRange: 1.3
-  knockbackForce: 10
+  AttackRange: 1.5
+  KnockbackForce: 10
+  HitMask:
+    serializedVersion: 2
+    m_Bits: 8
   WeaponSprite: {fileID: 0}
   WeaponSound: {fileID: 11400000, guid: 36d8ae4bd13f03049a68b54654fdf62d, type: 2}
   MaxNumberOfHits: 2
+  AttackWidth: 1

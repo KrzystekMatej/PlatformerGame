@@ -8,7 +8,7 @@ public class Attack : ActionNode
 {
     protected override State OnUpdate()
     {
-        context.inputController.Attack();
+        context.InputController.Attack();
         return State.Success;
     }
 }

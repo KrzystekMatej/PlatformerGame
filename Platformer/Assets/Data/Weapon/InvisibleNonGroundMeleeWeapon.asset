@@ -12,10 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1713860c2ed79c4daf228732f6e08a7, type: 3}
   m_Name: InvisibleNonGroundMeleeWeapon
   m_EditorClassIdentifier: 
+  IsGroundWeapon: 0
   WeaponName: InvisibleWeapon
   AttackDamage: 1
-  AttackRange: 1.3
-  MaxNumberOfHits: 2
-  knockbackForce: 10
+  AttackRange: 1.6
+  KnockbackForce: 10
+  HitMask:
+    serializedVersion: 2
+    m_Bits: 0
   WeaponSprite: {fileID: 0}
   WeaponSound: {fileID: 11400000, guid: 36d8ae4bd13f03049a68b54654fdf62d, type: 2}
+  MaxNumberOfHits: 2
+  AttackWidth: 1.5

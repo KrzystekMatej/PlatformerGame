@@ -6,19 +6,17 @@ using TheKiwiCoder;
 [System.Serializable]
 public class CanAttackAgent : Condition
 {
-    [SerializeField]
-    [Range(0f, 1f)]
-    private float startAttackRangeModifier = 1f;
-
     protected override bool IsConditionSatisfied()
     {
-        float attackDirection = context.agent.OrientationController.CurrentOrientation;
-        RaycastHit2D hit = context.vision.GetRaycastHit(attackDirection == 1 ? "Right" : "Left");
-        if (hit.collider == null) return false;
-        Agent target = hit.collider.GetComponent<Agent>();
-        return target != null
-            && context.agent.WeaponManager.GetWeapon() != null
-            && context.agent.WeaponManager.GetWeapon().IsUseable(context.agent)
-            && hit.distance < context.agent.WeaponManager.GetWeapon().AttackRange * startAttackRangeModifier;
+        float attackDirection = context.Agent.OrientationController.CurrentOrientation;
+        Weapon weapon = context.Agent.WeaponManager.GetWeapon();
+        if (weapon != null && weapon.IsUseable(context.Agent))
+        {
+            RaycastHit2D hit = context.RayCastDetector.GetVisionRay(attackDirection == 1 ? "Right" + weapon.WeaponName : "Left" + weapon.WeaponName).hit;
+            if (hit.collider == null) return false;
+            IHittable target = hit.collider.GetComponent<IHittable>();
+            return target != null;
+        }
+        return false;
     }
 }

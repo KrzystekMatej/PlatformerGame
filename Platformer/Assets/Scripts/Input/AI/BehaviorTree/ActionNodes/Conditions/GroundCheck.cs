@@ -12,7 +12,7 @@ public class GroundCheck : Condition
 
     protected override bool IsConditionSatisfied()
     {
-        RaycastHit2D groundHit = context.vision.GetRaycastHit((float)blackboard.DataTable["HorizontalDirection"] == 1 ? groundCheckRight : groundCheckLeft);
+        RaycastHit2D groundHit = context.RayCastDetector.GetVisionRay((float)blackboard.DataTable["HorizontalDirection"] == 1 ? groundCheckRight : groundCheckLeft).hit;
         return groundHit.collider == null || groundHit.distance > groundDistance;
     }
 }

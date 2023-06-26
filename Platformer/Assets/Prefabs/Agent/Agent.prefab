@@ -97,6 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b426653f2651baa44a2f45083f027621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnSwap:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2675105344776821214
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +543,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   <Triggered>k__BackingField: 0
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7363741092903229673
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,8 +891,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   DefaultData: {fileID: 11400000, guid: 2db2e287c7486e945a78aa07bdc916a3, type: 2}
-  <PhysicsCollider>k__BackingField: {fileID: 0}
-  <TriggerCollider>k__BackingField: {fileID: 0}
+  <PhysicsCollider>k__BackingField: {fileID: 7363741092666616261}
+  <TriggerCollider>k__BackingField: {fileID: 2774391687644902663}
 --- !u!114 &1098224640033834070
 MonoBehaviour:
   m_ObjectHideFlags: 0

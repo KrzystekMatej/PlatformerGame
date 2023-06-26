@@ -32,7 +32,7 @@ public class ThrowableWeapon : MonoBehaviour
 
     private void Update()
     {
-        Fly();
+        Rotate();
         if (((Vector2)transform.position - start).magnitude >= rangeWeapon.AttackRange)
         {
             Destroy(gameObject);
@@ -53,7 +53,7 @@ public class ThrowableWeapon : MonoBehaviour
         }
     }
 
-    private void Fly()
+    private void Rotate()
     {
         transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * rotationSpeed * -direction.x);
     }

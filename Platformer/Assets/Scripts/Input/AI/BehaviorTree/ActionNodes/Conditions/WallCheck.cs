@@ -12,8 +12,7 @@ public class WallCheck : Condition
 
     protected override bool IsConditionSatisfied()
     {
-        RaycastHit2D wallHit = context.vision.GetRaycastHit((float)blackboard.DataTable["HorizontalDirection"] == 1 ? wallCheckRight : wallCheckLeft);
-        
+        RaycastHit2D wallHit = context.RayCastDetector.GetVisionRay((float)blackboard.DataTable["HorizontalDirection"] == 1 ? wallCheckRight : wallCheckLeft).hit;
         return wallHit.collider != null && wallHit.distance < wallDistance && wallHit.collider.GetComponent<Agent>() == null;
     }
 }

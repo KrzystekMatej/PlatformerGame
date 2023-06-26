@@ -10,11 +10,11 @@ public class RangeWeapon : Weapon
     public bool IsUnstoppable = false;
 
 
-    public override void Attack(Agent agent, LayerMask hitMask, Vector3 direction)
+    public override void Attack(Agent agent, Vector3 direction)
     {
         agent.WeaponManager.SetWeaponVisibility(false);
         GameObject flyingObject = Instantiate(RangeWeaponPrefab, agent.TriggerCollider.bounds.center, Quaternion.identity);
-        flyingObject.GetComponent<ThrowableWeapon>().Initialize(this, direction, hitMask, agent);
+        flyingObject.GetComponent<ThrowableWeapon>().Initialize(this, direction, HitMask, agent);
     }
 
     public override bool IsUseable(Agent agent)

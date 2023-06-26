@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class WeaponManager : MonoBehaviour
 {
     public UnityEvent<Sprite> OnSwap;
+    public UnityEvent<Weapon> OnAdd;
 
     private List<Weapon> weapons = new List<Weapon>();
     private int currentWeapon = -1;
@@ -33,6 +34,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = weapons.Count - 1;
         spriteRenderer.sprite = weapons[currentWeapon].WeaponSprite;
         OnSwap?.Invoke(spriteRenderer.sprite);
+        OnAdd?.Invoke(weapon);
         return true;
     }
 
