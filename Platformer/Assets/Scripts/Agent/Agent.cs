@@ -37,7 +37,7 @@ public class Agent : MonoBehaviour, IHittable
         Animator = GetComponentInChildren<AgentAnimator>();
         OrientationController = GetComponentInChildren<OrientationController>();
         GroundDetector = GetComponentInChildren<CollisionDetector>();
-        ClimbDetector = GetComponentInChildren<TriggerDetector>();
+        ClimbDetector = GetComponent<TriggerDetector>();
         AudioFeedback = GetComponentInChildren<AudioFeedback>();
         WeaponManager = GetComponentInChildren<WeaponManager>();
         HealthManager = GetComponent<HealthManager>();
@@ -50,7 +50,6 @@ public class Agent : MonoBehaviour, IHittable
         InstanceData = new AgentInstanceData()
         {
             Health = DefaultData.Health,
-            Velocity = DefaultData.Velocity,
             MaxSpeed = DefaultData.MaxSpeed,
             Acceleration = DefaultData.Acceleration,
             Deacceleration = DefaultData.Deacceleration,

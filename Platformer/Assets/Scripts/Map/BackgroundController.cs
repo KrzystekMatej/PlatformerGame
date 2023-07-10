@@ -1,7 +1,9 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
 
@@ -11,11 +13,13 @@ public class BackgroundController : MonoBehaviour
     private GameObject current;
     [SerializeField]
     private GameObject next;
-    [SerializeField]
-    private Camera playerCamera;
+    private Collider2D playerCollider;
     [SerializeField]
     [Range(0, 1)]
-    private float speed = 0.1f;
+    private float horizontalParallax = 0.1f;
+    [SerializeField]
+    [Range(0, 1)]
+    private float verticalParallax = 0f;
     [SerializeField]
     [Range(0, 0.5f)]
     private float leftLimit = 0.25f;
@@ -23,86 +27,92 @@ public class BackgroundController : MonoBehaviour
     [Range(0.5f, 1f)]
     private float rightLimit = 0.75f;
 
-    private (SpriteRenderer sprite, float length) currentBounds;
-    private (SpriteRenderer sprite, float length) nextBounds;
-    bool isOnLeft;
+    BackgroundData backgroundData;
+    BackgroundData tempBackgroundData;
 
-    private void Awake()
-    {
-        playerCamera = playerCamera == null ? Camera.main : playerCamera;
-    }
+    Vector3 lastPlayerPos;
+
+
 
     private void Start()
     {
+        playerCollider = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.GetComponent<Agent>().TriggerCollider;
         var currentSprites = current.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
         var nextSprites = next.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
 
-        currentBounds = GetBounds(currentSprites);
-        nextBounds = GetBounds(nextSprites);
+        backgroundData.CurrentBounds = GetBounds(currentSprites);
+        backgroundData.NextBounds = GetBounds(nextSprites);
+
+        tempBackgroundData = backgroundData;
+
+        lastPlayerPos = playerCollider.bounds.center;
     }
 
-    private (SpriteRenderer sprite, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)
+    private (float startX, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)
     {
 
         float rightX = sprites.Last().bounds.center.x + sprites.Last().bounds.size.x / 2;
         float leftX = sprites.First().bounds.center.x - sprites.First().bounds.size.x / 2;
-        return (sprites.First(), rightX - leftX);
+        return (sprites.First().bounds.center.x - sprites.First().bounds.size.x / 2, rightX - leftX);
     }
 
     private void FixedUpdate()
     {
-        float currentStartX = currentBounds.sprite.bounds.center.x - currentBounds.sprite.bounds.size.x / 2;
-        float nextStartX = nextBounds.sprite.bounds.center.x - nextBounds.sprite.bounds.size.x / 2;
-        float cameraPosX = playerCamera.transform.position.x;
+        Vector3 currentPlayerPos = playerCollider.bounds.center;
 
-        ShiftNext(currentStartX, cameraPosX);
-        SwitchBackgrounds(nextStartX, cameraPosX);
-        ApplyParallaxEffect(cameraPosX);
+        ApplyParallaxEffect(currentPlayerPos);
+        ShiftNext(currentPlayerPos.x);
+        SwitchBackgrounds(currentPlayerPos.x);
+
+        lastPlayerPos = currentPlayerPos;
     }
 
-    private void ShiftNext(float currentStartX, float cameraPosX)
+    private void ShiftNext(float currentPlayerPos)
     {
-        if (!isOnLeft && cameraPosX < currentStartX + leftLimit * currentBounds.length)
+        if (!backgroundData.IsOnLeft && currentPlayerPos < backgroundData.CurrentBounds.startX + leftLimit * backgroundData.CurrentBounds.length)
         {
-            next.transform.position -= new Vector3(currentBounds.length + nextBounds.length, 0, 0);
-            isOnLeft = true;
+            Vector3 shift = new Vector3(backgroundData.CurrentBounds.length + backgroundData.NextBounds.length, 0, 0);
+            next.transform.position -= shift;
+            backgroundData.NextBounds.startX -= shift.x;
+            backgroundData.IsOnLeft = true;
         }
-        else if (isOnLeft && cameraPosX > currentStartX + rightLimit * currentBounds.length)
+        else if (backgroundData.IsOnLeft && currentPlayerPos > backgroundData.CurrentBounds.startX + rightLimit * backgroundData.CurrentBounds.length)
         {
-            next.transform.position += new Vector3(currentBounds.length + nextBounds.length, 0, 0);
-            isOnLeft = false;
-        }
-    }
-
-    private void SwitchBackgrounds(float nextStartX, float cameraPosX)
-    {
-        if (cameraPosX > nextStartX && cameraPosX < nextStartX + nextBounds.length)
-        {
-
-            var tempObject = current;
-            current = next;
-            next = tempObject;
-            var tempBounds = currentBounds;
-            currentBounds = nextBounds;
-            nextBounds = tempBounds;
-            isOnLeft = !isOnLeft;
+            Vector3 shift = new Vector3(backgroundData.CurrentBounds.length + backgroundData.NextBounds.length, 0, 0);
+            next.transform.position += shift;
+            backgroundData.NextBounds.startX += shift.x;
+            backgroundData.IsOnLeft = false;
         }
     }
 
-    private void ApplyParallaxEffect(float cameraPosX)
+    private void SwitchBackgrounds(float currentPlayerPosX)
     {
-        transform.position = new Vector2(cameraPosX * speed, transform.position.y);
+       if (currentPlayerPosX > backgroundData.NextBounds.startX && currentPlayerPosX < backgroundData.NextBounds.startX + backgroundData.NextBounds.length)
+       {
+            Utility.SwapReferences(ref current, ref next);
+            var tempCurrentBounds = backgroundData.CurrentBounds;
+            backgroundData.CurrentBounds = backgroundData.NextBounds;
+            backgroundData.NextBounds = tempCurrentBounds;
+            backgroundData.IsOnLeft = !backgroundData.IsOnLeft;
+       }
     }
 
-    public void ShiftTowardsPlayer()
+    private void ApplyParallaxEffect(Vector3 currentPlayerPos)
     {
-        float currentStartX = currentBounds.sprite.bounds.center.x - currentBounds.sprite.bounds.size.x / 2;
-        float nextStartX = nextBounds.sprite.bounds.center.x - nextBounds.sprite.bounds.size.x / 2;
-        float cameraPosX = playerCamera.transform.position.x;
-        if (currentStartX > cameraPosX || cameraPosX > nextStartX + nextBounds.length)
-        {
-            next.transform.position += new Vector3(cameraPosX - currentStartX + rightLimit * currentBounds.length, 0, 0);
-            current.transform.position += new Vector3(cameraPosX - currentStartX + rightLimit * currentBounds.length, 0, 0);
-        }
+        Vector3 shift = new Vector3((currentPlayerPos.x - lastPlayerPos.x) * horizontalParallax, (currentPlayerPos.y - lastPlayerPos.y) * verticalParallax);
+        transform.position += shift;
+        backgroundData.CurrentBounds.startX += shift.x;
+        backgroundData.NextBounds.startX += shift.x;
+    }
+
+
+    public void CacheBackgroundData()
+    {
+        tempBackgroundData = backgroundData;
+    }
+
+    public void RestoreBackgroundData()
+    {
+        backgroundData = tempBackgroundData;
     }
 }

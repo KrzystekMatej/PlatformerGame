@@ -46,4 +46,11 @@ public static class Utility
     {
         return (IndexToLayerMask(layerIndex) & layerMask) != 0;
     }
+
+    public static void SwapReferences<T>(ref T a, ref T b)
+    {
+        T temp = a;
+        a = b;
+        b = temp;
+    }
 }

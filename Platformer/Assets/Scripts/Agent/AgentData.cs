@@ -10,7 +10,6 @@ public class AgentData : ScriptableObject
 
     [Header("Run data")]
     [Space]
-    public Vector2 Velocity;
     public float MaxSpeed = 6;
     public float Acceleration = 50;
     public float Deacceleration = 50;

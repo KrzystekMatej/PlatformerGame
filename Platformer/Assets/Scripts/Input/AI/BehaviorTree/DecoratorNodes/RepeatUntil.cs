@@ -28,13 +28,9 @@ public class RepeatUntil : DecoratorNode
             return State.Success;
         }
 
-        if (!repeatOnSuccess && state == State.Success)
+        if ((!repeatOnSuccess && state == State.Success) || (!repeatOnFailure && state == State.Failure))
         {
-            return State.Failure;
-        }
-        else if (!repeatOnSuccess && state == State.Success)
-        {
-            return State.Failure;
+            return state;
         }
 
         return State.Running;

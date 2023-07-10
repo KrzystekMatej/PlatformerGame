@@ -3,58 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThrowableWeapon : MonoBehaviour
+public class ThrowableWeapon : Throwable
 {
-    [SerializeField]
-    private float rotationSpeed = 1;
-
     private RangeWeapon rangeWeapon;
-    private Vector2 start;
-    private Vector2 direction;
-    private Rigidbody2D rigidBody;
-    private TriggerDetector triggerDetector;
-    private Agent agent;
-
-    private void Awake()
-    {
-        start = transform.position;
-        rigidBody = GetComponent<Rigidbody2D>();
-        triggerDetector = GetComponent<TriggerDetector>();
-    }
+    private Agent throwingAgent;
 
     public void Initialize(RangeWeapon rangeWeapon, Vector2 direction, LayerMask layerMask, Agent agent)
     {
         this.rangeWeapon = rangeWeapon;
+        this.flyDistance = rangeWeapon.AttackRange;
         this.direction = direction;
         this.rigidBody.velocity = direction * rangeWeapon.FlySpeed;
-        this.agent = agent;
+        this.throwingAgent = agent;
+        GetComponent<TriggerDetector>().ChangeTriggerMask(layerMask);
     }
 
-    private void Update()
-    {
-        Rotate();
-        if (((Vector2)transform.position - start).magnitude >= rangeWeapon.AttackRange)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void PerformHit(Collider2D collision)
+    public override void PerformHit(Collider2D collision)
     {
         if (collision != null)
         {
-            if (collision.gameObject == agent.gameObject) return;
+            if (collision.gameObject == throwingAgent.gameObject) return;
             IHittable hittable = collision.GetComponent<IHittable>();
             if (hittable != null)
             {
-                hittable.Hit(agent.gameObject, rangeWeapon);
+                hittable.Hit(throwingAgent.gameObject, rangeWeapon);
                 if (!rangeWeapon.IsUnstoppable) Destroy(gameObject);
             }
         }
-    }
-
-    private void Rotate()
-    {
-        transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * rotationSpeed * -direction.x);
     }
 }

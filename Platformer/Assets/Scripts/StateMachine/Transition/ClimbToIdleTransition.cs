@@ -9,6 +9,6 @@ public class ClimbToIdleTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return !agent.ClimbDetector.Triggered;
+        return agent.ClimbDetector.TriggerCounter == 0;
     }
 }

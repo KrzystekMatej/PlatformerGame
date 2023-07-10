@@ -8,21 +8,42 @@ public class TriggerDetector : MonoBehaviour
 {
     [SerializeField]
     private LayerMask triggerMask;
+    [SerializeField]
+    private string triggerTag;
     [field: SerializeField]
-    public bool Triggered { get; private set; }
+    public int TriggerCounter { get; private set; }
     public UnityEvent<Collider2D> OnEnter, OnExit;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private HashSet<Collider2D> triggerSet = new HashSet<Collider2D>();
+
+    private void OnTriggerEnter2D(Collider2D trigger)
     {
-        Triggered = Utility.CheckLayer(collision.gameObject.layer, triggerMask);
-        if (Triggered) OnEnter?.Invoke(collision);
+        if (CheckTrigger(trigger))
+        {
+            TriggerCounter++;
+            triggerSet.Add(trigger);
+            OnEnter?.Invoke(trigger);
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D trigger)
     {
-        
-        Triggered = Triggered && !Utility.CheckLayer(collision.gameObject.layer, triggerMask);
-        if (!Triggered) OnExit?.Invoke(collision);
+        if (CheckTrigger(trigger))
+        {
+            TriggerCounter--;
+            triggerSet.Remove(trigger);
+            OnExit?.Invoke(trigger);
+        }
+    }
+
+    private bool CheckTrigger(Collider2D trigger)
+    {
+        return Utility.CheckLayer(trigger.gameObject.layer, triggerMask) && (triggerTag == "" || trigger.CompareTag(triggerTag));
+    }
+
+    public bool IsColliderTriggered(Collider2D trigger)
+    {
+        return triggerSet.Contains(trigger);
     }
 
     public void Enable()
@@ -34,4 +55,11 @@ public class TriggerDetector : MonoBehaviour
     {
         GetComponent<Collider2D>().enabled = false;
     }
+
+    public void ChangeTriggerMask(LayerMask triggerMask)
+    {
+        this.triggerMask = triggerMask;
+    }
 }
+
+

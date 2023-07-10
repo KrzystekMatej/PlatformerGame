@@ -24,7 +24,7 @@ TagManager:
   - Metal
   - Trap
   - Weapon
-  - AgentCollider
+  - AgentPhysicsCollider
   - Obstacle
   - 
   - 

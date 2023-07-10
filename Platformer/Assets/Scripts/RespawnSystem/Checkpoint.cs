@@ -8,38 +8,44 @@ public class Checkpoint : MonoBehaviour
 {
     private GameObject respawnTarget;
     private AudioSource audioSource;
-    private RespawnSystem respawnSystem;
+    private SpawnSystem respawnSystem;
+    private TriggerDetector triggerDetector;
 
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        respawnSystem = GetComponentInParent<RespawnSystem>();
+        respawnSystem = GetComponentInParent<SpawnSystem>();
+        triggerDetector = GetComponent<TriggerDetector>();
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ActivateCheckpoint(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        audioSource.Play();
+        respawnTarget = collision.gameObject;
+        triggerDetector.Disable();
+        respawnTarget.GetComponent<Agent>().OnRespawnRequired.RemoveAllListeners();
+        respawnTarget.GetComponent<Agent>().OnRespawnRequired.AddListener(RespawnPlayer);
+        foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
         {
-            audioSource.Play();
-            respawnTarget = collision.gameObject;
-            GetComponent<Collider2D>().enabled = false;
-            respawnTarget.GetComponent<Agent>().OnRespawnRequired.RemoveAllListeners();
-            respawnTarget.GetComponent<Agent>().OnRespawnRequired.AddListener(RespawnPlayer);
+            controller.CacheBackgroundData();
         }
     }
 
-    public void RespawnPlayer()
+    private void RespawnPlayer()
     {
         respawnTarget.transform.position = transform.position;
         respawnTarget.SetActive(true);
-        respawnSystem.backgroundController.ShiftTowardsPlayer();
+        foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
+        {
+            controller.RestoreBackgroundData();
+        }
     }
 
     public void ResetCheckpoint()
     {
         respawnTarget = null;
-        GetComponent<Collider2D>().enabled = true;
+        triggerDetector.Enable();
     }
 }

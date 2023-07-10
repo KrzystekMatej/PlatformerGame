@@ -48,16 +48,11 @@ public class ContextChaseBehaviour : ContextSteeringBehaviour
 
     private bool ClosestTargetReached(Collider2D targetCollider)
     {
-        Debug.Log(Vector2.Distance(transform.position, targetCollider.bounds.center));
         return Vector2.Distance(transform.position, targetCollider.bounds.center) < targetReachedDistance;
     }
 
     private bool CachedTargetPositionReached()
     {
-        if (cachedTargetPosition != null)
-        {
-            Debug.Log(Vector2.Distance(transform.position, cachedTargetPosition.Value));
-        }
         return cachedTargetPosition.HasValue && Vector2.Distance(transform.position, cachedTargetPosition.Value) < targetReachedDistance;
     }
 
