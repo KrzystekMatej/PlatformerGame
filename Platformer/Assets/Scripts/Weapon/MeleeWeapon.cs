@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MeleeWeapon", menuName = "Weapons/MeleeWeapon")]
-public class MeleeWeapon : Weapon
+public class MeleeWeapon : AgentWeapon
 {
     public int MaxNumberOfHits;
     public float AttackWidth = 1;

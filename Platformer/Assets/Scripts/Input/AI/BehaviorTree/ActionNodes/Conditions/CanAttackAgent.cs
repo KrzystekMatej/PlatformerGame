@@ -9,7 +9,7 @@ public class CanAttackAgent : Condition
     protected override bool IsConditionSatisfied()
     {
         float attackDirection = context.Agent.OrientationController.CurrentOrientation;
-        Weapon weapon = context.Agent.WeaponManager.GetWeapon();
+        AgentWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         if (weapon != null && weapon.IsUseable(context.Agent))
         {
             RaycastHit2D hit = context.RayCastDetector.GetVisionRay(attackDirection == 1 ? "Right" + weapon.WeaponName : "Left" + weapon.WeaponName).hit;

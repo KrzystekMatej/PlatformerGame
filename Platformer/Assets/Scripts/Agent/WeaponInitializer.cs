@@ -7,13 +7,13 @@ namespace WeaponSystem
     public class WeaponInitializer : MonoBehaviour
     {
         [SerializeField]
-        private List<Weapon> startWeapons = new List<Weapon>();
+        private List<AgentWeapon> startWeapons = new List<AgentWeapon>();
 
         void Start()
         {
             Agent agent = GetComponentInChildren<Agent>();
             if (agent == null) return;
-            foreach (Weapon item in startWeapons)
+            foreach (AgentWeapon item in startWeapons)
             {
                 item.Initialize();
                 agent.WeaponManager.AddWeapon(item);

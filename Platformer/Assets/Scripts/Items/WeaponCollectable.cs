@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponCollectable : Collectable
 {
     [SerializeField]
-    private Weapon weapon;
+    private AgentWeapon weapon;
     private SpriteRenderer spriteRenderer;
 
 

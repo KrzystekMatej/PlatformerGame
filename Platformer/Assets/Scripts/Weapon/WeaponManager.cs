@@ -7,9 +7,9 @@ using UnityEngine.Events;
 public class WeaponManager : MonoBehaviour
 {
     public UnityEvent<Sprite> OnSwap;
-    public UnityEvent<Weapon> OnAdd;
+    public UnityEvent<AgentWeapon> OnAdd;
 
-    private List<Weapon> weapons = new List<Weapon>();
+    private List<AgentWeapon> weapons = new List<AgentWeapon>();
     private int currentWeapon = -1;
 
     private SpriteRenderer spriteRenderer;
@@ -25,7 +25,7 @@ public class WeaponManager : MonoBehaviour
         spriteRenderer.enabled = visible;
     }
 
-    public bool AddWeapon(Weapon weapon)
+    public bool AddWeapon(AgentWeapon weapon)
     {
         if (weapons.Any(w => w.name == weapon.name))
             return false;
@@ -47,7 +47,7 @@ public class WeaponManager : MonoBehaviour
         OnSwap?.Invoke(spriteRenderer.sprite);
     }
 
-    public Weapon GetWeapon()
+    public AgentWeapon GetWeapon()
     {
         return currentWeapon == -1 ? null : weapons[currentWeapon];
     }

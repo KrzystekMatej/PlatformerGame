@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RangeWeapon", menuName = "Weapons/RangeWeapon")]
-public class RangeWeapon : Weapon
+public class RangeWeapon : AgentWeapon
 {
     public GameObject RangeWeaponPrefab;
     public float FlySpeed = 1f;

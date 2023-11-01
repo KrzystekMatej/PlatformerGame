@@ -8,7 +8,7 @@ public class GenericToAttackTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        Weapon weapon = agent.WeaponManager.GetWeapon();
+        AgentWeapon weapon = agent.WeaponManager.GetWeapon();
         return agent.InputController.InputData.Attack == InputState.Pressed && weapon != null && weapon.IsUseable(agent);
     }
 }

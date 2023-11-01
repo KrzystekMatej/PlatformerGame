@@ -24,7 +24,6 @@ public class AttackState : State
     {
         agent.Animator.PlayByType(AnimationType.Attack);
         agent.WeaponManager.SetWeaponVisibility(true);
-        attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
         if (agent.GroundDetector.CollisionDetected)
         {
             agent.RigidBody.velocity = Vector3.zero;
@@ -35,6 +34,7 @@ public class AttackState : State
     private void PerformAttack()
     {
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
+        attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
         agent.WeaponManager.GetWeapon().Attack(agent, attackDirection);
     }
 
@@ -47,7 +47,7 @@ public class AttackState : State
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.red;
-        Weapon weapon = agent.WeaponManager.GetWeapon();
+        AgentWeapon weapon = agent.WeaponManager.GetWeapon();
         if (weapon != null) weapon.ShowGizmos(agent.TriggerCollider.bounds.center, attackDirection);
     }
 }
