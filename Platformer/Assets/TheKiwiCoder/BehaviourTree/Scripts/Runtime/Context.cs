@@ -22,7 +22,6 @@ namespace TheKiwiCoder {
             // Add whatever else you need here...
             context.Agent = gameObject.GetComponentInChildren<Agent>();
             context.InputController = gameObject.GetComponentInChildren<AIInputController>();
-            context.RayCastDetector = gameObject.GetComponentInChildren<CastDetector>();
             context.AIManager = gameObject.GetComponentInChildren<AIManager>();
 
             return context;

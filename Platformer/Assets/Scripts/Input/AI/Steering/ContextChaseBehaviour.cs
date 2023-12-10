@@ -14,15 +14,9 @@ public class ContextChaseBehaviour : ContextSteeringBehaviour
 
     private Collider2D agentTriggerCollider;
 
-
-    private void Awake()
-    {
-
-        areaDetector = transform.parent.GetComponentInChildren<TargetDetector>();
-    }
-
     private void Start()
     {
+        areaDetector = (AreaDetector)transform.parent.GetComponentInChildren<Vision>().GetDetector("TargetDetector");
         agentTriggerCollider = GetComponentInParent<Agent>().TriggerCollider;
     }
 

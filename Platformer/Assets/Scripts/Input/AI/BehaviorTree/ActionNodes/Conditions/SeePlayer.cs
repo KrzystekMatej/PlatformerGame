@@ -7,7 +7,8 @@ public class SeePlayer : Condition
     protected override bool IsConditionSatisfied()
     {
         float orientation = context.Agent.OrientationController.CurrentOrientation;
-        RaycastHit2D hit = context.RayCastDetector.GetVisionRay(orientation == 1 ? "Right" : "Left").hit;
+        CastDetector detector = (CastDetector)context.AIManager.Vision.GetDetector(orientation == 1 ? "Right" : "Left");
+        RaycastHit2D hit = detector.Hit;
         return hit.collider != null && hit.collider.CompareTag("Player");
     }
 }

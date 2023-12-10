@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 6807904566691075523}
   - component: {fileID: 8807251873524585693}
   - component: {fileID: 3847454629912286329}
-  - component: {fileID: 210032545404517743}
   - component: {fileID: 7386431255902555914}
+  - component: {fileID: 794249645900471099}
+  - component: {fileID: -757481803613661382}
+  - component: {fileID: 36154450269475398}
   m_Layer: 17
   m_Name: Boomerang
   m_TagString: Untagged
@@ -125,19 +127,6 @@ CircleCollider2D:
   m_Offset: {x: -0.031099766, y: 0}
   serializedVersion: 2
   m_Radius: 0.4269832
---- !u!114 &210032545404517743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4409219762843877598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1627f2ebe57144790956db6625e0c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 350
 --- !u!114 &7386431255902555914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,13 +142,14 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 8192
-  <Triggered>k__BackingField: 0
+  triggerTag: 
+  <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 210032545404517743}
-        m_TargetAssemblyTypeName: ThrowableWeapon, Assembly-CSharp
-        m_MethodName: PerformHit
+      - m_Target: {fileID: -757481803613661382}
+        m_TargetAssemblyTypeName: DamageDealer, Assembly-CSharp
+        m_MethodName: TriggerDamageDealer
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -172,3 +162,43 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &794249645900471099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409219762843877598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2aaedb2c899e82a40a8690f3bfb8811c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-757481803613661382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409219762843877598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a717af8aab1b0e4280beca15a8808cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 0}
+  hitLimit: 1
+  attackDelay: 1
+--- !u!114 &36154450269475398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4409219762843877598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab9f2bf5f17531e44a1bc3794ff24196, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 600

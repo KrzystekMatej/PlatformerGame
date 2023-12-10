@@ -17,10 +17,10 @@ public class MeleeWeapon : AgentWeapon
         colliders = new Collider2D[MaxNumberOfHits];
     }
 
-    public override void Attack(Agent agent, Vector3 direction)
+    public override void Attack(Agent agent, Vector3 direction, LayerMask hitMask)
     {
         Vector3 origin = agent.TriggerCollider.bounds.center + direction * (AttackRange / 2);
-        int colliderCount = Physics2D.OverlapBoxNonAlloc(origin, new Vector2(AttackRange, AttackWidth), 0, colliders, HitMask);
+        int colliderCount = Physics2D.OverlapBoxNonAlloc(origin, new Vector2(AttackRange, AttackWidth), 0, colliders, hitMask);
 
 
         for (int i = 0; i < colliderCount; i++)

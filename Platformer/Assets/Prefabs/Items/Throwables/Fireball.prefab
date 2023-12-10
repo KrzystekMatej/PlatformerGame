@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1770989834935875642}
   - component: {fileID: 4382279615672760612}
   - component: {fileID: 8326521726440913280}
-  - component: {fileID: 4900892218167185558}
   - component: {fileID: 2335319724162130675}
   m_Layer: 17
   m_Name: Fireball
@@ -125,19 +124,6 @@ CircleCollider2D:
   m_Offset: {x: 0.18774748, y: 0.0072948635}
   serializedVersion: 2
   m_Radius: 0.39050913
---- !u!114 &4900892218167185558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8924422515313257767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a1627f2ebe57144790956db6625e0c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationSpeed: 0
 --- !u!114 &2335319724162130675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,11 +139,12 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 8
-  <Triggered>k__BackingField: 0
+  triggerTag: 
+  <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4900892218167185558}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ThrowableWeapon, Assembly-CSharp
         m_MethodName: PerformHit
         m_Mode: 0

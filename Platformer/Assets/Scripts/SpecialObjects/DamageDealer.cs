@@ -22,16 +22,16 @@ public class DamageDealer : MonoBehaviour
 
     }
 
-    public void Initialize(GameObject attacker, Weapon weapon, int hitLimit)
+    public void Initialize(GameObject attacker, Weapon weapon, LayerMask hitMask)
     {
         this.attacker = attacker;
-        this.weapon = weapon; 
-        this.hitLimit = hitLimit;
+        this.weapon = weapon;
+        triggerDetector.ChangeTriggerMask(hitMask);
     }
 
     public void TriggerDamageDealer(Collider2D collider)
     {
-        DealDamage(collider);
+        StartCoroutine(DealDamage(collider));
     }
 
     private IEnumerator DealDamage(Collider2D collider)

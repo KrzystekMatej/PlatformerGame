@@ -13,14 +13,15 @@ public class Flee : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector2 steeringForce = context.AIManager.Steering.Flee((Vector3)blackboard.DataTable["OpponentPosition"]);
+        Vector2 desiredVelocity = context.AIManager.Steering.Flee((Vector3)blackboard.DataTable["OpponentPosition"]);
         if (instantaneousTurn)
         {
-            context.InputController.SetMovementVector(context.InputController.InputData.MovementVector + steeringForce);
+            context.InputController.SetMovementVector(desiredVelocity);
         }
         else
         {
-            context.InputController.SetMovementVector(context.InputController.InputData.MovementVector + steeringForce * Time.deltaTime * turnSpeed);
+            Vector2 steeringForce = desiredVelocity - context.Agent.InstanceData.Velocity;
+            context.InputController.SetMovementVector((context.Agent.InstanceData.Velocity + steeringForce * Time.deltaTime * turnSpeed).normalized);
         }
         return State.Success;
     }

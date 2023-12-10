@@ -44,7 +44,7 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         return dictionary.ContainsKey(key);
     }
 
-    public List<SerializableDictionaryEntry<TKey, TValue>> GetAllStartEntries()
+    public List<SerializableDictionaryEntry<TKey, TValue>> GetAllEntries()
     {
         return entries;
     }

@@ -88,9 +88,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4682323907704305010}
   - component: {fileID: 1235885468742254910}
-  - component: {fileID: 7309365611103983381}
-  - component: {fileID: 3433077680152579820}
-  - component: {fileID: 3433077680152579821}
+  - component: {fileID: 6003980598358082882}
+  - component: {fileID: 2042738322846989398}
   m_Layer: 13
   m_Name: Vision
   m_TagString: Untagged
@@ -126,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionDelay: 0.1
---- !u!114 &7309365611103983381
+--- !u!114 &6003980598358082882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,34 +134,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3079820557302413007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  rayTable:
-    entries: []
---- !u!114 &3433077680152579820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079820557302413007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb95e211f9522fd4e90e84c3feefdb70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  <DetectorName>k__BackingField: TargetDetector
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   <DetectionRadius>k__BackingField: 8
   maxCollidersToDetect: 2
   detectLayerMask:
     serializedVersion: 2
     m_Bits: 8
-  obstacleLayerMask:
+  blockLayerMask:
     serializedVersion: 2
-    m_Bits: 574528
---- !u!114 &3433077680152579821
+    m_Bits: 640064
+--- !u!114 &2042738322846989398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,15 +156,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3079820557302413007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a86895074753a64f9be3ed3907881d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <DetectorName>k__BackingField: ObstacleDetector
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   <DetectionRadius>k__BackingField: 4
   maxCollidersToDetect: 10
   detectLayerMask:
     serializedVersion: 2
-    m_Bits: 582720
+    m_Bits: 648256
+  blockLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &4706410004552603123
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +374,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: hitMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hittableLayerMask.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -583,7 +576,7 @@ PrefabInstance:
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 7309365611103983381}
+      objectReference: {fileID: 0}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

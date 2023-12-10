@@ -41,7 +41,7 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 451, y: -66, z: 0}
+  viewPosition: {x: 347, y: -58, z: 0}
   viewScale: {x: 0.375937, y: 0.375937, z: 1}
   references:
     version: 2
@@ -118,7 +118,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 79d345a4d784f1948a36724da3fe63c2
-        position: {x: 236.99995, y: 695.99994}
+        position: {x: 214.87498, y: 695.99994}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -144,14 +144,14 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 9b7d84a78a2fc5b4abfc6d6c0daa99e1
-        position: {x: 569.7235, y: 482.99997}
+        position: {x: 570.0001, y: 483}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
             entries: []
         description: 
         drawGizmos: 0
-        turnSpeed: 1
+        turnSpeed: 15
         instantaneousTurn: 0
     - rid: 5306976957804314655
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
@@ -293,7 +293,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 56e9e2c3a9ef7a74892f2d32ebb14f81
-        position: {x: -559.9767, y: 896.9998}
+        position: {x: -560, y: 865}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -313,7 +313,7 @@ MonoBehaviour:
             entries: []
         description: 
         drawGizmos: 0
-        maxSpeedMultiplier: 4
+        maxSpeedMultiplier: 2
     - rid: 5306977072521936910
       type: {class: SetDefaultSpeed, ns: , asm: Assembly-CSharp}
       data:

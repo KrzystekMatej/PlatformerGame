@@ -8,20 +8,12 @@ public class ContextAvoidBehaviour : ContextSteeringBehaviour
     [SerializeField]
     private float obstacleMinimalDistance = 0.1f;
 
-    private Collider2D agentTriggerCollider;
     private float agentColliderRadius;
-
-
-    private void Awake()
-    {
-        
-        areaDetector = transform.parent.GetComponentInChildren<ObstacleDetector>();
-    }
 
     private void Start()
     {
-        agentTriggerCollider = GetComponentInParent<Agent>().TriggerCollider;
-        Vector3 colliderSize = agentTriggerCollider.bounds.extents;
+        areaDetector = (AreaDetector)transform.parent.GetComponentInChildren<Vision>().GetDetector("ObstacleDetector");
+        Vector3 colliderSize = GetComponentInParent<Agent>().TriggerCollider.bounds.extents;
         if (colliderSize.x > colliderSize.y)
         {
             agentColliderRadius = colliderSize.x;
@@ -52,7 +44,7 @@ public class ContextAvoidBehaviour : ContextSteeringBehaviour
         float outerRadius = areaDetector.DetectionRadius - obstacleThreshold;
         float distanceToObstacleFromInnerCircle = distanceToObstacle - obstacleThreshold;
 
-        float weight = distanceToObstacle <= agentColliderRadius + obstacleMinimalDistance
+        float weight = distanceToObstacle <= obstacleThreshold
             ? 1
             : (outerRadius - distanceToObstacleFromInnerCircle) / outerRadius;
 

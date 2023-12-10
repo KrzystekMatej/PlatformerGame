@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8024932112311095339}
   - component: {fileID: 4504165587787064423}
-  - component: {fileID: 5392120188565598796}
   m_Layer: 13
   m_Name: Vision
   m_TagString: Untagged
@@ -46,20 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionDelay: 0.1
---- !u!114 &5392120188565598796
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367330958343508886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  rayTable:
+  detectorTable:
     entries: []
 --- !u!1 &1444819533292539961
 GameObject:
@@ -358,6 +344,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: hitMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hittableLayerMask.m_Bits
       value: 8
       objectReference: {fileID: 0}
@@ -552,7 +542,7 @@ PrefabInstance:
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5392120188565598796}
+      objectReference: {fileID: 0}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

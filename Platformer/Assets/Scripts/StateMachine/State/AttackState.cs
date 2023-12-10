@@ -8,6 +8,8 @@ using UnityEngine.Events;
 public class AttackState : State
 {
     private Vector2 attackDirection;
+    [SerializeField]
+    public LayerMask hitMask;
 
     protected override StateTransition[] GetTransitions()
     {
@@ -35,7 +37,7 @@ public class AttackState : State
     {
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
         attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
-        agent.WeaponManager.GetWeapon().Attack(agent, attackDirection);
+        agent.WeaponManager.GetWeapon().Attack(agent, attackDirection, hitMask);
     }
 
     protected override void HandleExit()

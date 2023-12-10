@@ -50,8 +50,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 6, y: -277, z: 0}
-  viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
+  viewPosition: {x: 379, y: -32, z: 0}
+  viewScale: {x: 0.25, y: 0.25, z: 1}
   references:
     version: 2
     RefIds:
@@ -424,7 +424,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 70210ba37f9050b4c98dc1e760e2c2a2
-        position: {x: 581.5623, y: 1398}
+        position: {x: 585.9998, y: 1430.0002}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:

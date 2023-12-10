@@ -12,7 +12,8 @@ public class CanAttackAgent : Condition
         AgentWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         if (weapon != null && weapon.IsUseable(context.Agent))
         {
-            RaycastHit2D hit = context.RayCastDetector.GetVisionRay(attackDirection == 1 ? "Right" + weapon.WeaponName : "Left" + weapon.WeaponName).hit;
+            CastDetector detector = (CastDetector)context.AIManager.Vision.GetDetector(attackDirection == 1 ? "Right" + weapon.WeaponName : "Left" + weapon.WeaponName);
+            RaycastHit2D hit = detector.Hit;
             if (hit.collider == null) return false;
             IHittable target = hit.collider.GetComponent<IHittable>();
             return target != null;

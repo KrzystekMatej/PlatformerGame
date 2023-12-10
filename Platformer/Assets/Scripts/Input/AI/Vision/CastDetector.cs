@@ -2,131 +2,69 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Search.SearchColumn;
 
 public class CastDetector : VisionDetector
 {
-    [SerializeField]
-    private SerializableDictionary<string, VisionCast> rayTable = new SerializableDictionary<string, VisionCast>();
+    [field: SerializeField]
+    public Vector2 Size {  get; private set; }
+    [field: SerializeField]
+    public float Distance { get; private set; }
+    [field: SerializeField]
+    public Vector2 Direction { get; private set; }
+    [field: SerializeField]
+    public Vector2 Offset { get; private set; }
+    [field: SerializeField]
+    public LayerMask LayerMask { get; private set; }
+    [field: SerializeField]
+    public CastType CastType { get; private set; }
+    public RaycastHit2D Hit { get; private set; }
 
-    private void Awake()
+    public void Initialize(string detectorName, Color gizmoColor, Vector2 size, float distance, Vector2 direction, Vector2 offset, LayerMask layerMask, CastType castType)
     {
-        foreach (var visionCastEntry in rayTable.GetAllStartEntries())
-        {
-            visionCastEntry.Value.direction = visionCastEntry.Value.direction.normalized;
-        }
+        this.DetectorName = detectorName;
+        this.gizmoColor = gizmoColor;
+        this.Size = size;
+        this.Distance = distance;
+        this.Direction = direction.normalized;
+        this.Offset = offset;
+        this.LayerMask = layerMask;
+        this.CastType = castType;
     }
 
-    public override IEnumerator Detect(float delay)
+    public override void Detect()
     {
-        while (true)
-        {
-
-            foreach (var visionCastEntry in rayTable.GetAllStartEntries())
-            {
-                PerformCast(visionCastEntry.Value);
-            }
-            yield return new WaitForSeconds(delay);
-        }
-    }
-
-    private void PerformCast(VisionCast visionCast)
-    {
-        Vector2 origin = (Vector2)transform.position + visionCast.offset;
-        switch (visionCast.castType)
+        Vector2 origin = (Vector2)transform.position + Offset;
+        switch (CastType)
         {
             case CastType.Ray:
-                visionCast.hit = Physics2D.Raycast(origin, visionCast.direction, visionCast.distance, visionCast.layerMask);
+                Hit = Physics2D.Raycast(origin, Direction, Distance, LayerMask);
                 return;
             case CastType.Box:
-                visionCast.hit = Physics2D.BoxCast(origin, visionCast.size, 0, visionCast.direction, visionCast.distance, visionCast.layerMask);
+                Hit = Physics2D.BoxCast(origin, Size, 0, Direction, Distance, LayerMask);
                 return;
             case CastType.Circle:
-                visionCast.hit = Physics2D.CircleCast(origin, visionCast.size.x, visionCast.direction, visionCast.distance, visionCast.layerMask);
+                Hit = Physics2D.CircleCast(origin, Size.x, Direction, Distance, LayerMask);
                 return;
         }
-    }
-
-    public VisionCast GetVisionRay(string rayName)
-    {
-        return rayTable[rayName];
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = gizmoColor;
-        foreach (var rayEntry in rayTable.GetAllStartEntries())
-        {
-            DrawCastGizmo(rayEntry.Value);
-        }
-    }
-
-    private void DrawCastGizmo(VisionCast visionCast)
-    {
-        Vector2 normalizedDirection = visionCast.direction.normalized;
-        Vector2 origin = (Vector2)transform.position + visionCast.offset;
-        switch (visionCast.castType)
+        Vector2 origin = (Vector2)transform.position + Offset;
+        switch (CastType)
         {
             case CastType.Ray:
-                Vector2 end = origin + normalizedDirection * visionCast.distance;
+                Vector2 end = origin + Direction * Distance;
                 Gizmos.DrawLine(origin, end);
                 return;
             case CastType.Box:
-                Gizmos.DrawWireCube(origin, visionCast.size);
+                Gizmos.DrawWireCube(origin, Size);
                 return;
             case CastType.Circle:
-                Gizmos.DrawWireSphere(origin, visionCast.size.x);
+                Gizmos.DrawWireSphere(origin, Size.x);
                 return;
         }
-    }
-
-    public void AddWeaponDetector(Weapon weapon)
-    {
-        MeleeWeapon melee = weapon as MeleeWeapon;
-        if (melee != null)
-        {
-            rayTable["Right" + melee.WeaponName] = new VisionCast
-            (
-                new Vector2(melee.AttackRange, melee.AttackWidth),
-                0,
-                Vector2.right,
-                new Vector2(melee.AttackRange/2, 0),
-                melee.HitMask,
-                CastType.Box
-            );
-            rayTable["Left" + melee.WeaponName] = new VisionCast
-            (
-                new Vector2(melee.AttackRange, melee.AttackWidth),
-                0,
-                Vector2.left,
-                new Vector2(-melee.AttackRange/2, 0),
-                melee.HitMask,
-                CastType.Box
-            );
-        }
-    }
-}
-
-[Serializable]
-public class VisionCast
-{
-    public Vector2 size;
-    public float distance;
-    public Vector2 direction;
-    public Vector2 offset;
-    public LayerMask layerMask;
-    public CastType castType;
-    [HideInInspector]
-    public RaycastHit2D hit;
-
-    public VisionCast(Vector2 size, float distance, Vector2 direction, Vector2 offset, LayerMask layerMask, CastType castType)
-    {
-        this.size = size;
-        this.distance = distance;
-        this.direction = direction;
-        this.offset = offset;
-        this.layerMask = layerMask;
-        this.castType = castType;
     }
 }
 

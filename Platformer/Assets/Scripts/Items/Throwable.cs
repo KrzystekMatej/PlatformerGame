@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Throwable : MonoBehaviour
+public class Throwable : MonoBehaviour
 {
-    [SerializeField]
-    private float rotationSpeed = 0;
-
     protected Vector2 start;
     protected Vector2 direction;
     protected Rigidbody2D rigidBody;
@@ -18,19 +15,19 @@ public abstract class Throwable : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
+    public void Initialize(float flyDistance, Vector2 direction, float flySpeed)
+    {
+        this.flyDistance = flyDistance;
+        this.direction = direction;
+        this.rigidBody.velocity = direction * flySpeed;
+    }
+
+
     private void Update()
     {
-        Rotate();
         if (((Vector2)transform.position - start).magnitude >= flyDistance)
         {
             Destroy(gameObject);
         }
-    }
-
-    public abstract void PerformHit(Collider2D collision);
-
-    private void Rotate()
-    {
-        transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * rotationSpeed * -direction.x);
     }
 }

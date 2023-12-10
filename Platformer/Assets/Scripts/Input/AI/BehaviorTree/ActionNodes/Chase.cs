@@ -18,8 +18,8 @@ public class Chase : ActionNode
 
     protected override State OnUpdate()
     {
-        Vector2 steeringForce = context.AIManager.Steering.GetContextSteeringForce();
-        context.InputController.SetMovementVector(context.InputController.InputData.MovementVector + steeringForce);
+        Vector2 desiredVelocity = context.AIManager.Steering.GetContextSteeringVelocity();
+        context.InputController.SetMovementVector(desiredVelocity);
         return State.Success;
     }
 }

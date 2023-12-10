@@ -142,7 +142,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1827909482312279667}
   - component: {fileID: 5224811623946981951}
-  - component: {fileID: 558925713608223237}
+  - component: {fileID: 3896282128334167519}
+  - component: {fileID: 5599699444120824818}
+  - component: {fileID: 5622796734411890437}
+  - component: {fileID: 5799246728658625724}
   m_Layer: 13
   m_Name: Vision
   m_TagString: Untagged
@@ -178,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visionDelay: 0.1
---- !u!114 &558925713608223237
+--- !u!114 &3896282128334167519
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,49 +193,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <DetectorName>k__BackingField: Right
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  rayTable:
-    entries:
-    - Key: Right
-      Value:
-        size: {x: 0, y: 0}
-        distance: 5.5
-        direction: {x: 1, y: 0}
-        offset: {x: 0, y: 0}
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 640072
-        castType: 0
-    - Key: Left
-      Value:
-        size: {x: 0, y: 0}
-        distance: 5.5
-        direction: {x: -1, y: 0}
-        offset: {x: 0, y: 0}
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 640072
-        castType: 0
-    - Key: LeftDown
-      Value:
-        size: {x: 0, y: 0}
-        distance: 1.2
-        direction: {x: -1, y: -1}
-        offset: {x: 0, y: 0}
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 640064
-        castType: 0
-    - Key: RightDown
-      Value:
-        size: {x: 0, y: 0}
-        distance: 1.2
-        direction: {x: 1, y: -1}
-        offset: {x: 0, y: 0}
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 640064
-        castType: 0
+  <Size>k__BackingField: {x: 0, y: 0}
+  <Distance>k__BackingField: 5.5
+  <Direction>k__BackingField: {x: 1, y: 0}
+  <Offset>k__BackingField: {x: 0, y: 0}
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 640072
+  <CastType>k__BackingField: 0
+--- !u!114 &5599699444120824818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293736393397937614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DetectorName>k__BackingField: Left
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  <Size>k__BackingField: {x: 0, y: 0}
+  <Distance>k__BackingField: 5.5
+  <Direction>k__BackingField: {x: -1, y: 0}
+  <Offset>k__BackingField: {x: 0, y: 0}
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 640072
+  <CastType>k__BackingField: 0
+--- !u!114 &5622796734411890437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293736393397937614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DetectorName>k__BackingField: RightDown
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  <Size>k__BackingField: {x: 0, y: 0}
+  <Distance>k__BackingField: 1.2
+  <Direction>k__BackingField: {x: 1, y: -1}
+  <Offset>k__BackingField: {x: 0, y: 0}
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 640064
+  <CastType>k__BackingField: 0
+--- !u!114 &5799246728658625724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8293736393397937614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DetectorName>k__BackingField: LeftDown
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  <Size>k__BackingField: {x: 0, y: 0}
+  <Distance>k__BackingField: 1.2
+  <Direction>k__BackingField: {x: -1, y: -1}
+  <Offset>k__BackingField: {x: 0, y: 0}
+  <LayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 640064
+  <CastType>k__BackingField: 0
 --- !u!1001 &6980247669020632358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -299,6 +335,10 @@ PrefabInstance:
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: hitMask.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hittableLayerMask.m_Bits
@@ -487,7 +527,7 @@ PrefabInstance:
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 558925713608223237}
+      objectReference: {fileID: 0}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

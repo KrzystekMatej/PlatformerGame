@@ -62,18 +62,18 @@ public class Steering : MonoBehaviour
     {
         Vector2 desiredVelocity = (target - agent.transform.position).normalized;
         gizmoDirection = desiredVelocity;
-        return desiredVelocity - agent.InputController.InputData.MovementVector;
+        return desiredVelocity;
     }
 
 
     public Vector2 Flee(Vector3 target)
     {
-        Vector2 desiredVelocity = (agent.transform.position - target).normalized * agent.InstanceData.MaxSpeed;
+        Vector2 desiredVelocity = (agent.transform.position - target).normalized;
         gizmoDirection = desiredVelocity;
-        return desiredVelocity - agent.RigidBody.velocity;
+        return desiredVelocity;
     }
 
-    public Vector2 GetContextSteeringForce()
+    public Vector2 GetContextSteeringVelocity()
     {
         ResetContextMaps();
         foreach (ContextSteeringBehaviour behaviour in contextBehaviours)
@@ -88,7 +88,7 @@ public class Steering : MonoBehaviour
         }
 
         gizmoDirection = desiredVelocity;
-        return desiredVelocity.normalized - agent.InputController.InputData.MovementVector;
+        return desiredVelocity;
     }
 
     private void OnDrawGizmos()

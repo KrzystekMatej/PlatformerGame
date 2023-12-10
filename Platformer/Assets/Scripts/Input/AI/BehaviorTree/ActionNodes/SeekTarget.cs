@@ -11,23 +11,18 @@ public class SeekTarget : ActionNode
     [SerializeField]
     private bool instantaneousTurn;
 
-    public override void Initialize()
-    {
-        Vector3 target = (Vector3)blackboard.DataTable["CurrentTarget"];
-        context.InputController.SetMovementVector(context.AIManager.Steering.Seek(target));
-    }
-
     protected override State OnUpdate()
     {
         Vector3 target = (Vector3)blackboard.DataTable["CurrentTarget"];
-        Vector2 steeringForce = context.AIManager.Steering.Seek(target);
+        Vector2 desiredVelocity = context.AIManager.Steering.Seek(target);
         if (instantaneousTurn) 
         {
-            context.InputController.SetMovementVector(context.InputController.InputData.MovementVector + steeringForce);
+            context.InputController.SetMovementVector(desiredVelocity);
         }
         else
         {
-            context.InputController.SetMovementVector(context.InputController.InputData.MovementVector + steeringForce * Time.deltaTime * turnSpeed);
+            Vector2 steeringForce = desiredVelocity - context.Agent.InstanceData.Velocity;
+            context.InputController.SetMovementVector((context.Agent.InstanceData.Velocity + steeringForce * Time.deltaTime * turnSpeed).normalized);
         }
         return State.Success;
     }
