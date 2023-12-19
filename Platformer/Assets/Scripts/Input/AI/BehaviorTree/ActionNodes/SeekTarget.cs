@@ -21,8 +21,8 @@ public class SeekTarget : ActionNode
         }
         else
         {
-            Vector2 steeringForce = desiredVelocity - context.Agent.InstanceData.Velocity;
-            context.InputController.SetMovementVector((context.Agent.InstanceData.Velocity + steeringForce * Time.deltaTime * turnSpeed).normalized);
+            Vector2 steeringForce = desiredVelocity - context.Agent.RigidBody.velocity;
+            context.InputController.SetMovementVector((context.Agent.RigidBody.velocity + steeringForce * Time.deltaTime * turnSpeed).normalized);
         }
         return State.Success;
     }

@@ -151,7 +151,8 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 8
-  <Triggered>k__BackingField: 0
+  triggerTag: 
+  <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -194,7 +195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6776d6f2150951a40929ad73896ce25e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectSound: {fileID: 11400000, guid: 9d992be12ab3f6b478092a8dbac0c2cf, type: 2}
+  collectSound: {fileID: 11400000, guid: 050b2dc8ce9c06c478a478f0d9d789f8, type: 2}
   weapon: {fileID: 0}
 --- !u!114 &6134027256406698368
 MonoBehaviour:

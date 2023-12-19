@@ -11,7 +11,7 @@ public class GenericToDieTransition : InterruptTransition
 
     public override void RunTransitionAction(Agent agent)
     {
-        agent.RigidBody.gravityScale = agent.InstanceData.DefaultGravityScale;
+        agent.RigidBody.gravityScale = agent.DefaultData.GravityScale;
         agent.OnRespawnRequired.RemoveAllListeners();
     }
 

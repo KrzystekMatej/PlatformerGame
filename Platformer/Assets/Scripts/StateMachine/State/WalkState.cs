@@ -2,8 +2,10 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Windows;
 
 public class WalkState : State
 {
@@ -33,51 +35,54 @@ public class WalkState : State
 
     public override void HandleUpdate()
     {
+        CalculateAcceleration();
         CalculateVelocity();
     }
 
-    protected virtual void CalculateVelocity()
-    {
-        agent.InstanceData.Velocity.x = CalculateVelocityComponent(agent.InputController.InputData.MovementVector.x, agent.InstanceData.Velocity.x);
-        agent.InstanceData.Velocity.y = agent.RigidBody.velocity.y;
+    
 
-        agent.RigidBody.velocity = agent.InstanceData.Velocity;
+    protected virtual void CalculateAcceleration()
+    {
+        Vector2 input = agent.InputController.InputData.MovementVector;
+        Vector2 velocityNormalized = agent.RigidBody.velocity.normalized;
+
+        Vector2 direction = new Vector2(input.x == 0 ? -velocityNormalized.x : input.x, 0);
+
+        agent.InstanceData.Acceleration += direction * agent.InstanceData.MaxForce;
     }
 
-    protected float CalculateVelocityComponent(float input, float currentVelocity)
+    protected void CalculateVelocity()
     {
-        if (input != 0)
-        {
-            return Accelerate(input, currentVelocity);
-        }
-        else
-        {
-            return Deaccelerate(currentVelocity);
-        }
+        Vector2 previousVelocity = agent.RigidBody.velocity;
+
+        agent.RigidBody.velocity += agent.InstanceData.Acceleration * Time.deltaTime;
+
+        agent.RigidBody.velocity = new Vector2
+        (
+            StopDeacceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
+            StopDeacceleration(agent.InputController.InputData.MovementVector.y, agent.RigidBody.velocity.y, previousVelocity.y)
+        );
+
+        LimitVelocity();
+        agent.InstanceData.Acceleration.Set(0, 0);
     }
 
-    private float Accelerate(float input, float currentVelocity)
+    private static float StopDeacceleration(float input, float currentVelocity, float previousVelocity)
     {
-        if (Mathf.Sign(currentVelocity) != Mathf.Sign(input))
+        if (input == 0 && Mathf.Sign(currentVelocity) != Mathf.Sign(previousVelocity))
         {
-            currentVelocity = -currentVelocity;
+            return 0;
         }
-
-        currentVelocity += Mathf.Sign(input) * agent.InstanceData.Acceleration * Time.deltaTime;
-        float modifiedMaxSpeed = agent.InstanceData.MaxSpeed * Mathf.Abs(input);
-        return Mathf.Clamp(currentVelocity, -modifiedMaxSpeed, modifiedMaxSpeed);
-    }
-
-    private float Deaccelerate(float currentVelocity)
-    {
-        currentVelocity -= Mathf.Sign(currentVelocity) * agent.InstanceData.Deacceleration * Time.deltaTime;
-
-        if (Mathf.Sign(currentVelocity) != Mathf.Sign(agent.InstanceData.Velocity.x))
-        {
-            currentVelocity = 0;
-        }
-
         return currentVelocity;
+    }
+
+    protected virtual void LimitVelocity()
+    {
+        agent.RigidBody.velocity = new Vector2
+        (
+            Mathf.Clamp(agent.RigidBody.velocity.x, -agent.InstanceData.MaxSpeed, agent.InstanceData.MaxSpeed),
+            agent.RigidBody.velocity.y
+        );
     }
 
     protected override void HandleExit()

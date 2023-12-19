@@ -12,14 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1713860c2ed79c4daf228732f6e08a7, type: 3}
   m_Name: HammerMeleeWeapon
   m_EditorClassIdentifier: 
-  IsGroundWeapon: 1
   WeaponName: Hammer
   AttackDamage: 1
+  KnockbackForce: 10000
+  IsGroundWeapon: 1
   AttackRange: 2.3
-  KnockbackForce: 0
-  HitMask:
-    serializedVersion: 2
-    m_Bits: 532480
   WeaponSprite: {fileID: 21300000, guid: 922413032c327be4896cae33fbfb0934, type: 3}
   WeaponSound: {fileID: 11400000, guid: fa1cb2a7ddca1f54abe96e96e75c168e, type: 2}
   MaxNumberOfHits: 5

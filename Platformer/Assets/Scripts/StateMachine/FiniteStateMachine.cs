@@ -8,10 +8,10 @@ using UnityEngine.UIElements;
 
 public class FiniteStateMachine : MonoBehaviour
 {
-    [SerializeField]
-    private State initialState;
-    [SerializeField]
-    private State currentState;
+    [field: SerializeField]
+    public State InitialState { get; private set; }
+    [field: SerializeField]
+    public State CurrentState { get; private set; }
 
     public StateFactory Factory { get; private set; }
 
@@ -19,26 +19,26 @@ public class FiniteStateMachine : MonoBehaviour
     private void Awake()
     {
         Factory = GetComponent<StateFactory>();
-        initialState = initialState == null ? GetComponent<IdleState>() : initialState;
+        InitialState = InitialState == null ? GetComponent<IdleState>() : InitialState;
     }
 
     private void Start()
     {
         Factory.InitializeStates(GetComponentInParent<Agent>());
-        currentState = initialState;
-        currentState.Enter();
+        CurrentState = InitialState;
+        CurrentState.Enter();
     }
 
     public void UpdateState(Agent agent)
     {
-        StateTransition triggered = currentState.Transitions.FirstOrDefault(t => t.IsTriggered(agent));
+        StateTransition triggered = CurrentState.Transitions.FirstOrDefault(t => t.IsTriggered(agent));
 
         if (triggered != null)
         {
             PerformTransition(triggered, agent);
         }
 
-        currentState.HandleUpdate();
+        CurrentState.HandleUpdate();
     }
 
     private void PerformTransition(StateTransition triggered, Agent agent)
@@ -47,16 +47,16 @@ public class FiniteStateMachine : MonoBehaviour
 
         if (targetState != null)
         {
-            currentState.Exit();
+            CurrentState.Exit();
             triggered.RunTransitionAction(agent);
-            currentState = targetState;
-            currentState.Enter();
+            CurrentState = targetState;
+            CurrentState.Enter();
         }
     }
 
     public void PerformInterruptTransition(Agent agent, InterruptType interrupt)
     {
-        StateTransition triggered = currentState.InterruptTransitions.FirstOrDefault(t => t.IsTriggered(agent) && t.IsInterruptEnabled(interrupt));
+        StateTransition triggered = CurrentState.InterruptTransitions.FirstOrDefault(t => t.IsTriggered(agent) && t.IsInterruptEnabled(interrupt));
 
         if (triggered != null)
         {

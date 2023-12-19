@@ -11,8 +11,7 @@ public class AgentData : ScriptableObject
     [Header("Run data")]
     [Space]
     public float MaxSpeed = 6;
-    public float Acceleration = 50;
-    public float Deacceleration = 50;
+    public float MaxForce = 50;
     [Header("Jump data")]
     [Space]
     public float JumpForce = 12;
@@ -21,4 +20,7 @@ public class AgentData : ScriptableObject
     [Header("Climb data")]
     [Space]
     public Vector2 ClimbSpeed = new Vector2(2, 5);
+    [Header("General data")]
+    [Space]
+    public float GravityScale = 2;
 }

@@ -28,14 +28,13 @@ public class FallState : WalkState
     public override void HandleUpdate()
     {
         ControlFall();
+        CalculateAcceleration();
         CalculateVelocity();
     }
 
     private void ControlFall()
     {
-        agent.InstanceData.Velocity = agent.RigidBody.velocity;
-        agent.InstanceData.Velocity.y += agent.InstanceData.FallGravityModifier * Physics2D.gravity.y * Time.deltaTime;
-        agent.RigidBody.velocity = agent.InstanceData.Velocity;
+        agent.InstanceData.Acceleration.y += agent.InstanceData.FallGravityModifier * Physics2D.gravity.y;
     }
 
     protected override void HandleExit()

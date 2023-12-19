@@ -661,6 +661,9 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &7363741092903229671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,17 +749,17 @@ MonoBehaviour:
       Value: {fileID: 7363741092903229668}
     - Key: 1
       Value: {fileID: 7363741092903229675}
-    - Key: 2
-      Value: {fileID: 7363741092903229670}
     - Key: 3
-      Value: {fileID: 7363741092903229669}
+      Value: {fileID: 7363741092903229670}
     - Key: 4
-      Value: {fileID: 5247370467627279520}
+      Value: {fileID: 7363741092903229669}
     - Key: 5
+      Value: {fileID: 5247370467627279520}
+    - Key: 6
       Value: {fileID: 7363741092903229671}
-    - Key: 7
-      Value: {fileID: 1679817844667101516}
     - Key: 8
+      Value: {fileID: 1679817844667101516}
+    - Key: 9
       Value: {fileID: 8660966007656399279}
 --- !u!114 &7438126095448475424
 MonoBehaviour:
@@ -770,8 +773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85e5255524cd70447bcf84d98fdc47bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialState: {fileID: 7363741092903229668}
-  currentState: {fileID: 0}
+  <InitialState>k__BackingField: {fileID: 7363741092903229668}
+  <CurrentState>k__BackingField: {fileID: 0}
 --- !u!1 &7363741092985079733
 GameObject:
   m_ObjectHideFlags: 0
@@ -925,6 +928,7 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 256
+  triggerTag: 
   <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:

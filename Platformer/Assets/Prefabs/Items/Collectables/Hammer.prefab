@@ -123,6 +123,10 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 11400000, guid: a8db2415180809347a71d17e83671b0e, type: 2}
+    - target: {fileID: 4119757848706521279, guid: 7551f94dd2740e648b9a45a2bf6f43d9, type: 3}
+      propertyPath: collectSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 050b2dc8ce9c06c478a478f0d9d789f8, type: 2}
     - target: {fileID: 6108224353254855290, guid: 7551f94dd2740e648b9a45a2bf6f43d9, type: 3}
       propertyPath: m_Size.x
       value: 0.5625

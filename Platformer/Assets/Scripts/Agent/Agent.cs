@@ -1,9 +1,11 @@
+using DG.Tweening.Core.Easing;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static Unity.VisualScripting.Member;
 
 public class Agent : MonoBehaviour, IHittable
 {
@@ -51,13 +53,11 @@ public class Agent : MonoBehaviour, IHittable
         {
             Health = DefaultData.Health,
             MaxSpeed = DefaultData.MaxSpeed,
-            Acceleration = DefaultData.Acceleration,
-            Deacceleration = DefaultData.Deacceleration,
+            MaxForce = DefaultData.MaxForce,
             JumpForce = DefaultData.JumpForce,
             JumpGravityModifier = DefaultData.JumpGravityModifier,
             FallGravityModifier = DefaultData.FallGravityModifier,
-            ClimbSpeed = DefaultData.ClimbSpeed,
-            DefaultGravityScale = RigidBody.gravityScale
+            ClimbSpeed = DefaultData.ClimbSpeed
         };
     }
 

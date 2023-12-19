@@ -19,17 +19,9 @@ public class IdleState : State
         };
     }
 
-    public override void HandleUpdate()
-    {
-        agent.RigidBody.velocity = Vector2.zero;
-    }
-
     protected override void HandleEnter()
     {
         agent.Animator.PlayByType(AnimationType.Idle);
-        if (agent.GroundDetector.CollisionDetected)
-        {
-            agent.RigidBody.velocity = Vector2.zero;
-        }
+        agent.RigidBody.velocity = agent.GroundDetector.CollisionDetected ? Vector2.zero : agent.RigidBody.velocity;
     }
 }

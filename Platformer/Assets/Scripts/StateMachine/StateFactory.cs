@@ -38,6 +38,7 @@ public enum StateType
 {
     Idle,
     Walk,
+    Fly,
     Jump,
     Fall,
     Attack,

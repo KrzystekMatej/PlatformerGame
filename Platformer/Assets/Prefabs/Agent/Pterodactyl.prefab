@@ -565,6 +565,10 @@ PrefabInstance:
       propertyPath: initialState
       value: 
       objectReference: {fileID: 3751193155364834489}
+    - target: {fileID: 7438126095448475424, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: <InitialState>k__BackingField
+      value: 
+      objectReference: {fileID: 3751193155364834489}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.size
       value: 1

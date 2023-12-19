@@ -40,7 +40,7 @@ public class ClimbState : State
 
     protected override void HandleExit()
     {
-        agent.RigidBody.gravityScale = agent.InstanceData.DefaultGravityScale;
+        agent.RigidBody.gravityScale = agent.DefaultData.GravityScale;
         agent.Animator.Enable();
     }
 }

@@ -29,12 +29,19 @@ public class FlyState : WalkState
         agent.AudioFeedback.PlaySpecificSound(flapSound);
     }
 
-    protected override void CalculateVelocity()
+    protected override void CalculateAcceleration()
     {
-        agent.InstanceData.Velocity.x = CalculateVelocityComponent(agent.InputController.InputData.MovementVector.x, agent.InstanceData.Velocity.x);
-        agent.InstanceData.Velocity.y = CalculateVelocityComponent(agent.InputController.InputData.MovementVector.y, agent.InstanceData.Velocity.y);
+        Vector2 input = agent.InputController.InputData.MovementVector;
+        Vector2 velocityNormalized = agent.RigidBody.velocity.normalized;
 
-        agent.RigidBody.velocity = agent.InstanceData.Velocity;
+        Vector2 direction = new Vector2(input.x == 0 ? -velocityNormalized.x : input.x, input.y == 0 ? -velocityNormalized.y : input.y);
+
+        agent.InstanceData.Acceleration += direction * agent.InstanceData.MaxForce;
+    }
+
+    protected override void LimitVelocity()
+    {
+        agent.RigidBody.velocity = Vector2.ClampMagnitude(agent.RigidBody.velocity, agent.InstanceData.MaxSpeed);
     }
 
     protected override void HandleExit()

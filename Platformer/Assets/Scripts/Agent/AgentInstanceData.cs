@@ -5,13 +5,11 @@ using UnityEngine;
 public struct AgentInstanceData
 {
     public int Health;
-    public Vector2 Velocity;
+    public Vector2 Acceleration;
     public float MaxSpeed;
-    public float Acceleration;
-    public float Deacceleration;
+    public float MaxForce;
     public float JumpForce;
     public float JumpGravityModifier;
     public float FallGravityModifier;
     public Vector2 ClimbSpeed;
-    public float DefaultGravityScale;
 }

@@ -24,7 +24,7 @@ public class AIInputController : InputController
     }
 
 
-    private void LateUpdate()
+    private void Update()
     {
         inputData.Jump = GetFixedInputState(inputData.Jump, jumpKey);
         inputData.Crouch = GetFixedInputState(inputData.Crouch, crouchKey);

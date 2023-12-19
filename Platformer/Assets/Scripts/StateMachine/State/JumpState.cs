@@ -23,14 +23,13 @@ public class JumpState : WalkState
     {
         agent.Animator.PlayByType(AnimationType.Jump);
         agent.AudioFeedback.PlaySound(SoundActionType.Jump, agent.GroundDetector.CollisionLayerIndex);
-        agent.InstanceData.Velocity = agent.RigidBody.velocity;
-        agent.InstanceData.Velocity.y = agent.InstanceData.JumpForce;
-        agent.RigidBody.velocity = agent.InstanceData.Velocity;
+        agent.RigidBody.velocity = new Vector2(agent.RigidBody.velocity.x, agent.InstanceData.JumpForce);
     }
 
     public override void HandleUpdate()
     {
         ControlJumpHeight();
+        CalculateAcceleration();
         CalculateVelocity();
     }
 
@@ -38,9 +37,7 @@ public class JumpState : WalkState
     {
         if (agent.InputController.InputData.Jump == InputState.Inactive)
         {
-            agent.InstanceData.Velocity = agent.RigidBody.velocity;
-            agent.InstanceData.Velocity.y += agent.InstanceData.JumpGravityModifier * Physics2D.gravity.y * Time.deltaTime;
-            agent.RigidBody.velocity = agent.InstanceData.Velocity;
+            agent.InstanceData.Acceleration.y += agent.InstanceData.JumpGravityModifier * Physics2D.gravity.y;
         }
     }
 }
