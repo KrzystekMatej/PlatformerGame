@@ -19,3 +19,4 @@ MonoBehaviour:
   JumpGravityModifier: 2
   FallGravityModifier: 0.5
   ClimbSpeed: {x: 2, y: 5}
+  GravityScale: 2

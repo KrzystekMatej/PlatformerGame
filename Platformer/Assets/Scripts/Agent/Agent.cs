@@ -74,7 +74,7 @@ public class Agent : MonoBehaviour, IHittable
             WeaponManager.SwapWeapon();
         }
         OrientationController.SetAgentOrientation(InputController.InputData.MovementVector);
-        StateMachine.UpdateState(this);
+        StateMachine.PerformStateUpdate(this);
     }
 
     private void FixedUpdate()

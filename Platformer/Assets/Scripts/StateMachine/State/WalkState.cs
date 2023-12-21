@@ -51,38 +51,28 @@ public class WalkState : State
         agent.InstanceData.Acceleration += direction * agent.InstanceData.MaxForce;
     }
 
-    protected void CalculateVelocity()
+    protected virtual void CalculateVelocity()
     {
         Vector2 previousVelocity = agent.RigidBody.velocity;
 
         agent.RigidBody.velocity += agent.InstanceData.Acceleration * Time.deltaTime;
-
         agent.RigidBody.velocity = new Vector2
         (
             StopDeacceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
-            StopDeacceleration(agent.InputController.InputData.MovementVector.y, agent.RigidBody.velocity.y, previousVelocity.y)
+            agent.RigidBody.velocity.y
         );
-
-        LimitVelocity();
-        agent.InstanceData.Acceleration.Set(0, 0);
-    }
-
-    private static float StopDeacceleration(float input, float currentVelocity, float previousVelocity)
-    {
-        if (input == 0 && Mathf.Sign(currentVelocity) != Mathf.Sign(previousVelocity))
-        {
-            return 0;
-        }
-        return currentVelocity;
-    }
-
-    protected virtual void LimitVelocity()
-    {
         agent.RigidBody.velocity = new Vector2
         (
             Mathf.Clamp(agent.RigidBody.velocity.x, -agent.InstanceData.MaxSpeed, agent.InstanceData.MaxSpeed),
             agent.RigidBody.velocity.y
         );
+
+        agent.InstanceData.Acceleration.Set(0, 0);
+    }
+
+    protected static float StopDeacceleration(float input, float currentVelocity, float previousVelocity)
+    {
+        return input == 0 && Mathf.Sign(currentVelocity) != Mathf.Sign(previousVelocity) ? 0 : currentVelocity;
     }
 
     protected override void HandleExit()

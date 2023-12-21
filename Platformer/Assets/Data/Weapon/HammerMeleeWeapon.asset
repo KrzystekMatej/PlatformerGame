@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: Hammer
   AttackDamage: 1
-  KnockbackForce: 10000
+  KnockbackForce: 0
   IsGroundWeapon: 1
   AttackRange: 2.3
   WeaponSprite: {fileID: 21300000, guid: 922413032c327be4896cae33fbfb0934, type: 3}

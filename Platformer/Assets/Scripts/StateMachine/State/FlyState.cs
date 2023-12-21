@@ -39,9 +39,19 @@ public class FlyState : WalkState
         agent.InstanceData.Acceleration += direction * agent.InstanceData.MaxForce;
     }
 
-    protected override void LimitVelocity()
+    protected override void CalculateVelocity()
     {
+        Vector2 previousVelocity = agent.RigidBody.velocity;
+
+        agent.RigidBody.velocity += agent.InstanceData.Acceleration * Time.deltaTime;
+        agent.RigidBody.velocity = new Vector2
+        (
+            StopDeacceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
+            StopDeacceleration(agent.InputController.InputData.MovementVector.y, agent.RigidBody.velocity.y, previousVelocity.y)
+        );
         agent.RigidBody.velocity = Vector2.ClampMagnitude(agent.RigidBody.velocity, agent.InstanceData.MaxSpeed);
+
+        agent.InstanceData.Acceleration.Set(0, 0);
     }
 
     protected override void HandleExit()

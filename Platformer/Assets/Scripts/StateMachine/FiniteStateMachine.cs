@@ -29,16 +29,16 @@ public class FiniteStateMachine : MonoBehaviour
         CurrentState.Enter();
     }
 
-    public void UpdateState(Agent agent)
+    public void PerformStateUpdate(Agent agent)
     {
+        CurrentState.HandleUpdate();
+
         StateTransition triggered = CurrentState.Transitions.FirstOrDefault(t => t.IsTriggered(agent));
 
         if (triggered != null)
         {
             PerformTransition(triggered, agent);
         }
-
-        CurrentState.HandleUpdate();
     }
 
     private void PerformTransition(StateTransition triggered, Agent agent)
