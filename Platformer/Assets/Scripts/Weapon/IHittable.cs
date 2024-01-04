@@ -2,6 +2,6 @@
 
 internal interface IHittable
 {
-    void Hit(GameObject gameObject, Weapon attackingWeapon);
+    void Hit(Collider2D attackerCollider, Weapon attackingWeapon);
     void Hit(int attackDamage);
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 [Serializable]
@@ -31,10 +33,6 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         }
         set 
         {
-            if (!ContainsKey(key))
-            {
-                entries.Add(new SerializableDictionaryEntry<TKey, TValue>(key, value));
-            }
             dictionary[key] = value;
         }
     }
@@ -44,9 +42,9 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         return dictionary.ContainsKey(key);
     }
 
-    public List<SerializableDictionaryEntry<TKey, TValue>> GetAllEntries()
+    public Dictionary<TKey, TValue>.ValueCollection GetAllEntries()
     {
-        return entries;
+        return dictionary.Values;
     }
 }
 
@@ -60,33 +58,5 @@ public class SerializableDictionaryEntry<TKey, TValue>
     {
         Key = key;
         Value = value;
-    }
-}
-
-[Serializable]
-public class SoundKey
-{
-    public SoundActionType actionType;
-    public LayerMask materialLayer;
-
-
-    public SoundKey(SoundActionType actionType, LayerMask materialLayer)
-    {
-        this.actionType = actionType;
-        this.materialLayer = materialLayer;
-    }
-
-    public override bool Equals(object obj)
-    {
-        if (obj is SoundKey soundKey)
-        {
-            return soundKey.actionType.Equals(actionType) && soundKey.materialLayer.Equals(materialLayer);
-        }
-        return false;
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(actionType, materialLayer);
     }
 }

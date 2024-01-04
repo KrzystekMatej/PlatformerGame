@@ -887,10 +887,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99e520aafdad1c4292039a918333194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftKey: 97
   rightKey: 100
-  downKey: 115
+  leftKey: 97
   upKey: 119
+  downKey: 115
   jumpKey: 32
   attackKey: 113
   weaponSwapKey: 101
@@ -1065,7 +1065,7 @@ PrefabInstance:
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 4830311978843861552}
+      objectReference: {fileID: 3040692532522478651}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1317,7 +1317,7 @@ PrefabInstance:
     - target: {fileID: 8660966007656399279, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 4830311978843861552}
+      objectReference: {fileID: 3040692532522478651}
     - target: {fileID: 8660966007656399279, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -1380,6 +1380,17 @@ PrefabInstance:
       objectReference: {fileID: 7352125856386542907, guid: cf505303fc6b62f478c3f1c5dbd95230, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+--- !u!114 &3040692532522478651 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3580818035751282821, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1982475228897019070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4511701468293684576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a116309e888f5e74b8e6e54219960fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!70 &4396555839418528185 stripped
 CapsuleCollider2D:
   m_CorrespondingSourceObject: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -1398,17 +1409,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4511701468293684576}
   m_Enabled: 1
---- !u!114 &4830311978843861552 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6380366541168735886, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
-  m_PrefabInstance: {fileID: 1982475228897019070}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4511701468293684576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a116309e888f5e74b8e6e54219960fb8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &9057417481030304520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363741092985079734, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

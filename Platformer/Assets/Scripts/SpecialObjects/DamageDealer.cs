@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DamageDealer : MonoBehaviour
 {
-    private GameObject attacker;
+    private Collider2D attacker;
     [SerializeField]
     private Weapon weapon;
     [SerializeField]
@@ -18,11 +18,10 @@ public class DamageDealer : MonoBehaviour
     private void Awake()
     {
         triggerDetector = GetComponent<TriggerDetector>();
-        attacker = gameObject;
-
+        attacker = GetComponent<Collider2D>();
     }
 
-    public void Initialize(GameObject attacker, Weapon weapon, LayerMask hitMask)
+    public void Initialize(Collider2D attacker, Weapon weapon, LayerMask hitMask)
     {
         this.attacker = attacker;
         this.weapon = weapon;

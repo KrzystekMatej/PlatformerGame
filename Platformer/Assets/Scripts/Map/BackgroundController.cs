@@ -32,11 +32,15 @@ public class BackgroundController : MonoBehaviour
 
     Vector3 lastPlayerPos;
 
-
-
-    private void Start()
+    private void Awake()
     {
-        playerCollider = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera.Follow.GetComponent<Agent>().TriggerCollider;
+        Camera.main.GetComponent<CinemachineBrain>().m_CameraActivatedEvent.AddListener(OnCameraActivated);
+        this.enabled = false;
+    }
+
+    private void OnCameraActivated(ICinemachineCamera incomingVcam, ICinemachineCamera outgoingVcam)
+    {
+        playerCollider = incomingVcam.Follow.GetComponent<Agent>().TriggerCollider;
         var currentSprites = current.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
         var nextSprites = next.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
 
@@ -46,6 +50,7 @@ public class BackgroundController : MonoBehaviour
         tempBackgroundData = backgroundData;
 
         lastPlayerPos = playerCollider.bounds.center;
+        this.enabled = true;
     }
 
     private (float startX, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)

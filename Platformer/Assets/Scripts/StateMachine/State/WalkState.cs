@@ -58,7 +58,7 @@ public class WalkState : State
         agent.RigidBody.velocity += agent.InstanceData.Acceleration * Time.deltaTime;
         agent.RigidBody.velocity = new Vector2
         (
-            StopDeacceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
+            StopDeceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
             agent.RigidBody.velocity.y
         );
         agent.RigidBody.velocity = new Vector2
@@ -70,7 +70,7 @@ public class WalkState : State
         agent.InstanceData.Acceleration.Set(0, 0);
     }
 
-    protected static float StopDeacceleration(float input, float currentVelocity, float previousVelocity)
+    protected static float StopDeceleration(float input, float currentVelocity, float previousVelocity)
     {
         return input == 0 && Mathf.Sign(currentVelocity) != Mathf.Sign(previousVelocity) ? 0 : currentVelocity;
     }

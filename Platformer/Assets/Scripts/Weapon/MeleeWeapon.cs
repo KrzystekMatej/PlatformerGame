@@ -19,7 +19,7 @@ public class MeleeWeapon : AgentWeapon
 
     public override void Attack(Agent agent, Vector3 direction, LayerMask hitMask)
     {
-        Vector3 origin = agent.TriggerCollider.bounds.center + direction * (AttackRange / 2);
+        Vector3 origin = agent.GetCenterPosition() + direction * (AttackRange / 2);
         int colliderCount = Physics2D.OverlapBoxNonAlloc(origin, new Vector2(AttackRange, AttackWidth), 0, colliders, hitMask);
 
 
@@ -27,7 +27,7 @@ public class MeleeWeapon : AgentWeapon
         {
             if (colliders[i].gameObject == agent.gameObject) continue;
             IHittable damageable = colliders[i].GetComponent<IHittable>();
-            if (damageable != null) damageable.Hit(agent.gameObject, this);
+            if (damageable != null) damageable.Hit(agent.TriggerCollider, this);
         }
     }
 

@@ -13,9 +13,9 @@ public class RangeWeapon : AgentWeapon
     public override void Attack(Agent agent, Vector3 direction, LayerMask hitMask)
     {
         agent.WeaponManager.SetWeaponVisibility(false);
-        GameObject flyingObject = Instantiate(RangeWeaponPrefab, agent.TriggerCollider.bounds.center, Quaternion.identity);
+        GameObject flyingObject = Instantiate(RangeWeaponPrefab, agent.GetCenterPosition(), Quaternion.identity);
         flyingObject.GetComponent<Throwable>().Initialize(AttackRange, direction, FlySpeed);
-        flyingObject.GetComponent<DamageDealer>().Initialize(agent.gameObject, this, hitMask);
+        flyingObject.GetComponent<DamageDealer>().Initialize(agent.TriggerCollider, this, hitMask);
         flyingObject.GetComponent<Rotator>().Direction = direction;
     }
 

@@ -55,11 +55,11 @@ namespace TheKiwiCoder {
             return children;
         }
 
-        public static void Traverse(Node node, System.Action<Node> visiter) {
+        public static void Traverse(Node node, System.Action<Node> visitor) {
             if (node != null) {
-                visiter.Invoke(node);
+                visitor.Invoke(node);
                 var children = GetChildren(node);
-                children.ForEach((n) => Traverse(n, visiter));
+                children.ForEach((n) => Traverse(n, visitor));
             }
         }
 

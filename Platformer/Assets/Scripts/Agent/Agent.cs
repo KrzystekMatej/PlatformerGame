@@ -5,12 +5,11 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static Unity.VisualScripting.Member;
 
 public class Agent : MonoBehaviour, IHittable
 {
     public UnityEvent OnDeathComplete, OnFallOut, OnRespawnRequired;
-    public UnityEvent<GameObject, Weapon> OnHit;
+    public UnityEvent<Collider2D, Weapon> OnHit;
 
     public AgentData DefaultData;
     public AgentInstanceData InstanceData;
@@ -82,17 +81,22 @@ public class Agent : MonoBehaviour, IHittable
         GroundDetector.Detect();
     }
 
+    public Vector3 GetCenterPosition()
+    {
+        return TriggerCollider.bounds.center;
+    }
+
     public void FallOut()
     {
         OnFallOut?.Invoke();
         OnRespawnRequired?.Invoke();
     }
     
-    public void Hit(GameObject gameObject, Weapon attackingWeapon)
+    public void Hit(Collider2D attackerCollider, Weapon attackingWeapon)
     {
         Hit(attackingWeapon.AttackDamage);
-        OnHit?.Invoke(gameObject, attackingWeapon);
-        PerformKnockback(gameObject.transform.position, attackingWeapon.KnockbackForce);
+        OnHit?.Invoke(attackerCollider, attackingWeapon);
+        PerformKnockback(attackerCollider.bounds.center, attackingWeapon.KnockbackForce);
     }
 
     public void Hit(int attackDamage)

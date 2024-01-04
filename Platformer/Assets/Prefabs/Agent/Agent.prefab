@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7231147595225947246}
   - component: {fileID: 9135688367114563810}
-  - component: {fileID: 6380366541168735886}
+  - component: {fileID: 3580818035751282821}
   m_Layer: 0
   m_Name: AudioFeedback
   m_TagString: Untagged
@@ -232,7 +232,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6380366541168735886
+--- !u!114 &3580818035751282821
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,6 +265,12 @@ MonoBehaviour:
           m_Bits: 32768
       Value: {fileID: 11400000, guid: 5b8cefaa674dbb649a9e8ccea1a370e7, type: 2}
     - Key:
+        actionType: 0
+        materialLayer:
+          serializedVersion: 2
+          m_Bits: 1024
+      Value: {fileID: 11400000, guid: 15278fbe6a466a3429e047de7d3846e2, type: 2}
+    - Key:
         actionType: 1
         materialLayer:
           serializedVersion: 2
@@ -283,6 +289,12 @@ MonoBehaviour:
           m_Bits: 32768
       Value: {fileID: 11400000, guid: 21aaed756f5fc974789aa8c2c90b294c, type: 2}
     - Key:
+        actionType: 1
+        materialLayer:
+          serializedVersion: 2
+          m_Bits: 1024
+      Value: {fileID: 11400000, guid: fa0128468762f784ca3059d8aedbcbe5, type: 2}
+    - Key:
         actionType: 2
         materialLayer:
           serializedVersion: 2
@@ -300,18 +312,6 @@ MonoBehaviour:
           serializedVersion: 2
           m_Bits: 32768
       Value: {fileID: 11400000, guid: 632346a58634cdc45a60e6b5c2fa3d34, type: 2}
-    - Key:
-        actionType: 0
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 1024
-      Value: {fileID: 11400000, guid: 15278fbe6a466a3429e047de7d3846e2, type: 2}
-    - Key:
-        actionType: 1
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 1024
-      Value: {fileID: 11400000, guid: fa0128468762f784ca3059d8aedbcbe5, type: 2}
     - Key:
         actionType: 2
         materialLayer:

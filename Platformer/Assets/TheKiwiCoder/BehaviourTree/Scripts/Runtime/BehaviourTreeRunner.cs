@@ -25,8 +25,7 @@ namespace TheKiwiCoder {
             tree.Initialize();
         }
 
-        // Update is called once per frame
-        void Update() {
+        public void TreeUpdate() {
             if (tree) {
                 tree.Update();
             }

@@ -46,8 +46,8 @@ public class FlyState : WalkState
         agent.RigidBody.velocity += agent.InstanceData.Acceleration * Time.deltaTime;
         agent.RigidBody.velocity = new Vector2
         (
-            StopDeacceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
-            StopDeacceleration(agent.InputController.InputData.MovementVector.y, agent.RigidBody.velocity.y, previousVelocity.y)
+            StopDeceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
+            StopDeceleration(agent.InputController.InputData.MovementVector.y, agent.RigidBody.velocity.y, previousVelocity.y)
         );
         agent.RigidBody.velocity = Vector2.ClampMagnitude(agent.RigidBody.velocity, agent.InstanceData.MaxSpeed);
 
