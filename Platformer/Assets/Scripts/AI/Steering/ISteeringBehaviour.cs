@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface ISteeringBehaviour
 {
-    public Vector2 GetSteering(Agent agent, Vision vision);
+    Vector2 GetSteering(Agent agent, Vision vision);
 }
+

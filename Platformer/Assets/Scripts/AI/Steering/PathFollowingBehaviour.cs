@@ -21,12 +21,12 @@ public class PathFollowingBehaviour : SeekBehaviour
         Vector2 target = Vector2.zero;
 
 
-        for (int i = 0; i < path.Count; i++)
+        for (int i = 0; i < path.Count - 1; i++)
         {
             Vector2 a = path[i].position;
-            Vector2 b = path[(i + 1) % path.Count].position;
+            Vector2 b = path[i + 1].position;
 
-            Vector2 normalPoint = GetNormalPoint(futurePosition, a, b);
+            Vector2 normalPoint = MathUtility.GetClosestPointOnSegment(futurePosition, a, b);
 
             Vector2 direction = a - b;
             if
@@ -61,13 +61,5 @@ public class PathFollowingBehaviour : SeekBehaviour
         {
             return Vector2.zero;
         }
-    }
-
-
-    private Vector2 GetNormalPoint(Vector2 futurePosition, Vector2 a, Vector2 b)
-    {
-        Vector2 af = futurePosition - a;
-        Vector2 ab = (b - a).normalized;
-        return a + ab * Vector2.Dot(af, ab);
     }
 }
