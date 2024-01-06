@@ -28,7 +28,7 @@ public class Steering : MonoBehaviour
 
     private void Awake()
     {
-        agent = GetComponentInParent<Agent>();
+        agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
         contextBehaviours = GetComponentsInChildren<ContextSteeringBehaviour>().ToList();
         InitializeContextMaps();
     }
@@ -60,7 +60,7 @@ public class Steering : MonoBehaviour
 
     public Vector2 Seek(Vector3 target)
     {
-        Vector2 desiredVelocity = (target - agent.transform.position).normalized;
+        Vector2 desiredVelocity = (target - agent.GetCenterPosition()).normalized;
         gizmoDirection = desiredVelocity;
         return desiredVelocity;
     }
@@ -68,7 +68,7 @@ public class Steering : MonoBehaviour
 
     public Vector2 Flee(Vector3 target)
     {
-        Vector2 desiredVelocity = (agent.transform.position - target).normalized;
+        Vector2 desiredVelocity = (agent.GetCenterPosition() - target).normalized;
         gizmoDirection = desiredVelocity;
         return desiredVelocity;
     }
@@ -78,7 +78,7 @@ public class Steering : MonoBehaviour
         ResetContextMaps();
         foreach (ContextSteeringBehaviour behaviour in contextBehaviours)
         {
-            behaviour.ModifySteeringContext(danger, interest, directions);
+            behaviour.ModifySteeringContext(agent, danger, interest, directions);
         }
 
         Vector2 desiredVelocity = Vector2.zero;
@@ -96,7 +96,7 @@ public class Steering : MonoBehaviour
         if (Application.isPlaying)
         {
             Gizmos.color = gizmoColor;
-            Gizmos.DrawRay(transform.position, gizmoDirection * gizmoRayLength);
+            Gizmos.DrawRay(agent.GetCenterPosition(), gizmoDirection * gizmoRayLength);
         }
     }
 }

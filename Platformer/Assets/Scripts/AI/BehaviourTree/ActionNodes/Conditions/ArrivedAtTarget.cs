@@ -10,6 +10,6 @@ public class ArrivedAtTarget : Condition
 
     protected override bool IsConditionSatisfied()
     {
-        return Vector3.Distance((Vector3)blackboard.DataTable["CurrentTarget"], context.Agent.transform.position) < arriveDistance;
+        return Vector3.Distance((Vector3)blackboard.DataTable["CurrentTarget"], context.Agent.GetCenterPosition()) < arriveDistance;
     }
 }

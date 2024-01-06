@@ -19,7 +19,7 @@ public class AIManager : MonoBehaviour
     private void Awake()
     {
         AIInputController = GetComponentInParent<AIInputController>();
-        Agent = GetComponentInParent<Agent>();
+        Agent = AIInputController.GetComponentInChildren<Agent>();
         Vision = GetComponentInChildren<Vision>();
         Steering = GetComponentInChildren<Steering>();
         TreeRunner = GetComponentInChildren<BehaviourTreeRunner>();
@@ -27,7 +27,6 @@ public class AIManager : MonoBehaviour
 
     private void Start()
     {
-        transform.position = Agent.GetCenterPosition();
         StartCoroutine(AIUpdate());
     }
 
@@ -37,7 +36,6 @@ public class AIManager : MonoBehaviour
 
         while (true)
         {
-            if (Vision != null) Vision.DetectorUpdate();
             if (TreeRunner != null) TreeRunner.TreeUpdate();
             if (RootBehaviour != null) Agent.InstanceData.Acceleration += RootBehaviour.GetSteering(Agent, Vision);
             yield return new WaitForSeconds(aiUpdateInterval);

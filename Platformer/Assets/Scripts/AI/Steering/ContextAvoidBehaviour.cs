@@ -12,8 +12,7 @@ public class ContextAvoidBehaviour : ContextSteeringBehaviour
 
     private void Start()
     {
-        areaDetector = (AreaDetector)transform.parent.GetComponentInChildren<Vision>().GetDetector("ObstacleDetector");
-        Vector3 colliderSize = GetComponentInParent<Agent>().TriggerCollider.bounds.extents;
+        Vector3 colliderSize = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>().GetCenterPosition();
         if (colliderSize.x > colliderSize.y)
         {
             agentColliderRadius = colliderSize.x;
@@ -24,24 +23,25 @@ public class ContextAvoidBehaviour : ContextSteeringBehaviour
         }
     }
 
-    public override void ModifySteeringContext(float[] danger, float[] interest, List<Vector2> directions)
+    public override void ModifySteeringContext(Agent agent, float[] danger, float[] interest, List<Vector2> directions)
     {
-        Collider2D[] obstacles = areaDetector.GetColliders();
+        int detectionCount = overlapDetector.Detect(agent.GetCenterPosition());
+        Collider2D[] obstacles = overlapDetector.Colliders;
 
-        for (int i = 0; i < areaDetector.ColliderCount; i++)
+        for (int i = 0; i < detectionCount; i++)
         {
-            UpdateDangerTowardsObstacle(obstacles[i], danger, directions);
+            UpdateDangerTowardsObstacle(agent, obstacles[i], danger, directions);
         }
     }
 
 
-    private void UpdateDangerTowardsObstacle(Collider2D obstacle, float[] danger, List<Vector2> directions)
+    private void UpdateDangerTowardsObstacle(Agent agent, Collider2D obstacle, float[] danger, List<Vector2> directions)
     {
-        Vector2 directionToObstacle = obstacle.ClosestPoint(transform.position) - (Vector2)transform.position;
+        Vector2 directionToObstacle = obstacle.ClosestPoint(agent.GetCenterPosition()) - (Vector2)agent.GetCenterPosition();
         float distanceToObstacle = directionToObstacle.magnitude;
 
         float obstacleThreshold = agentColliderRadius + obstacleMinimalDistance;
-        float outerRadius = areaDetector.DetectionRadius - obstacleThreshold;
+        float outerRadius = overlapDetector.Size.x - obstacleThreshold;
         float distanceToObstacleFromInnerCircle = distanceToObstacle - obstacleThreshold;
 
         float weight = distanceToObstacle <= obstacleThreshold

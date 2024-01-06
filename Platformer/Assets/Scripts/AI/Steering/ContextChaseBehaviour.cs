@@ -16,49 +16,48 @@ public class ContextChaseBehaviour : ContextSteeringBehaviour
 
     private void Start()
     {
-        areaDetector = (AreaDetector)transform.parent.GetComponentInChildren<Vision>().GetDetector("TargetDetector");
         agentTriggerCollider = GetComponentInParent<Agent>().TriggerCollider;
     }
 
-    public override void ModifySteeringContext(float[] danger, float[] interest, List<Vector2> directions)
+    public override void ModifySteeringContext(Agent agent, float[] danger, float[] interest, List<Vector2> directions)
     {
-        Collider2D[] targets = areaDetector.GetColliders();
+        int detectionCount = overlapDetector.Detect(agent.GetCenterPosition());
 
-        int closestTargetIndex = FindClosestTarget(targets);
+        int closestTargetIndex = FindClosestTarget(agent.GetCenterPosition(), detectionCount);
 
         if (closestTargetIndex != -1)
         {
-            cachedTargetPosition = targets[closestTargetIndex].bounds.center;
-            if (ClosestTargetReached(targets[closestTargetIndex])) return;
+            cachedTargetPosition = overlapDetector.Colliders[closestTargetIndex].bounds.center;
+            if (ClosestTargetReached(agent, overlapDetector.Colliders[closestTargetIndex])) return;
         }
-        else if (CachedTargetPositionReached() || !cachedTargetPosition.HasValue)
+        else if (CachedTargetPositionReached(agent) || !cachedTargetPosition.HasValue)
         {
             cachedTargetPosition = null;
             return;
         }
 
-        UpdateInterestTowardsTarget(interest, directions);
+        UpdateInterestTowardsTarget(agent, interest, directions);
     }
 
-    private bool ClosestTargetReached(Collider2D targetCollider)
+    private bool ClosestTargetReached(Agent agent, Collider2D targetCollider)
     {
-        return Vector2.Distance(transform.position, targetCollider.bounds.center) < targetReachedDistance;
+        return Vector2.Distance(agent.GetCenterPosition(), targetCollider.bounds.center) < targetReachedDistance;
     }
 
-    private bool CachedTargetPositionReached()
+    private bool CachedTargetPositionReached(Agent agent)
     {
-        return cachedTargetPosition.HasValue && Vector2.Distance(transform.position, cachedTargetPosition.Value) < targetReachedDistance;
+        return cachedTargetPosition.HasValue && Vector2.Distance(agent.GetCenterPosition(), cachedTargetPosition.Value) < targetReachedDistance;
     }
 
-    public int FindClosestTarget(Collider2D[] targets)
+    public int FindClosestTarget(Vector2 origin, int detectionCount)
     {
         float minDistance = float.MaxValue;
         int closestTargetIndex = -1;
-        for (int i = 0; i < areaDetector.ColliderCount; i++)
+        for (int i = 0; i < detectionCount; i++)
         {
-            if (targets[i] != null)
+            if (overlapDetector.Colliders[i] != null)
             {
-                float distance = Vector2.Distance(targets[i].bounds.center, transform.position);
+                float distance = Vector2.Distance(overlapDetector.Colliders[i].bounds.center, origin);
                 if (distance < minDistance)
                 {
                     minDistance = distance;
@@ -70,9 +69,9 @@ public class ContextChaseBehaviour : ContextSteeringBehaviour
         return closestTargetIndex;
     }
 
-    private void UpdateInterestTowardsTarget(float[] interest, List<Vector2> directions)
+    private void UpdateInterestTowardsTarget(Agent agent, float[] interest, List<Vector2> directions)
     {
-        Vector2 directionToTarget = cachedTargetPosition.Value - transform.position;
+        Vector2 directionToTarget = cachedTargetPosition.Value - agent.GetCenterPosition();
 
         for (int i = 0; i < interest.Length; i++)
         {

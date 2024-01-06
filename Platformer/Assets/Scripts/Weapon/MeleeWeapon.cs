@@ -1,32 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 [CreateAssetMenu(fileName = "MeleeWeapon", menuName = "Weapons/MeleeWeapon")]
 public class MeleeWeapon : AgentWeapon
 {
-    public int MaxNumberOfHits;
-    public float AttackWidth = 1;
-
-    protected Collider2D[] colliders;
-
-    public override void Initialize()
-    {
-        colliders = new Collider2D[MaxNumberOfHits];
-    }
-
     public override void Attack(Agent agent, Vector3 direction, LayerMask hitMask)
     {
-        Vector3 origin = agent.GetCenterPosition() + direction * (AttackRange / 2);
-        int colliderCount = Physics2D.OverlapBoxNonAlloc(origin, new Vector2(AttackRange, AttackWidth), 0, colliders, hitMask);
+        AttackDetector.DetectLayerMask = hitMask;
+        Vector3 origin = agent.GetCenterPosition() + direction * (AttackDetector.Size.x / 2);
+        int colliderCount = AttackDetector.Detect(origin);
 
 
         for (int i = 0; i < colliderCount; i++)
         {
-            if (colliders[i].gameObject == agent.gameObject) continue;
-            IHittable damageable = colliders[i].GetComponent<IHittable>();
+            if (AttackDetector.Colliders[i].gameObject == agent.gameObject) continue;
+            IHittable damageable = AttackDetector.Colliders[i].GetComponent<IHittable>();
             if (damageable != null) damageable.Hit(agent.TriggerCollider, this);
         }
     }
@@ -38,8 +31,8 @@ public class MeleeWeapon : AgentWeapon
 
     
 
-    public override void ShowGizmos(Vector3 origin, Vector3 direction)
+    public override void DrawGizmos(Vector3 origin, Vector3 direction)
     {
-        Gizmos.DrawWireCube(origin + direction * (AttackRange / 2), new Vector2(AttackRange, AttackWidth));
+        Gizmos.DrawWireCube(origin + direction * (AttackDetector.Size.x / 2), AttackDetector.Size);
     }
 }

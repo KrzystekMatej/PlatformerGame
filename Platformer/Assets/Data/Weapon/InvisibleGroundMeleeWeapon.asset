@@ -15,9 +15,7 @@ MonoBehaviour:
   WeaponName: InvisibleWeapon
   AttackDamage: 1
   KnockbackForce: 10
+  <AttackDetector>k__BackingField: {fileID: 11400000, guid: e7a29d1b07821d441a2b87a100f519e8, type: 2}
   IsGroundWeapon: 1
-  AttackRange: 2
   WeaponSprite: {fileID: 0}
   WeaponSound: {fileID: 11400000, guid: 36d8ae4bd13f03049a68b54654fdf62d, type: 2}
-  MaxNumberOfHits: 2
-  AttackWidth: 1

@@ -9,9 +9,8 @@ public class PursueBehaviour : SeekBehaviour
 
     public override Vector2 GetSteering(Agent agent, Vision vision)
     {
-        Collider2D target = GetTarget(vision);
 
-        Vector2 direction = target.bounds.center - transform.position;
+        Vector2 direction = target.bounds.center - agent.GetCenterPosition();
         float distance = direction.magnitude;
         float speed = agent.RigidBody.velocity.magnitude;
         float prediction;

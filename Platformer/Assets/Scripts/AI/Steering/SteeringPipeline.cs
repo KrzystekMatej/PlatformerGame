@@ -12,8 +12,12 @@ public class SteeringPipeline : MonoBehaviour
     private List<Constraint> constraints = new List<Constraint>();
     [SerializeField]
     private Actuator actuator;
-
     private int constraintSteps;
+
+    private void Awake()
+    {
+        constraintSteps = constraints.Count;
+    }
 
     private SteeringPipeline deadlock;
 
@@ -35,16 +39,21 @@ public class SteeringPipeline : MonoBehaviour
         {
             Path path = actuator.GetPath(agent, goal);
 
+            bool validPath = true;
             foreach (Constraint constraint in constraints)
             {
                 if (constraint.IsViolated(path))
                 {
                     goal = constraint.Suggest(agent, path, goal);
+                    validPath = false;
                     break;
                 }
             }
 
-            return actuator.GetOutput(agent, path, goal);
+            if (validPath)
+            {
+                return actuator.GetOutput(agent, path, goal);
+            }
         }
 
         return deadlock.GetSteering(agent);

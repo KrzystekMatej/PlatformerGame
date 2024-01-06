@@ -7,13 +7,15 @@ public class GroundCheck : Condition
     [SerializeField]
     float groundDistance = 1f;
 
-    private string groundCheckRight = "RightDown";
-    private string groundCheckLeft = "LeftDown";
+    [SerializeField]
+    private CastDetector groundCheckRight;
+    [SerializeField]
+    private CastDetector groundCheckLeft;
 
     protected override bool IsConditionSatisfied()
     {
-        CastDetector detector = (CastDetector)context.Vision.GetDetector((float)blackboard.DataTable["HorizontalDirection"] == 1 ? groundCheckRight : groundCheckLeft);
-        RaycastHit2D groundHit = detector.Hit;
-        return groundHit.collider == null || groundHit.distance > groundDistance;
+        CastDetector detector = (float)blackboard.DataTable["HorizontalDirection"] == 1f ? groundCheckRight : groundCheckLeft;
+        int detectionCount = detector.Detect(context.Agent.GetCenterPosition());
+        return detectionCount == 0 || detector.Hits[0].distance > groundDistance;
     }
 }

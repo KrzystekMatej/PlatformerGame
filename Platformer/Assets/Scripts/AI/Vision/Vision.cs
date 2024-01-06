@@ -8,55 +8,33 @@ using UnityEngine;
 
 public class Vision : MonoBehaviour
 {
-    private FastAccessList<string, VisionDetector> detectorAccessList = new FastAccessList<string, VisionDetector>();
+    [SerializeField]
+    private List<VisionDetector> detectors = new List<VisionDetector>();
 
-    private void Awake()
+    public void AddCastDetector(Color gizmoColor, Vector2 size, float angle, LayerMask detectLayerMask, Vector2 originOffset,
+        ShapeType detectShapeType, int maxDetections, float distance, Vector2 direction)
     {
-        foreach (var detector in GetComponents<VisionDetector>())
+        CastDetector detector = ScriptableObject.CreateInstance<CastDetector>();
+        detector.Initialize(gizmoColor, size, angle, detectLayerMask, originOffset,
+        detectShapeType, maxDetections, distance, direction);
+        detectors.Add(detector);
+    }
+
+    public void AddAreaDetector(Color gizmoColor, Vector2 size, float angle, LayerMask detectLayerMask, Vector2 originOffset,
+        ShapeType detectShapeType, int maxDetections, LayerMask blockLayerMask)
+    {
+        OverlapDetector detector = ScriptableObject.CreateInstance<OverlapDetector>();
+        detector.Initialize(gizmoColor, size, angle, detectLayerMask, originOffset, detectShapeType, maxDetections, blockLayerMask);
+        detectors.Add(detector);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
+
+        foreach (VisionDetector detector in detectors)
         {
-            detectorAccessList[detector.DetectorName] = detector;
+            detector.DrawGizmos(agent.GetComponent<Collider2D>().bounds.center);
         }
-    }
-
-    public void DetectorUpdate()
-    {
-        foreach (var detector in detectorAccessList.Values)
-        {
-            if (detector.enabled)
-            {
-                detector.Detect();
-            }
-        }
-    }
-
-    public VisionDetector GetDetector(string detectorName)
-    {
-        return detectorAccessList[detectorName];
-    }
-
-    public void AddCastDetector(string detectorName, Color gizmoColor, Vector2 size, float distance, Vector2 direction, Vector2 offset, LayerMask layerMask, CastType castType)
-    {
-        CastDetector detector = gameObject.AddComponent<CastDetector>();
-        detector.Initialize(detectorName, gizmoColor, size, distance, direction, offset, layerMask, castType);
-        detectorAccessList[detector.DetectorName] = detector;
-    }
-
-    public void AddAreaDetector(string detectorName, Color gizmoColor, float detectionRadius, int maxCollidersToDetect, LayerMask detectLayerMask, LayerMask blockLayerMask)
-    {
-        AreaDetector detector = gameObject.AddComponent<AreaDetector>();
-        detector.Initialize(detectorName, gizmoColor, detectionRadius, maxCollidersToDetect, detectLayerMask, blockLayerMask);
-        detectorAccessList[detector.DetectorName] = detector;
-    }
-
-    public void StartDetector(string detectorName)
-    {
-        VisionDetector detector = detectorAccessList[detectorName];
-        detector.enabled = true;
-    }
-
-    public void StopDetector(string detectorName)
-    {
-        VisionDetector detector = detectorAccessList[detectorName];
-        detector.enabled = false;
     }
 }

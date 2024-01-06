@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f7a82b4904c69a4681aac0c858a6131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overlapDetector: {fileID: 0}
   targetReachedDistance: 1.4
 --- !u!114 &3433077678585937672
 MonoBehaviour:
@@ -77,6 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c81864635f5ec47a6f68eeddbda348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overlapDetector: {fileID: 0}
   obstacleMinimalDistance: 0.15
 --- !u!1 &3079820557302413007
 GameObject:
@@ -88,8 +90,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4682323907704305010}
   - component: {fileID: 1235885468742254910}
-  - component: {fileID: 6003980598358082882}
-  - component: {fileID: 2042738322846989398}
   m_Layer: 13
   m_Name: Vision
   m_TagString: Untagged
@@ -124,51 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a496a13febd677448b9dd6096e1bd90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visionDelay: 0.1
---- !u!114 &6003980598358082882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079820557302413007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DetectorName>k__BackingField: TargetDetector
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <DetectionRadius>k__BackingField: 8
-  maxCollidersToDetect: 2
-  detectLayerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  blockLayerMask:
-    serializedVersion: 2
-    m_Bits: 640064
---- !u!114 &2042738322846989398
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3079820557302413007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <DetectorName>k__BackingField: ObstacleDetector
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <DetectionRadius>k__BackingField: 4
-  maxCollidersToDetect: 10
-  detectLayerMask:
-    serializedVersion: 2
-    m_Bits: 648256
-  blockLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  detectors: []
 --- !u!1 &4706410004552603123
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,15 +149,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4706410004552603123}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4682323907704305010}
   - {fileID: 13254736349972360}
-  m_Father: {fileID: 6866701850769994129}
-  m_RootOrder: 4
+  m_Father: {fileID: 7413313321222751369}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &661582681091697858
 MonoBehaviour:
@@ -249,6 +205,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6866701850769994129}
+  - {fileID: 2802224522686023313}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -377,6 +334,10 @@ PrefabInstance:
     - target: {fileID: 3580818035751282821, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: soundTable.entries.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: HitMask.m_Bits
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hitMask.m_Bits

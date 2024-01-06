@@ -115,7 +115,7 @@ public class Agent : MonoBehaviour, IHittable
     public void PerformKnockback(Vector3 from, float knockbackForce)
     {
         if (knockbackForce <= 0) return;
-        Vector2 direction = transform.position - from;
+        Vector2 direction = GetCenterPosition() - from;
         RigidBody.AddForce(new Vector2(direction.normalized.x, 0) * knockbackForce, ForceMode2D.Impulse);
     }
 }

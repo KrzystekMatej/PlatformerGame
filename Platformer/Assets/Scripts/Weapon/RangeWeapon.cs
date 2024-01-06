@@ -14,7 +14,7 @@ public class RangeWeapon : AgentWeapon
     {
         agent.WeaponManager.SetWeaponVisibility(false);
         GameObject flyingObject = Instantiate(RangeWeaponPrefab, agent.GetCenterPosition(), Quaternion.identity);
-        flyingObject.GetComponent<Throwable>().Initialize(AttackRange, direction, FlySpeed);
+        flyingObject.GetComponent<Throwable>().Initialize(AttackDetector.Size.x, direction, FlySpeed);
         flyingObject.GetComponent<DamageDealer>().Initialize(agent.TriggerCollider, this, hitMask);
         flyingObject.GetComponent<Rotator>().Direction = direction;
     }
@@ -24,7 +24,7 @@ public class RangeWeapon : AgentWeapon
         return agent.GroundDetector.CollisionDetected || !IsGroundWeapon;
     }
 
-    public override void ShowGizmos(Vector3 origin, Vector3 direction)
+    public override void DrawGizmos(Vector3 origin, Vector3 direction)
     {
         return;
     }

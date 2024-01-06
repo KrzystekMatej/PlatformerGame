@@ -6,18 +6,25 @@ using TheKiwiCoder;
 [System.Serializable]
 public class CanAttackAgent : Condition
 {
+    private AttackState attackState;
+
+    public override void Initialize()
+    {
+        attackState = context.Agent.GetComponentInChildren<AttackState>();
+    }
+
     protected override bool IsConditionSatisfied()
     {
-        float attackDirection = context.Agent.OrientationController.CurrentOrientation;
+    
         AgentWeapon weapon = context.Agent.WeaponManager.GetWeapon();
+        int detectionCount = 0;
         if (weapon != null && weapon.IsUseable(context.Agent))
         {
-            CastDetector detector = (CastDetector)context.Vision.GetDetector(attackDirection == 1 ? "Right" + weapon.WeaponName : "Left" + weapon.WeaponName);
-            RaycastHit2D hit = detector.Hit;
-            if (hit.collider == null) return false;
-            IHittable target = hit.collider.GetComponent<IHittable>();
-            return target != null;
+            Vector2 attackDirection = context.Agent.transform.right * context.Agent.OrientationController.CurrentOrientation;
+            Vector2 origin = (Vector2)context.Agent.GetCenterPosition() + attackDirection * weapon.AttackDetector.Size.x/2;
+            weapon.AttackDetector.DetectLayerMask = attackState.HitMask;
+            detectionCount = weapon.AttackDetector.Detect(origin);
         }
-        return false;
+        return detectionCount != 0;
     }
 }

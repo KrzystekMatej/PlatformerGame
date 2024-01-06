@@ -1,76 +1,65 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "CastDetector", menuName = "Vision/CastDetector")]
 public class CastDetector : VisionDetector
 {
     [field: SerializeField]
-    public Vector2 Size {  get; private set; }
+    public float Distance { get; set; }
     [field: SerializeField]
-    public float Distance { get; private set; }
-    [field: SerializeField]
-    public Vector2 Direction { get; private set; }
-    [field: SerializeField]
-    public Vector2 Offset { get; private set; }
-    [field: SerializeField]
-    public LayerMask LayerMask { get; private set; }
-    [field: SerializeField]
-    public CastType CastType { get; private set; }
-    public RaycastHit2D Hit { get; private set; }
+    public Vector2 Direction { get; set; }
+    public RaycastHit2D[] Hits { get; private set; }
 
-    public void Initialize(string detectorName, Color gizmoColor, Vector2 size, float distance, Vector2 direction, Vector2 offset, LayerMask layerMask, CastType castType)
+    private void OnEnable()
     {
-        this.DetectorName = detectorName;
-        this.gizmoColor = gizmoColor;
-        this.Size = size;
-        this.Distance = distance;
-        this.Direction = direction.normalized;
-        this.Offset = offset;
-        this.LayerMask = layerMask;
-        this.CastType = castType;
+        Hits = new RaycastHit2D[maxDetections];
     }
 
-    public override void Detect()
+
+    public void Initialize(Color gizmoColor, Vector2 size, float angle, LayerMask detectLayerMask, Vector2 originOffset,
+        ShapeType detectShapeType, int maxDetections, float distance, Vector2 direction)
     {
-        Vector2 origin = (Vector2)transform.position + Offset;
-        switch (CastType)
+        Initialize(gizmoColor, size, angle, detectLayerMask, originOffset, detectShapeType, maxDetections);
+        this.Hits = new RaycastHit2D[maxDetections];
+        this.Distance = distance;
+        this.Direction = direction.normalized;
+    }
+
+    public override int Detect(Vector2 origin)
+    {
+        origin += OriginOffset;
+        switch (DetectShapeType)
         {
-            case CastType.Ray:
-                Hit = Physics2D.Raycast(origin, Direction, Distance, LayerMask);
-                return;
-            case CastType.Box:
-                Hit = Physics2D.BoxCast(origin, Size, 0, Direction, Distance, LayerMask);
-                return;
-            case CastType.Circle:
-                Hit = Physics2D.CircleCast(origin, Size.x, Direction, Distance, LayerMask);
-                return;
+            case ShapeType.Ray:
+                return Physics2D.RaycastNonAlloc(origin, Direction, Hits, Distance, DetectLayerMask);
+            case ShapeType.Box:
+                return Physics2D.BoxCastNonAlloc(origin, Size, Angle, Direction, Hits, Distance, DetectLayerMask);
+            case ShapeType.Circle:
+                return Physics2D.CircleCastNonAlloc(origin, Size.x, Direction, Hits, Distance, DetectLayerMask);
+            default:
+                return 0;
         }
     }
 
-    private void OnDrawGizmos()
+    public override void DrawGizmos(Vector2 origin)
     {
         Gizmos.color = gizmoColor;
-        Vector2 origin = (Vector2)transform.position + Offset;
-        switch (CastType)
+        origin += OriginOffset;
+        switch (DetectShapeType)
         {
-            case CastType.Ray:
+            case ShapeType.Ray:
                 Vector2 end = origin + Direction * Distance;
                 Gizmos.DrawLine(origin, end);
                 return;
-            case CastType.Box:
+            case ShapeType.Box:
                 Gizmos.DrawWireCube(origin, Size);
                 return;
-            case CastType.Circle:
+            case ShapeType.Circle:
                 Gizmos.DrawWireSphere(origin, Size.x);
                 return;
         }
     }
-}
-
-public enum CastType
-{
-    Ray,
-    Box,
-    Circle
 }

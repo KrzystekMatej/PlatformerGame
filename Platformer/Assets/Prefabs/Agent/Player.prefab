@@ -1103,6 +1103,10 @@ PrefabInstance:
       value: -0.00041759014
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: HitMask.m_Bits
+      value: 532480
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hitMask.m_Bits
       value: 532480
       objectReference: {fileID: 0}

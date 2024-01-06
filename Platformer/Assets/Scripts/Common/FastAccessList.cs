@@ -6,16 +6,16 @@ using UnityEngine;
 
 public class FastAccessList<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
 {
-    private Dictionary<TKey, TValue> dictionary;
     private List<TValue> list;
+    private Dictionary<TKey, TValue> dictionary;
 
     public IEnumerable<TValue> Values => list;
     public int Count => list.Count;
 
     public FastAccessList()
     {
-        dictionary = new Dictionary<TKey, TValue>();
         list = new List<TValue>();
+        dictionary = new Dictionary<TKey, TValue>();
     }
 
     public TValue this[TKey key]
@@ -34,24 +34,24 @@ public class FastAccessList<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValu
             }
             else
             {
-                dictionary.Add(key, value);
                 list.Add(value);
+                dictionary.Add(key, value);
             }
         }
     }
 
     public void Add(TKey key, TValue value)
     {
-        dictionary.Add(key, value);
         list.Add(value);
+        dictionary.Add(key, value);
     }
 
     public bool Remove(TKey key)
     {
         if (dictionary.TryGetValue(key, out TValue value))
         {
-            dictionary.Remove(key);
             list.Remove(value);
+            dictionary.Remove(key);
             return true;
         }
 

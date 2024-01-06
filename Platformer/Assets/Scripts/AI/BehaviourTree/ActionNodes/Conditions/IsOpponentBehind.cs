@@ -10,7 +10,7 @@ public class IsOpponentBehind : Condition
     {
         Vector3 opponentPosition = (Vector3)blackboard.DataTable["OpponentPosition"];
         float orientation = context.Agent.OrientationController.CurrentOrientation;
-        return (orientation == 1 && opponentPosition.x < context.Agent.transform.position.x)
-            || (orientation == -1 && opponentPosition.x > context.Agent.transform.position.x);
+        return (orientation == 1 && opponentPosition.x < context.Agent.GetCenterPosition().x)
+            || (orientation == -1 && opponentPosition.x > context.Agent.GetCenterPosition().x);
     }
 }

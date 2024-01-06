@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class ContextSteeringBehaviour : MonoBehaviour
 {
-    protected AreaDetector areaDetector;
+    [SerializeField]
+    protected OverlapDetector overlapDetector;
 
-    public abstract void ModifySteeringContext(float[] danger, float[] interest, List<Vector2> directions);
+    public abstract void ModifySteeringContext(Agent agent, float[] danger, float[] interest, List<Vector2> directions);
 }

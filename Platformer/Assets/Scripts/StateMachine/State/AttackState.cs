@@ -9,7 +9,7 @@ public class AttackState : State
 {
     private Vector2 attackDirection;
     [SerializeField]
-    public LayerMask hitMask;
+    public LayerMask HitMask;
 
     protected override StateTransition[] GetTransitions()
     {
@@ -37,7 +37,7 @@ public class AttackState : State
     {
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
         attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
-        agent.WeaponManager.GetWeapon().Attack(agent, attackDirection, hitMask);
+        agent.WeaponManager.GetWeapon().Attack(agent, attackDirection, HitMask);
     }
 
     protected override void HandleExit()
@@ -50,6 +50,6 @@ public class AttackState : State
         if (!Application.isPlaying) return;
         Gizmos.color = Color.red;
         AgentWeapon weapon = agent.WeaponManager.GetWeapon();
-        if (weapon != null) weapon.ShowGizmos(agent.GetCenterPosition(), attackDirection);
+        if (weapon != null) weapon.DrawGizmos(agent.GetCenterPosition(), agent.transform.right * agent.OrientationController.CurrentOrientation);
     }
 }

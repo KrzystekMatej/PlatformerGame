@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1713860c2ed79c4daf228732f6e08a7, type: 3}
+  m_Name: HammerWeapon
+  m_EditorClassIdentifier: 
+  WeaponName: Hammer
+  AttackDamage: 1
+  KnockbackForce: 0
+  <AttackDetector>k__BackingField: {fileID: 11400000, guid: 50e2d2fbde6b6b54ebb53ffd9959e90f, type: 2}
+  IsGroundWeapon: 1
+  WeaponSprite: {fileID: 21300000, guid: 922413032c327be4896cae33fbfb0934, type: 3}
+  WeaponSound: {fileID: 11400000, guid: fa1cb2a7ddca1f54abe96e96e75c168e, type: 2}

@@ -16,7 +16,7 @@ public class PathFollowingBehaviour : SeekBehaviour
 
     public override Vector2 GetSteering(Agent agent, Vision vision)
     {
-        Vector2 futurePosition = (Vector2)transform.position + agent.RigidBody.velocity * predictTime;
+        Vector2 futurePosition = (Vector2)agent.GetCenterPosition() + agent.RigidBody.velocity * predictTime;
         Vector2 normal = Vector2.zero;
         Vector2 target = Vector2.zero;
 

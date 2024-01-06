@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class AgentWeapon : Weapon
 {
+    [field: SerializeField]
+    public OverlapDetector AttackDetector { get; private set; }
     public bool IsGroundWeapon;
-    public float AttackRange;
     public Sprite WeaponSprite;
     public Sound WeaponSound;
 
@@ -13,5 +14,5 @@ public abstract class AgentWeapon : Weapon
     public abstract bool IsUseable(Agent agent);
     public abstract void Attack(Agent agent, Vector3 direction, LayerMask hitMask);
 
-    public abstract void ShowGizmos(Vector3 origin, Vector3 direction);
+    public abstract void DrawGizmos(Vector3 origin, Vector3 direction);
 }

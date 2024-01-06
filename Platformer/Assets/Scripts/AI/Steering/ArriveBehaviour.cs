@@ -12,12 +12,12 @@ public class ArriveBehaviour : MonoBehaviour, ISteeringBehaviour
     private float timeToTarget = 0.1f;
     [SerializeField]
     private string targetDetectorName;
+    [SerializeField]
+    private Collider2D target;
 
     public Vector2 GetSteering(Agent agent, Vision vision)
     {
-        Collider2D target = GetTarget(vision);
-
-        Vector2 direction = target.bounds.center - transform.position;
+        Vector2 direction = target.bounds.center - agent.GetCenterPosition();
         float distance = direction.magnitude;
 
         if (distance < targetRadius) return Vector2.zero;
@@ -34,12 +34,6 @@ public class ArriveBehaviour : MonoBehaviour, ISteeringBehaviour
         }
 
         return steeringForce;
-    }
-
-    public Collider2D GetTarget(Vision vision)
-    {
-        AreaDetector areaDetector = (AreaDetector)vision.GetDetector(targetDetectorName);
-        return areaDetector.GetColliders()[0];
     }
 
 }
