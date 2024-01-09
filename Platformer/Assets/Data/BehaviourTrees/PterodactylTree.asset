@@ -17,7 +17,6 @@ MonoBehaviour:
   nodes:
   - rid: 5306976957804314647
   - rid: 5306976957804314651
-  - rid: 5306977030094192641
   - rid: 5306977072521936897
   - rid: 5306977072521936898
   - rid: 5306977072521936899
@@ -30,8 +29,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 320, y: 89, z: 0}
-  viewScale: {x: 0.375937, y: 0.375937, z: 1}
+  viewPosition: {x: 304, y: 136, z: 0}
+  viewScale: {x: 0.25, y: 0.25, z: 1}
   references:
     version: 2
     RefIds:
@@ -67,19 +66,6 @@ MonoBehaviour:
           rid: 5306977072521936897
         restartOnSuccess: 1
         restartOnFailure: 1
-    - rid: 5306977030094192641
-      type: {class: Chase, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 43d60fa1e73ca7041bbb1d4b1d40af47
-        position: {x: 251.29842, y: 481.99994}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
     - rid: 5306977072521936897
       type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -95,14 +81,13 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 5306977072521936898
-        - rid: 5306977030094192641
     - rid: 5306977072521936898
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 50cf7966b49f6cb41bd38317becb3c6d
-        position: {x: -299, y: 482}
+        position: {x: -39.99997, y: 507.64615}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -119,7 +104,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: f1b3e4f2ce890d34a9027953c9198eb9
-        position: {x: -496.47748, y: 707.00006}
+        position: {x: -236.99997, y: 717.6461}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -132,7 +117,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: ecc4d8d1d93e7e64c86324f70909c562
-        position: {x: -298.99994, y: 707.00006}
+        position: {x: -39.99997, y: 717.6461}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -145,7 +130,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4babaa8466a0309449a3d6da419304c7
-        position: {x: -73, y: 986.9984}
+        position: {x: 186.00008, y: 997.64606}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -158,7 +143,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: dfc734084b2360049a18f7b8d950dc6a
-        position: {x: -72.99978, y: 826.0794}
+        position: {x: 186.00008, y: 836.6461}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -174,7 +159,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8d24a46dc92481b4da79b3d2bb09ca1c
-        position: {x: -72.76155, y: 683.00006}
+        position: {x: 186.00008, y: 693.6461}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:

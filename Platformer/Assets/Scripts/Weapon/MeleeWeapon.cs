@@ -33,6 +33,6 @@ public class MeleeWeapon : AgentWeapon
 
     public override void DrawGizmos(Vector3 origin, Vector3 direction)
     {
-        Gizmos.DrawWireCube(origin + direction * (AttackDetector.Size.x / 2), AttackDetector.Size);
+        AttackDetector.DrawGizmos(origin + direction * (AttackDetector.Size.x / 2));
     }
 }

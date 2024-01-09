@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a496a13febd677448b9dd6096e1bd90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectors: []
+  detectors:
+  - {fileID: 11400000, guid: f0a020e04a520a540bef1491281fc55a, type: 2}
 --- !u!1 &1444819533292539961
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +86,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3426019859473785553}
-  - component: {fileID: 380568243153632142}
+  - component: {fileID: 91778178657419374}
+  - component: {fileID: 1573872954357426758}
   m_Layer: 13
   m_Name: Steering
   m_TagString: Untagged
@@ -112,7 +114,7 @@ Transform:
   m_Father: {fileID: 668570889393267656}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &380568243153632142
+--- !u!114 &91778178657419374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,12 +126,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5fb8512ba40b043ae6ff76dfb055e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextBehaviours: []
-  contextMapResolution: 8
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  gizmoRayLength: 2
-  dangerModifier: 1
-  interestModifier: 1
+--- !u!114 &1573872954357426758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2778156916591170950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0148bb15f137bd34a9f4fee6ccdcebe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <PipelineName>k__BackingField: PathFollowingPipeline
+  targeters:
+  - {fileID: 8102357324611538216}
+  decomposers: []
+  constraints: []
+  actuator: {fileID: 1778772192037210305}
 --- !u!1 &4031300133077246299
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +153,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2167360148506843850}
+  - component: {fileID: 784365793656562379}
+  - component: {fileID: 8102357324611538216}
   m_Layer: 13
   m_Name: Targeters
   m_TagString: Untagged
@@ -161,6 +177,37 @@ Transform:
   m_Father: {fileID: 3426019859473785553}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &784365793656562379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031300133077246299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47fb8112f2a4b5b4c8bc948f0031a57b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFleeing: 0
+  targetDetector: {fileID: 11400000, guid: f0a020e04a520a540bef1491281fc55a, type: 2}
+--- !u!114 &8102357324611538216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4031300133077246299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01cf26f87754b8949892ea8fadbf1c5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  path:
+    <Points>k__BackingField:
+    - {fileID: 0}
+  pathOffset: 0.1
+  predictTime: 0.1
 --- !u!1 &5062157811442559543
 GameObject:
   m_ObjectHideFlags: 0
@@ -170,6 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 570875397500541236}
+  - component: {fileID: 1778772192037210305}
   m_Layer: 13
   m_Name: Actuators
   m_TagString: Untagged
@@ -192,6 +240,18 @@ Transform:
   m_Father: {fileID: 3426019859473785553}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1778772192037210305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062157811442559543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c337428734816f84188fb88ea9682442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5142373644606100356
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: 6b069c1af8b68634dbf115ccf03350af, type: 2}
+  tree: {fileID: 11400000, guid: 0c8c8a7dd4ce4fb4787bed7676ae0d4a, type: 2}
 --- !u!114 &980594575261900543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +641,10 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2db2e287c7486e945a78aa07bdc916a3, type: 2}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: DefaultData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4390f7a0800901740a0f47f09f96a586, type: 2}
+    - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: <DefaultData>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 4390f7a0800901740a0f47f09f96a586, type: 2}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

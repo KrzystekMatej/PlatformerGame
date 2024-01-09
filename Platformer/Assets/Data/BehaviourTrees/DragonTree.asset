@@ -13,46 +13,35 @@ MonoBehaviour:
   m_Name: DragonTree
   m_EditorClassIdentifier: 
   rootNode:
-    rid: 5306976957804314647
+    rid: 5306976802028126208
   nodes:
-  - rid: 5306976957804314647
-  - rid: 5306976957804314649
-  - rid: 5306976957804314650
-  - rid: 5306976957804314651
-  - rid: 5306976957804314652
-  - rid: 5306976957804314653
-  - rid: 5306976957804314654
-  - rid: 5306976957804314655
-  - rid: 5306976957804314656
-  - rid: 5306976957804314657
-  - rid: 5306976965628002304
-  - rid: 5306976965628002305
-  - rid: 5306976965628002306
-  - rid: 5306977072521936905
-  - rid: 5306977072521936906
-  - rid: 5306977072521936907
-  - rid: 5306977072521936908
-  - rid: 5306977072521936909
-  - rid: 5306977072521936910
-  - rid: 5306977072521936911
-  - rid: 5306977072521936912
+  - rid: 5306976802028126208
+  - rid: 5306976806425067523
+  - rid: 5306976818888441858
+  - rid: 5306976818888441859
+  - rid: 5306976818888441860
+  - rid: 5306976818888441863
+  - rid: 5306976818888441868
+  - rid: 5306976818888441875
+  - rid: 5306976957804314637
+  - rid: 7899365586350112772
   treeState: 0
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 306, y: -21, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 392, y: 61, z: 0}
+  viewScale: {x: 0.375937, y: 0.375937, z: 1}
   references:
     version: 2
     RefIds:
-    - rid: 5306976957804314647
+    - rid: 5306976802028126208
       type: {class: RootNode, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 2d1960c5-d2cd-4690-94e0-807d63998775
-        position: {x: -40.000004, y: -78.66011}
+        guid: b51f8336-868b-45b8-a4a7-e164a0c2ef57
+        position: {x: -493.00018, y: -199.61954}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -60,193 +49,27 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         child:
-          rid: 5306976957804314651
-    - rid: 5306976957804314649
-      type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: b61cd2d304ade2741bb0f3a23e4cf0df
-        position: {x: -39.999897, y: 319.498}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        children:
-        - rid: 5306976957804314655
-        - rid: 5306977072521936905
-        - rid: 5306976957804314650
-        - rid: 5306976957804314654
-    - rid: 5306976957804314650
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 71af5f1a2800f294f9b93b5bc28c1d0f
-        position: {x: 311.99997, y: 547}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        children:
-        - rid: 5306976957804314652
-        - rid: 5306976957804314653
-    - rid: 5306976957804314651
-      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: a9ee44b3686f80248a32abf8952ff442
-        position: {x: -39.999897, y: 149.09814}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        child:
-          rid: 5306976957804314649
-        restartOnSuccess: 1
-        restartOnFailure: 1
-    - rid: 5306976957804314652
-      type: {class: ArrivedAtTarget, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 79d345a4d784f1948a36724da3fe63c2
-        position: {x: 214.87498, y: 695.99994}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306976957804314653
-      type: {class: SetNextTarget, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: e36793f63efb102408ff14b99a1a9f10
-        position: {x: 420.00006, y: 695.99994}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306976957804314654
-      type: {class: SeekTarget, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 9b7d84a78a2fc5b4abfc6d6c0daa99e1
-        position: {x: 570.0001, y: 483}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        turnSpeed: 0
-        instantaneousTurn: 1
-    - rid: 5306976957804314655
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: a1a30e70ec7bfbe49913d18eeb7afd29
-        position: {x: -1286.4547, y: 533.17035}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        children:
-        - rid: 5306976957804314656
-        - rid: 5306976965628002306
-        - rid: 5306976965628002305
-    - rid: 5306976957804314656
-      type: {class: CanAttackAgent, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: f855da617cb04184894834bd3abfd3cc
-        position: {x: -1565.4547, y: 689.1703}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306976957804314657
+          rid: 5306976818888441859
+    - rid: 5306976806425067523
       type: {class: Attack, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 4f778ed42cb35b34bb4187976f39fd98
-        position: {x: -1034.4547, y: 1011.1703}
+        guid: 80b3963569da0294b8a25e88b5062b3e
+        position: {x: -475.57928, y: 856.00006}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
             entries: []
         description: 
         drawGizmos: 0
-    - rid: 5306976965628002304
-      type: {class: WaitAfterSuccess, ns: , asm: Assembly-CSharp}
+    - rid: 5306976818888441858
+      type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 33f425e70e5acd04ca519168d05213d6
-        position: {x: -1034.4547, y: 826.1703}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        child:
-          rid: 5306976957804314657
-        duration: 1
-    - rid: 5306976965628002305
-      type: {class: Succeed, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 3fb0d8ba4a421614ab38faa8ae9afbfc
-        position: {x: -1034.4547, y: 689.1703}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-        child:
-          rid: 5306976965628002304
-    - rid: 5306976965628002306
-      type: {class: StopMovement, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: ea28763872695b84daba145fafd9fb5a
-        position: {x: -1286.4547, y: 689.1703}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306977072521936905
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 451fcc16669d9ec4e8f109417aaa7c84
-        position: {x: -559.9767, y: 546.9998}
+        guid: eb635c8ba468c0a47b35caef0ccee0bb
+        position: {x: -493.00018, y: 133.38045}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -254,31 +77,15 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         children:
-        - rid: 5306977072521936906
-        - rid: 5306977072521936907
-        - rid: 5306977072521936909
-        - rid: 5306977072521936911
-        - rid: 5306977072521936910
-    - rid: 5306977072521936906
-      type: {class: GotHit, ns: , asm: Assembly-CSharp}
+        - rid: 5306976818888441860
+        - rid: 7899365586350112772
+    - rid: 5306976818888441859
+      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 4a2a445b4112d5e47911ff6fdca2e8b8
-        position: {x: -727.9767, y: 727.9999}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306977072521936907
-      type: {class: Inverter, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: d31b0346f78595e49aa8375a50dec439
-        position: {x: -559.9767, y: 727.9999}
+        guid: 6fdf3a433a566dd4698b000007f990fb
+        position: {x: -493.00018, y: -14.619537}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -286,54 +93,75 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         child:
-          rid: 5306977072521936908
-    - rid: 5306977072521936908
+          rid: 5306976818888441858
+        restartOnSuccess: 1
+        restartOnFailure: 0
+    - rid: 5306976818888441860
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: d8fd8fdc781f3ea4894dbbd495d29bdd
+        position: {x: -717.5793, y: 330}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+          DataTable:
+            entries: []
+        description: 
+        drawGizmos: 0
+        children:
+        - rid: 5306976818888441868
+        - rid: 5306976818888441875
+        - rid: 5306976957804314637
+    - rid: 5306976818888441863
+      type: {class: WaitAfterSuccess, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: d6a72cd0d57986447b9c1178fe4eaa8a
+        position: {x: -475.57928, y: 696}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+          DataTable:
+            entries: []
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 5306976806425067523
+        duration: 1
+    - rid: 5306976818888441868
       type: {class: CanAttackAgent, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 56e9e2c3a9ef7a74892f2d32ebb14f81
-        position: {x: -560, y: 865}
+        guid: b0aedfc9cd96d9e4da5b0328f53f154e
+        position: {x: -924.5793, y: 553}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
             entries: []
         description: 
         drawGizmos: 0
-    - rid: 5306977072521936909
-      type: {class: ChangeMaxSpeed, ns: , asm: Assembly-CSharp}
+    - rid: 5306976818888441875
+      type: {class: StopMovement, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: b43116fef2d6bcc45997e812852633aa
-        position: {x: -383, y: 728}
+        guid: 56e988673d988fe48a5e27257a52abba
+        position: {x: -717.5793, y: 553}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
             entries: []
         description: 
         drawGizmos: 0
-        maxSpeedMultiplier: 2
-    - rid: 5306977072521936910
-      type: {class: SetDefaultSpeed, ns: , asm: Assembly-CSharp}
+    - rid: 5306976957804314637
+      type: {class: Succeed, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 1d7aba0223008b043887f945c9f54be3
-        position: {x: 4.249859, y: 728}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306977072521936911
-      type: {class: RepeatUntil, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: f1b770395180cad418e7b7d6c0e1036f
-        position: {x: -189.99992, y: 728}
+        guid: 7061c841d7550be41928015433619795
+        position: {x: -475.57928, y: 553}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -341,22 +169,18 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         child:
-          rid: 5306977072521936912
-        duration: 2
-        repeatOnSuccess: 1
-        repeatOnFailure: 0
-    - rid: 5306977072521936912
-      type: {class: Flee, ns: , asm: Assembly-CSharp}
+          rid: 5306976818888441863
+    - rid: 7899365586350112772
+      type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 08fda04079948d94197f9acbd0eb9b8f
-        position: {x: -189.99976, y: 864.99994}
+        guid: e47d0c816250f8f488adba1bbce4e81f
+        position: {x: -303.8404, y: 330}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
             entries: []
         description: 
         drawGizmos: 0
-        turnSpeed: 0
-        instantaneousTurn: 1
+        targetSteeringPipeline: PathFollowingPipeline

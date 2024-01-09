@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SteeringPipeline : MonoBehaviour
 {
+    [field: SerializeField]
+    public string PipelineName { get; private set; }
     [SerializeField]
     private List<Targeter> targeters = new List<Targeter>();
     [SerializeField]
@@ -16,7 +18,7 @@ public class SteeringPipeline : MonoBehaviour
 
     private void Awake()
     {
-        constraintSteps = constraints.Count;
+        constraintSteps = constraints.Count == 0 ? 1 : constraints.Count;
     }
 
     private SteeringPipeline deadlock;
@@ -37,7 +39,7 @@ public class SteeringPipeline : MonoBehaviour
 
         for (int i = 0; i < constraintSteps; i++)
         {
-            Path path = actuator.GetPath(agent, goal);
+            List<Vector2> path = actuator.GetPath(agent, goal);
 
             bool validPath = true;
             foreach (Constraint constraint in constraints)
@@ -52,7 +54,7 @@ public class SteeringPipeline : MonoBehaviour
 
             if (validPath)
             {
-                return actuator.GetOutput(agent, path, goal);
+                return actuator.GetSteering(agent, path, goal);
             }
         }
 

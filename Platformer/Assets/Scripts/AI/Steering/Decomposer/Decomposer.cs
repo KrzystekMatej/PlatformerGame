@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Decomposer
+public abstract class Decomposer : MonoBehaviour
 {
-    SteeringGoal Decompose(Agent agent, SteeringGoal goal);
+    public abstract SteeringGoal Decompose(Agent agent, SteeringGoal goal);
 }

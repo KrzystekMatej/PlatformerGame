@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Actuator
+public abstract class Actuator : MonoBehaviour
 {
-    Path GetPath(Agent agent, SteeringGoal goal);
-    Vector2 GetOutput(Agent agent, Path path, SteeringGoal goal);
+    public abstract List<Vector2> GetPath(Agent agent, SteeringGoal goal);
+    public abstract Vector2 GetSteering(Agent agent, List<Vector2> path, SteeringGoal goal);
 }

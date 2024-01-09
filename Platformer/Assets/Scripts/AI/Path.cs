@@ -5,53 +5,51 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[Serializable]
 public class Path
 {
-    public List<Vector2> Points { get; private set; }
+    [field: SerializeField]
+    public List<Transform> Points { get; private set; }
     private List<float> pointParameters = new List<float>();
 
-    public Path(List<Vector2> points)
+    public void Initialize()
     {
-        SetPoints(points);
-    }
-
-    public void SetPoints(List<Vector2> points)
-    {
-        if (points is null || points.Count == 0)
+        if (Points is null || Points.Count == 0)
         {
-            throw new ArgumentException("Points list cannot be null or empty.", nameof(points));
+            throw new ArgumentException("Points list cannot be null or empty.", nameof(Points));
         }
-
-        Points = points;
 
         pointParameters.Add(0);
 
         for (int i = 1; i < Points.Count; i++)
         {
-            pointParameters.Add(pointParameters[i - 1] + Vector2.Distance(points[i - 1], points[i]));
+            pointParameters.Add(pointParameters[i - 1] + Vector2.Distance(Points[i - 1].position, Points[i].position));
         }
     }
 
     public (float parameter, int segmentIndex) GetParameter(Vector2 position)
     {
-        return FindParameter(position, 0, Points.Count - 1);
+        return FindParameter(position, 0, Points.Count - 2);
     }
 
-    public (float parameter, int segmentIndex) GetCloseParameter(Vector2 position, int lastSegmentIndex)
+    public (float parameter, int segmentIndex) GetCloseParameter(Vector2 position, int lastClosestPointIndex)
     {
-        return FindParameter(position, Mathf.Max(0, lastSegmentIndex - 1), Mathf.Min(lastSegmentIndex + 2));
+        int startSegment = Mathf.Max(0, lastClosestPointIndex - 1);
+        int endSegment = Mathf.Min(lastClosestPointIndex, Points.Count - 2);
+
+        return FindParameter(position, startSegment, endSegment);
     }
 
     private (float parameter, int segmentIndex) FindParameter(Vector2 position, int startSegment, int endSegment)
     {
         float closestDistance = float.MaxValue;
         float newParameter = 0;
-        int newSegmentIndex = -1;
+        int newClosestPointIndex = -1;
 
-        for (int i = startSegment; i < endSegment; i++)
+        for (int i = startSegment; i <= endSegment; i++)
         {
-            Vector2 startPoint = Points[i];
-            Vector2 endPoint = Points[i + 1];
+            Vector2 startPoint = Points[i].position;
+            Vector2 endPoint = Points[i + 1].position;
 
 
             Vector2 normalPoint = MathUtility.GetClosestPointOnSegment(startPoint, endPoint, position);
@@ -63,11 +61,13 @@ public class Path
             {
                 closestDistance = distanceToLine;
                 newParameter = currentParameter;
-                newSegmentIndex = i;
+
+                float segmentDistance = pointParameters[i + 1] - pointParameters[i];
+                newClosestPointIndex = scalarProjection < segmentDistance - scalarProjection ? i : i + 1;
             }
         }
 
-        return (newParameter, newSegmentIndex);
+        return (newParameter, newClosestPointIndex);
     }
 
     public Vector2 GetPosition(float parameter)
@@ -76,13 +76,14 @@ public class Path
         return GetPosition(parameter, parameterIndex);
     }
 
-    public Vector2 GetPosition(float parameter, int currentSegmentIndex)
+    public Vector2 GetPosition(float parameter, int closestPointIndex)
     {
         parameter = Mathf.Clamp(parameter, 0, pointParameters[pointParameters.Count - 1]);
-        currentSegmentIndex = Mathf.Clamp(currentSegmentIndex, 0, pointParameters.Count - 2);
-        Vector2 segmentDirection = (Points[currentSegmentIndex + 1] - Points[currentSegmentIndex]).normalized;
-        float segmentDistance = parameter - pointParameters[currentSegmentIndex];
-        return Points[currentSegmentIndex] + segmentDirection * segmentDistance;
+
+        int currentSegmentIndex = Mathf.Clamp(closestPointIndex, 0, pointParameters.Count - 2);
+        Vector2 segmentDirection = (Points[currentSegmentIndex + 1].position - Points[currentSegmentIndex].position).normalized;
+        float distanceToParameter = parameter - pointParameters[currentSegmentIndex];
+        return (Vector2)Points[currentSegmentIndex].position + segmentDirection * distanceToParameter;
     }
 
     public int FindClosestParameterIndex(float parameter)

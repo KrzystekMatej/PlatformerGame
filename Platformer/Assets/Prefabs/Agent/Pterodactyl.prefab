@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 13254736349972360}
   - component: {fileID: 3093041901512842967}
-  - component: {fileID: 3433077678585937687}
-  - component: {fileID: 3433077678585937672}
   m_Layer: 13
   m_Name: Steering
   m_TagString: Untagged
@@ -46,40 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5fb8512ba40b043ae6ff76dfb055e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  contextBehaviours: []
-  contextMapResolution: 8
-  gizmoColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  gizmoRayLength: 2
-  dangerModifier: 1
-  interestModifier: 1
---- !u!114 &3433077678585937687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660132533992894687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f7a82b4904c69a4681aac0c858a6131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overlapDetector: {fileID: 0}
-  targetReachedDistance: 1.4
---- !u!114 &3433077678585937672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 660132533992894687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40c81864635f5ec47a6f68eeddbda348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  overlapDetector: {fileID: 0}
-  obstacleMinimalDistance: 0.15
 --- !u!1 &3079820557302413007
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +377,10 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2db2e287c7486e945a78aa07bdc916a3, type: 2}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: DefaultData
+      value: 
+      objectReference: {fileID: 11400000, guid: 4390f7a0800901740a0f47f09f96a586, type: 2}
+    - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: <DefaultData>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 4390f7a0800901740a0f47f09f96a586, type: 2}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

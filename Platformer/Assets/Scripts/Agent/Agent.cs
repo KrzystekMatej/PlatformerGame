@@ -10,8 +10,8 @@ public class Agent : MonoBehaviour, IHittable
 {
     public UnityEvent OnDeathComplete, OnFallOut, OnRespawnRequired;
     public UnityEvent<Collider2D, Weapon> OnHit;
-
-    public AgentData DefaultData;
+    [field: SerializeField]
+    public AgentData DefaultData { get; private set; }
     public AgentInstanceData InstanceData;
     public Rigidbody2D RigidBody { get; private set; }
     public InputController InputController { get; private set; }

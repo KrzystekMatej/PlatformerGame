@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Constraint
+public abstract class Constraint : MonoBehaviour
 {
-    bool IsViolated(Path path);
-    SteeringGoal Suggest(Agent agent, Path path, SteeringGoal goal);
+    public abstract bool IsViolated(List<Vector2> path);
+    public abstract SteeringGoal Suggest(Agent agent, List<Vector2> path, SteeringGoal goal);
 }

@@ -8,19 +8,15 @@ public class AIManager : MonoBehaviour
     [SerializeField]
     private float aiUpdateInterval = 0.1f;
 
-    public AIInputController AIInputController { get; private set; }
+    public AIInputController InputController { get; private set; }
     public Agent Agent { get; private set; }
-    public Vision Vision { get; private set; }
     public BehaviourTreeRunner TreeRunner { get; private set; }
     public Steering Steering { get; private set; }
-    [field: SerializeField]
-    public ISteeringBehaviour RootBehaviour { get; private set; }
 
     private void Awake()
     {
-        AIInputController = GetComponentInParent<AIInputController>();
-        Agent = AIInputController.GetComponentInChildren<Agent>();
-        Vision = GetComponentInChildren<Vision>();
+        InputController = GetComponentInParent<AIInputController>();
+        Agent = InputController.GetComponentInChildren<Agent>();
         Steering = GetComponentInChildren<Steering>();
         TreeRunner = GetComponentInChildren<BehaviourTreeRunner>();
     }
@@ -37,7 +33,7 @@ public class AIManager : MonoBehaviour
         while (true)
         {
             if (TreeRunner != null) TreeRunner.TreeUpdate();
-            if (RootBehaviour != null) Agent.InstanceData.Acceleration += RootBehaviour.GetSteering(Agent, Vision);
+            if (Steering != null) Steering.ApplySteering(Agent, InputController);
             yield return new WaitForSeconds(aiUpdateInterval);
         }
     }

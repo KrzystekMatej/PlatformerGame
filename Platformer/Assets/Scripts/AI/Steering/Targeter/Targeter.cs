@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Targeter
+public abstract class Targeter : MonoBehaviour
 {
-    SteeringGoal GetGoal(Agent agent);
+    public abstract SteeringGoal GetGoal(Agent agent);
 }
