@@ -5,31 +5,36 @@ using UnityEngine;
 public class PathFollowingTargeter : Targeter
 {
     [SerializeField]
+    private List<Transform> waypoints = new List<Transform>();
+    [SerializeField]
     private Path path;
     [SerializeField]
-    private float pathOffset;
-    [SerializeField]
     private float predictTime = 0.1f;
-    private int lastClosestPointIndex;
-    private float currentParameter;
+    [SerializeField]
+    private bool isDynamic = false;
 
-    private void Awake()
+    public void Awake()
     {
-        path.Initialize();
+        path.SetPoints(waypoints);
     }
 
     public override SteeringGoal GetGoal(Agent agent)
     {
         SteeringGoal goal = new SteeringGoal();
+        if (isDynamic) path.SetPoints(waypoints);
 
         Vector2 futurePosition = (Vector2)agent.GetCenterPosition() + agent.RigidBody.velocity * predictTime;
 
-        (currentParameter, lastClosestPointIndex) = path.GetCloseParameter(futurePosition, lastClosestPointIndex);
-        float targetParameter = currentParameter + pathOffset;
-        Debug.Log(targetParameter);
-
-        goal.Position = path.GetPosition(targetParameter, lastClosestPointIndex);
+        path.CalculateTarget(futurePosition);
+        goal.Position = path.Target;
 
         return goal;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+        Agent agent = GetComponentInParent<AIManager>().Agent;
+        path.DrawGizmos(agent.GetCenterPosition());
     }
 }

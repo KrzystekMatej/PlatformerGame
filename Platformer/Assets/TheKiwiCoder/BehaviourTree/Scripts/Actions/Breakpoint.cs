@@ -7,7 +7,7 @@ using TheKiwiCoder;
 public class Breakpoint : ActionNode
 {
     protected override void OnStart() {
-        Debug.Log("Trigging Breakpoint");
+        Debug.Log("Triggering Breakpoint");
         Debug.Break();
     }
 

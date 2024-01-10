@@ -1,113 +1,207 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
 [Serializable]
 public class Path
 {
-    [field: SerializeField]
-    public List<Transform> Points { get; private set; }
-    private List<float> pointParameters = new List<float>();
+    public List<Vector2> Points { get; private set; } = new List<Vector2>();
+    [SerializeField]
+    private float pathOffset;
+    [SerializeField]
+    private float pathRadius;
 
-    public void Initialize()
+    public Vector2 Target { get; private set; }
+    private int closestPointIndex;
+    private SegmentData closestSegment;
+
+    private struct SegmentData
     {
-        if (Points is null || Points.Count == 0)
+        public int Index;
+        public Vector2 Direction;
+        public float Length;
+        public float DistanceToSegment;
+        public float ScalarProjection;
+
+        public SegmentData(int index, Vector2 direction, float length, float distanceToSegment, float scalarProjection)
         {
-            throw new ArgumentException("Points list cannot be null or empty.", nameof(Points));
+            Index = index;
+            Direction = direction;
+            Length = length;
+            DistanceToSegment = distanceToSegment;
+            ScalarProjection = scalarProjection;
+        }
+    }
+
+    public Path(List<Vector2> points)
+    {
+        Points = new List<Vector2>();
+        SetPoints(points);
+    }
+
+    public void SetPoints(List<Vector2> points)
+    {
+        if (points is null || points.Count == 0)
+        {
+            throw new ArgumentException("Points list cannot be null or empty.", nameof(points));
         }
 
-        pointParameters.Add(0);
-
-        for (int i = 1; i < Points.Count; i++)
+        if (Points == null)
         {
-            pointParameters.Add(pointParameters[i - 1] + Vector2.Distance(Points[i - 1].position, Points[i].position));
+            Points = new List<Vector2>();
+        }
+
+        Points.Clear();
+        Points.AddRange(points);
+    }
+
+    public void SetPoints(List<Transform> transforms)
+    {
+        if (transforms == null || transforms.Count == 0)
+        {
+            throw new ArgumentNullException("Points list cannot be null or empty.", nameof(transforms));
+        }
+
+        if (Points == null)
+        {
+            Points = new List<Vector2>();
+        }
+
+        if (Points.Count > transforms.Count)
+        {
+            Points.RemoveRange(transforms.Count, Points.Count - transforms.Count);
+        }
+        else while (Points.Count < transforms.Count)
+        {
+            Points.Add(Vector2.zero);
+        }
+
+        for (int i = 0; i < transforms.Count; i++)
+        {
+            Points[i] = new Vector2(transforms[i].position.x, transforms[i].position.y);
         }
     }
 
-    public (float parameter, int segmentIndex) GetParameter(Vector2 position)
+    public void CalculateTarget(Vector2 position)
     {
-        return FindParameter(position, 0, Points.Count - 2);
+        FindTarget(position, 0, Points.Count - 1);
     }
 
-    public (float parameter, int segmentIndex) GetCloseParameter(Vector2 position, int lastClosestPointIndex)
+    public void CalculateTargetNearLastPosition(Vector2 position)
     {
-        int startSegment = Mathf.Max(0, lastClosestPointIndex - 1);
-        int endSegment = Mathf.Min(lastClosestPointIndex, Points.Count - 2);
+        int startSegment = Mathf.Max(closestPointIndex - 1, 0);
+        int endSegment = Mathf.Min(closestPointIndex, Points.Count - 2);
 
-        return FindParameter(position, startSegment, endSegment);
+        FindTarget(position, startSegment, endSegment);
     }
 
-    private (float parameter, int segmentIndex) FindParameter(Vector2 position, int startSegment, int endSegment)
+    private void FindTarget(Vector2 position, int startSegment,  int endSegment)
     {
-        float closestDistance = float.MaxValue;
-        float newParameter = 0;
-        int newClosestPointIndex = -1;
+        closestSegment = new SegmentData(-1, Vector2.zero, 0, float.MaxValue, 0);
 
         for (int i = startSegment; i <= endSegment; i++)
         {
-            Vector2 startPoint = Points[i].position;
-            Vector2 endPoint = Points[i + 1].position;
-
-
-            Vector2 normalPoint = MathUtility.GetClosestPointOnSegment(startPoint, endPoint, position);
-            float distanceToLine = Vector2.Distance(position, normalPoint);
-            float scalarProjection = Vector2.Distance(startPoint, normalPoint);
-            float currentParameter = pointParameters[i] + scalarProjection;
-
-            if (distanceToLine < closestDistance)
-            {
-                closestDistance = distanceToLine;
-                newParameter = currentParameter;
-
-                float segmentDistance = pointParameters[i + 1] - pointParameters[i];
-                newClosestPointIndex = scalarProjection < segmentDistance - scalarProjection ? i : i + 1;
-            }
+            CalculateClosestSegmentData(i, position);
         }
 
-        return (newParameter, newClosestPointIndex);
-    }
 
-    public Vector2 GetPosition(float parameter)
-    {
-        int parameterIndex = FindClosestParameterIndex(parameter);
-        return GetPosition(parameter, parameterIndex);
-    }
-
-    public Vector2 GetPosition(float parameter, int closestPointIndex)
-    {
-        parameter = Mathf.Clamp(parameter, 0, pointParameters[pointParameters.Count - 1]);
-
-        int currentSegmentIndex = Mathf.Clamp(closestPointIndex, 0, pointParameters.Count - 2);
-        Vector2 segmentDirection = (Points[currentSegmentIndex + 1].position - Points[currentSegmentIndex].position).normalized;
-        float distanceToParameter = parameter - pointParameters[currentSegmentIndex];
-        return (Vector2)Points[currentSegmentIndex].position + segmentDirection * distanceToParameter;
-    }
-
-    public int FindClosestParameterIndex(float parameter)
-    {
-        int left = 0;
-        int right = pointParameters.Count - 1;
-        while (left <= right)
+        if (closestSegment.ScalarProjection <= closestSegment.Length - closestSegment.ScalarProjection)
         {
-            int mid = (left + right) / 2;
+            closestPointIndex = closestSegment.Index;
+        }
+        else
+        {
+            closestPointIndex = closestSegment.Index + 1;
+        }
 
-            if (pointParameters[mid] < parameter)
-            {
-                left = mid + 1;
-            }
-            else if (pointParameters[mid] > parameter)
-            {
-                right = mid - 1;
-            }
+        AddPathOffset(pathOffset);
+    }
+
+    private void CalculateClosestSegmentData(int index, Vector2 position)
+    {
+        Vector2 startPoint = Points[index % Points.Count];
+        Vector2 endPoint = Points[(index + 1) % Points.Count];
+
+
+        Vector2 positionDirection = position - startPoint;
+        Vector2 segmentDirection = endPoint - startPoint;
+
+        float segmentLength = segmentDirection.magnitude;
+        float scalarProjection = 0;
+        if (segmentLength != 0)
+        {
+            segmentDirection = segmentDirection / segmentLength;
+            scalarProjection = Mathf.Clamp(Vector2.Dot(positionDirection, segmentDirection), 0, segmentLength);
+        }
+
+        Vector2 normalPoint = startPoint + segmentDirection * scalarProjection;
+        float distanceToSegment = Vector2.Distance(position, normalPoint);
+
+
+        if (distanceToSegment < closestSegment.DistanceToSegment)
+        {
+            closestSegment = new SegmentData(index, segmentDirection, segmentLength, distanceToSegment, scalarProjection);
+        }
+    }
+
+
+    private void AddPathOffset(float pathOffset)
+    {
+        Vector2 startPoint = Points[closestSegment.Index % Points.Count];
+        float targetDistance = pathOffset + closestSegment.ScalarProjection;
+
+        if (targetDistance <= closestSegment.Length)
+        {
+            Target = startPoint + closestSegment.Direction * targetDistance;
+        }
+        else
+        {
+            float distanceOnNextSegment = targetDistance - closestSegment.Length;
+            Vector2 midPoint = Points[(closestSegment.Index + 1) % Points.Count];
+
+            if (closestSegment.Index + 2 > Points.Count - 1) Target = midPoint;
             else
             {
-                return mid;
+                Vector2 endPoint = Points[(closestSegment.Index + 2) % Points.Count];
+                Vector2 nextSegmentDirection = (endPoint - midPoint).normalized;
+                Target = midPoint + nextSegmentDirection * distanceOnNextSegment;
             }
         }
+    }
 
-        return left > 0 ? left - 1 : 0;
+    public void DrawGizmos(Vector2 currentPosition)
+    {
+        Vector2 a;
+        Vector2 b;
+
+        for (int i = 0; i < Points.Count; i++)
+        {
+            a = Points[i % Points.Count];
+            b = Points[(i + 1) % Points.Count];
+            Gizmos.color = Color.white;
+            //Gizmos.DrawLine(a, b);
+        }
+
+        Gizmos.color = Color.red;
+        float pointRadius = 0.1f;
+        Gizmos.DrawSphere(Target, pointRadius);
+
+        Gizmos.color = Color.yellow;
+        a = Points[closestSegment.Index];
+        b = a + closestSegment.Direction * closestSegment.ScalarProjection;
+        Gizmos.DrawLine(a, b);
+
+
+        Gizmos.color = Color.yellow;
+        a = b;
+        b = currentPosition;
+        Gizmos.DrawLine(a, b);
     }
 }
