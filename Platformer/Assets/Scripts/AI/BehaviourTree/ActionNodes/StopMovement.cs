@@ -8,7 +8,8 @@ public class StopMovement : ActionNode
 {
     protected override State OnUpdate()
     {
-        context.InputController.SetMovementVector(Vector2.zero);
+        if (context.Steering != null) context.Steering.UpdateCurrentPipeline(null);
+        else context.InputController.SetMovementVector(Vector2.zero);
         return State.Success;
     }
 }

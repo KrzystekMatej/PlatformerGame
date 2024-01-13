@@ -6,6 +6,7 @@ using TheKiwiCoder;
 using Unity.VisualScripting;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class Vision : MonoBehaviour
 {
     [SerializeField]
@@ -38,3 +39,4 @@ public class Vision : MonoBehaviour
         }
     }
 }
+#endif

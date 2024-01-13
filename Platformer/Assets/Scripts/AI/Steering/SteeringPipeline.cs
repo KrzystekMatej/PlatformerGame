@@ -1,27 +1,52 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TheKiwiCoder;
 using UnityEngine;
 
 public class SteeringPipeline : MonoBehaviour
 {
     [field: SerializeField]
     public string PipelineName { get; private set; }
-    [SerializeField]
-    private List<Targeter> targeters = new List<Targeter>();
-    [SerializeField]
-    private List<Decomposer> decomposers = new List<Decomposer>();
-    [SerializeField]
-    private List<Constraint> constraints = new List<Constraint>();
-    [SerializeField]
+    private Targeter[] targeters;
+    private Decomposer[] decomposers;
+    private Constraint[] constraints;
     private Actuator actuator;
+    [SerializeField]
+    private SteeringPipeline deadlock;
     private int constraintSteps;
 
     private void Awake()
     {
-        constraintSteps = constraints.Count == 0 ? 1 : constraints.Count;
+        targeters = GetComponents<Targeter>();
+        decomposers = GetComponents<Decomposer>();
+        constraints = GetComponents<Constraint>();
+        actuator = GetComponent<Actuator>();
+
+
+        constraintSteps = constraints.Length == 0 ? 1 : constraints.Length;
     }
 
-    private SteeringPipeline deadlock;
+    public void BindBlackboard(Blackboard blackboard)
+    {
+        foreach (Targeter targeter in targeters)
+        {
+            blackboard.DataTable[PipelineName + targeter.GetType().Name] = targeter;
+        }
+
+        foreach (Decomposer decomposer in decomposers)
+        {
+            blackboard.DataTable[PipelineName + decomposer.GetType().Name] = decomposer;
+        }
+
+        foreach (Constraint constraint in constraints)
+        {
+            blackboard.DataTable[PipelineName + constraint.GetType().Name] = constraint;
+        }
+
+        blackboard.DataTable[PipelineName + actuator.GetType().Name] = actuator;
+    }
 
     public Vector2 GetSteering(Agent agent)
     {

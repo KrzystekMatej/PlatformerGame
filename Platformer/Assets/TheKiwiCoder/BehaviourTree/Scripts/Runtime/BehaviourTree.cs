@@ -30,6 +30,13 @@ namespace TheKiwiCoder {
             nodes.Add(rootNode);
         }
 
+        public void Initialize(Context context)
+        {
+            Bind(context);
+            if (context.Steering != null) context.Steering.BindBlackboard(blackboard);
+            Traverse(rootNode, node => { node.Initialize(); });
+        }
+
         public Node.State Update() {
             if (rootNode.state == Node.State.Running) {
                 treeState = rootNode.Update();
@@ -73,10 +80,6 @@ namespace TheKiwiCoder {
                 node.context = context;
                 node.blackboard = blackboard;
             });
-        }
-
-        public void Initialize() {
-            Traverse(rootNode, node => { node.Initialize(); });
         }
     }
 }

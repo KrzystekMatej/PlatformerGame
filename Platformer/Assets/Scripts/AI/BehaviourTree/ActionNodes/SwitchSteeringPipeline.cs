@@ -10,7 +10,7 @@ public class SwitchSteeringPipeline : ActionNode
 
     protected override State OnUpdate()
     {
-        context.Steering.CurrentPipeline = targetSteeringPipeline;
-        return State.Success;
+        bool hasChanged = context.Steering.UpdateCurrentPipeline(targetSteeringPipeline);
+        return hasChanged ? State.Success : State.Failure;
     }
 }

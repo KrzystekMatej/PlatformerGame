@@ -10,10 +10,6 @@ public abstract class Condition : ActionNode
 
     protected override State OnUpdate()
     {
-        if (IsConditionSatisfied())
-        {
-            return State.Success;
-        }
-        return State.Failure;
+        return IsConditionSatisfied() ? State.Success : State.Failure;
     }
 }

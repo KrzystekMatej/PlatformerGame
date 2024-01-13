@@ -32,7 +32,7 @@ public class AIManager : MonoBehaviour
 
         while (true)
         {
-            if (TreeRunner != null) TreeRunner.TreeUpdate();
+            TreeRunner.TreeUpdate();
             if (Steering != null) Steering.ApplySteering(Agent, InputController);
             yield return new WaitForSeconds(aiUpdateInterval);
         }

@@ -13,9 +13,21 @@ public class PathFollowingTargeter : Targeter
     [SerializeField]
     private bool isDynamic = false;
 
-    public void Awake()
+#if UNITY_EDITOR
+    private Vector2 currentFuturePosition;
+#endif
+
+    public void Start()
+    {
+        RecalculatePath(GetComponentInParent<AIManager>().Agent);
+    }
+
+    public void RecalculatePath(Agent agent)
     {
         path.SetPoints(waypoints);
+
+        Vector2 futurePosition = (Vector2)agent.GetCenterPosition() + agent.RigidBody.velocity * predictTime;
+        path.Recalculate(futurePosition);
     }
 
     public override SteeringGoal GetGoal(Agent agent)
@@ -26,7 +38,11 @@ public class PathFollowingTargeter : Targeter
         Vector2 futurePosition = (Vector2)agent.GetCenterPosition() + agent.RigidBody.velocity * predictTime;
 
         path.CalculateTarget(futurePosition);
-        goal.Position = path.Target;
+        goal.Position = path.Target != null ? (Vector2)path.Target : futurePosition;
+
+#if UNITY_EDITOR
+        currentFuturePosition = futurePosition;
+#endif
 
         return goal;
     }
@@ -34,7 +50,6 @@ public class PathFollowingTargeter : Targeter
     private void OnDrawGizmos()
     {
         if (!Application.isPlaying) return;
-        Agent agent = GetComponentInParent<AIManager>().Agent;
-        path.DrawGizmos(agent.GetCenterPosition());
+        path.DrawGizmos(currentFuturePosition);
     }
 }

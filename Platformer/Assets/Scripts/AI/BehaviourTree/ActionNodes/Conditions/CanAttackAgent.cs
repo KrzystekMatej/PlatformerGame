@@ -15,7 +15,6 @@ public class CanAttackAgent : Condition
 
     protected override bool IsConditionSatisfied()
     {
-    
         AgentWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         int detectionCount = 0;
         if (weapon != null && weapon.IsUseable(context.Agent))
