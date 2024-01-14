@@ -23,11 +23,10 @@ public class Steering : MonoBehaviour
     
     private Dictionary<string, SteeringPipeline> pipelineTable = new Dictionary<string, SteeringPipeline>();
 
-    public void Awake()
+    private void Awake()
     {
         foreach (SteeringPipeline pipeline in GetComponentsInChildren<SteeringPipeline>())
         {
-            pipeline.gameObject.SetActive(false);
             pipelineTable[pipeline.PipelineName] = pipeline;
         }
     }
@@ -37,6 +36,7 @@ public class Steering : MonoBehaviour
         foreach (SteeringPipeline pipeline in pipelineTable.Values)
         {
             pipeline.BindBlackboard(blackboard);
+            pipeline.gameObject.SetActive(false);
         }
     }
 
@@ -53,12 +53,14 @@ public class Steering : MonoBehaviour
         {
             if (pipelineName == currentPipeline.PipelineName) return false;
             currentPipeline.gameObject.SetActive(false);
+            Debug.Log($"{currentPipeline.GetHashCode()} is deactivated");
         }
 
         if (pipelineName != null)
         {
             currentPipeline = pipelineTable[pipelineName];
             currentPipeline.gameObject.SetActive(true);
+            Debug.Log($"{currentPipeline.GetHashCode()} is activated");
         }
 
         return true;
