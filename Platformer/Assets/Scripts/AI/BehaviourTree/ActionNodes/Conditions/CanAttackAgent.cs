@@ -20,7 +20,7 @@ public class CanAttackAgent : Condition
         if (weapon != null && weapon.IsUseable(context.Agent))
         {
             Vector2 attackDirection = context.Agent.transform.right * context.Agent.OrientationController.CurrentOrientation;
-            Vector2 origin = (Vector2)context.Agent.GetCenterPosition() + attackDirection * weapon.AttackDetector.Size.x/2;
+            Vector2 origin = context.Agent.CenterPosition + attackDirection * weapon.AttackDetector.Size.x/2;
             weapon.AttackDetector.DetectLayerMask = attackState.HitMask;
             detectionCount = weapon.AttackDetector.Detect(origin);
         }

@@ -8,9 +8,9 @@ public class IsOpponentBehind : Condition
 {
     protected override bool IsConditionSatisfied()
     {
-        Vector3 opponentPosition = (Vector3)blackboard.DataTable["OpponentPosition"];
+        Vector2 opponentPosition = (Vector2)blackboard.DataTable["OpponentPosition"];
         float orientation = context.Agent.OrientationController.CurrentOrientation;
-        return (orientation == 1 && opponentPosition.x < context.Agent.GetCenterPosition().x)
-            || (orientation == -1 && opponentPosition.x > context.Agent.GetCenterPosition().x);
+        return (orientation == 1 && opponentPosition.x < context.Agent.CenterPosition.x)
+            || (orientation == -1 && opponentPosition.x > context.Agent.CenterPosition.x);
     }
 }

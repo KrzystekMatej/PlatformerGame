@@ -6,5 +6,6 @@ public enum ShapeType
 {
     Ray,
     Box,
-    Circle
+    Circle,
+    Capsule
 }

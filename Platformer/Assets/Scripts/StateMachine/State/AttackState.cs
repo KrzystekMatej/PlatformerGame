@@ -50,6 +50,6 @@ public class AttackState : State
         if (!Application.isPlaying) return;
         Gizmos.color = Color.red;
         AgentWeapon weapon = agent.WeaponManager.GetWeapon();
-        if (weapon != null) weapon.DrawGizmos(agent.GetCenterPosition(), agent.transform.right * agent.OrientationController.CurrentOrientation);
+        if (weapon != null) weapon.DrawGizmos(agent.CenterPosition, agent.transform.right * agent.OrientationController.CurrentOrientation);
     }
 }

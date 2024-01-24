@@ -30,6 +30,8 @@ public class Agent : MonoBehaviour, IHittable
     [field: SerializeField]
     public Collider2D TriggerCollider { get; private set; }
 
+    public float EnclosingCircleRadius { get; private set; }
+    public Vector2 CenterPosition { get => TriggerCollider.bounds.center; }
 
     private void Awake()
     {
@@ -58,6 +60,8 @@ public class Agent : MonoBehaviour, IHittable
             FallGravityModifier = DefaultData.FallGravityModifier,
             ClimbSpeed = DefaultData.ClimbSpeed
         };
+
+        EnclosingCircleRadius = MathUtility.GetEnclosingCircleRadius(TriggerCollider);
     }
 
     private void Start()
@@ -79,11 +83,6 @@ public class Agent : MonoBehaviour, IHittable
     private void FixedUpdate()
     {
         GroundDetector.Detect();
-    }
-
-    public Vector3 GetCenterPosition()
-    {
-        return TriggerCollider.bounds.center;
     }
 
     public void FallOut()
@@ -112,10 +111,10 @@ public class Agent : MonoBehaviour, IHittable
         Hit(HealthManager.CurrentHealth);
     }
 
-    public void PerformKnockback(Vector3 from, float knockbackForce)
+    public void PerformKnockback(Vector2 from, float knockbackForce)
     {
         if (knockbackForce <= 0) return;
-        Vector2 direction = GetCenterPosition() - from;
+        Vector2 direction = CenterPosition - from;
         RigidBody.AddForce(new Vector2(direction.normalized.x, 0) * knockbackForce, ForceMode2D.Impulse);
     }
 }

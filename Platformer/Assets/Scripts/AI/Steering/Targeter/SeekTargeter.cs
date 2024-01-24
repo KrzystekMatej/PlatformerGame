@@ -5,26 +5,38 @@ using UnityEngine;
 public class SeekTargeter : Targeter
 {
     [SerializeField]
-    protected bool isFleeing;
+    private float arriveRadius;
     [SerializeField]
-    private OverlapDetector targetDetector;
+    private bool isFleeing;
+    [SerializeField]
+    private bool isPositionCached;
+    public Vector2 TargetPosition { get; set; }
+
+    private void Start()
+    {
+        Agent agent = GetComponentInParent<AIManager>().Agent;
+        TargetPosition = agent.CenterPosition;
+    }
 
     public override SteeringGoal GetGoal(Agent agent)
     {
         SteeringGoal goal = new SteeringGoal();
-        Collider2D target = GetTarget(agent);
 
-        if (target != null)
+        Vector2 goalPosition = !isFleeing ? TargetPosition : agent.CenterPosition + (agent.CenterPosition - TargetPosition);
+
+        if (Vector2.Distance(agent.CenterPosition, TargetPosition) > arriveRadius)
         {
-            goal.Position = !isFleeing ? target.bounds.center : agent.GetCenterPosition() + (agent.GetCenterPosition() - target.bounds.center);
+            goal.Position = goalPosition;
         }
 
+        TargetPosition = isPositionCached ? goalPosition : agent.CenterPosition;
         return goal;
     }
 
-    public Collider2D GetTarget(Agent agent)
+    private void OnDrawGizmos()
     {
-        int detectionCount = targetDetector.Detect(agent.GetCenterPosition());
-        return detectionCount == 0 ? null : targetDetector.Colliders[0];
+        if (!Application.isPlaying) return;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(TargetPosition, arriveRadius);
     }
 }

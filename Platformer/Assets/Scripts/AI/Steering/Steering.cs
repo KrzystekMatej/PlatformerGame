@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TheKiwiCoder;
 using UnityEngine;
 
@@ -42,7 +39,13 @@ public class Steering : MonoBehaviour
 
     public void ApplySteering(Agent agent, AIInputController inputController)
     {
-        Vector2 steeringForce = (currentPipeline != null) ? currentPipeline.GetSteering(agent) : Vector2.zero;
+        Vector2 steeringForce;
+        if (currentPipeline != null)
+        {
+            steeringForce = currentPipeline.GetSteering(agent);
+            if (steeringForce == Vector2.zero) UpdateCurrentPipeline(null);
+        }
+        else steeringForce = Vector2.zero;
 
         inputController.SetMovementVector(steeringForce);
     }
@@ -53,15 +56,17 @@ public class Steering : MonoBehaviour
         {
             if (pipelineName == currentPipeline.PipelineName) return false;
             currentPipeline.gameObject.SetActive(false);
-            Debug.Log($"{currentPipeline.GetHashCode()} is deactivated");
+            Debug.Log("Deactivated");
         }
+        else if(pipelineName == null) return false;
 
         if (pipelineName != null)
         {
             currentPipeline = pipelineTable[pipelineName];
             currentPipeline.gameObject.SetActive(true);
-            Debug.Log($"{currentPipeline.GetHashCode()} is activated");
+            Debug.Log("Activated");
         }
+        else currentPipeline = null;
 
         return true;
     }

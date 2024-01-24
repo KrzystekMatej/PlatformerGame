@@ -30,6 +30,11 @@ public class SteeringGoal
         }
     }
 
+    public bool HasNothing()
+    {
+        return !HasPosition && !HasVelocity;
+    }
+
     public void UpdateChannels(SteeringGoal other)
     {
         if (other.HasPosition)

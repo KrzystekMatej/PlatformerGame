@@ -13,7 +13,7 @@ public class SeePlayer : Condition
     {
         float orientation = context.Agent.OrientationController.CurrentOrientation;
         CastDetector detector = orientation == 1 ? right : left;
-        int detectionCount = detector.Detect(context.Agent.GetCenterPosition());
+        int detectionCount = detector.Detect(context.Agent.CenterPosition);
         return detectionCount != 0 && detector.Hits[0].collider.CompareTag("Player");
     }
 }

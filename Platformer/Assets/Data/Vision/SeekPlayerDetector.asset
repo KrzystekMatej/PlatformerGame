@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SeekPlayerDetector
   m_EditorClassIdentifier: 
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 5, y: 0}
+  <Size>k__BackingField: {x: 8, y: 0}
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2

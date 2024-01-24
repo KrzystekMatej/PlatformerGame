@@ -6,27 +6,25 @@ using UnityEngine;
 
 public class SimpleActuator : Actuator
 {
-    public override List<Vector2> GetPath(Agent agent, SteeringGoal goal)
+    public override SteeringGoal GetFeasibleGoal(Agent agent, List<Vector2> pointPath, SteeringGoal goal)
     {
-        if (goal.HasPosition)
+        if (goal.HasPosition && pointPath.Count == 0)
         {
-            return new List<Vector2>
-            {
-                goal.Position
-            };
+            pointPath.Add(agent.CenterPosition);
+            pointPath.Add(goal.Position);
         }
 
-        return null;
+        return goal;
     }
 
-    public override Vector2 GetSteering(Agent agent, List<Vector2> path, SteeringGoal goal)
+    public override Vector2 GetSteering(Agent agent, List<Vector2> pointPath, SteeringGoal goal)
     {
-        if (path == null || path.Count == 0)
+        if (!goal.HasPosition)
         {
-            return new Vector2(0, 0);
+            return Vector2.zero;
         }
 
-        Vector2 desiredVelocity = (path[0] - (Vector2)agent.GetCenterPosition()).normalized * agent.InstanceData.MaxForce;
+        Vector2 desiredVelocity = (goal.Position - agent.CenterPosition).normalized * agent.InstanceData.MaxForce;
 
         return (desiredVelocity - agent.RigidBody.velocity).normalized;
     }

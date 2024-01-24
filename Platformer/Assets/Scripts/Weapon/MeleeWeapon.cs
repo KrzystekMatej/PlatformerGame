@@ -9,10 +9,10 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 [CreateAssetMenu(fileName = "MeleeWeapon", menuName = "Weapons/MeleeWeapon")]
 public class MeleeWeapon : AgentWeapon
 {
-    public override void Attack(Agent agent, Vector3 direction, LayerMask hitMask)
+    public override void Attack(Agent agent, Vector2 direction, LayerMask hitMask)
     {
         AttackDetector.DetectLayerMask = hitMask;
-        Vector3 origin = agent.GetCenterPosition() + direction * (AttackDetector.Size.x / 2);
+        Vector2 origin = agent.CenterPosition + direction * (AttackDetector.Size.x / 2);
         int colliderCount = AttackDetector.Detect(origin);
 
 
@@ -31,7 +31,7 @@ public class MeleeWeapon : AgentWeapon
 
     
 
-    public override void DrawGizmos(Vector3 origin, Vector3 direction)
+    public override void DrawGizmos(Vector2 origin, Vector2 direction)
     {
         AttackDetector.DrawGizmos(origin + direction * (AttackDetector.Size.x / 2));
     }

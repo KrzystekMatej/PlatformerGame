@@ -26,7 +26,7 @@ public class PathFollowingTargeter : Targeter
     {
         path.SetPoints(waypoints);
 
-        Vector2 futurePosition = (Vector2)agent.GetCenterPosition() + agent.RigidBody.velocity * predictTime;
+        Vector2 futurePosition = agent.CenterPosition + agent.RigidBody.velocity * predictTime;
         path.Recalculate(futurePosition);
     }
 
@@ -35,7 +35,7 @@ public class PathFollowingTargeter : Targeter
         SteeringGoal goal = new SteeringGoal();
         if (isDynamic) path.SetPoints(waypoints);
 
-        Vector2 futurePosition = (Vector2)agent.GetCenterPosition() + agent.RigidBody.velocity * predictTime;
+        Vector2 futurePosition = agent.CenterPosition + agent.RigidBody.velocity * predictTime;
 
         path.CalculateTarget(futurePosition);
         goal.Position = path.Target != null ? (Vector2)path.Target : futurePosition;

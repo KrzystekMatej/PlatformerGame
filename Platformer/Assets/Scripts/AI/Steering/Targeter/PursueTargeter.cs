@@ -6,23 +6,19 @@ public class PursueTargeter : SeekTargeter
 {
     [field: SerializeField]
     public float MaxPrediction { get; private set; }
+    public Vector2 TargetVelocity { get; set; }
 
     public override SteeringGoal GetGoal(Agent agent)
     {
-        SteeringGoal goal = new SteeringGoal();
-        Collider2D target = GetTarget(agent);
+        float distance = (TargetPosition - agent.CenterPosition).magnitude;
+        float speed = agent.RigidBody.velocity.magnitude;
+        float prediction = speed <= distance / MaxPrediction ? MaxPrediction : distance / speed;
 
-        if (target != null)
-        {
-            float distance = (target.bounds.center - agent.GetCenterPosition()).magnitude;
-            float speed = agent.RigidBody.velocity.magnitude;
-            float prediction = speed <= distance / MaxPrediction ? MaxPrediction : distance / speed;
+        Vector2 futurePosition = agent.CenterPosition + TargetVelocity * prediction;
 
-            Vector3 futurePosition = agent.GetCenterPosition() + target.GetComponent<Rigidbody>().velocity * prediction;
+        TargetPosition = futurePosition;
+        TargetVelocity = Vector2.zero;
 
-            goal.Position = !isFleeing ? futurePosition : agent.GetCenterPosition() + (agent.GetCenterPosition() - futurePosition);
-        }
-
-        return goal;
+        return base.GetGoal(agent);
     }
 }

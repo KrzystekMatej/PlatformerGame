@@ -15,7 +15,7 @@ public class GroundCheck : Condition
     protected override bool IsConditionSatisfied()
     {
         CastDetector detector = (float)blackboard.DataTable["HorizontalDirection"] == 1f ? groundCheckRight : groundCheckLeft;
-        int detectionCount = detector.Detect(context.Agent.GetCenterPosition());
+        int detectionCount = detector.Detect(context.Agent.CenterPosition);
         return detectionCount == 0 || detector.Hits[0].distance > groundDistance;
     }
 }

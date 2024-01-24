@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a496a13febd677448b9dd6096e1bd90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectors:
-  - {fileID: 11400000, guid: f0a020e04a520a540bef1491281fc55a, type: 2}
+  detectors: []
 --- !u!1 &1444819533292539961
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,10 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PipelineName>k__BackingField: PathFollowingPipeline
-  targeters: []
-  decomposers: []
-  constraints: []
-  actuator: {fileID: 0}
   deadlock: {fileID: 0}
 --- !u!114 &7325101189958284097
 MonoBehaviour:

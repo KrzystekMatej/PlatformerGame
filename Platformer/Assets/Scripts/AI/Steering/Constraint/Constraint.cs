@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class Constraint : MonoBehaviour
 {
-    public abstract bool IsViolated(List<Vector2> path);
-    public abstract SteeringGoal Suggest(Agent agent, List<Vector2> path, SteeringGoal goal);
+    public abstract bool IsViolated(Agent agent, List<Vector2> pointPath);
+    public abstract SteeringGoal Suggest(Agent agent, List<Vector2> pointPath, SteeringGoal goal);
 }

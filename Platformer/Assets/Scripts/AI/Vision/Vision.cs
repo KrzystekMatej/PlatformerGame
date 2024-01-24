@@ -29,13 +29,14 @@ public class Vision : MonoBehaviour
         detectors.Add(detector);
     }
 
-    public void OnDrawGizmos()
+    public void OnDrawGizmosSelected()
     {
         Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
+        Vector2 origin = agent.GetComponent<Collider2D>().bounds.center;
 
         foreach (VisionDetector detector in detectors)
         {
-            detector.DrawGizmos(agent.GetComponent<Collider2D>().bounds.center);
+            detector.DrawGizmos(origin);
         }
     }
 }

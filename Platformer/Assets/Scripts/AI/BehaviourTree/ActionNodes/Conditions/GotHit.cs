@@ -16,7 +16,7 @@ public class GotHit : Condition
     public void SetHit(Collider2D attackerCollider, Weapon attackingWeapon)
     {
         hit = true;
-        blackboard.DataTable["OpponentPosition"] = attackerCollider.bounds.center;
+        blackboard.DataTable["OpponentPosition"] = (Vector2)attackerCollider.bounds.center;
         blackboard.DataTable["AttackingWeapon"] = attackingWeapon;
     }
 
