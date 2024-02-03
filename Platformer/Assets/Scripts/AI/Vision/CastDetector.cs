@@ -16,16 +16,7 @@ public class CastDetector : VisionDetector
     private void OnEnable()
     {
         Hits = new RaycastHit2D[maxDetections];
-    }
-
-
-    public void Initialize(Color gizmoColor, Vector2 size, float angle, LayerMask detectLayerMask, Vector2 originOffset,
-        ShapeType detectShapeType, int maxDetections, float distance, Vector2 direction)
-    {
-        Initialize(gizmoColor, size, angle, detectLayerMask, originOffset, detectShapeType, maxDetections);
-        this.Hits = new RaycastHit2D[maxDetections];
-        this.Distance = distance;
-        this.Direction = direction.normalized;
+        Direction = Direction.normalized;
     }
 
     public override int Detect(Vector2 origin)
@@ -34,14 +25,19 @@ public class CastDetector : VisionDetector
         switch (DetectShapeType)
         {
             case ShapeType.Ray:
-                return Physics2D.RaycastNonAlloc(origin, Direction, Hits, Distance, DetectLayerMask);
+                DetectionCount = Physics2D.RaycastNonAlloc(origin, Direction, Hits, Distance, DetectLayerMask);
+                break;
             case ShapeType.Box:
-                return Physics2D.BoxCastNonAlloc(origin, Size, Angle, Direction, Hits, Distance, DetectLayerMask);
+                DetectionCount = Physics2D.BoxCastNonAlloc(origin, Size, Angle, Direction, Hits, Distance, DetectLayerMask);
+                break;
             case ShapeType.Circle:
-                return Physics2D.CircleCastNonAlloc(origin, Size.x, Direction, Hits, Distance, DetectLayerMask);
+                DetectionCount = Physics2D.CircleCastNonAlloc(origin, Size.x, Direction, Hits, Distance, DetectLayerMask);
+                break;
             default:
-                return 0;
+                DetectionCount = 0;
+                break;
         }
+        return DetectionCount;
     }
 
     public override void DrawGizmos(Vector2 origin)

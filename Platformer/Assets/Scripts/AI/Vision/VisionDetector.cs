@@ -20,16 +20,7 @@ public abstract class VisionDetector : ScriptableObject
     [SerializeField]
     protected int maxDetections = 1;
 
-    public void Initialize(Color gizmoColor, Vector2 size, float angle, LayerMask detectLayerMask, Vector2 originOffset, ShapeType detectShapeType, int maxDetections)
-    {
-        this.gizmoColor = gizmoColor;
-        this.Size = size;
-        this.Angle = angle;
-        this.DetectLayerMask = detectLayerMask;
-        this.OriginOffset = originOffset;
-        this.DetectShapeType = detectShapeType;
-        this.maxDetections = maxDetections;
-    }
+    public int DetectionCount { get; protected set; }
 
     public abstract int Detect(Vector2 origin);
 

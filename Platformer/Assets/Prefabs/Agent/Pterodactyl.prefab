@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 5441309920161683283}
   - component: {fileID: 377242489695348582}
   - component: {fileID: 8018527025378207147}
-  - component: {fileID: 5698722251173356833}
   m_Layer: 13
   m_Name: SteeringPipeline 0
   m_TagString: Untagged
@@ -121,26 +120,6 @@ MonoBehaviour:
   arriveRadius: 0.6
   isFleeing: 0
   isPositionCached: 1
---- !u!114 &5698722251173356833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2905118906616369720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d564e8f5e5afe3e4aac1df4504492cf5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  avoidLayerMask:
-    serializedVersion: 2
-    m_Bits: 49216
-  maxObstacleCount: 2
-  fanAngle: 0
-  centralRayLength: 3
-  sideRayLength: 1.5
-  rayCount: 1
 --- !u!1 &3079820557302413007
 GameObject:
   m_ObjectHideFlags: 0

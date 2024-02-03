@@ -7,8 +7,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class ObstacleConstraint : AvoidConstraint
+public class ObstacleConstraint : Constraint
 {
+    private CastDetector detector;
     [SerializeField]
     private float margin;
 
@@ -16,15 +17,18 @@ public class ObstacleConstraint : AvoidConstraint
 
     public override bool IsViolated(Agent agent, List<Vector2> pointPath)
     {
+        detector.Size = new Vector2(agent.EnclosingCircleRadius, 0);
+
         for (int i = 0; i < pointPath.Count - 1; i++)
         {
             Vector2 startPoint = pointPath[i];
             Vector2 endPoint = pointPath[i + 1];
             Vector2 direction = endPoint - startPoint;
 
-            hitCount = Physics2D.CircleCastNonAlloc(agent.CenterPosition, agent.EnclosingCircleRadius, direction.normalized, hits, direction.magnitude, avoidLayerMask);
+            detector.Direction = direction.normalized;
+            detector.Distance = direction.magnitude;
 
-            if (hitCount > 0)
+            if (detector.Detect(startPoint) > 0)
             {
                 problemSegmentIndex = i;
                 return true;
@@ -37,9 +41,7 @@ public class ObstacleConstraint : AvoidConstraint
     public override SteeringGoal Suggest(Agent agent, List<Vector2> pointPath, SteeringGoal goal)
     {
         RaycastHit2D closestHit = GetClosestHit();
-        UpdateDetourPath(pointPath, closestHit);
-
-        goal.Position = pointPath[1];
+        goal.Position = GetAvoidanceTarget(pointPath, closestHit);
         return goal;
     }
 
@@ -48,19 +50,19 @@ public class ObstacleConstraint : AvoidConstraint
         RaycastHit2D closestHit = new RaycastHit2D();
         float shortestDistance = float.MaxValue;
 
-        for (int i = 0; i < hitCount; i++)
+        for (int i = 0; i < detector.DetectionCount; i++)
         {
-            if (hits[i].distance < shortestDistance)
+            if (detector.Hits[i].distance < shortestDistance)
             {
-                shortestDistance = hits[i].distance;
-                closestHit = hits[i];
+                shortestDistance = detector.Hits[i].distance;
+                closestHit = detector.Hits[i];
             }
         }
 
         return closestHit;
     }
 
-    private void UpdateDetourPath(List<Vector2> pointPath, RaycastHit2D closestHit)
+    private Vector2 GetAvoidanceTarget(List<Vector2> pointPath, RaycastHit2D closestHit)
     {
         Vector2 startPoint = pointPath[problemSegmentIndex];
         Vector2 endPoint = pointPath[problemSegmentIndex + 1];
@@ -71,7 +73,7 @@ public class ObstacleConstraint : AvoidConstraint
         Vector2 normalPoint = startPoint + (endPoint - startPoint).normalized * scalarProjection;
         Vector2 normalDirection = (normalPoint - center).normalized;
 
-        pointPath.Insert(problemSegmentIndex + 1, center + normalDirection * radius * margin);
+        return center + normalDirection * radius * margin;
     }
 
     private void OnDrawGizmos()

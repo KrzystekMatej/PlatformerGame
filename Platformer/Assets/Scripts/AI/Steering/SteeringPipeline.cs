@@ -70,25 +70,36 @@ public class SteeringPipeline : MonoBehaviour
             goal = decomposer.Decompose(agent, goal);
         }
 
-        List<Vector2> pointPath = new List<Vector2>();
-        goal = actuator.GetFeasibleGoal(agent, pointPath, goal);
-
-        if (goal.HasPosition)
+        for (int i = 0; i < constraintSteps; i++)
         {
-            foreach (Constraint constraint in constraints)
+            List<Vector2> path = actuator.GetPath(agent, goal);
+            bool validPath = true;
+
+            if (goal.HasPosition)
             {
-                if (constraint.IsViolated(agent, pointPath))
+                foreach (Constraint constraint in constraints)
                 {
-                    goal = constraint.Suggest(agent, pointPath, goal);
+                    if (constraint.IsViolated(agent, path))
+                    {
+                        goal = constraint.Suggest(agent, path, goal);
+                        validPath = false;
+                        break;
+                    }
                 }
             }
-        }
 
 #if UNITY_EDITOR
-        currentPath = pointPath;
-        currentGoalPosition = goal.Position;
+            currentPath = path;
+            currentGoalPosition = goal.Position;
 #endif
-        return actuator.GetSteering(agent, pointPath, goal);
+            if (validPath)
+            {
+                return actuator.GetSteering(agent, path, goal);
+            }
+
+        }
+
+        return deadlock != null ? deadlock.GetSteering(agent) : Vector2.zero;
     }
 
     private void OnDrawGizmos()

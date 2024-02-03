@@ -2,147 +2,155 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
-public class WallConstraint : AvoidConstraint, ISerializationCallbackReceiver
+public class WallConstraint : Constraint
 {
     [SerializeField]
-    private float fanAngle;
+    private int maxRayCount;
     [SerializeField]
-    private float centralRayLength;
+    private float maxRayLength;
     [SerializeField]
-    private float sideRayLength;
+    private LayerMask wallLayerMask;
     [SerializeField]
+    private float margin;
+
+
     private int rayCount;
-    [SerializeField]
-    private float margin = 1f;
-
-    private RaycastHit2D closestHit;
-    private Vector2 problemRay;
-
+    private float rayLength;
+    private Vector2 pathDirection = Vector2.right;
 #if UNITY_EDITOR
-    Vector2[] rays;
+    private Vector2? gizmoChosenRay;
 #endif
 
-    private float middle;
-    private float angleStep;
-    private float lengthStep;
-
-    public void OnBeforeSerialize() {}
-
-    public void OnAfterDeserialize()
+    private void Start()
     {
-        if (rayCount <= 0) throw new ArgumentException("RayCount has to be higher than 0.");
-        if (centralRayLength < sideRayLength) throw new ArgumentException("CentralRayLength has to be longer then SideRayLength.");
-        if (fanAngle != 0f && rayCount == 1) throw new ArgumentException("If RayCount is 1 then fan angle has to be 0.");
-
-        if (rayCount == 1)
-        {
-            middle = 0;
-            angleStep = 0;
-            lengthStep = 0;
-        }
-        else
-        {
-            middle = (rayCount - 1) / 2f;
-            angleStep = fanAngle / (rayCount - 1);
-            lengthStep = (centralRayLength - sideRayLength) / middle;
-        }
-
-#if UNITY_EDITOR
-        rays = new Vector2[rayCount];
-
-        float currentAngle = -(fanAngle / 2f);
-
-        for (int i = 0; i < rayCount; i++)
-        {
-            float rayLength = centralRayLength - Math.Abs(i - middle) * lengthStep;
-            rays[i] = (Quaternion.Euler(0, 0, currentAngle) * Vector2.right).normalized * rayLength;
-            currentAngle += angleStep;
-        }
-#endif
+        Agent agent = GetComponentInParent<AIManager>().Agent;
+        AdjustRayParameters(agent.CenterPosition, agent.EnclosingCircleRadius);
     }
 
     public override bool IsViolated(Agent agent, List<Vector2> pointPath)
     {
-        Vector2 agentDirection = agent.RigidBody.velocity;
-        float agentDirectionAngle = Mathf.Atan2(agentDirection.y, agentDirection.x) * Mathf.Rad2Deg;
+        pathDirection = (pointPath[1] - pointPath[0]).normalized;
+        bool result = Physics2D.Raycast(pointPath[0], pathDirection, rayLength, wallLayerMask).collider != null;
 
-        return CheckRays(agent.CenterPosition, agentDirectionAngle - (fanAngle / 2f));
-    }
-
-    private bool CheckRays(Vector2 origin, float startAngle)
-    {
-        bool pathBlocked = false;
-        float shortestDistance = float.MaxValue;
-
-        for (int i = 0; i < rayCount; i++)
-        {
-            float rayLength = centralRayLength - Math.Abs(i - middle) * lengthStep;
-            Vector2 rayDirection = (Quaternion.Euler(0, 0, startAngle) * Vector3.right).normalized;
-
-            hitCount = Physics2D.RaycastNonAlloc(origin, rayDirection, hits, rayLength, avoidLayerMask);
-            pathBlocked |= hitCount > 0;
-
-            for (int j = 0; j < hitCount; j++)
-            {
-                if (hits[j].distance < shortestDistance)
-                {
-                    shortestDistance = hits[j].distance;
-                    closestHit = hits[j];
-                    problemRay = rayDirection * rayLength;
-                }
-            }
-
-#if UNITY_EDITOR
-            rays[i] = rayDirection * rayLength;
-#endif
-
-            startAngle += angleStep;
-        }
-
-        return pathBlocked;
+        return result;
     }
 
     public override SteeringGoal Suggest(Agent agent, List<Vector2> pointPath, SteeringGoal goal)
     {
-        Vector2 hitDirection = closestHit.point - agent.CenterPosition;
-        Vector2 overShoot = problemRay - hitDirection;
+        AdjustRayParameters(pointPath[0], agent.EnclosingCircleRadius);
+        float angleStep = 360 / rayCount;
 
-        Vector2 wallVector = closestHit.normal.Perpendicular1();
-        Vector2 agentDirection = agent.RigidBody.velocity;
-        Vector2? collisionPoint = MathUtility.FindIntersection(closestHit.point, wallVector, agent.CenterPosition, agentDirection);
+        Vector2? chosenRay = null;
 
-        if (collisionPoint == null)
+        for (int i = 0; i < rayCount; i++)
         {
-            return goal;
+            float currentAngle = (i % 2 == 0 ? 1 : -1) * (i / 2 * angleStep);
+            Vector2 rayDirection = Quaternion.Euler(0, 0, currentAngle) * pathDirection;
+            RaycastHit2D hit = Physics2D.Raycast(pointPath[0], rayDirection, rayLength, wallLayerMask);
+
+            if (hit.collider == null)
+            {
+                hit = Physics2D.CircleCast(pointPath[0], agent.EnclosingCircleRadius, rayDirection, rayLength, wallLayerMask);
+
+                if (hit.collider == null)
+                {
+                    chosenRay = rayDirection * rayLength;
+
+#if UNITY_EDITOR
+                    gizmoChosenRay = chosenRay;
+#endif
+
+                    break;
+                }
+            }
         }
-        
-        Vector2 target = collisionPoint.Value + closestHit.normal * overShoot.magnitude;
 
-        pointPath.Clear();
-        pointPath.Add(agent.CenterPosition);
-        pointPath.Add(target);
+        if (chosenRay == null) return new SteeringGoal();
 
-        goal.Position = target;
-
+        goal.Position = agent.CenterPosition + (Vector2)chosenRay;
         return goal;
+    }
+
+    private void AdjustRayParameters(Vector2 origin, float agentRadius)
+    {
+        float safetyMargin = 0.001f;
+
+        float shortestDistance = float.MaxValue;
+        float angleStep = 360 / maxRayCount;
+        float currentAngle = 0;
+
+        for (int i = 0; i < maxRayCount; i++)
+        {
+            Vector2 direction = Quaternion.Euler(0, 0, currentAngle) * pathDirection;
+            RaycastHit2D hit = Physics2D.Raycast(origin, direction, maxRayLength, wallLayerMask);
+            if (hit.collider != null && hit.distance < shortestDistance)
+            {
+                shortestDistance = hit.distance;
+            }
+
+            currentAngle += angleStep;
+        }
+
+        float minRayLength = agentRadius * margin;
+
+        if (shortestDistance < minRayLength)
+        {
+            rayCount = maxRayCount;
+            rayLength = minRayLength;
+        }
+        else
+        {
+            float distanceFraction = (maxRayLength - agentRadius) / (shortestDistance - agentRadius);
+            rayCount = Mathf.RoundToInt(distanceFraction * maxRayCount);
+            rayLength = shortestDistance + safetyMargin;
+        }
+
+        rayCount = maxRayCount;
+        Debug.Log(rayCount);
+        Debug.Log(rayLength);
     }
 
     private void OnDrawGizmos()
     {
         Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
-        Gizmos.color = Color.yellow;
-        foreach (Vector2 ray in rays)
+        Gizmos.color = Color.red;
+
+        float angleStep = 360 / maxRayCount;
+        float currentAngle = 0;
+
+        for (int i = 0; i < maxRayCount; i++)
         {
-            Vector2 endPoint = agent.CenterPosition + ray;
+            Vector2 rayDirection = Quaternion.Euler(0, 0, currentAngle) * pathDirection;
+            Vector2 endPoint = agent.CenterPosition + rayDirection * maxRayLength;
             Gizmos.DrawLine(agent.CenterPosition, endPoint);
+            currentAngle += angleStep;
+        }
+
+        if (rayCount > 0)
+        {
+            Gizmos.color = Color.yellow;
+            angleStep = 360 / rayCount;
+            currentAngle = 0;
+
+            for (int i = 0; i < rayCount; i++)
+            {
+                Vector2 rayDirection = Quaternion.Euler(0, 0, currentAngle) * pathDirection;
+                Vector2 endPoint = agent.CenterPosition + rayDirection * rayLength;
+                Gizmos.DrawLine(agent.CenterPosition, endPoint);
+                currentAngle += angleStep;
+            }
+
         }
 
         if (!Application.isPlaying) return;
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(closestHit.point, 0.3f);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(agent.CenterPosition, agent.CenterPosition + gizmoChosenRay ?? Vector2.zero);
+        Gizmos.DrawWireSphere(agent.CenterPosition, agent.EnclosingCircleRadius * margin);
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public static class MathUtility
@@ -18,7 +20,7 @@ public static class MathUtility
         return Mathf.Clamp(Vector2.Dot(u, n), 0, segmentLength);
     }
 
-    public static Vector2? FindIntersection(Vector2 a, Vector2 u, Vector2 b, Vector2 v)
+    public static Vector2? FindLineIntersection(Vector2 a, Vector2 u, Vector2 b, Vector2 v)
     {
         float t;
         float denominator = u.x * v.y - u.y * v.x;
@@ -59,5 +61,63 @@ public static class MathUtility
         }
 
         throw new ArgumentException($"Collider of {collider.GetType()} type is not allowed for circle approximation.");
+    }
+
+    public static Vector2 PolarCoordinatesToVector2(float angleDeg, float magnitude)
+    {
+        float angleRad = angleDeg * Mathf.Deg2Rad;
+        return new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * magnitude;
+    }
+
+    public static int GetCircularIndex(int index, int length)
+    {
+        int qZeroRounding = index / length;
+        int roundingCorrection = ((index ^ length) < 0) && (index % length != 0) ? 1 : 0;
+        int qNegInfRounding = qZeroRounding - roundingCorrection;
+        int r = index - length * qNegInfRounding;
+        return r;
+    }
+
+    public static bool IsPointInsidePolygon(Vector2 point, Vector2[] polygonPoints)
+    {
+        int intersections = 0;
+        for (int i = 0; i < polygonPoints.Length; i++)
+        {
+            Vector2 a = polygonPoints[i];
+            Vector2 b = polygonPoints[(i + 1) % polygonPoints.Length];
+
+            if ((a.y > point.y) != (b.y > point.y))
+            {
+                float intersectX = (b.x - a.x) * (point.y - a.y) / (b.y - a.y) + a.x;
+
+                if (point.x < intersectX)
+                {
+                    intersections++;
+                }
+            }
+        }
+
+        return (intersections % 2) == 1;
+    }
+
+    public static bool IsAngleConvexCC(Vector3 a, Vector3 b)
+    {
+        return Vector3.Cross(a, b).z >= 0;
+    }
+
+    public static bool IsPointInsideCompositeCollider(Vector2 point, CompositeCollider2D collider)
+    {
+        for (int i = 0; i < collider.pathCount; i++)
+        {
+            Vector2[] pathPoints = new Vector2[collider.GetPathPointCount(i)];
+            collider.GetPath(i, pathPoints);
+
+            if (IsPointInsidePolygon(point, pathPoints))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

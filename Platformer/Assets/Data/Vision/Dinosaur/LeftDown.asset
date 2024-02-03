@@ -17,7 +17,7 @@ MonoBehaviour:
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 640064
+    m_Bits: 574528
   <OriginOffset>k__BackingField: {x: -0.8, y: 0}
   <DetectShapeType>k__BackingField: 0
   maxDetections: 1

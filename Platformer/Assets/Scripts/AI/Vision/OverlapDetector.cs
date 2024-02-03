@@ -18,39 +18,31 @@ public class OverlapDetector : VisionDetector
         Colliders = new Collider2D[maxDetections];
     }
 
-    public void Initialize(Color gizmoColor, Vector2 size, float angle, LayerMask detectLayerMask, Vector2 originOffset,
-        ShapeType detectShapeType, int maxDetections, LayerMask blockLayerMask)
-    {
-        Initialize(gizmoColor, size, angle, detectLayerMask, originOffset, detectShapeType, maxDetections);
-        this.Colliders = new Collider2D[maxDetections];
-        this.BlockLayerMask = blockLayerMask;
-    }
-
     public override int Detect(Vector2 origin)
     {
         origin += OriginOffset;
-        int detectionCount = 0;
+        DetectionCount = 0;
         switch (DetectShapeType)
         {
             case ShapeType.Box:
-                detectionCount = Physics2D.OverlapBoxNonAlloc(origin, Size, Angle, Colliders, DetectLayerMask);
+                DetectionCount = Physics2D.OverlapBoxNonAlloc(origin, Size, Angle, Colliders, DetectLayerMask);
                 break;
             case ShapeType.Circle:
-                detectionCount = Physics2D.OverlapCircleNonAlloc(origin, Size.x, Colliders, DetectLayerMask);
+                DetectionCount = Physics2D.OverlapCircleNonAlloc(origin, Size.x, Colliders, DetectLayerMask);
                 break;
         }
 
         if (BlockLayerMask != 0)
         {
-            return FilterBlockedColliders(origin, detectionCount);
+            return FilterBlockedColliders(origin);
         }
 
-        return detectionCount;
+        return DetectionCount;
     }
 
-    public int FilterBlockedColliders(Vector2 origin, int detectionCount)
+    public int FilterBlockedColliders(Vector2 origin)
     {
-        for (int i = 0; i < detectionCount; i++)
+        for (int i = 0; i < DetectionCount; i++)
         {
             Vector2 directionToTarget = (Vector2)Colliders[i].bounds.center - origin;
             float distance = directionToTarget.magnitude;
@@ -60,11 +52,11 @@ public class OverlapDetector : VisionDetector
             if (hit.collider == null || !Utility.CheckLayer(hit.collider.gameObject.layer, DetectLayerMask))
             {
                 Colliders[i] = null;
-                detectionCount--;
+                DetectionCount--;
             }
         }
 
-        return detectionCount;
+        return DetectionCount;
     }
 
     public override void DrawGizmos(Vector2 origin)

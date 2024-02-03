@@ -83,18 +83,8 @@ public class Path
 
     private int GetPathIndex(int index)
     {
-        if (isCircular)
-        {
-            int count = Points.Count;
-            int qZeroRounding = index / count;
-            int roundingCorrection = ((index ^ count) < 0) && (index % count != 0) ? 1 : 0;
-            int qNegInfRounding = qZeroRounding - roundingCorrection;
-
-
-            int r = index - count * qNegInfRounding;
-            return r;
-        }
-        return index;
+        if (isCircular) return MathUtility.GetCircularIndex(index, Points.Count);
+        else return index;
     }
 
     public void Recalculate(Vector2 position)

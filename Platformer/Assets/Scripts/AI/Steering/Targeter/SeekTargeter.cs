@@ -14,8 +14,7 @@ public class SeekTargeter : Targeter
 
     private void Start()
     {
-        Agent agent = GetComponentInParent<AIManager>().Agent;
-        TargetPosition = agent.CenterPosition;
+        TargetPosition = GetComponentInParent<AIManager>().Agent.CenterPosition;
     }
 
     public override SteeringGoal GetGoal(Agent agent)

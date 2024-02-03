@@ -26,7 +26,7 @@ TagManager:
   - Weapon
   - AgentPhysicsCollider
   - Obstacle
-  - 
+  - NavGraph
   - 
   - 
   - 
