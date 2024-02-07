@@ -16,7 +16,7 @@ public class NavGraphNode : MonoBehaviour
     public Vector2 ExpansionVector;
 
     [NonSerialized]
-    public ulong ProcessId;
+    public ulong SearchId;
     [NonSerialized]
     public HeapNode HeapNode;
     [NonSerialized]
@@ -51,6 +51,11 @@ private void Start()
     public void RemoveNeighbor(NavGraphNode neighbor)
     {
         if (Neighbors.Remove(neighbor)) neighbor.Neighbors.Remove(this);
+    }
+
+    public Vector2 GetExpandedPosition(float expansionDistance)
+    {
+        return transform.position + (Vector3)ExpansionVector * expansionDistance;
     }
 }
 

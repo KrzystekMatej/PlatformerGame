@@ -1,28 +1,27 @@
 using FibonacciHeap;
-using JetBrains.Annotations;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class NavGraph : MonoBehaviour
 {
+    public LayerMask SolidGeometryLayerMask;
+    [SerializeField]
+    private bool precalculationEnabled;
+
 #if UNITY_EDITOR
     [SerializeField]
     private bool showEdges;
-    [HideInInspector]
-    public List<NavGraphNode> TestPath;
+    public NavPath TestPath;
 #endif
 
     [HideInInspector]
     public List<NavGraphNode> Nodes = new List<NavGraphNode>();
-    private ulong processId;
-    [SerializeField]
-    private bool precalculationEnabled;
-    private NavGraphNode[,] shortestPathTable;
+    private ulong searchId;
+    private (int nodeIndex, float length)[,] shortestPathTable;
 
     private void Awake()
     {
@@ -30,7 +29,7 @@ public class NavGraph : MonoBehaviour
     }
 
 
-    public (List<NavGraphNode> path, float length) DijkstraShortestPath(NavGraphNode start, Func<NavGraphNode, bool> terminationCondition)
+    public NavPath DijkstraShortestPath(NavGraphNode start, Func<NavGraphNode, bool> terminationCondition)
     {
         return FindShortestPath
         (
@@ -40,7 +39,13 @@ public class NavGraph : MonoBehaviour
         );
     }
 
-    public (List<NavGraphNode> path, float length) AStarShortestPath(NavGraphNode start, NavGraphNode end)
+    public NavPath FindShortestPath(NavGraphNode start, NavGraphNode end)
+    {
+        if (precalculationEnabled) return GetPrecalculatedPath(start, end);
+        return AStarShortestPath(start, end);
+    }
+
+    public NavPath AStarShortestPath(NavGraphNode start, NavGraphNode end)
     {
         return FindShortestPath
         (
@@ -50,18 +55,13 @@ public class NavGraph : MonoBehaviour
         );
     }
 
-    public (List<NavGraphNode> path, float length) FindShortestPath(NavGraphNode start, Func<NavGraphNode, bool> terminationCondition, Func<NavGraphNode, float> heuristic)
+    public NavPath FindShortestPath(NavGraphNode start, Func<NavGraphNode, bool> terminationCondition, Func<NavGraphNode, float> heuristic)
     {
-        if (processId == ulong.MaxValue)
-        {
-            ResetPathFindingData();
-            processId++;
-        }
-        processId++;
+        IncreaseSearchId();
 
         FibonacciHeap<NavGraphNode, float> heap = new FibonacciHeap<NavGraphNode, float>(float.NegativeInfinity);
 
-        start.ProcessId = processId;
+        start.SearchId = searchId;
         start.GCost = 0;
         start.HCost = heuristic(start);
         start.HeapNode = new FibonacciHeapNode<NavGraphNode, float>(start, start.HCost);
@@ -73,13 +73,13 @@ public class NavGraph : MonoBehaviour
         {
             NavGraphNode currentNode = heap.Min().Data;
 
-            if (terminationCondition(currentNode)) return (ReconstructPath(currentNode), currentNode.GCost);
+            if (terminationCondition(currentNode)) return ReconstructPath(currentNode);
 
             foreach (NavGraphNode neighbor in currentNode.Neighbors)
             {
                 float neighborGCost = currentNode.GCost + Vector2.Distance(currentNode.transform.position, neighbor.transform.position);
 
-                if (neighbor.ProcessId == processId)
+                if (neighbor.SearchId == searchId)
                 {
                     if (neighbor.Closed) continue;
 
@@ -88,7 +88,7 @@ public class NavGraph : MonoBehaviour
                 }
                 else
                 {
-                    neighbor.ProcessId = processId;
+                    neighbor.SearchId = searchId;
                     neighbor.HCost = heuristic(neighbor);
                     neighbor.Closed = false;
                     neighbor.HeapNode = new FibonacciHeapNode<NavGraphNode, float>(neighbor, neighborGCost + neighbor.HCost);
@@ -103,28 +103,30 @@ public class NavGraph : MonoBehaviour
             currentNode.Closed = true;
         }
 
-        return (null, 0);
+        return null;
     }
 
-    public List<(List<NavGraphNode> path, float length)> YenKShortestPaths(NavGraphNode start, NavGraphNode end, int k) => YenKShortestPaths(start, end, (i, paths) => i <= k);
+    public List<NavPath> YenKShortestPaths(NavGraphNode start, NavGraphNode end, int k) => YenShortestPaths(start, end, (i, paths) => i <= k);
 
-    public List<(List<NavGraphNode> path, float length)> YenKShortestPaths(NavGraphNode start, NavGraphNode end, Func<int, List<(List<NavGraphNode> path, float length)>, bool> terminationCondition)
+    public List<NavPath> YenShortestPaths(NavGraphNode start, NavGraphNode end, Func<int, List<NavPath>, bool> terminationCondition)
     {
-        List<(List<NavGraphNode> path, float length)> kShortestPaths = new List<(List<NavGraphNode>, float)>() { AStarShortestPath(start, end) };
-        FibonacciHeap<List<NavGraphNode>, float> heap = new FibonacciHeap<List<NavGraphNode>, float>(float.NegativeInfinity);
+        var shortestPathData = AStarShortestPath(start, end);
+        if (shortestPathData.Nodes == null) return null;
 
-        
+        List<NavPath> kShortestPaths = new List<NavPath>() { shortestPathData };
+        SortedSet<NavPath> set = new SortedSet<NavPath>();
+
         for (int k = 1; terminationCondition(k, kShortestPaths); k++)
         {
-            for (int i = 0; i <= kShortestPaths[k - 1].path.Count - 2; i++)
+            for (int i = 0; i <= kShortestPaths[k - 1].Nodes.Count - 2; i++)
             {
-                NavGraphNode spur = kShortestPaths[k - 1].path[i];
-                List<NavGraphNode> rootPath = kShortestPaths[k - 1].path.GetRange(0, i + 1);
+                NavGraphNode spur = kShortestPaths[k - 1].Nodes[i];
+                List<NavGraphNode> rootPath = kShortestPaths[k - 1].Nodes.GetRange(0, i + 1);
 
                 List<int> relatedPathIndexes = new List<int>();
                 for (int j = 0; j < kShortestPaths.Count; j++)
                 {
-                    List<NavGraphNode> relatedPath = kShortestPaths[j].path;
+                    List<NavGraphNode> relatedPath = kShortestPaths[j].Nodes;
                     if (relatedPath.Count < i + 1) continue;
                     if (rootPath.SequenceEqual(relatedPath.GetRange(0, i + 1)))
                     {
@@ -134,7 +136,7 @@ public class NavGraph : MonoBehaviour
                 }
 
                 rootPath.RemoveAt(i);
-                List<List<NavGraphNode>> removedNeighbors = new List<List<NavGraphNode>>(); 
+                List<List<NavGraphNode>> removedNeighbors = new List<List<NavGraphNode>>();
                 for (int j = 0; j < i; j++)
                 {
                     removedNeighbors.Add(rootPath[j].Neighbors);
@@ -145,32 +147,19 @@ public class NavGraph : MonoBehaviour
                     rootPath[j].Neighbors = new List<NavGraphNode>();
                 }
 
-                (List<NavGraphNode> spurPath, float spurPathLength) = AStarShortestPath(spur, end);
+                NavPath spurPath = AStarShortestPath(spur, end);
 
                 if (spurPath != null)
                 {
-                    rootPath.AddRange(spurPath);
+                    rootPath.AddRange(spurPath.Nodes);
 
-                    float totalPathLength = GetPathSegmentLength(rootPath, 0, i + 1) + spurPathLength;
-
-                    bool contains = false;
-                    //does it iterate through?
-                    foreach (FibonacciHeapNode<List<NavGraphNode>, float> heapNode in heap)
-                    {
-                        if (totalPathLength != heapNode.Key) continue;
-                        if (heapNode.Data.SequenceEqual(rootPath))
-                        {
-                            contains = true;
-                            break;
-                        }
-                    }
-                    if (!contains) heap.Insert(new FibonacciHeapNode<List<NavGraphNode>, float>(rootPath, totalPathLength));
-
+                    float totalPathLength = GetPathSegmentLength(rootPath, 0, i + 1) + spurPath.Length;
+                    set.Add(new NavPath(rootPath, totalPathLength));
                 }
 
                 foreach (int pathIndex in relatedPathIndexes)
                 {
-                    kShortestPaths[pathIndex].path[i].AddNeighbor(kShortestPaths[pathIndex].path[i + 1]);
+                    kShortestPaths[pathIndex].Nodes[i].AddNeighbor(kShortestPaths[pathIndex].Nodes[i + 1]);
                 }
 
                 for (int j = 0; j < i; j++)
@@ -184,54 +173,71 @@ public class NavGraph : MonoBehaviour
 
             }
 
-            if (heap.IsEmpty())
+            if (set.Count == 0)
             {
                 break;
             }
 
 
-            var min = heap.RemoveMin();
-            kShortestPaths.Add((min.Data, min.Key));
+            var min = set.Min;
+            set.Remove(min);
+            kShortestPaths.Add(min);
         }
 
         return kShortestPaths;
     }
 
-    public void ResetPathFindingData()
+    private void IncreaseSearchId()
+    {
+        if (searchId == ulong.MaxValue)
+        {
+            ResetPathFindingData();
+            searchId++;
+        }
+        searchId++;
+    }
+
+    private void ResetPathFindingData()
     {
         foreach (NavGraphNode node in Nodes)
         {
-            node.ProcessId = 0;
+            node.SearchId = 0;
             node.HeapNode = null;
             node.Closed = false;
             node.From = null;
         }
     }
 
-    public List<NavGraphNode> ReconstructPrecalculatedPath(NavGraphNode start, NavGraphNode end)
+    public NavPath GetPrecalculatedPath(NavGraphNode start, NavGraphNode end)
     {
         if (!precalculationEnabled) 
             throw new InvalidOperationException("Precalculation must be enabled to reconstruct the path.");
 
-        if (shortestPathTable[start.Index, end.Index] == null) return null;
+        if (shortestPathTable[start.Index, end.Index].nodeIndex == -1) return null;
 
         List<NavGraphNode> path = new List<NavGraphNode>();
-        NavGraphNode current = start;
+        int current = start.Index;
 
-        while (current != end)
+        while (current != end.Index)
         {
-            path.Add(current);
-            current = shortestPathTable[current.Index, end.Index];
+            path.Add(Nodes[current]);
+            current = shortestPathTable[current, end.Index].nodeIndex;
         }
-        path.Add(current);
+        path.Add(Nodes[current]);
 
-        return path;
+        return new NavPath(path, shortestPathTable[start.Index, end.Index].length);
     }
 
-    private static List<NavGraphNode> ReconstructPath(NavGraphNode current)
+    public float GetPrecalculatedDistance(NavGraphNode start, NavGraphNode end)
+    {
+        return shortestPathTable[start.Index, end.Index].length;
+    }
+
+    private static NavPath ReconstructPath(NavGraphNode end)
     {
         List<NavGraphNode> path = new List<NavGraphNode>();
 
+        NavGraphNode current = end;
         while (current != null)
         {
             path.Add(current);
@@ -239,7 +245,7 @@ public class NavGraph : MonoBehaviour
         }
 
         path.Reverse();
-        return path;
+        return new NavPath(path, end.GCost);
     }
 
     public static float GetPathSegmentLength(List<NavGraphNode> path, int start, int count)
@@ -249,13 +255,14 @@ public class NavGraph : MonoBehaviour
         {
             length += Vector3.Distance(path[i].transform.position, path[i + 1].transform.position);
         }
-        int a = 0;
         return length;
     }
 
     public void PrecalculateShortestPaths()
     {
-        shortestPathTable = new NavGraphNode[Nodes.Count, Nodes.Count];
+        shortestPathTable = new (int, float)[Nodes.Count, Nodes.Count];
+
+
 
         for (int source = 0; source < Nodes.Count; source++)
         {
@@ -263,13 +270,14 @@ public class NavGraph : MonoBehaviour
 
             for (int target = 0; target < Nodes.Count; target++)
             {
-                if (source == target) shortestPathTable[source, target] = Nodes[target];
+                if (source == target) shortestPathTable[source, target] = (target, 0);
                 else
                 {
                     int nd = target;
-                    while (nd != source && Nodes[nd].From != null && Nodes[nd].From.ProcessId == processId)
+                    while (nd != source && Nodes[nd].From != null && Nodes[nd].From.SearchId == searchId)
                     {
-                        shortestPathTable[Nodes[nd].From.Index, target] = Nodes[nd];
+                        float length = Nodes[nd].GCost + Vector2.Distance(Nodes[nd].transform.position, Nodes[target].transform.position);
+                        shortestPathTable[Nodes[nd].From.Index, target] = (nd, length);
                         nd = Nodes[nd].From.Index;
                     }
                 }
@@ -277,10 +285,61 @@ public class NavGraph : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    public IEnumerable<NavGraphNode> TraverseDepthSearch(NavGraphNode start)
     {
-        Nodes = GetComponentsInChildren<NavGraphNode>().ToList();
+        IncreaseSearchId();
+        Stack<NavGraphNode> stack = new Stack<NavGraphNode>();
+        stack.Push(start);
 
+        while (stack.Count > 0)
+        {
+            NavGraphNode current = stack.Pop();
+            current.SearchId = searchId;
+
+            yield return current;
+
+            foreach (NavGraphNode node in current.Neighbors)
+            {
+                if (node.SearchId != searchId) stack.Push(node);
+            }
+        }
+    }
+
+    public NavGraphNode QuantizePosition(Vector2 origin, NavGraphNode coherenceNode, NavGraphNode reachableNode)
+    {
+
+        if (coherenceNode == null) return QuantizePositionFromList(origin, reachableNode != null ? TraverseDepthSearch(reachableNode) : Nodes);
+
+        coherenceNode.Neighbors.Add(coherenceNode);
+        NavGraphNode result = QuantizePositionFromList(origin, coherenceNode.Neighbors);
+        coherenceNode.Neighbors.RemoveAt(coherenceNode.Neighbors.Count - 1);
+        return result;
+    }
+
+    private NavGraphNode QuantizePositionFromList(Vector3 origin, IEnumerable<NavGraphNode> nodesToCheck)
+    {
+        NavGraphNode result = null;
+        float minDistance = float.PositiveInfinity;
+
+        foreach (NavGraphNode node in nodesToCheck)
+        {
+            Vector3 nodeVector = node.transform.position - origin;
+            bool collision = Physics2D.Raycast(origin, nodeVector, nodeVector.magnitude, SolidGeometryLayerMask);
+
+            float distance = Vector2.Distance(origin, node.transform.position);
+            if (!collision && distance < minDistance)
+            {
+                minDistance = distance;
+                result = node;
+            }
+        }
+
+        return result;
+    }
+
+
+    private void OnDrawGizmosSelected()
+    {
         if (!showEdges) return;
         foreach (NavGraphNode node in Nodes)
         {
@@ -294,9 +353,9 @@ public class NavGraph : MonoBehaviour
         if (TestPath != null)
         {
             Gizmos.color = Color.red;
-            for (int i = 0; i < TestPath.Count - 1; i++)
+            for (int i = 0; i < TestPath.Nodes.Count - 1; i++)
             {
-                Gizmos.DrawLine(TestPath[i].transform.position, TestPath[i + 1].transform.position);
+                Gizmos.DrawLine(TestPath.Nodes[i].transform.position, TestPath.Nodes[i + 1].transform.position);
             }
         }
     }
@@ -309,13 +368,6 @@ public class NavGraphEditor : Editor
     private NavGraphNode start;
     private NavGraphNode end;
     private int k;
-    private SerializedProperty testPathProperty;
-    private float testPathLength;
-
-    void OnEnable()
-    {
-        testPathProperty = serializedObject.FindProperty("TestPath");
-    }
 
     public override void OnInspectorGUI()
     {
@@ -325,21 +377,12 @@ public class NavGraphEditor : Editor
 
         DrawDefaultInspector();
 
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        GUIStyle centeredStyle = new GUIStyle(EditorStyles.label);
-        centeredStyle.alignment = TextAnchor.MiddleCenter;
-        EditorGUILayout.LabelField("Tests", centeredStyle);
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
         start = (NavGraphNode)EditorGUILayout.ObjectField("Start", start, typeof(NavGraphNode), true);
         end = (NavGraphNode)EditorGUILayout.ObjectField("End", end, typeof(NavGraphNode), true);
 
         EditorGUILayout.Space();
 
-        if (GUILayout.Button("Calculate shortest path"))
+        if (GUILayout.Button("Calculate Shortest Path"))
         {
             if (start == null || end == null)
             {
@@ -347,9 +390,18 @@ public class NavGraphEditor : Editor
                 return;
             }
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            (script.TestPath, testPathLength) = script.AStarShortestPath(start, end);
+            var path = script.AStarShortestPath(start, end);
+            if (path.Nodes != null)
+            {
+                script.TestPath = path;
+            }
+            else
+            {
+                script.TestPath = null;
+                Debug.Log("Path does not exist.");
+            }
             stopwatch.Stop();
-            Debug.Log($"Method execution time: {stopwatch.Elapsed.TotalSeconds} seconds");
+            Debug.Log($"Method execution time is {stopwatch.Elapsed.TotalSeconds} seconds.");
         }
 
         EditorGUILayout.Space();
@@ -359,7 +411,7 @@ public class NavGraphEditor : Editor
 
         EditorGUILayout.Space();
 
-        if (GUILayout.Button("Calculate Kth shortest path"))
+        if (GUILayout.Button("Calculate Kth Shortest Path"))
         {
             if (start == null || end == null)
             {
@@ -368,28 +420,17 @@ public class NavGraphEditor : Editor
             }
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var paths = script.YenKShortestPaths(start, end, k);
-            (script.TestPath, testPathLength) = paths[k];
             stopwatch.Stop();
-            Debug.Log($"Method execution time: {stopwatch.Elapsed.TotalSeconds} seconds");
-
-            for (int i = 0; i < paths.Count; i++)
+            if (paths != null && paths.Count > k)
             {
-                for (int j = i + 1; j < paths.Count; j++)
-                {
-                    if (paths[i].path.SequenceEqual(paths[j].path))
-                    {
-                        Debug.Log($"duplicate {i} {j}");
-                    }
-                }
+                script.TestPath = paths[k];
             }
+            else
+            {
+                script.TestPath = null;
+                Debug.Log("Path does not exist.");
+            }
+            Debug.Log($"Method execution time is {stopwatch.Elapsed.TotalSeconds} seconds.");
         }
-
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        EditorGUILayout.PropertyField(testPathProperty, new GUIContent("Test Path"), true);
-        EditorGUILayout.FloatField("Test Path Length", NavGraph.GetPathSegmentLength(script.TestPath, 0, script.TestPath.Count));
-
-        serializedObject.ApplyModifiedProperties();
     }
 }

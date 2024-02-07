@@ -35,6 +35,7 @@ public class WallConstraint : Constraint
 
     public override bool IsViolated(Agent agent, List<Vector2> pointPath)
     {
+        if (pointPath.Count < 2) return true;
         pathDirection = (pointPath[1] - pointPath[0]).normalized;
         bool result = Physics2D.Raycast(pointPath[0], pathDirection, rayLength, wallLayerMask).collider != null;
 
@@ -116,7 +117,7 @@ public class WallConstraint : Constraint
         Debug.Log(rayLength);
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
         Gizmos.color = Color.red;

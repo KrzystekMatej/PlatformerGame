@@ -19,8 +19,7 @@ public class SteeringPipeline : MonoBehaviour
     private int constraintSteps;
 
 #if UNITY_EDITOR
-    List<Vector2> currentPath = new List<Vector2>();
-    Vector2 currentGoalPosition;
+    Vector2 gizmoGoalPosition;
 #endif
 
     private void Awake()
@@ -75,22 +74,18 @@ public class SteeringPipeline : MonoBehaviour
             List<Vector2> path = actuator.GetPath(agent, goal);
             bool validPath = true;
 
-            if (goal.HasPosition)
+            foreach (Constraint constraint in constraints)
             {
-                foreach (Constraint constraint in constraints)
+                if (constraint.IsViolated(agent, path))
                 {
-                    if (constraint.IsViolated(agent, path))
-                    {
-                        goal = constraint.Suggest(agent, path, goal);
-                        validPath = false;
-                        break;
-                    }
+                    goal = constraint.Suggest(agent, path, goal);
+                    validPath = false;
+                    break;
                 }
             }
 
 #if UNITY_EDITOR
-            currentPath = path;
-            currentGoalPosition = goal.Position;
+            gizmoGoalPosition = goal.Position;
 #endif
             if (validPath)
             {
@@ -102,18 +97,10 @@ public class SteeringPipeline : MonoBehaviour
         return deadlock != null ? deadlock.GetSteering(agent) : Vector2.zero;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
-
-        for (int i = 0; i < currentPath.Count - 1; i++)
-        {
-            Vector2 a = currentPath[i];
-            Vector2 b = currentPath[i + 1];
-            Gizmos.DrawLine(a, b);
-        }
-
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(currentGoalPosition, 0.3f);
+        Gizmos.DrawWireSphere(gizmoGoalPosition, 0.3f);
     }
 }

@@ -448,11 +448,16 @@ namespace FibonacciHeap
             if (_minNode == null) yield break;
             Stack<FibonacciHeapNode<T, TKey>> stack = new Stack<FibonacciHeapNode<T, TKey>>();
 
-            stack.Push(_minNode);
+            FibonacciHeapNode<T, TKey> current = _minNode;
+            do
+            {
+                stack.Push(current);
+                current = current.Right;
+            } while (current != _minNode);
 
             while (stack.Count > 0)
             {
-                FibonacciHeapNode<T, TKey> current = stack.Pop();
+                current = stack.Pop();
 
                 yield return current;
 

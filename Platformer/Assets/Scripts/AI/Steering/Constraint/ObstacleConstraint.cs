@@ -17,6 +17,7 @@ public class ObstacleConstraint : Constraint
 
     public override bool IsViolated(Agent agent, List<Vector2> pointPath)
     {
+        if (pointPath.Count < 2) return true;
         detector.Size = new Vector2(agent.EnclosingCircleRadius, 0);
 
         for (int i = 0; i < pointPath.Count - 1; i++)
@@ -76,7 +77,7 @@ public class ObstacleConstraint : Constraint
         return center + normalDirection * radius * margin;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
         Vector2 origin = agent.GetComponent<Collider2D>().bounds.center;

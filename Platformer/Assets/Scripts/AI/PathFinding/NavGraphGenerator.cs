@@ -9,25 +9,32 @@ using UnityEngine;
 public class NavGraphGenerator : MonoBehaviour
 {
     [SerializeField]
-    private LayerMask solidGeometryLayerMask;
-    [SerializeField]
     private float expansionMargin = 0.001f;
     [SerializeField]
     private Sprite nodeSprite;
     [SerializeField]
     private NavGraph navGraph;
     [SerializeField]
-    private float redundantPathMargin;
+    private float minNodeDistance = Mathf.Epsilon;
+    [SerializeField]
+    private float redundantPathMargin = Mathf.Epsilon;
+    [SerializeField]
+    [HideInInspector]
+    private GameObject nodeContainer;
 
     public void GenerateNodes()
     {
-        var mapColliders = GetComponentsInChildren<CompositeCollider2D>().Where(c => Utility.CheckLayer(c.gameObject.layer, solidGeometryLayerMask)).ToList();
+        CompositeCollider2D[] solidColliders = GetComponentsInChildren<CompositeCollider2D>().Where(c => Utility.CheckLayer(c.gameObject.layer, navGraph.SolidGeometryLayerMask)).ToArray();
+        Collider2D[] traversableZones = navGraph.GetComponentsInChildren<Collider2D>();
 
         DeleteNodes();
+       
+        nodeContainer = new GameObject("Nodes");
+        nodeContainer.transform.parent = navGraph.transform;
 
         int graphLayer = LayerMask.NameToLayer("NavGraph");
 
-        foreach (CompositeCollider2D collider in mapColliders)
+        foreach (CompositeCollider2D collider in solidColliders)
         {
             string layerName = LayerMask.LayerToName(collider.gameObject.layer);
 
@@ -49,10 +56,10 @@ public class NavGraphGenerator : MonoBehaviour
                     Vector2 expansionVector = (normalA + normalB).normalized;
                     Vector2 nodePosition = pathPoints[j] + expansionVector * expansionMargin;
 
-                    if (!mapColliders.Any(c => MathUtility.IsPointInsideCompositeCollider(nodePosition, c)))
+                    if (traversableZones.Any(z => z.OverlapPoint(nodePosition)) && !solidColliders.Any(c => MathUtility.IsPointInsideCompositeCollider(nodePosition, c)))
                     {
                         GameObject nodeObject = new GameObject();
-                        nodeObject.transform.parent = navGraph.transform;
+                        nodeObject.transform.parent = nodeContainer.transform;
                         nodeObject.layer = graphLayer;
 
                         SpriteRenderer renderer = nodeObject.AddComponent<SpriteRenderer>();
@@ -71,17 +78,8 @@ public class NavGraphGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log($"Node Count: {navGraph.Nodes.Count}");
-    }
-
-    public void DeleteNodes()
-    {
-        foreach (NavGraphNode node in navGraph.Nodes)
-        {
-            DestroyImmediate(node.gameObject);
-        }
-        navGraph.Nodes.Clear();
-        navGraph.TestPath.Clear();
+        DeleteCloseNodes();
+        Debug.Log($"Number of generated nodes is {navGraph.Nodes.Count}.");
     }
 
     public void GenerateEdges()
@@ -95,7 +93,7 @@ public class NavGraphGenerator : MonoBehaviour
                 if (node == neighbor) continue;
 
                 Vector2 direction = neighbor.transform.position - node.transform.position;
-                RaycastHit2D hit = Physics2D.Raycast(node.transform.position, direction.normalized, direction.magnitude, solidGeometryLayerMask);
+                RaycastHit2D hit = Physics2D.Raycast(node.transform.position, direction.normalized, direction.magnitude, navGraph.SolidGeometryLayerMask);
 
                 if (hit.collider == null)
                 {
@@ -105,8 +103,16 @@ public class NavGraphGenerator : MonoBehaviour
             }
         }
 
-        Debug.Log($"Edge Count: {edgeCount / 2}");
+        Debug.Log($"Number of generated edges is {edgeCount / 2}.");
     }
+
+    public void DeleteNodes()
+    {
+        navGraph.Nodes.Clear();
+        navGraph.TestPath = null;
+        DestroyImmediate(nodeContainer);
+    }
+
 
     public void DeleteEdges()
     {
@@ -133,7 +139,7 @@ public class NavGraphGenerator : MonoBehaviour
             {
                 List<NavGraphNode> kShortestPaths = kShortestPathTable[i, j];
 
-                if (i != j && kShortestPaths.Count != 0)
+                if (i != j && !navGraph.Nodes[i].Neighbors.Any(n => n.Index == j) && kShortestPaths != null)
                 {
                     if (kShortestPaths.Count == 1)
                     {
@@ -143,7 +149,40 @@ public class NavGraphGenerator : MonoBehaviour
             }
         }
 
-        foreach (NavGraphNode node in redundantNodes)
+        DeleteNodesInEnumerable(redundantNodes);
+    }
+
+    private void DeleteCloseNodes()
+    {
+        List<NavGraphNode> redundantNodes = new List<NavGraphNode>();
+
+        for (int i = 0; i < navGraph.Nodes.Count; i++)
+        {
+            for (int j = i + 1; j < navGraph.Nodes.Count; j++)
+            {
+                if (Vector3.Distance(navGraph.Nodes[i].transform.position, navGraph.Nodes[j].transform.position) <= minNodeDistance)
+                {
+                    redundantNodes.Add(navGraph.Nodes[i]);
+                    redundantNodes.Add(navGraph.Nodes[j]);
+                }
+            }
+        }
+
+        DeleteNodesInEnumerable(redundantNodes);
+        Debug.Log($"Number of deleted nodes which were too close to each other is {redundantNodes.Count}.");
+    }
+
+    private void AssignIndexes()
+    {
+        for (int i = 0; i < navGraph.Nodes.Count; i++)
+        {
+            navGraph.Nodes[i].Index = i;
+        }
+    }
+
+    private void DeleteNodesInEnumerable(IEnumerable nodes)
+    {
+        foreach (NavGraphNode node in nodes)
         {
             foreach (NavGraphNode neighbor in node.Neighbors)
             {
@@ -152,7 +191,11 @@ public class NavGraphGenerator : MonoBehaviour
             node.Neighbors.Clear();
             navGraph.Nodes.Remove(node);
             DestroyImmediate(node.gameObject);
+
+            if (navGraph.TestPath != null && navGraph.TestPath.Nodes.Contains(node)) navGraph.TestPath = null;
         }
+
+        AssignIndexes();
     }
 
     private List<NavGraphNode>[,] CalculateKShortestPathTable()
@@ -163,18 +206,21 @@ public class NavGraphGenerator : MonoBehaviour
         {
             for (int target = 0; target < navGraph.Nodes.Count; target++)
             {
-                if (target == source) continue;
+                if (target == source)
+                {
+                    kShortestPathTable[source, target] = new List<NavGraphNode>() { navGraph.Nodes[source] };
+                }
 
-                List<(List<NavGraphNode> path, float length)> shortestPaths = navGraph.YenKShortestPaths
+                List<NavPath> shortestPaths = navGraph.YenShortestPaths
                 (
                     navGraph.Nodes[source],
                     navGraph.Nodes[target],
-                    (k, paths) => paths[k].length - paths[k - 1].length < redundantPathMargin
+                    (k, paths) => (k == 1) ? true : paths[k - 1].Length - paths[k - 2].Length <= redundantPathMargin
                 );
 
-                foreach ((List<NavGraphNode> path, float length) in shortestPaths)
+                if (shortestPaths != null)
                 {
-                    kShortestPathTable[source, target].Add(path[path.Count - 2]);
+                    kShortestPathTable[source, target] = shortestPaths.Select(path => path.Nodes[1]).ToList();
                 }
             }
         }

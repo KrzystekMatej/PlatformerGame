@@ -22,7 +22,9 @@ public class LineCastCheck : MonoBehaviour
         Gizmos.DrawLine(pointA.position, pointB.position);
         if (isTestingActive)
         {
-            Debug.Log(Physics2D.Linecast(pointA.position, pointB.position, colliderMask).collider);
+            Vector2 goalVector = pointB.position - pointA.position;
+            float goalDistance = goalVector.magnitude;
+            Debug.Log(Physics2D.Raycast(pointA.position, goalVector, goalDistance, colliderMask).collider);
         }
     }
 }

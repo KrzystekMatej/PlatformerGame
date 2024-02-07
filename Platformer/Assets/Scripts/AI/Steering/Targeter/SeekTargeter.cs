@@ -10,32 +10,35 @@ public class SeekTargeter : Targeter
     private bool isFleeing;
     [SerializeField]
     private bool isPositionCached;
-    public Vector2 TargetPosition { get; set; }
+    public Vector2 GoalPosition { get; set; }
+    public GameObject GoalOwner { get; set; }
+
 
     private void Start()
     {
-        TargetPosition = GetComponentInParent<AIManager>().Agent.CenterPosition;
+        GoalPosition = GetComponentInParent<AIManager>().Agent.CenterPosition;
     }
 
     public override SteeringGoal GetGoal(Agent agent)
     {
         SteeringGoal goal = new SteeringGoal();
 
-        Vector2 goalPosition = !isFleeing ? TargetPosition : agent.CenterPosition + (agent.CenterPosition - TargetPosition);
+        Vector2 goalPosition = !isFleeing ? GoalPosition : agent.CenterPosition + (agent.CenterPosition - GoalPosition);
 
-        if (Vector2.Distance(agent.CenterPosition, TargetPosition) > arriveRadius)
+        if (Vector2.Distance(agent.CenterPosition, GoalPosition) > arriveRadius)
         {
             goal.Position = goalPosition;
+            goal.Owner = GoalOwner;
         }
 
-        TargetPosition = isPositionCached ? goalPosition : agent.CenterPosition;
+        GoalPosition = isPositionCached ? goalPosition : agent.CenterPosition;
         return goal;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(TargetPosition, arriveRadius);
+        Gizmos.DrawWireSphere(GoalPosition, arriveRadius);
     }
 }

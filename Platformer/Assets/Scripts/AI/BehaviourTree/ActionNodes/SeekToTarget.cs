@@ -8,7 +8,8 @@ public class SeekToTarget : ActionNode
     protected override State OnUpdate()
     {
         SeekTargeter seek = (SeekTargeter)blackboard.DataTable[context.Steering.CurrentPipelineName + nameof(SeekTargeter)];
-        seek.TargetPosition = (Vector2)blackboard.DataTable["Target"];
+        seek.GoalPosition = (Vector2)blackboard.DataTable["GoalPosition"];
+        seek.GoalOwner = (GameObject)blackboard.DataTable["GoalOwner"];
         return State.Success;
     }
 }

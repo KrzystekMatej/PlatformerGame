@@ -33,6 +33,9 @@ public class Agent : MonoBehaviour, IHittable
     public float EnclosingCircleRadius { get; private set; }
     public Vector2 CenterPosition { get => TriggerCollider.bounds.center; }
 
+    private RaycastHit2D[] castHits;
+    private ContactFilter2D castFilter;
+
     private void Awake()
     {
         InputController = GetComponentInParent<InputController>();
@@ -62,6 +65,8 @@ public class Agent : MonoBehaviour, IHittable
         };
 
         EnclosingCircleRadius = MathUtility.GetEnclosingCircleRadius(TriggerCollider);
+        castHits = new RaycastHit2D[1];
+        castFilter = new ContactFilter2D();
     }
 
     private void Start()
@@ -116,5 +121,11 @@ public class Agent : MonoBehaviour, IHittable
         if (knockbackForce <= 0) return;
         Vector2 direction = CenterPosition - from;
         RigidBody.AddForce(new Vector2(direction.normalized.x, 0) * knockbackForce, ForceMode2D.Impulse);
+    }
+
+    public bool CastCheck(Vector2 direction, float distance, LayerMask solidGeometryLayerMask)
+    {
+        castFilter.SetLayerMask(solidGeometryLayerMask);
+        return TriggerCollider.Cast(direction, castFilter, castHits, distance) > 0;
     }
 }

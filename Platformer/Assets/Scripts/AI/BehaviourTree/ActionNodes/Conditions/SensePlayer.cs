@@ -11,7 +11,8 @@ public class SensePlayer : Condition
 
     public override void Initialize()
     {
-        blackboard.DataTable["Target"] = null;
+        blackboard.DataTable["GoalPosition"] = null;
+        blackboard.DataTable["TargetOwner"] = null;
     }
 
     protected override bool IsConditionSatisfied()
@@ -19,10 +20,12 @@ public class SensePlayer : Condition
         int detectionCount = senseDetector.Detect(context.Agent.CenterPosition);
         if (detectionCount > 0)
         {
-            blackboard.DataTable["Target"] = (Vector2)senseDetector.Colliders[0].bounds.center;
+            blackboard.DataTable["GoalPosition"] = (Vector2)senseDetector.Colliders[0].gameObject.transform.position;
+            blackboard.DataTable["GoalOwner"] = senseDetector.Colliders[0].gameObject;
             return true;
         }
-        blackboard.DataTable["Target"] = null;
+        blackboard.DataTable["GoalPosition"] = null;
+        blackboard.DataTable["GoalOwner"] = null;
         return false;
     }
 }

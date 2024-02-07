@@ -10,13 +10,13 @@ public class PursueTargeter : SeekTargeter
 
     public override SteeringGoal GetGoal(Agent agent)
     {
-        float distance = (TargetPosition - agent.CenterPosition).magnitude;
+        float distance = (GoalPosition - agent.CenterPosition).magnitude;
         float speed = agent.RigidBody.velocity.magnitude;
         float prediction = speed <= distance / MaxPrediction ? MaxPrediction : distance / speed;
 
         Vector2 futurePosition = agent.CenterPosition + TargetVelocity * prediction;
 
-        TargetPosition = futurePosition;
+        GoalPosition = futurePosition;
         TargetVelocity = Vector2.zero;
 
         return base.GetGoal(agent);
