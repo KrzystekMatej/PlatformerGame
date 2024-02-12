@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
-  m_Name: InvisibleNonGroundMeleeDetector
+  m_Name: HammerDetector
   m_EditorClassIdentifier: 
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 1.6, y: 1.5}
+  <Size>k__BackingField: {x: 2.3, y: 1}
+  <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 0
   <OriginOffset>k__BackingField: {x: 0, y: 0}
-  <DetectShapeType>k__BackingField: 1
-  maxDetections: 1
+  detectShapeType: 1
+  maxDetections: 5

@@ -12,10 +12,15 @@ public class NavPath : IComparable<NavPath>
     [SerializeField]
     public float Length;
 
+    public NavPath()
+    {
+        Nodes = new List<NavGraphNode>();
+    }
+
     public NavPath(List<NavGraphNode> path, float length)
     {
-        this.Nodes = path;
-        this.Length = length;
+        Nodes = path;
+        Length = length;
     }
 
     public NavGraphNode GetStart()

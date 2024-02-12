@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum ShapeType
 {
-    Ray,
+    Primitive,
     Box,
     Circle,
     Capsule

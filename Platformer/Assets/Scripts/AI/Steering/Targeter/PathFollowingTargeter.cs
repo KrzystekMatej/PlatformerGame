@@ -31,7 +31,7 @@ public class PathFollowingTargeter : Targeter
         SteeringGoal goal = new SteeringGoal();
         if (isDynamic) path.SetPoints(waypoints);
 
-        goal.Position = path.CalculateGoal(agent);
+        goal.Position = path.CalculateGoalWithCoherence(agent);
 #if UNITY_EDITOR
         gizmoGoalPosition = goal.Position;
 #endif

@@ -6,14 +6,18 @@ public class NavGraphTracker : MonoBehaviour
 {
     [SerializeField]
     private float quantizationUpdateInterval;
-    public NavGraphNode Current { get; private set; }
-    private NavGraph navGraph;
+    [field: SerializeField]
+    public PositionQuantizer Quantizer { get; private set; }
     private Agent agent;
+
+    private void Awake()
+    {
+        agent = GetComponent<Agent>();
+        if (Quantizer.NavGraph == null) Quantizer.NavGraph = FindObjectOfType<NavGraph>();
+    }
 
     private void Start()
     {
-        navGraph = FindObjectOfType<NavGraph>();
-        agent = GetComponent<Agent>();
         StartCoroutine(UpdateTracker());
     }
 
@@ -21,7 +25,7 @@ public class NavGraphTracker : MonoBehaviour
     {
         while (true)
         {
-            Current = navGraph.QuantizePosition(agent.CenterPosition, Current, Current);
+            Quantizer.QuantizePositionToNode(agent.CenterPosition);
             yield return new WaitForSeconds(quantizationUpdateInterval);
         }
     }

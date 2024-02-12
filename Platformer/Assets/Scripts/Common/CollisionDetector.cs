@@ -6,11 +6,11 @@ public class CollisionDetector : MonoBehaviour
 {
     [SerializeField]
     private Collider2D objectCollider;
-    [SerializeField]
-    private LayerMask colliderMask;
+    [field: SerializeField]
+    public LayerMask CollisionLayerMask { get; private set; }
 
     public bool CollisionDetected { get; private set; }
-    public int CollisionLayerIndex { get; private set; }
+    public RaycastHit2D Hit { get; private set; }
 
     [Header("Gizmo parameters")]
     [Range(-2f, 2f)]
@@ -39,11 +39,12 @@ public class CollisionDetector : MonoBehaviour
             0,
             Vector2.down,
             0,
-            colliderMask
+            CollisionLayerMask
         );
 
+        
         CollisionDetected = (hit.collider != null) && hit.collider.IsTouching(objectCollider);
-        CollisionLayerIndex = (hit.collider != null) ? hit.collider.gameObject.layer : 0;
+        Hit = hit;
     }
 
     private void OnDrawGizmos()

@@ -12,7 +12,8 @@ using static UnityEngine.Rendering.VolumeComponent;
 [Serializable]
 public class Path
 {
-    public List<Vector2> Points;
+    [NonSerialized]
+    public List<Vector2> Points = new List<Vector2>();
     [SerializeField]
     private float predictTime = 0.1f;
     [SerializeField]
@@ -95,12 +96,6 @@ public class Path
         return Mathf.Clamp(index, 0, Points.Count - 1);
     }
 
-    private int GetSegmentIndex(int index)
-    {
-        if (isCircular) return MathUtility.GetCircularIndex(index, Points.Count);
-        return Mathf.Clamp(index, 0, Points.Count - 2);
-    }
-
     private Vector2 GetFuturePosition(Agent agent)
     {
         return agent.CenterPosition + agent.RigidBody.velocity * predictTime;
@@ -111,7 +106,22 @@ public class Path
         FindClosestSegment(GetFuturePosition(agent), 0, isCircular ? Points.Count - 1 : Points.Count - 2);
     }
 
-    public Vector2 CalculateGoal(Agent agent)
+    public Vector2 CalculateGoalWithoutCoherence(Agent agent)
+    {
+        Vector2 goalPosition = GetFuturePosition(agent);
+
+        FindClosestSegment(GetFuturePosition(agent), 0, isCircular ? Points.Count - 1 : Points.Count - 2);
+
+        if (Mathf.Sqrt(closestSegment.SquaredDistance) >= radius) goalPosition = GetOffsetGoal(offset);
+
+#if UNITY_EDITOR
+        gizmoGoalPosition = goalPosition;
+#endif
+
+        return goalPosition;
+    }
+
+    public Vector2 CalculateGoalWithCoherence(Agent agent)
     {
         Vector2 goalPosition = GetFuturePosition(agent);
 
@@ -212,6 +222,18 @@ public class Path
         }
 
         return Points[direction == 1 ? Points.Count - 1 : 0];
+    }
+
+    public void SmoothOut(Agent agent, LayerMask solidGeometryLayerMask)
+    {
+        for (int i = 0; i < Points.Count - 2; i++)
+        {
+            Vector2 edgeVector = Points[i + 2] - Points[i];
+            if (!agent.CastCheck(edgeVector, edgeVector.magnitude, solidGeometryLayerMask))
+            {
+                Points.RemoveAt(i + 1);
+            }
+        }
     }
 
     public void DrawGizmos()

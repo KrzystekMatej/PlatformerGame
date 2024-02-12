@@ -228,9 +228,10 @@ public class NavGraph : MonoBehaviour
         return new NavPath(path, shortestPathTable[start.Index, end.Index].length);
     }
 
-    public float GetPrecalculatedDistance(NavGraphNode start, NavGraphNode end)
+    public float GetGraphDistance(NavGraphNode start, NavGraphNode end)
     {
-        return shortestPathTable[start.Index, end.Index].length;
+        if (precalculationEnabled) return shortestPathTable[start.Index, end.Index].length;
+        return AStarShortestPath(start, end).Length;
     }
 
     private static NavPath ReconstructPath(NavGraphNode end)
@@ -304,39 +305,6 @@ public class NavGraph : MonoBehaviour
             }
         }
     }
-
-    public NavGraphNode QuantizePosition(Vector2 origin, NavGraphNode coherenceNode, NavGraphNode reachableNode)
-    {
-
-        if (coherenceNode == null) return QuantizePositionFromList(origin, reachableNode != null ? TraverseDepthSearch(reachableNode) : Nodes);
-
-        coherenceNode.Neighbors.Add(coherenceNode);
-        NavGraphNode result = QuantizePositionFromList(origin, coherenceNode.Neighbors);
-        coherenceNode.Neighbors.RemoveAt(coherenceNode.Neighbors.Count - 1);
-        return result;
-    }
-
-    private NavGraphNode QuantizePositionFromList(Vector3 origin, IEnumerable<NavGraphNode> nodesToCheck)
-    {
-        NavGraphNode result = null;
-        float minDistance = float.PositiveInfinity;
-
-        foreach (NavGraphNode node in nodesToCheck)
-        {
-            Vector3 nodeVector = node.transform.position - origin;
-            bool collision = Physics2D.Raycast(origin, nodeVector, nodeVector.magnitude, SolidGeometryLayerMask);
-
-            float distance = Vector2.Distance(origin, node.transform.position);
-            if (!collision && distance < minDistance)
-            {
-                minDistance = distance;
-                result = node;
-            }
-        }
-
-        return result;
-    }
-
 
     private void OnDrawGizmosSelected()
     {

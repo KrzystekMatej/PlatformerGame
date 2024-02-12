@@ -134,10 +134,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path:
-    offset: 0
+    predictTime: 0.1
+    offset: 0.1
     radius: 0
     isCircular: 0
-  optimalPathEnabled: 1
+  quantizer:
+    <NavGraph>k__BackingField: {fileID: 0}
+    <CoherenceEnabled>k__BackingField: 1
+    <SolidGeometryDetector>k__BackingField: {fileID: 11400000, guid: 2b8b21784b5edcc4e931ae54c1041da5, type: 2}
 --- !u!1 &3079820557302413007
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,19 +404,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
-      value: 1.2061223
+      value: 1.6361341
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.y
-      value: 1.0404727
+      value: 1.1130406
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.1245902
+      value: 0.20018324
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
-      value: -0.35963264
+      value: -0.44331607
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction
@@ -452,19 +456,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
-      value: 1.2061223
+      value: 0.9002319
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.y
-      value: 1.0404727
+      value: 0.6054111
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.1245902
+      value: -0.07364987
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
-      value: -0.35963264
+      value: -0.544975
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction

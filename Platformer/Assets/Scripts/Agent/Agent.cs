@@ -30,7 +30,7 @@ public class Agent : MonoBehaviour, IHittable
     [field: SerializeField]
     public Collider2D TriggerCollider { get; private set; }
 
-    public float EnclosingCircleRadius { get; private set; }
+    public float EnclosingCircleRadius { get => MathUtility.GetEnclosingCircleRadius(TriggerCollider); }
     public Vector2 CenterPosition { get => TriggerCollider.bounds.center; }
 
     private RaycastHit2D[] castHits;
@@ -64,7 +64,6 @@ public class Agent : MonoBehaviour, IHittable
             ClimbSpeed = DefaultData.ClimbSpeed
         };
 
-        EnclosingCircleRadius = MathUtility.GetEnclosingCircleRadius(TriggerCollider);
         castHits = new RaycastHit2D[1];
         castFilter = new ContactFilter2D();
     }
@@ -127,5 +126,12 @@ public class Agent : MonoBehaviour, IHittable
     {
         castFilter.SetLayerMask(solidGeometryLayerMask);
         return TriggerCollider.Cast(direction, castFilter, castHits, distance) > 0;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(CenterPosition, MathUtility.GetEnclosingCircleRadius(collider));
     }
 }

@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
-  m_Name: SeekPlayerDetector
+  m_Name: BoomerangDetector
   m_EditorClassIdentifier: 
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 8, y: 0}
+  <Size>k__BackingField: {x: 9, y: 1}
+  <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
   <OriginOffset>k__BackingField: {x: 0, y: 0}
-  <DetectShapeType>k__BackingField: 2
+  detectShapeType: 1
   maxDetections: 1

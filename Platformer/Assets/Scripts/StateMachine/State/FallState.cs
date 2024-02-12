@@ -39,6 +39,6 @@ public class FallState : WalkState
 
     protected override void HandleExit()
     {
-        agent.AudioFeedback.PlaySound(SoundActionType.Land, agent.GroundDetector.CollisionLayerIndex);
+        if (agent.GroundDetector.Hit) agent.AudioFeedback.PlaySound(SoundActionType.Land, agent.GroundDetector.Hit.collider.gameObject.layer);
     }
 }

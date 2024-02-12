@@ -1,63 +1,55 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
-using static UnityEngine.UI.Image;
 
 [CreateAssetMenu(fileName = "OverlapDetector", menuName = "Vision/OverlapDetector")]
 public class OverlapDetector : VisionDetector
 {
-    [SerializeField]
-    public LayerMask BlockLayerMask { get; set; }
     public Collider2D[] Colliders { get; private set; }
+
+    private Func<Vector2, Vector2, CapsuleDirection2D, float, Collider2D[], LayerMask, int> overlap;
+
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Collider2D[], LayerMask, int> pointOverlap
+        = (origin, size, capsuleDirection, angle, colliders, layerMask)
+        => Physics2D.OverlapPointNonAlloc(origin, colliders, layerMask);
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Collider2D[], LayerMask, int> boxOverlap
+        = (origin, size, capsuleDirection, angle, colliders, layerMask)
+        => Physics2D.OverlapBoxNonAlloc(origin, size, angle, colliders, layerMask);
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Collider2D[], LayerMask, int> circleOverlap
+        = (origin, size, capsuleDirection, angle, colliders, layerMask)
+        => Physics2D.OverlapCircleNonAlloc(origin, size.x, colliders, layerMask);
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Collider2D[], LayerMask, int> capsuleOverlap
+        = (origin, size, capsuleDirection, angle, colliders, layerMask)
+        => Physics2D.OverlapCapsuleNonAlloc(origin, size, capsuleDirection, angle, colliders, layerMask);
+
 
     private void OnEnable()
     {
         Colliders = new Collider2D[maxDetections];
+
+        UpdateDetectFunction();
+    }
+
+    protected override void UpdateDetectFunction()
+    {
+        switch (DetectShapeType)
+        {
+            case ShapeType.Primitive:
+                overlap = pointOverlap;
+                break;
+            case ShapeType.Box:
+                overlap = boxOverlap;
+                break;
+            case ShapeType.Circle:
+                overlap = circleOverlap;
+                break;
+            case ShapeType.Capsule:
+                overlap = capsuleOverlap;
+                break;
+        }
     }
 
     public override int Detect(Vector2 origin)
-    {
-        origin += OriginOffset;
-        DetectionCount = 0;
-        switch (DetectShapeType)
-        {
-            case ShapeType.Box:
-                DetectionCount = Physics2D.OverlapBoxNonAlloc(origin, Size, Angle, Colliders, DetectLayerMask);
-                break;
-            case ShapeType.Circle:
-                DetectionCount = Physics2D.OverlapCircleNonAlloc(origin, Size.x, Colliders, DetectLayerMask);
-                break;
-        }
-
-        if (BlockLayerMask != 0)
-        {
-            return FilterBlockedColliders(origin);
-        }
-
-        return DetectionCount;
-    }
-
-    public int FilterBlockedColliders(Vector2 origin)
-    {
-        for (int i = 0; i < DetectionCount; i++)
-        {
-            Vector2 directionToTarget = (Vector2)Colliders[i].bounds.center - origin;
-            float distance = directionToTarget.magnitude;
-            if (distance == 0) break;
-            RaycastHit2D hit = Physics2D.Raycast(origin, directionToTarget/distance, Size.x, BlockLayerMask | DetectLayerMask);
-
-            if (hit.collider == null || !Utility.CheckLayer(hit.collider.gameObject.layer, DetectLayerMask))
-            {
-                Colliders[i] = null;
-                DetectionCount--;
-            }
-        }
-
-        return DetectionCount;
-    }
+        => overlap(origin + OriginOffset, Size, CapsuleDirection, Angle, Colliders, DetectLayerMask);
 
     public override void DrawGizmos(Vector2 origin)
     {

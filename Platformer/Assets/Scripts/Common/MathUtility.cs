@@ -20,7 +20,43 @@ public static class MathUtility
         return Mathf.Clamp(Vector2.Dot(u, n), 0, segmentLength);
     }
 
-    public static Vector2? FindLineIntersection(Vector2 a, Vector2 u, Vector2 b, Vector2 v)
+    public static int FindLineCircleIntersections(Vector2 point, Vector2 direction, Vector2 center, float radius, Vector2[] intersections)
+    {
+        float a = direction.x * direction.x + direction.y * direction.y;
+        float b = 2 * (point.x * direction.x - direction.x * center.x + point.y * direction.y - direction.y * center.y);
+        float c = point.x * point.x + point.y * point.y + center.x * center.x + center.y * center.y - radius * radius - 2 * (point.x * center.x + point.y * center.y);
+        float d = b * b - 4 * a * c;
+
+        if (d < 0) return 0;
+        else if (Mathf.Abs(d) < Mathf.Epsilon && intersections.Length >= 1)
+        {
+            float t = -b/(2 * a);
+            intersections[0] = point + direction * t;
+            return 1;
+        }
+        else if (intersections.Length >= 2)
+        {
+            float root = Mathf.Sqrt(d);
+            float t1 = (-b + root) / (2 * a);
+            float t2 = (-b - root) / (2 * a);
+
+            if (t1 < t2)
+            {
+                intersections[0] = point + direction * t1;
+                intersections[1] = point + direction * t2;
+            }
+            else
+            {
+                intersections[1] = point + direction * t1;
+                intersections[0] = point + direction * t2;
+            }
+            return 2;
+        }
+
+        throw new ArgumentException("The array is too small to hold all intersections.", nameof(intersections));
+    }
+
+    public static Vector2? FindLineLineIntersection(Vector2 a, Vector2 u, Vector2 b, Vector2 v)
     {
         float t;
         float denominator = u.x * v.y - u.y * v.x;
@@ -36,31 +72,15 @@ public static class MathUtility
 
     public static float GetEnclosingCircleRadius(Collider2D collider)
     {
-        if (collider is CapsuleCollider2D capsuleCollider)
+        if (collider is CircleCollider2D circleCollider) return circleCollider.radius;
+        else if (collider is CapsuleCollider2D capsuleCollider)
         {
-            Vector2 boxSize;
-            if (capsuleCollider.direction == CapsuleDirection2D.Vertical)
-            {
-                boxSize = new Vector2(2 * capsuleCollider.size.x, capsuleCollider.size.y);
-            }
-            else
-            {
-                boxSize = new Vector2(capsuleCollider.size.x, 2 * capsuleCollider.size.y);
-            }
-            float diagonal = Mathf.Sqrt(boxSize.x * boxSize.x + boxSize.y * boxSize.y);
-            return diagonal / 2;
-        }
-        else if (collider is BoxCollider2D boxCollider)
-        {
-            float diagonal = Mathf.Sqrt(boxCollider.size.x * boxCollider.size.x + boxCollider.size.y * boxCollider.size.y);
-            return diagonal / 2;
-        }
-        else if (collider is CircleCollider2D circleCollider)
-        {
-            return circleCollider.radius;
+            if (capsuleCollider.direction == CapsuleDirection2D.Vertical) return capsuleCollider.size.y / 2;
+            return capsuleCollider.size.x / 2;
         }
 
-        throw new ArgumentException($"Collider of {collider.GetType()} type is not allowed for circle approximation.");
+        float diagonal = Mathf.Sqrt(collider.bounds.size.x * collider.bounds.size.x + collider.bounds.size.y * collider.bounds.size.y);
+        return diagonal / 2;
     }
 
     public static Vector2 PolarCoordinatesToVector2(float angleDeg, float magnitude)
@@ -119,5 +139,19 @@ public static class MathUtility
         }
 
         return false;
+    }
+
+    public static Vector2[] GetDirectionsInCircle(int resolution)
+    {
+        float angleStep = 360 / resolution;
+        float angle = 0;
+        Vector2[] directions = new Vector2[resolution];
+        for (int i = 0; i < resolution; i++)
+        {
+            directions[i] = Quaternion.Euler(0, 0, angle) * Vector2.right;
+            angle += angleStep;
+        }
+
+        return directions;
     }
 }

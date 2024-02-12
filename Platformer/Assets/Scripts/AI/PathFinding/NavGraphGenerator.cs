@@ -9,7 +9,9 @@ using UnityEngine;
 public class NavGraphGenerator : MonoBehaviour
 {
     [SerializeField]
-    private float expansionMargin = 0.001f;
+    private float collisionAvoidanceMargin = 0.1f;
+    [SerializeField]
+    private float maxAllowedRadius = 1f;
     [SerializeField]
     private Sprite nodeSprite;
     [SerializeField]
@@ -53,8 +55,8 @@ public class NavGraphGenerator : MonoBehaviour
                     Vector2 normalA = edgeA.Perpendicular2().normalized;
                     Vector2 normalB = edgeB.Perpendicular1().normalized;
 
-                    Vector2 expansionVector = (normalA + normalB).normalized;
-                    Vector2 nodePosition = pathPoints[j] + expansionVector * expansionMargin;
+                    Vector2 expansionVector = normalA + normalB;
+                    Vector2 nodePosition = pathPoints[j] + expansionVector * collisionAvoidanceMargin;
 
                     if (traversableZones.Any(z => z.OverlapPoint(nodePosition)) && !solidColliders.Any(c => MathUtility.IsPointInsideCompositeCollider(nodePosition, c)))
                     {
@@ -86,30 +88,31 @@ public class NavGraphGenerator : MonoBehaviour
     {
         int edgeCount = 0;
 
-        foreach (NavGraphNode node in navGraph.Nodes)
+        for (int i = 0; i < navGraph.Nodes.Count; i++)
         {
-            foreach (NavGraphNode neighbor in navGraph.Nodes)
+            for (int j = i + 1; j < navGraph.Nodes.Count; j++)
             {
-                if (node == neighbor) continue;
+                Vector2 expandedNode = navGraph.Nodes[i].GetExpandedPosition(maxAllowedRadius);
+                Vector2 expandedNeighbor = navGraph.Nodes[j].GetExpandedPosition(maxAllowedRadius);
+                Vector2 neighborVector = expandedNeighbor - expandedNode;
+                RaycastHit2D hit = Physics2D.CircleCast(expandedNode, maxAllowedRadius, neighborVector, neighborVector.magnitude, navGraph.SolidGeometryLayerMask);
 
-                Vector2 direction = neighbor.transform.position - node.transform.position;
-                RaycastHit2D hit = Physics2D.Raycast(node.transform.position, direction.normalized, direction.magnitude, navGraph.SolidGeometryLayerMask);
-
-                if (hit.collider == null)
+                if (!hit)
                 {
-                    node.Neighbors.Add(neighbor);
+                    navGraph.Nodes[i].Neighbors.Add(navGraph.Nodes[j]);
+                    navGraph.Nodes[j].Neighbors.Add(navGraph.Nodes[i]);
                     edgeCount++;
                 }
             }
         }
 
-        Debug.Log($"Number of generated edges is {edgeCount / 2}.");
+        Debug.Log($"Number of generated edges is {edgeCount}.");
     }
 
     public void DeleteNodes()
     {
         navGraph.Nodes.Clear();
-        navGraph.TestPath = null;
+        navGraph.TestPath = new NavPath();
         DestroyImmediate(nodeContainer);
     }
 
@@ -160,7 +163,7 @@ public class NavGraphGenerator : MonoBehaviour
         {
             for (int j = i + 1; j < navGraph.Nodes.Count; j++)
             {
-                if (Vector3.Distance(navGraph.Nodes[i].transform.position, navGraph.Nodes[j].transform.position) <= minNodeDistance)
+                if (Vector3.Distance(navGraph.Nodes[i].GetExpandedPosition(-collisionAvoidanceMargin), navGraph.Nodes[j].GetExpandedPosition(-collisionAvoidanceMargin)) <= minNodeDistance)
                 {
                     redundantNodes.Add(navGraph.Nodes[i]);
                     redundantNodes.Add(navGraph.Nodes[j]);
@@ -192,7 +195,7 @@ public class NavGraphGenerator : MonoBehaviour
             navGraph.Nodes.Remove(node);
             DestroyImmediate(node.gameObject);
 
-            if (navGraph.TestPath != null && navGraph.TestPath.Nodes.Contains(node)) navGraph.TestPath = null;
+            if (navGraph.TestPath != null && navGraph.TestPath.Nodes.Contains(node)) navGraph.TestPath = new NavPath();
         }
 
         AssignIndexes();

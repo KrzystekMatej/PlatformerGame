@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectCollider: {fileID: 7363741092666616261}
-  colliderMask:
+  <CollisionLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 574528
   boxCastXOffset: -0
@@ -661,7 +661,7 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
-  hitMask:
+  HitMask:
     serializedVersion: 2
     m_Bits: 0
 --- !u!114 &7363741092903229671
@@ -888,7 +888,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  DefaultData: {fileID: 11400000, guid: 2db2e287c7486e945a78aa07bdc916a3, type: 2}
+  <DefaultData>k__BackingField: {fileID: 0}
   <PhysicsCollider>k__BackingField: {fileID: 7363741092666616261}
   <TriggerCollider>k__BackingField: {fileID: 2774391687644902663}
 --- !u!114 &1098224640033834070

@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
+using static UnityEngine.UI.Image;
 
 [CreateAssetMenu(fileName = "CastDetector", menuName = "Vision/CastDetector")]
 public class CastDetector : VisionDetector
@@ -12,32 +14,48 @@ public class CastDetector : VisionDetector
     [field: SerializeField]
     public Vector2 Direction { get; set; }
     public RaycastHit2D[] Hits { get; private set; }
+    private Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> cast;
+
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> rayCast
+        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+        => Physics2D.RaycastNonAlloc(origin, direction, hits, distance, layerMask);
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> boxCast
+        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+        => Physics2D.BoxCastNonAlloc(origin, size, angle, direction, hits, distance, layerMask);
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> circleCast
+        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+        => Physics2D.CircleCastNonAlloc(origin, size.x, direction, hits, distance, layerMask);
+    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> capsuleCast
+        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+        => Physics2D.CapsuleCastNonAlloc(origin, size, capsuleDirection, angle, direction, hits, distance, layerMask);
 
     private void OnEnable()
     {
         Hits = new RaycastHit2D[maxDetections];
         Direction = Direction.normalized;
+        UpdateDetectFunction();
     }
 
     public override int Detect(Vector2 origin)
+        => cast(origin + OriginOffset, Size, CapsuleDirection, Angle, Direction, Hits, Distance, DetectLayerMask);
+
+    protected override void UpdateDetectFunction()
     {
-        origin += OriginOffset;
         switch (DetectShapeType)
         {
-            case ShapeType.Ray:
-                DetectionCount = Physics2D.RaycastNonAlloc(origin, Direction, Hits, Distance, DetectLayerMask);
+            case ShapeType.Primitive:
+                cast = rayCast;
                 break;
             case ShapeType.Box:
-                DetectionCount = Physics2D.BoxCastNonAlloc(origin, Size, Angle, Direction, Hits, Distance, DetectLayerMask);
+                cast = boxCast;
                 break;
             case ShapeType.Circle:
-                DetectionCount = Physics2D.CircleCastNonAlloc(origin, Size.x, Direction, Hits, Distance, DetectLayerMask);
+                cast = circleCast;
                 break;
-            default:
-                DetectionCount = 0;
+            case ShapeType.Capsule:
+                cast = capsuleCast;
                 break;
         }
-        return DetectionCount;
     }
 
     public override void DrawGizmos(Vector2 origin)
@@ -46,7 +64,7 @@ public class CastDetector : VisionDetector
         origin += OriginOffset;
         switch (DetectShapeType)
         {
-            case ShapeType.Ray:
+            case ShapeType.Primitive:
                 Vector2 end = origin + Direction * Distance;
                 Gizmos.DrawLine(origin, end);
                 return;
