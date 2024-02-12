@@ -12,21 +12,21 @@ TagManager:
   - Player
   - Water
   - UI
-  - Grass
   - CameraConfiner
   - Climbable
-  - Hittable
   - Platform
   - Checkpoint
   - Collectable
   - Enemy
-  - Rock
-  - Metal
   - Trap
   - Weapon
-  - AgentPhysicsCollider
   - Obstacle
-  - NavGraph
+  - WalkingAgentCollider
+  - FlyingAgentCollider
+  - SolidGeometry
+  - 
+  - 
+  - 
   - 
   - 
   - 

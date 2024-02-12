@@ -22,7 +22,7 @@ public class JumpState : WalkState
     protected override void HandleEnter()
     {
         agent.Animator.PlayByType(AnimationType.Jump);
-        if (agent.GroundDetector.Hit) agent.AudioFeedback.PlaySound(SoundActionType.Jump, agent.GroundDetector.Hit.collider.gameObject.layer);
+        agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(SoundActionType.Jump));
         agent.RigidBody.velocity = new Vector2(agent.RigidBody.velocity.x, agent.InstanceData.JumpForce);
     }
 

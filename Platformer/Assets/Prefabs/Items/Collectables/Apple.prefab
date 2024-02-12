@@ -151,6 +151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PointCollectable
       objectReference: {fileID: 0}
+    - target: {fileID: 7794785749717558356, guid: 2a1c946b7b3c57841b51294c5e79870c, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a1c946b7b3c57841b51294c5e79870c, type: 3}
 --- !u!4 &4859133086843385407 stripped

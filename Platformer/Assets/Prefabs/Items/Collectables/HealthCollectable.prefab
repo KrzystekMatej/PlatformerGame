@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5489649921723222100}
   - component: {fileID: 5489649921723222099}
   - component: {fileID: 5489649921723222098}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: HealthCollectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,8 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 8
-  <Triggered>k__BackingField: 0
+  triggerTag: 
+  <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:
       m_Calls:

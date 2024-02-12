@@ -19,7 +19,7 @@ public class Agent : MonoBehaviour, IHittable
     public AudioFeedback AudioFeedback { get; private set; }
     public WeaponManager WeaponManager { get; private set; }
     public OrientationController OrientationController { get; private set; }
-    public CollisionDetector GroundDetector { get; private set; }
+    public GroundDetector GroundDetector { get; private set; }
     public TriggerDetector ClimbDetector { get; private set; }
     public HealthManager HealthManager { get; private set; }
     public PointManager PointManager { get; private set; }
@@ -42,7 +42,7 @@ public class Agent : MonoBehaviour, IHittable
         RigidBody = GetComponent<Rigidbody2D>();
         Animator = GetComponentInChildren<AgentAnimator>();
         OrientationController = GetComponentInChildren<OrientationController>();
-        GroundDetector = GetComponentInChildren<CollisionDetector>();
+        GroundDetector = GetComponentInChildren<GroundDetector>();
         ClimbDetector = GetComponent<TriggerDetector>();
         AudioFeedback = GetComponentInChildren<AudioFeedback>();
         WeaponManager = GetComponentInChildren<WeaponManager>();

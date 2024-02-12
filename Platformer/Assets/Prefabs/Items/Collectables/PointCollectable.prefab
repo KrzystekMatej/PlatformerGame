@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4519950811140137824}
   - component: {fileID: 4623613160882074119}
   - component: {fileID: 3448892990828183390}
-  m_Layer: 12
+  m_Layer: 10
   m_Name: PointCollectable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,8 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 8
-  <Triggered>k__BackingField: 0
+  triggerTag: 
+  <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:
       m_Calls:

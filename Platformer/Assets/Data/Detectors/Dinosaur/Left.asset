@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   <Size>k__BackingField: {x: 0, y: 0}
+  <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 640072
+    m_Bits: 655624
   <OriginOffset>k__BackingField: {x: 0, y: 0}
-  <DetectShapeType>k__BackingField: 0
+  detectShapeType: 0
   maxDetections: 1
   <Distance>k__BackingField: 5.5
   <Direction>k__BackingField: {x: -1, y: 0}

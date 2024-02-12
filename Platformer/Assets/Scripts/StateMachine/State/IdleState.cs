@@ -22,6 +22,6 @@ public class IdleState : State
     protected override void HandleEnter()
     {
         agent.Animator.PlayByType(AnimationType.Idle);
-        agent.RigidBody.velocity = agent.GroundDetector.CollisionDetected ? Vector2.zero : agent.RigidBody.velocity;
+        agent.RigidBody.velocity = agent.GroundDetector.Detected ? Vector2.zero : agent.RigidBody.velocity;
     }
 }

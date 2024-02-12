@@ -25,7 +25,7 @@ public class NavGraphTracker : MonoBehaviour
     {
         while (true)
         {
-            Quantizer.QuantizePositionToNode(agent.CenterPosition);
+            Quantizer.QuantizePosition(agent.CenterPosition);
             yield return new WaitForSeconds(quantizationUpdateInterval);
         }
     }

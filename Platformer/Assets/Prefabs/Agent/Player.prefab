@@ -1104,7 +1104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: HitMask.m_Bits
-      value: 532480
+      value: 526336
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hitMask.m_Bits
@@ -1126,6 +1126,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 52a8a9480403f914db4355634c7662c7, type: 2}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: <CollisionLayerMask>k__BackingField.m_Bits
+      value: 655616
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: DefaultData
       value: 
@@ -1427,6 +1431,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
   m_PrefabInstance: {fileID: 1982475228897019070}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6215835673700825425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057417481030304523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quantizationUpdateInterval: 0.1
+  <Quantizer>k__BackingField:
+    <NavGraph>k__BackingField: {fileID: 0}
+    <CoherenceEnabled>k__BackingField: 1
 --- !u!114 &7184499124817944392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1468,23 +1488,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.5
   disableAttacking: 1
---- !u!114 &6215835673700825425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057417481030304523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  quantizationUpdateInterval: 0.1
-  <Quantizer>k__BackingField:
-    <NavGraph>k__BackingField: {fileID: 0}
-    <CoherenceEnabled>k__BackingField: 1
-    <SolidGeometryDetector>k__BackingField: {fileID: 11400000, guid: d7edfda2b7e18fc45a2023b5e0604493, type: 2}
 --- !u!114 &9057417481030304527 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

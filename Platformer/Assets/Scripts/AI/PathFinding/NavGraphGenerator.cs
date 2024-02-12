@@ -34,8 +34,6 @@ public class NavGraphGenerator : MonoBehaviour
         nodeContainer = new GameObject("Nodes");
         nodeContainer.transform.parent = navGraph.transform;
 
-        int graphLayer = LayerMask.NameToLayer("NavGraph");
-
         foreach (CompositeCollider2D collider in solidColliders)
         {
             string layerName = LayerMask.LayerToName(collider.gameObject.layer);
@@ -62,7 +60,6 @@ public class NavGraphGenerator : MonoBehaviour
                     {
                         GameObject nodeObject = new GameObject();
                         nodeObject.transform.parent = nodeContainer.transform;
-                        nodeObject.layer = graphLayer;
 
                         SpriteRenderer renderer = nodeObject.AddComponent<SpriteRenderer>();
                         renderer.sprite = nodeSprite;

@@ -39,7 +39,7 @@ public class PlanningDecomposer : Decomposer
         }
 
         NavGraphNode goalNode = QuantizeGoal(goal);
-        NavGraphNode agentNode = quantizer.QuantizePositionToNode(agent.CenterPosition, goalNode);
+        NavGraphNode agentNode = quantizer.QuantizePosition(agent.CenterPosition, goalNode);
         navPath = CalculateNavPath(agentNode, goalNode);
         if (navPath == null) return new SteeringGoal();
 
@@ -83,7 +83,7 @@ public class PlanningDecomposer : Decomposer
             if (goalTracker != null) return goalTracker.Quantizer.CoherenceNode;
         }
         quantizer.CoherenceEnabled = false;
-        NavGraphNode result = quantizer.QuantizePositionToNode(goal.Position);
+        NavGraphNode result = quantizer.QuantizePosition(goal.Position);
         quantizer.CoherenceEnabled = true;
         return result;
     }

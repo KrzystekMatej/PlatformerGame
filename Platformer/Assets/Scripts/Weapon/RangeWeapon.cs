@@ -21,7 +21,7 @@ public class RangeWeapon : AgentWeapon
 
     public override bool IsUseable(Agent agent)
     {
-        return agent.GroundDetector.CollisionDetected || !IsGroundWeapon;
+        return agent.GroundDetector.Detected || !IsGroundWeapon;
     }
 
     public override void DrawGizmos(Vector2 origin, Vector2 direction)

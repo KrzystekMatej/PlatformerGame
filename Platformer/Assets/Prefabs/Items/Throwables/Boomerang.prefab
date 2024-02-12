@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 794249645900471099}
   - component: {fileID: -757481803613661382}
   - component: {fileID: 36154450269475398}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: Boomerang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 2048
   triggerTag: 
   <TriggerCounter>k__BackingField: 0
   OnEnter:

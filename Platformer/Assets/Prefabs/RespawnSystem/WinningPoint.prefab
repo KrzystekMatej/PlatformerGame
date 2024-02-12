@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5967776503819513085}
   - component: {fileID: 6524653372160195466}
   - component: {fileID: 2219192688840938142}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: WinningPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,8 @@ MonoBehaviour:
   triggerMask:
     serializedVersion: 2
     m_Bits: 8
-  <Triggered>k__BackingField: 0
+  triggerTag: 
+  <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:
       m_Calls:

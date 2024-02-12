@@ -56,7 +56,9 @@ public class Steering : MonoBehaviour
         {
             if (pipelineName == currentPipeline.PipelineName) return false;
             currentPipeline.gameObject.SetActive(false);
+#if UNITY_EDITOR
             Debug.Log("Deactivated");
+#endif
         }
         else if(pipelineName == null) return false;
 
@@ -64,7 +66,9 @@ public class Steering : MonoBehaviour
         {
             currentPipeline = pipelineTable[pipelineName];
             currentPipeline.gameObject.SetActive(true);
+#if UNITY_EDITOR
             Debug.Log("Activated");
+#endif
         }
         else currentPipeline = null;
 

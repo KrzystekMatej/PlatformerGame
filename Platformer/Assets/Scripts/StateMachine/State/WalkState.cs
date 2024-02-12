@@ -30,7 +30,7 @@ public class WalkState : State
 
     private void PlayStepSound()
     {
-        if (agent.GroundDetector.Hit) agent.AudioFeedback.PlaySound(SoundActionType.Step, agent.GroundDetector.Hit.collider.gameObject.layer);
+        agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(SoundActionType.Step));
     }
 
     public override void HandleUpdate()

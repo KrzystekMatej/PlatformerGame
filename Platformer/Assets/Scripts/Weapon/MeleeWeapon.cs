@@ -26,7 +26,7 @@ public class MeleeWeapon : AgentWeapon
 
     public override bool IsUseable(Agent agent)
     {
-        return agent.GroundDetector.CollisionDetected || !IsGroundWeapon;
+        return agent.GroundDetector.Detected || !IsGroundWeapon;
     }
 
     

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7433307234973794105}
   - component: {fileID: 7018045401786011267}
   - component: {fileID: 7639093333086872763}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 7363741092666616261}
   - component: {fileID: 7363741092666616262}
   - component: {fileID: 7363741092666616263}
-  m_Layer: 18
+  m_Layer: 15
   m_Name: Collider
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ MonoBehaviour:
   objectCollider: {fileID: 7363741092666616261}
   <CollisionLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 574528
+    m_Bits: 655616
   boxCastXOffset: -0
   boxCastYOffset: -0.47
   boxCastWidth: 0.705
@@ -663,7 +663,7 @@ MonoBehaviour:
       m_Calls: []
   HitMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2056
 --- !u!114 &7363741092903229671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,7 +789,7 @@ GameObject:
   - component: {fileID: 7363741092985079729}
   - component: {fileID: 1098224640033834070}
   - component: {fileID: 3521928051518276039}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Agent
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -927,7 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 128
   triggerTag: 
   <TriggerCounter>k__BackingField: 0
   OnEnter:

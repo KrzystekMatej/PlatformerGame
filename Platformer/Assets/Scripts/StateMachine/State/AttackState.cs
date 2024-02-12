@@ -26,7 +26,7 @@ public class AttackState : State
     {
         agent.Animator.PlayByType(AnimationType.Attack);
         agent.WeaponManager.SetWeaponVisibility(true);
-        if (agent.GroundDetector.CollisionDetected)
+        if (agent.GroundDetector.Detected)
         {
             agent.RigidBody.velocity = Vector3.zero;
         }

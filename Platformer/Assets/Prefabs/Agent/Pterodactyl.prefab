@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 13254736349972360}
   - component: {fileID: 3093041901512842967}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Steering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 377242489695348582}
   - component: {fileID: 8018527025378207147}
   - component: {fileID: 2245584684669175667}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: SteeringPipeline 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,6 @@ MonoBehaviour:
   quantizer:
     <NavGraph>k__BackingField: {fileID: 0}
     <CoherenceEnabled>k__BackingField: 1
-    <SolidGeometryDetector>k__BackingField: {fileID: 11400000, guid: 2b8b21784b5edcc4e931ae54c1041da5, type: 2}
 --- !u!1 &3079820557302413007
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4682323907704305010}
   - component: {fileID: 1235885468742254910}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2802224522686023313}
   - component: {fileID: 661582681091697858}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 712751985054126638}
   - component: {fileID: 4544182348190097048}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DecisionMaking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 415090757186357842, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 17
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
@@ -496,7 +495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092903229673, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
@@ -576,7 +575,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_TagString

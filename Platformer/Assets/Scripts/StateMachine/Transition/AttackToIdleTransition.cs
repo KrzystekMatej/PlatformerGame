@@ -11,6 +11,6 @@ public class AttackToIdleTransition : InterruptTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return agent.GroundDetector.CollisionDetected;
+        return agent.GroundDetector.Detected;
     }
 }

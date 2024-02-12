@@ -8,6 +8,6 @@ public class GenericToJumpTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return agent.InputController.InputData.Jump == InputState.Pressed && agent.GroundDetector.CollisionDetected;
+        return agent.InputController.InputData.Jump == InputState.Pressed && agent.GroundDetector.Detected;
     }
 }

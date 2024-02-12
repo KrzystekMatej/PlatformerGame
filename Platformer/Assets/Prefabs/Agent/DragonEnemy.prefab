@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8024932112311095339}
   - component: {fileID: 4504165587787064423}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Vision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 255006811333691554}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3426019859473785553}
   - component: {fileID: 91778178657419374}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Steering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 2299227263688197828}
   - component: {fileID: 7325101189958284097}
   - component: {fileID: 6762963787823031888}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: SteeringPipeline 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,10 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: []
   path:
+    predictTime: 0.1
     offset: 2
     radius: 0
     isCircular: 1
-  predictTime: 0.1
   isDynamic: 1
 --- !u!114 &6762963787823031888
 MonoBehaviour:
@@ -210,7 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8016354232200348499}
   - component: {fileID: 2574111137823132897}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: DecisionMaking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 668570889393267656}
   - component: {fileID: 2777265237074659739}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: AI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 415090757186357842, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 17
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
@@ -501,7 +501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092903229673, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
@@ -581,7 +581,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_TagString

@@ -8,6 +8,6 @@ public class FallToIdleTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return agent.GroundDetector.CollisionDetected && agent.InputController.InputData.MovementVector.x == 0;
+        return agent.GroundDetector.Detected && agent.InputController.InputData.MovementVector.x == 0;
     }
 }
