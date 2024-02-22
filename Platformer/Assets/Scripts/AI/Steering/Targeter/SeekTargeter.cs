@@ -5,8 +5,6 @@ using UnityEngine;
 public class SeekTargeter : Targeter
 {
     [SerializeField]
-    private float arriveRadius;
-    [SerializeField]
     private bool isFleeing;
     [SerializeField]
     private bool isPositionCached;
@@ -19,26 +17,19 @@ public class SeekTargeter : Targeter
         GoalPosition = GetComponentInParent<AIManager>().Agent.CenterPosition;
     }
 
-    public override SteeringGoal GetGoal(Agent agent)
+    public override bool TryUpdateGoal(Agent agent, SteeringGoal goal)
     {
-        SteeringGoal goal = new SteeringGoal();
+        goal.Position = !isFleeing ? GoalPosition : agent.CenterPosition + (agent.CenterPosition - GoalPosition);
+        goal.Owner = GoalOwner;
 
-        Vector2 goalPosition = !isFleeing ? GoalPosition : agent.CenterPosition + (agent.CenterPosition - GoalPosition);
-
-        if (Vector2.Distance(agent.CenterPosition, GoalPosition) > arriveRadius)
-        {
-            goal.Position = goalPosition;
-            goal.Owner = GoalOwner;
-        }
-
-        GoalPosition = isPositionCached ? goalPosition : agent.CenterPosition;
-        return goal;
+        GoalPosition = isPositionCached ? goal.Position : agent.CenterPosition;
+        return true;
     }
 
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(GoalPosition, arriveRadius);
+        Gizmos.DrawWireSphere(GoalPosition, 0.1f);
     }
 }

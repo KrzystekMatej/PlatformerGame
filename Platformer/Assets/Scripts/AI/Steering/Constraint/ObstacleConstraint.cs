@@ -43,6 +43,7 @@ public class ObstacleConstraint : Constraint
     {
         RaycastHit2D closestHit = GetClosestHit();
         goal.Position = GetAvoidanceTarget(pointPath, closestHit);
+
         return goal;
     }
 

@@ -10,9 +10,13 @@ public class SteeringPipeline : MonoBehaviour
 {
     [field: SerializeField]
     public string PipelineName { get; private set; }
+    [SerializeField]
     private Targeter[] targeters;
+    [SerializeField]
     private Decomposer[] decomposers;
+    [SerializeField]
     private Constraint[] constraints;
+    [SerializeField]
     private Actuator actuator;
     [SerializeField]
     private SteeringPipeline deadlock;
@@ -24,12 +28,6 @@ public class SteeringPipeline : MonoBehaviour
 
     private void Awake()
     {
-        targeters = GetComponents<Targeter>();
-        decomposers = GetComponents<Decomposer>();
-        constraints = GetComponents<Constraint>();
-        actuator = GetComponent<Actuator>();
-
-
         constraintSteps = constraints.Length + 1;
     }
 
@@ -53,16 +51,16 @@ public class SteeringPipeline : MonoBehaviour
         blackboard.DataTable[PipelineName + actuator.GetType().Name] = actuator;
     }
 
-    public Vector2 GetSteering(Agent agent)
+    public Vector2? GetSteering(Agent agent)
     {
         SteeringGoal goal = new SteeringGoal();
 
         foreach (Targeter targeter in targeters)
         {
-            goal.UpdateChannels(targeter.GetGoal(agent));
+            if (!targeter.TryUpdateGoal(agent, goal)) return null;
         }
 
-        if (goal.HasNothing()) return Vector2.zero;
+        if (goal.HasNothing()) return GetDeadlockSteering(agent);
 
         foreach (Decomposer decomposer in decomposers)
         {
@@ -89,12 +87,19 @@ public class SteeringPipeline : MonoBehaviour
 #endif
             if (validPath)
             {
-                return actuator.GetSteering(agent, path, goal);
+                Vector2? steeringForce = actuator.GetSteering(agent, path, goal);
+                if (steeringForce != null) return steeringForce;
+                else break;
             }
 
         }
 
-        return deadlock != null ? deadlock.GetSteering(agent) : Vector2.zero;
+        return GetDeadlockSteering(agent);
+    }
+
+    private Vector2? GetDeadlockSteering(Agent agent)
+    {
+        return deadlock != null ? deadlock.GetSteering(agent) : null;
     }
 
     private void OnDrawGizmosSelected()

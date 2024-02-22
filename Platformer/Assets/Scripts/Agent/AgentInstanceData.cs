@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct AgentInstanceData
+public class AgentInstanceData
 {
     public int Health;
     public Vector2 Acceleration;

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TheKiwiCoder;
 using UnityEngine;
 
@@ -28,6 +29,11 @@ public class Steering : MonoBehaviour
         }
     }
 
+    public SteeringPipeline GetPipeline(string pipelineName)
+    {
+        return pipelineTable[pipelineName];
+    }
+
     public void BindBlackboard(Blackboard blackboard)
     {
         foreach (SteeringPipeline pipeline in pipelineTable.Values)
@@ -39,32 +45,33 @@ public class Steering : MonoBehaviour
 
     public void ApplySteering(Agent agent, AIInputController inputController)
     {
-        Vector2 steeringForce;
-        if (currentPipeline != null)
-        {
-            steeringForce = currentPipeline.GetSteering(agent);
-            if (steeringForce == Vector2.zero) UpdateCurrentPipeline(null);
-        }
-        else steeringForce = Vector2.zero;
+        if (currentPipeline == null) return;
 
-        inputController.SetMovementVector(steeringForce);
+        Vector2? steeringForce = currentPipeline.GetSteering(agent);
+
+        if (steeringForce == null)
+        {
+            UpdateCurrentPipeline(null);
+            inputController.StopMoving(agent.RigidBody.velocity);
+        }
+        else inputController.SetSteeringForce(steeringForce.Value);
     }
 
-    public bool UpdateCurrentPipeline(string pipelineName)
+    public bool UpdateCurrentPipeline(SteeringPipeline newPipeline)
     {
         if (currentPipeline != null)
         {
-            if (pipelineName == currentPipeline.PipelineName) return false;
+            if (newPipeline == currentPipeline) return false;
             currentPipeline.gameObject.SetActive(false);
 #if UNITY_EDITOR
             Debug.Log("Deactivated");
 #endif
         }
-        else if(pipelineName == null) return false;
+        else if(newPipeline == null) return false;
 
-        if (pipelineName != null)
+        if (newPipeline != null)
         {
-            currentPipeline = pipelineTable[pipelineName];
+            currentPipeline = newPipeline;
             currentPipeline.gameObject.SetActive(true);
 #if UNITY_EDITOR
             Debug.Log("Activated");

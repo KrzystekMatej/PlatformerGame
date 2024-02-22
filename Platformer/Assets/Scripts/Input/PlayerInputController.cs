@@ -16,7 +16,7 @@ public class PlayerInputController : InputController
     {
         if (Time.timeScale > 0)
         {
-            inputData.MovementVector = GetMovementVector();
+            inputData.SteeringForce = GetSteeringForce();
             inputData.Jump = GetInputState(jumpKey);
             inputData.Attack = GetInputState(attackKey);
             inputData.WeaponSwap = GetInputState(weaponSwapKey);
@@ -50,10 +50,16 @@ public class PlayerInputController : InputController
         return state;
     }
 
-    private Vector2 GetMovementVector()
+    private Vector2 GetSteeringForce()
     {
-        //return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); - for stop if both keys are down
-        return new Vector2(GetMovementVectorComponent(rightKey, leftKey, inputData.MovementVector.x), GetMovementVectorComponent(upKey, downKey, inputData.MovementVector.y));
+        //return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * agent.InstanceData.MaxForce; - for stop if both keys are down
+        Vector2 currentInput = MathUtility.GetSignedVector(inputData.SteeringForce);
+        Vector2 newInput = new Vector2(GetMovementVectorComponent(rightKey, leftKey, currentInput.x), GetMovementVectorComponent(upKey, downKey, currentInput.y));
+
+        DecelerationFlags.x = DecelerationFlags.x || (currentInput.x != 0 && newInput.x == 0);
+        DecelerationFlags.y = DecelerationFlags.y || (currentInput.y != 0 && newInput.y == 0);
+
+        return newInput.normalized * instanceData.MaxForce;
     }
 
     //for last key priority

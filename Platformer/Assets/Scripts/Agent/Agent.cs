@@ -80,7 +80,7 @@ public class Agent : MonoBehaviour, IHittable
         {
             WeaponManager.SwapWeapon();
         }
-        OrientationController.SetAgentOrientation(InputController.InputData.MovementVector);
+        OrientationController.SetAgentOrientation(RigidBody.velocity);
         StateMachine.PerformStateUpdate(this);
     }
 

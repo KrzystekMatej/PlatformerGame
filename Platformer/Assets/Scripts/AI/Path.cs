@@ -236,6 +236,11 @@ public class Path
         }
     }
 
+    public bool ReachedEnd(Agent agent, Vector2 goal)
+    {
+        return !isCircular && goal == Points[Points.Count - 1] && Vector2.Distance(agent.CenterPosition, goal) <= agent.EnclosingCircleRadius;
+    }
+
     public void DrawGizmos()
     {
         if (Points.Count < 2) return;

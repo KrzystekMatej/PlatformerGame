@@ -9,6 +9,6 @@ public class GenericToClimbTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return Mathf.Abs(agent.InputController.InputData.MovementVector.y) > 0 && agent.ClimbDetector.TriggerCounter > 0;
+        return Mathf.Abs(agent.InputController.InputData.SteeringForce.y) > 0 && agent.ClimbDetector.TriggerCounter > 0;
     }
 }

@@ -70,6 +70,19 @@ public static class MathUtility
         return a + t * u;
     }
 
+    public static float GetRandomBinomial()
+    {
+        return UnityEngine.Random.value - UnityEngine.Random.value;
+    }
+
+    public static float GetNormalizedAngle(Vector2 vector)
+    {
+        float angleRadians = Mathf.Atan2(vector.y, vector.x);
+        float normalizedAngle = angleRadians / Mathf.PI;
+
+        return normalizedAngle;
+    }
+
     public static float GetEnclosingCircleRadius(Collider2D collider)
     {
         if (collider is CircleCollider2D circleCollider) return circleCollider.radius;
@@ -83,10 +96,19 @@ public static class MathUtility
         return diagonal / 2;
     }
 
-    public static Vector2 PolarCoordinatesToVector2(float angleDeg, float magnitude)
+    public static Vector2 PolarCoordinatesToVector2(float angleRad, float magnitude)
     {
-        float angleRad = angleDeg * Mathf.Deg2Rad;
         return new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * magnitude;
+    }
+
+    public static Vector2 GetSignedVector(Vector2 vector)
+    {
+        return new Vector2(Math.Sign(vector.x), Math.Sign(vector.y));
+    }
+
+    public static float GetVectorAngle(Vector2 vector)
+    {
+        return Mathf.Atan2(vector.y, vector.x);
     }
 
     public static int GetCircularIndex(int index, int length)

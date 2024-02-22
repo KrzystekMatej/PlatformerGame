@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AIInputController : InputController
@@ -45,9 +46,16 @@ public class AIInputController : InputController
     }
 
 
-    public void SetMovementVector(Vector2 movementVector)
+    public void SetSteeringForce(Vector2 steeringForce)
     {
-        inputData.MovementVector = movementVector;
+        inputData.SteeringForce = Vector2.ClampMagnitude(steeringForce, instanceData.MaxForce);
+        DecelerationFlags = (false, false);
+    }
+
+    public void StopMoving(Vector2 currentVelocity)
+    {
+        inputData.SteeringForce = Vector2.zero;
+        DecelerationFlags = (currentVelocity.x != 0, currentVelocity.y != 0);
     }
 
     public void StartJumping()

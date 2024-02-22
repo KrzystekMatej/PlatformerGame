@@ -33,8 +33,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 357, y: -410, z: 0}
-  viewScale: {x: 0.8695652, y: 0.8695652, z: 1}
+  viewPosition: {x: 548, y: -10, z: 0}
+  viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
   references:
     version: 2
     RefIds:
@@ -199,7 +199,7 @@ MonoBehaviour:
             entries: []
         description: 
         drawGizmos: 0
-        targetSteeringPipeline: PathFollowingPipeline
+        targetPipelineName: PathFollowingPipeline
     - rid: 7899365732142284800
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:

@@ -168,6 +168,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PipelineName>k__BackingField: PathFollowingPipeline
+  targeters:
+  - {fileID: 7325101189958284097}
+  decomposers: []
+  constraints: []
+  actuator: {fileID: 6762963787823031888}
   deadlock: {fileID: 0}
 --- !u!114 &7325101189958284097
 MonoBehaviour:

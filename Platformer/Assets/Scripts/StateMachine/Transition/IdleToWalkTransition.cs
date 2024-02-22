@@ -9,6 +9,6 @@ public class IdleToWalkTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return Mathf.Abs(agent.InputController.InputData.MovementVector.x) > 0;
+        return Mathf.Abs(agent.InputController.InputData.SteeringForce.x) > 0;
     }
 }

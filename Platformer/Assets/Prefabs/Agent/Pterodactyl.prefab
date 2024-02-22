@@ -57,7 +57,10 @@ GameObject:
   - component: {fileID: 5441309920161683283}
   - component: {fileID: 377242489695348582}
   - component: {fileID: 8018527025378207147}
+  - component: {fileID: 8448524356590432070}
   - component: {fileID: 2245584684669175667}
+  - component: {fileID: 425993995980375926}
+  - component: {fileID: 2842447663772043084}
   m_Layer: 0
   m_Name: SteeringPipeline 0
   m_TagString: Untagged
@@ -93,7 +96,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <PipelineName>k__BackingField: SeekPipeline
-  deadlock: {fileID: 0}
+  targeters:
+  - {fileID: 8018527025378207147}
+  - {fileID: 8448524356590432070}
+  decomposers:
+  - {fileID: 2245584684669175667}
+  constraints: []
+  actuator: {fileID: 377242489695348582}
+  deadlock: {fileID: 425993995980375926}
 --- !u!114 &377242489695348582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,9 +128,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fb8112f2a4b5b4c8bc948f0031a57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arriveRadius: 0.6
   isFleeing: 0
   isPositionCached: 1
+--- !u!114 &8448524356590432070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905118906616369720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebe9035228a2018448cce7036b338e9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowRadius: 1
+  slowDegree: 1
+  minSpeed: 0.1
+  seekTargeter: {fileID: 0}
 --- !u!114 &2245584684669175667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +166,42 @@ MonoBehaviour:
   quantizer:
     <NavGraph>k__BackingField: {fileID: 0}
     <CoherenceEnabled>k__BackingField: 1
+--- !u!114 &425993995980375926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905118906616369720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0148bb15f137bd34a9f4fee6ccdcebe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <PipelineName>k__BackingField: WanderDeadlock
+  targeters:
+  - {fileID: 2842447663772043084}
+  decomposers: []
+  constraints: []
+  actuator: {fileID: 377242489695348582}
+  deadlock: {fileID: 0}
+--- !u!114 &2842447663772043084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2905118906616369720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d985aa38eef3740ac4abe2278661d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isFleeing: 0
+  isPositionCached: 0
+  wanderOffset: 6
+  wanderRadius: 2
+  wanderRate: 0.2
 --- !u!1 &3079820557302413007
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +573,7 @@ PrefabInstance:
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: <DefaultData>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 4390f7a0800901740a0f47f09f96a586, type: 2}
+      objectReference: {fileID: 11400000, guid: 87bbb63af871eaf4389b00c2f6197171, type: 2}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.size
       value: 1

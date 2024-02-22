@@ -34,8 +34,8 @@ MonoBehaviour:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 413, y: -397, z: 0}
-  viewScale: {x: 0.7561437, y: 0.7561437, z: 1}
+  viewPosition: {x: 489, y: -32, z: 0}
+  viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
   references:
     version: 2
     RefIds:
@@ -211,14 +211,14 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a323075200843b64f8d6106007c63e5c
-        position: {x: -59.000164, y: 900.99994}
+        position: {x: -40.000008, y: 942.9998}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
             entries: []
         description: 
         drawGizmos: 0
-        targetSteeringPipeline: SeekPipeline
+        targetPipelineName: SeekPipeline
     - rid: 7899365797028167684
       type: {class: SeekToTarget, ns: , asm: Assembly-CSharp}
       data:

@@ -5,11 +5,12 @@ using UnityEngine;
 public class SteeringGoal
 {
     public bool HasPosition { get; private set; }
-    public bool HasVelocity { get; private set; }
+    public bool HasSpeed { get; private set; }
     public bool HasOwner { get; private set; }
 
+
     private Vector2 position;
-    private Vector2 velocity;
+    private float speed;
     private GameObject owner;
 
     public Vector2 Position
@@ -22,13 +23,13 @@ public class SteeringGoal
         }
     }
 
-    public Vector2 Velocity
+    public float Speed
     {
-        get { return velocity; }
+        get { return speed; }
         set
         {
-            velocity = value;
-            HasPosition = true;
+            speed = value;
+            HasSpeed = true;
         }
     }
 
@@ -44,24 +45,24 @@ public class SteeringGoal
 
     public bool HasNothing()
     {
-        return !HasPosition && !HasVelocity && !HasOwner;
+        return !HasPosition && !HasSpeed && !HasOwner;
     }
 
     public void UpdateChannels(SteeringGoal other)
     {
         if (other.HasPosition)
         {
-            Position = other.Position;
+            Position = other.position;
         }
          
-        if (other.HasVelocity)
+        if (other.HasSpeed)
         {
-            Velocity = other.Velocity;
+            Speed = other.speed;
         }
 
         if (other.HasOwner)
         {
-            Owner = other.Owner;
+            Owner = other.owner;
         }
     }
 }

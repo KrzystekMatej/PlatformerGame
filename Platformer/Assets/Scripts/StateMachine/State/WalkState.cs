@@ -39,16 +39,13 @@ public class WalkState : State
         CalculateVelocity();
     }
 
-    
 
     protected virtual void CalculateAcceleration()
     {
-        Vector2 input = agent.InputController.InputData.MovementVector;
-        Vector2 velocityNormalized = agent.RigidBody.velocity.normalized;
+        Vector2 inputForce = agent.InputController.InputData.SteeringForce;
+        Vector2 decelerationForce = -MathUtility.GetSignedVector(agent.RigidBody.velocity) * agent.InstanceData.MaxForce;
 
-        Vector2 direction = new Vector2(input.x == 0 ? -velocityNormalized.x : input.x, 0);
-
-        agent.InstanceData.Acceleration += direction * agent.InstanceData.MaxForce;
+        agent.InstanceData.Acceleration += new Vector2(agent.InputController.DecelerationFlags.x ? decelerationForce.x : inputForce.x, 0);
     }
 
     protected virtual void CalculateVelocity()
@@ -56,23 +53,21 @@ public class WalkState : State
         Vector2 previousVelocity = agent.RigidBody.velocity;
 
         agent.RigidBody.velocity += agent.InstanceData.Acceleration * Time.deltaTime;
-        agent.RigidBody.velocity = new Vector2
-        (
-            StopDeceleration(agent.InputController.InputData.MovementVector.x, agent.RigidBody.velocity.x, previousVelocity.x),
-            agent.RigidBody.velocity.y
-        );
-        agent.RigidBody.velocity = new Vector2
-        (
-            Mathf.Clamp(agent.RigidBody.velocity.x, -agent.InstanceData.MaxSpeed, agent.InstanceData.MaxSpeed),
-            agent.RigidBody.velocity.y
-        );
 
+        if (agent.InputController.DecelerationFlags.x && ShouldDecelerationStop(agent.RigidBody.velocity.x, previousVelocity.x))
+        {
+            agent.RigidBody.velocity = new Vector2(0, agent.RigidBody.velocity.y);
+            agent.InputController.DecelerationFlags.x = false;
+        }
+
+        float clampedX = Mathf.Clamp(agent.RigidBody.velocity.x, -agent.InstanceData.MaxSpeed, agent.InstanceData.MaxSpeed);
+        agent.RigidBody.velocity = new Vector2(clampedX, agent.RigidBody.velocity.y);
         agent.InstanceData.Acceleration.Set(0, 0);
     }
 
-    protected static float StopDeceleration(float input, float currentVelocity, float previousVelocity)
+    protected static bool ShouldDecelerationStop(float currentVelocityComponent, float previousVelocityComponent)
     {
-        return input == 0 && Mathf.Sign(currentVelocity) != Mathf.Sign(previousVelocity) ? 0 : currentVelocity;
+        return Mathf.Sign(currentVelocityComponent) != Mathf.Sign(previousVelocityComponent);
     }
 
     protected override void HandleExit()

@@ -11,10 +11,6 @@ public class PathFollowingTargeter : Targeter
     [SerializeField]
     private bool isDynamic = false;
 
-#if UNITY_EDITOR
-    private Vector2 gizmoGoalPosition;
-#endif
-
     public void Start()
     {
         RecalculatePath(GetComponentInParent<AIManager>().Agent);
@@ -26,17 +22,13 @@ public class PathFollowingTargeter : Targeter
         path.Recalculate(agent);
     }
 
-    public override SteeringGoal GetGoal(Agent agent)
+    public override bool TryUpdateGoal(Agent agent, SteeringGoal goal)
     {
-        SteeringGoal goal = new SteeringGoal();
         if (isDynamic) path.SetPoints(waypoints);
 
         goal.Position = path.CalculateGoalWithCoherence(agent);
-#if UNITY_EDITOR
-        gizmoGoalPosition = goal.Position;
-#endif
-
-        return goal;
+        
+        return !path.ReachedEnd(agent, goal.Position);
     }
 
     private void OnDrawGizmosSelected()

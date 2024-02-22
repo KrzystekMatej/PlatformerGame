@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,10 +27,11 @@ public class ClimbState : State
 
     public override void HandleUpdate()
     {
-        if (agent.InputController.InputData.MovementVector.magnitude > 0)
+        Vector2 steeringForce = agent.InputController.InputData.SteeringForce;
+        if (steeringForce.magnitude > 0)
         {
             agent.Animator.Enable();
-            agent.RigidBody.velocity = agent.InputController.InputData.MovementVector * agent.InstanceData.ClimbSpeed;
+            agent.RigidBody.velocity = MathUtility.GetSignedVector(steeringForce) * agent.InstanceData.ClimbSpeed;
         }
         else
         {
