@@ -45,9 +45,6 @@ TagManager:
   - name: Background
     uniqueID: 2788494723
     locked: 0
-  - name: Exit
-    uniqueID: 1866051873
-    locked: 0
   - name: Weapon
     uniqueID: 2919025073
     locked: 0

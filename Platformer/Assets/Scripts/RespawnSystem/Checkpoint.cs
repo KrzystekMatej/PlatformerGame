@@ -8,14 +8,14 @@ public class Checkpoint : MonoBehaviour
 {
     private GameObject respawnTarget;
     private AudioSource audioSource;
-    private SpawnSystem respawnSystem;
+    private RespawnSystem respawnSystem;
     private TriggerDetector triggerDetector;
 
 
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
-        respawnSystem = GetComponentInParent<SpawnSystem>();
+        respawnSystem = GetComponentInParent<RespawnSystem>();
         triggerDetector = GetComponent<TriggerDetector>();
     }
 
