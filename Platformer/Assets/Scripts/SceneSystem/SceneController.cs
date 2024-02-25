@@ -45,7 +45,12 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings-1);
     }
 
-    public int GetNextLevelIndex()
+    public void SaveLevelProgress()
+    {
+        LevelSaveManager.SaveReachedLevel(SceneManager.GetActiveScene().buildIndex-1);
+    }
+
+    private int GetNextLevelIndex()
     {
         int index = SceneManager.GetActiveScene().buildIndex + 1;
         if (index < SceneManager.sceneCountInBuildSettings)

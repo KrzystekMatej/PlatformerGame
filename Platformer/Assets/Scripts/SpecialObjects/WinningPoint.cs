@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WinningPoint : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class WinningPoint : MonoBehaviour
     public void WinningPointReached()
     {
         audioSource.Play();
+        sceneController.SaveLevelProgress();
         StartCoroutine(LoadNextScene());
     }
 
