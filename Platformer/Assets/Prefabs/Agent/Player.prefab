@@ -1116,7 +1116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_SortingLayer
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_SortingLayerID
@@ -1488,6 +1488,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 0.5
   disableAttacking: 1
+--- !u!114 &4293532838017081111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057417481030304523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a10af186c92e0645a6c39ac2edcd0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <isStickable>k__BackingField: 1
 --- !u!114 &9057417481030304527 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

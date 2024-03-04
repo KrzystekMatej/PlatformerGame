@@ -24,8 +24,10 @@ public class RangeWeapon : AgentWeapon
         return agent.GroundDetector.Detected || !IsGroundWeapon;
     }
 
+#if UNITY_EDITOR
     public override void DrawGizmos(Vector2 origin, Vector2 direction)
     {
         return;
     }
+#endif
 }

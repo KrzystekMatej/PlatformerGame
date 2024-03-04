@@ -13,7 +13,7 @@ public class BackgroundController : MonoBehaviour
     private GameObject current;
     [SerializeField]
     private GameObject next;
-    private Collider2D playerCollider;
+    private ICinemachineCamera virtualCamera;
     [SerializeField]
     [Range(0, 1)]
     private float horizontalParallax = 0.1f;
@@ -30,17 +30,17 @@ public class BackgroundController : MonoBehaviour
     BackgroundData backgroundData;
     BackgroundData tempBackgroundData;
 
-    Vector3 lastPlayerPos;
+    Vector3 lastCameraPosition;
 
     private void Awake()
     {
         Camera.main.GetComponent<CinemachineBrain>().m_CameraActivatedEvent.AddListener(OnCameraActivated);
-        this.enabled = false;
+        enabled = false;
     }
 
     private void OnCameraActivated(ICinemachineCamera incomingVcam, ICinemachineCamera outgoingVcam)
     {
-        playerCollider = incomingVcam.Follow.GetComponent<Agent>().TriggerCollider;
+        virtualCamera = incomingVcam;
         var currentSprites = current.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
         var nextSprites = next.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
 
@@ -49,8 +49,8 @@ public class BackgroundController : MonoBehaviour
 
         tempBackgroundData = backgroundData;
 
-        lastPlayerPos = playerCollider.bounds.center;
-        this.enabled = true;
+        lastCameraPosition = virtualCamera.State.FinalPosition;
+        enabled = true;
     }
 
     private (float startX, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)
@@ -63,25 +63,25 @@ public class BackgroundController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 currentPlayerPos = playerCollider.bounds.center;
+        Vector3 currentCameraPosition = virtualCamera.State.FinalPosition;
 
-        ApplyParallaxEffect(currentPlayerPos);
-        ShiftNext(currentPlayerPos.x);
-        SwitchBackgrounds(currentPlayerPos.x);
+        ApplyParallaxEffect(currentCameraPosition);
+        ShiftNext(currentCameraPosition.x);
+        SwitchBackgrounds(currentCameraPosition.x);
 
-        lastPlayerPos = currentPlayerPos;
+        lastCameraPosition = currentCameraPosition;
     }
 
-    private void ShiftNext(float currentPlayerPos)
+    private void ShiftNext(float currentCameraPositionX)
     {
-        if (!backgroundData.IsOnLeft && currentPlayerPos < backgroundData.CurrentBounds.startX + leftLimit * backgroundData.CurrentBounds.length)
+        if (!backgroundData.IsOnLeft && currentCameraPositionX < backgroundData.CurrentBounds.startX + leftLimit * backgroundData.CurrentBounds.length)
         {
             Vector3 shift = new Vector3(backgroundData.CurrentBounds.length + backgroundData.NextBounds.length, 0, 0);
             next.transform.position -= shift;
             backgroundData.NextBounds.startX -= shift.x;
             backgroundData.IsOnLeft = true;
         }
-        else if (backgroundData.IsOnLeft && currentPlayerPos > backgroundData.CurrentBounds.startX + rightLimit * backgroundData.CurrentBounds.length)
+        else if (backgroundData.IsOnLeft && currentCameraPositionX > backgroundData.CurrentBounds.startX + rightLimit * backgroundData.CurrentBounds.length)
         {
             Vector3 shift = new Vector3(backgroundData.CurrentBounds.length + backgroundData.NextBounds.length, 0, 0);
             next.transform.position += shift;
@@ -90,9 +90,9 @@ public class BackgroundController : MonoBehaviour
         }
     }
 
-    private void SwitchBackgrounds(float currentPlayerPosX)
+    private void SwitchBackgrounds(float currentCameraPositionX)
     {
-       if (currentPlayerPosX > backgroundData.NextBounds.startX && currentPlayerPosX < backgroundData.NextBounds.startX + backgroundData.NextBounds.length)
+       if (currentCameraPositionX > backgroundData.NextBounds.startX && currentCameraPositionX < backgroundData.NextBounds.startX + backgroundData.NextBounds.length)
        {
             Utility.SwapReferences(ref current, ref next);
             var tempCurrentBounds = backgroundData.CurrentBounds;
@@ -102,9 +102,9 @@ public class BackgroundController : MonoBehaviour
        }
     }
 
-    private void ApplyParallaxEffect(Vector3 currentPlayerPos)
+    private void ApplyParallaxEffect(Vector3 currentCameraPosition)
     {
-        Vector3 shift = new Vector3((currentPlayerPos.x - lastPlayerPos.x) * horizontalParallax, (currentPlayerPos.y - lastPlayerPos.y) * verticalParallax);
+        Vector3 shift = new Vector3((currentCameraPosition.x - lastCameraPosition.x) * horizontalParallax, (currentCameraPosition.y - lastCameraPosition.y) * verticalParallax);
         transform.position += shift;
         backgroundData.CurrentBounds.startX += shift.x;
         backgroundData.NextBounds.startX += shift.x;
@@ -119,5 +119,10 @@ public class BackgroundController : MonoBehaviour
     public void RestoreBackgroundData()
     {
         backgroundData = tempBackgroundData;
+    }
+
+    public bool IsFollowed(Agent agent)
+    {
+        return agent == virtualCamera.Follow.GetComponent<Agent>();
     }
 }

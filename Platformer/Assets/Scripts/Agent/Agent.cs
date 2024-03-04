@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 public class Agent : MonoBehaviour, IHittable
 {
@@ -33,9 +34,6 @@ public class Agent : MonoBehaviour, IHittable
     public float EnclosingCircleRadius { get => MathUtility.GetEnclosingCircleRadius(TriggerCollider); }
     public Vector2 CenterPosition { get => TriggerCollider.bounds.center; }
 
-    private RaycastHit2D[] castHits;
-    private ContactFilter2D castFilter;
-
     private void Awake()
     {
         InputController = GetComponentInParent<InputController>();
@@ -63,9 +61,6 @@ public class Agent : MonoBehaviour, IHittable
             FallGravityModifier = DefaultData.FallGravityModifier,
             ClimbSpeed = DefaultData.ClimbSpeed
         };
-
-        castHits = new RaycastHit2D[1];
-        castFilter = new ContactFilter2D();
     }
 
     private void Start()
@@ -120,12 +115,6 @@ public class Agent : MonoBehaviour, IHittable
         if (knockbackForce <= 0) return;
         Vector2 direction = CenterPosition - from;
         RigidBody.AddForce(new Vector2(direction.normalized.x, 0) * knockbackForce, ForceMode2D.Impulse);
-    }
-
-    public bool CastCheck(Vector2 direction, float distance, LayerMask solidGeometryLayerMask)
-    {
-        castFilter.SetLayerMask(solidGeometryLayerMask);
-        return TriggerCollider.Cast(direction, castFilter, castHits, distance) > 0;
     }
 
     private void OnDrawGizmosSelected()

@@ -8,6 +8,6 @@ public class WalkToIdleTransition : StateTransition
 
     public override bool IsTriggered(Agent agent)
     {
-        return Mathf.Abs(agent.RigidBody.velocity.x) < 0.01f;
+        return Mathf.Abs(agent.RigidBody.velocity.x) < Mathf.Epsilon && agent.InputController.InputData.SteeringForce.x == 0;
     }
 }

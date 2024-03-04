@@ -33,9 +33,10 @@ public abstract class VisionDetector : ScriptableObject
     [SerializeField]
     protected int maxDetections = 1;
 
-    public int DetectionCount { get; protected set; }
-
     public abstract int Detect(Vector2 origin);
     protected abstract void UpdateDetectFunction();
+
+#if UNITY_EDITOR
     public abstract void DrawGizmos(Vector2 origin);
+#endif
 }

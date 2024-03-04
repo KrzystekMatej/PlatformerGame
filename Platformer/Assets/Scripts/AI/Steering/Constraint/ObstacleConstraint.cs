@@ -14,6 +14,7 @@ public class ObstacleConstraint : Constraint
     private float margin;
 
     private int problemSegmentIndex;
+    private int detectionCount;
 
     public override bool IsViolated(Agent agent, List<Vector2> pointPath)
     {
@@ -28,8 +29,9 @@ public class ObstacleConstraint : Constraint
 
             detector.Direction = direction.normalized;
             detector.Distance = direction.magnitude;
+            detectionCount = detector.Detect(startPoint);
 
-            if (detector.Detect(startPoint) > 0)
+            if (detectionCount > 0)
             {
                 problemSegmentIndex = i;
                 return true;
@@ -52,7 +54,7 @@ public class ObstacleConstraint : Constraint
         RaycastHit2D closestHit = new RaycastHit2D();
         float shortestDistance = float.MaxValue;
 
-        for (int i = 0; i < detector.DetectionCount; i++)
+        for (int i = 0; i < detectionCount; i++)
         {
             if (detector.Hits[i].distance < shortestDistance)
             {

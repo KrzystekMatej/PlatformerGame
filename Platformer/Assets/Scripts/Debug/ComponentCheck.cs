@@ -11,7 +11,7 @@ public class ComponentCheck : MonoBehaviour
     [SerializeField]
     private string componentName;
 
-    public void CheckForComponentInAllObjects()
+    public void CheckComponent()
     {
         if (string.IsNullOrEmpty(componentName))
         {
@@ -52,7 +52,7 @@ public class MonoBehaviourCheckEditor : Editor
 
         if (GUILayout.Button("Check for Component"))
         {
-            script.CheckForComponentInAllObjects();
+            script.CheckComponent();
         }
     }
 }

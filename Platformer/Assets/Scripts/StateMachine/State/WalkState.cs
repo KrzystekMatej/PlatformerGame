@@ -67,7 +67,7 @@ public class WalkState : State
 
     protected static bool ShouldDecelerationStop(float currentVelocityComponent, float previousVelocityComponent)
     {
-        return Mathf.Sign(currentVelocityComponent) != Mathf.Sign(previousVelocityComponent);
+        return currentVelocityComponent == 0 || Math.Sign(currentVelocityComponent) != Math.Sign(previousVelocityComponent);
     }
 
     protected override void HandleExit()

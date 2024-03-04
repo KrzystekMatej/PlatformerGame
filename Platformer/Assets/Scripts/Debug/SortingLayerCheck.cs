@@ -10,7 +10,7 @@ public class SortingLayerCheck : MonoBehaviour
     [SerializeField]
     private string testSortingLayerName;
 
-    public void CheckLayerInAllObjects()
+    public void CheckLayer()
     {
         SpriteRenderer[] allSpriteRenderers = FindObjectsOfType<SpriteRenderer>();
         bool found = false;
@@ -46,7 +46,7 @@ public class SortingLayerCheckEditor : Editor
 
         if (GUILayout.Button("Check Layer"))
         {
-            script.CheckLayerInAllObjects();
+            script.CheckLayer();
         }
     }
 }

@@ -29,10 +29,11 @@ public class MeleeWeapon : AgentWeapon
         return agent.GroundDetector.Detected || !IsGroundWeapon;
     }
 
-    
 
+#if UNITY_EDITOR
     public override void DrawGizmos(Vector2 origin, Vector2 direction)
     {
         AttackDetector.DrawGizmos(origin + direction * (AttackDetector.Size.x / 2));
     }
+#endif
 }

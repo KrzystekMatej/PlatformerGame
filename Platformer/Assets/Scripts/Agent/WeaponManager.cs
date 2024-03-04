@@ -20,9 +20,9 @@ public class WeaponManager : MonoBehaviour
         SetWeaponVisibility(false);
     }
 
-    public void SetWeaponVisibility(bool visible)
+    public void SetWeaponVisibility(bool isVisible)
     {
-        spriteRenderer.enabled = visible;
+        spriteRenderer.enabled = isVisible;
     }
 
     public bool AddWeapon(AgentWeapon weapon)

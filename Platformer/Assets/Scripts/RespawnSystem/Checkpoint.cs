@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Checkpoint : MonoBehaviour
 {
-    private GameObject respawnTarget;
+    private Agent respawnTarget;
     private AudioSource audioSource;
     private RespawnSystem respawnSystem;
     private TriggerDetector triggerDetector;
@@ -23,23 +23,24 @@ public class Checkpoint : MonoBehaviour
     public void ActivateCheckpoint(Collider2D collision)
     {
         audioSource.Play();
-        respawnTarget = collision.gameObject;
         triggerDetector.Disable();
-        respawnTarget.GetComponent<Agent>().OnRespawnRequired.RemoveAllListeners();
-        respawnTarget.GetComponent<Agent>().OnRespawnRequired.AddListener(RespawnPlayer);
+        respawnTarget = collision.GetComponent<Agent>();
+        respawnTarget.OnRespawnRequired.RemoveAllListeners();
+        respawnTarget.OnRespawnRequired.AddListener(RespawnPlayer);
+
         foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
         {
-            controller.CacheBackgroundData();
+            if (controller.IsFollowed(respawnTarget)) controller.CacheBackgroundData();
         }
     }
 
     private void RespawnPlayer()
     {
         respawnTarget.transform.position = transform.position;
-        respawnTarget.SetActive(true);
+
         foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
         {
-            controller.RestoreBackgroundData();
+            if (controller.IsFollowed(respawnTarget)) controller.RestoreBackgroundData();
         }
     }
 

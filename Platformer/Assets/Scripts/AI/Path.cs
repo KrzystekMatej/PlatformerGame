@@ -224,12 +224,12 @@ public class Path
         return Points[direction == 1 ? Points.Count - 1 : 0];
     }
 
-    public void SmoothOut(Agent agent, LayerMask solidGeometryLayerMask)
+    public void SmoothOut(float agentRadius, LayerMask solidGeometryLayerMask)
     {
         for (int i = 0; i < Points.Count - 2; i++)
         {
             Vector2 edgeVector = Points[i + 2] - Points[i];
-            if (!agent.CastCheck(edgeVector, edgeVector.magnitude, solidGeometryLayerMask))
+            if (!Physics2D.CircleCast(Points[i], agentRadius, edgeVector, edgeVector.magnitude, solidGeometryLayerMask))
             {
                 Points.RemoveAt(i + 1);
             }

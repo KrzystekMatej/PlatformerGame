@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-internal interface IHittable
+public interface IHittable
 {
     void Hit(Collider2D attackerCollider, Weapon attackingWeapon);
     void Hit(int attackDamage);

@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class AgentAnimator : MonoBehaviour
 {
     private Animator animator;
-    private SpriteRenderer spriteRenderer;
 
     public UnityEvent OnAnimationAction;
     public UnityEvent OnAnimationComplete;
@@ -14,7 +13,6 @@ public class AgentAnimator : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     public void PlayByType(AnimationType animationType)

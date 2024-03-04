@@ -53,13 +53,17 @@ public class PlayerInputController : InputController
     private Vector2 GetSteeringForce()
     {
         //return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * agent.InstanceData.MaxForce; - for stop if both keys are down
-        Vector2 currentInput = MathUtility.GetSignedVector(inputData.SteeringForce);
-        Vector2 newInput = new Vector2(GetMovementVectorComponent(rightKey, leftKey, currentInput.x), GetMovementVectorComponent(upKey, downKey, currentInput.y));
+        Vector2 currentMovementVector = MathUtility.GetSignedVector(inputData.SteeringForce);
+        Vector2 newMovementVector = new Vector2
+        (
+            GetMovementVectorComponent(rightKey, leftKey, currentMovementVector.x),
+            GetMovementVectorComponent(upKey, downKey, currentMovementVector.y)
+        );
 
-        DecelerationFlags.x = DecelerationFlags.x || (currentInput.x != 0 && newInput.x == 0);
-        DecelerationFlags.y = DecelerationFlags.y || (currentInput.y != 0 && newInput.y == 0);
+        DecelerationFlags.x = (DecelerationFlags.x && newMovementVector.x == 0) || (currentMovementVector.x != 0 && newMovementVector.x == 0);
+        DecelerationFlags.y = (DecelerationFlags.y && newMovementVector.y == 0) || (currentMovementVector.y != 0 && newMovementVector.y == 0);
 
-        return newInput.normalized * instanceData.MaxForce;
+        return newMovementVector.normalized * instanceData.MaxForce;
     }
 
     //for last key priority

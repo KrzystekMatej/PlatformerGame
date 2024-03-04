@@ -5,6 +5,8 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.UI.Image;
+using Cast = System.Func<UnityEngine.Vector2, UnityEngine.Vector2, UnityEngine.CapsuleDirection2D,
+    float, UnityEngine.Vector2, UnityEngine.RaycastHit2D[], float, UnityEngine.LayerMask, int>;
 
 [CreateAssetMenu(fileName = "CastDetector", menuName = "Vision/CastDetector")]
 public class CastDetector : VisionDetector
@@ -14,19 +16,15 @@ public class CastDetector : VisionDetector
     [field: SerializeField]
     public Vector2 Direction { get; set; }
     public RaycastHit2D[] Hits { get; private set; }
-    private Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> cast;
+    private Cast cast;
 
-    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> rayCast
-        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+    private static readonly Cast rayCast = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
         => Physics2D.RaycastNonAlloc(origin, direction, hits, distance, layerMask);
-    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> boxCast
-        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+    private static readonly Cast boxCast = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
         => Physics2D.BoxCastNonAlloc(origin, size, angle, direction, hits, distance, layerMask);
-    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> circleCast
-        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+    private static readonly Cast circleCast = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
         => Physics2D.CircleCastNonAlloc(origin, size.x, direction, hits, distance, layerMask);
-    private static readonly Func<Vector2, Vector2, CapsuleDirection2D, float, Vector2, RaycastHit2D[], float, LayerMask, int> capsuleCast
-        = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
+    private static readonly Cast capsuleCast = (origin, size, capsuleDirection, angle, direction, hits, distance, layerMask)
         => Physics2D.CapsuleCastNonAlloc(origin, size, capsuleDirection, angle, direction, hits, distance, layerMask);
 
     private void OnEnable()
@@ -58,6 +56,7 @@ public class CastDetector : VisionDetector
         }
     }
 
+#if UNITY_EDITOR
     public override void DrawGizmos(Vector2 origin)
     {
         Gizmos.color = gizmoColor;
@@ -76,4 +75,5 @@ public class CastDetector : VisionDetector
                 return;
         }
     }
+#endif
 }

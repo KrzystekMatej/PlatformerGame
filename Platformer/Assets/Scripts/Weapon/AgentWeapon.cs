@@ -14,5 +14,7 @@ public abstract class AgentWeapon : Weapon
     public abstract bool IsUseable(Agent agent);
     public abstract void Attack(Agent agent, Vector2 direction, LayerMask hitMask);
 
+#if UNITY_EDITOR
     public abstract void DrawGizmos(Vector2 origin, Vector2 direction);
+#endif
 }

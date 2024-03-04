@@ -10,7 +10,7 @@ public class LayerMaskCheck : MonoBehaviour
     [SerializeField]
     private LayerMask testLayerMask;
 
-    public void CheckLayerInAllObjects()
+    public void CheckLayer()
     {
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         bool found = false;
@@ -18,7 +18,7 @@ public class LayerMaskCheck : MonoBehaviour
         {
             if (Utility.CheckLayer(obj.layer, testLayerMask))
             {
-                Debug.Log("Object with name '" + obj.name + "' is on layer '" + LayerMask.LayerToName(obj.layer) + "'.");
+                Debug.Log($"Object with name '{obj.name}' is on layer '{LayerMask.LayerToName(obj.layer)}'.");
                 found = true;
             }
         }
@@ -41,7 +41,7 @@ public class LayerMaskCheckEditor : Editor
 
         if (GUILayout.Button("Check Layer"))
         {
-            script.CheckLayerInAllObjects();
+            script.CheckLayer();
         }
     }
 }
