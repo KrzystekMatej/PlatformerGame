@@ -23,14 +23,4 @@ public class AudioFeedback : MonoBehaviour
             audioSource.PlayOneShot(sound.AudioClip);
         }
     }
-
-    public void PlayRandomSound(List<Sound> sounds)
-    {
-        if (sounds?.Count > 0)
-        {
-            int randomIndex = UnityEngine.Random.Range(0, sounds.Count);
-            audioSource.volume = sounds[randomIndex].Volume;
-            audioSource.PlayOneShot(sounds[randomIndex].AudioClip);
-        }
-    }
 }

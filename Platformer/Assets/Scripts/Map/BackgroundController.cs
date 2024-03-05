@@ -34,13 +34,14 @@ public class BackgroundController : MonoBehaviour
 
     private void Awake()
     {
+        InitializeBackgroundData();
+
         Camera.main.GetComponent<CinemachineBrain>().m_CameraActivatedEvent.AddListener(OnCameraActivated);
         enabled = false;
     }
 
-    private void OnCameraActivated(ICinemachineCamera incomingVcam, ICinemachineCamera outgoingVcam)
+    private void InitializeBackgroundData()
     {
-        virtualCamera = incomingVcam;
         var currentSprites = current.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
         var nextSprites = next.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
 
@@ -48,7 +49,11 @@ public class BackgroundController : MonoBehaviour
         backgroundData.NextBounds = GetBounds(nextSprites);
 
         tempBackgroundData = backgroundData;
+    }
 
+    private void OnCameraActivated(ICinemachineCamera incomingVcam, ICinemachineCamera outgoingVcam)
+    {
+        virtualCamera = incomingVcam;
         lastCameraPosition = virtualCamera.State.FinalPosition;
         enabled = true;
     }
@@ -123,6 +128,7 @@ public class BackgroundController : MonoBehaviour
 
     public bool IsFollowed(Agent agent)
     {
+        if (virtualCamera == null) return false;
         return agent == virtualCamera.Follow.GetComponent<Agent>();
     }
 }

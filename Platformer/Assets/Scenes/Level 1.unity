@@ -103325,6 +103325,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 200927329027098069, guid: c65263b208264004d800138189af70dd, type: 3}
   m_PrefabInstance: {fileID: 1875675573}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1540878185 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 200927329027098068, guid: c65263b208264004d800138189af70dd, type: 3}
+  m_PrefabInstance: {fileID: 1875675573}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3cb813ca10e83419251f57d098c97d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1546455860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 188791900362458180, guid: 9c56ea4e8891f9d45893deaa836c6ea1, type: 3}
@@ -128076,15 +128087,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 200927329027098067, guid: c65263b208264004d800138189af70dd, type: 3}
       propertyPath: m_Size.x
-      value: 4.603021
+      value: 1.4390988
       objectReference: {fileID: 0}
     - target: {fileID: 200927329027098067, guid: c65263b208264004d800138189af70dd, type: 3}
       propertyPath: m_Size.y
-      value: 3.3906708
+      value: 1.5987148
       objectReference: {fileID: 0}
     - target: {fileID: 200927329027098067, guid: c65263b208264004d800138189af70dd, type: 3}
       propertyPath: m_Offset.x
-      value: -0.09412265
+      value: 0.003875494
       objectReference: {fileID: 0}
     - target: {fileID: 200927329027098067, guid: c65263b208264004d800138189af70dd, type: 3}
       propertyPath: m_Offset.y
@@ -128138,12 +128149,53 @@ PrefabInstance:
       propertyPath: m_Name
       value: Checkpoint 0
       objectReference: {fileID: 0}
+    - target: {fileID: 200927329027098070, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1575339175715545486, guid: c65263b208264004d800138189af70dd, type: 3}
       propertyPath: m_Volume
+      value: 0.354
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1540878185}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1540878185}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ActivateCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ActivateCheckpoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Checkpoint, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6874109316580370648, guid: c65263b208264004d800138189af70dd, type: 3}
+      propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Checkpoint, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 200927329027098065, guid: c65263b208264004d800138189af70dd, type: 3}
+    - {fileID: 1575339175715545486, guid: c65263b208264004d800138189af70dd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c65263b208264004d800138189af70dd, type: 3}
 --- !u!1 &1885805485
 GameObject:

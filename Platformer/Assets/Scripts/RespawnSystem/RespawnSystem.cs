@@ -10,4 +10,12 @@ public class RespawnSystem : MonoBehaviour
     {
         BackgroundControllers = FindObjectsOfType<BackgroundController>();
     }
+
+    private void Start()
+    {
+        foreach (BackgroundController controller in BackgroundControllers)
+        {
+            controller.CacheBackgroundData();
+        }
+    }
 }

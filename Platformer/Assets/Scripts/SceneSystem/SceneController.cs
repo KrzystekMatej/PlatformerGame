@@ -7,32 +7,20 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     [SerializeField]
-    private int startLevelIndex, menuIndex;
-
-    public void RestartCurrentLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void LoadStartLevel()
-    {
-        SceneManager.LoadScene(startLevelIndex);
-    }
-
-    public void LoadNextLevel()
-    {
-        SceneManager.LoadScene(GetNextLevelIndex());
-    }
+    private int menuIndex;
+    [SerializeField]
+    private int startLevelIndex;
 
     public void LoadCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadLevelByIndex(int levelIndex)
+    public void LoadNextScene()
     {
-        SceneManager.LoadScene(startLevelIndex + levelIndex - 1);
-        
+        int index = SceneManager.GetActiveScene().buildIndex + 1;
+        if (index < SceneManager.sceneCountInBuildSettings) SceneManager.LoadScene(index);
+        else SceneManager.LoadScene(menuIndex);
     }
 
     public void LoadMainMenu()
@@ -40,28 +28,29 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(menuIndex);
     }
 
-    public void LoadEndScene()
+    public void LoadLevelByIndex(int levelIndex)
     {
-        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings-1);
+        SceneManager.LoadScene(startLevelIndex + levelIndex);
     }
 
-    public void SaveLevelProgress()
+    public int GetCurrentLevelIndex()
     {
-        LevelSaveManager.SaveReachedLevel(SceneManager.GetActiveScene().buildIndex-1);
+        int levelIndex = SceneManager.GetActiveScene().buildIndex - startLevelIndex;
+        if (levelIndex >= startLevelIndex)
+        {
+            return levelIndex;
+        }
+        return -1;
     }
 
-    private int GetNextLevelIndex()
+    public void StartTime()
     {
-        int index = SceneManager.GetActiveScene().buildIndex + 1;
-        if (index < SceneManager.sceneCountInBuildSettings)
-        {
-            return index;
-        }
-        else
-        {
-            return menuIndex;
-        }
+        Time.timeScale = 1f;
+    }
 
+    public void StopTime()
+    {
+        Time.timeScale = 0f;
     }
 
     public void ExitGame()
@@ -71,15 +60,5 @@ public class SceneController : MonoBehaviour
         #else
             Application.Quit();
         #endif
-    }
-
-    public void StopTime()
-    {
-        Time.timeScale = 0f;
-    }
-
-    public void StartTime()
-    {
-        Time.timeScale = 1f;
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Sound", menuName = "AudioFeedback/Sound")]
 public class Sound : ScriptableObject
 {
-    public string Name;
     public AudioClip AudioClip;
     [Range(0f, 1f)]
     public float Volume;

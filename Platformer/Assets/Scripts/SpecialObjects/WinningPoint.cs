@@ -20,7 +20,7 @@ public class WinningPoint : MonoBehaviour
     public void WinningPointReached()
     {
         audioSource.Play();
-        sceneController.SaveLevelProgress();
+        LevelSaveManager.SaveLevelProgress(sceneController);
         StartCoroutine(LoadNextScene());
     }
 
@@ -28,6 +28,6 @@ public class WinningPoint : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(waitDuration);
-        sceneController.LoadNextLevel();
+        sceneController.LoadNextScene();
     }
 }
