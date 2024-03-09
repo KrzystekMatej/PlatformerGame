@@ -52,9 +52,9 @@ public class Steering : MonoBehaviour
         if (steeringForce == null)
         {
             UpdateCurrentPipeline(null);
-            inputController.StopMoving(agent.RigidBody.velocity);
+            inputController.StopMoving();
         }
-        else inputController.SetSteeringForce(steeringForce.Value);
+        else inputController.AddSteeringForce(steeringForce.Value);
     }
 
     public bool UpdateCurrentPipeline(SteeringPipeline newPipeline)

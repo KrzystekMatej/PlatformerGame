@@ -15,7 +15,7 @@ public class WalkForward : ActionNode
 
     protected override State OnUpdate()
     {
-        context.InputController.SetSteeringForce(new Vector2((float)blackboard.DataTable["HorizontalDirection"] * context.Agent.InstanceData.MaxForce, 0));
+        context.InputController.AddSteeringForce(new Vector2((float)blackboard.DataTable["HorizontalDirection"] * context.Agent.InstanceData.MaxForce, 0));
         return State.Success;
     }
 }

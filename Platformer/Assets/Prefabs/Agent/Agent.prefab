@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1375942223
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -244,80 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a116309e888f5e74b8e6e54219960fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundTable:
-    entries:
-    - Key:
-        actionType: 0
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 64
-      Value: {fileID: 11400000, guid: ee6362346ce4d4d49a0d7c6028cf49f8, type: 2}
-    - Key:
-        actionType: 0
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 16384
-      Value: {fileID: 11400000, guid: 97a13a2bd3d1aee4abd1d659d5e6acb3, type: 2}
-    - Key:
-        actionType: 0
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 32768
-      Value: {fileID: 11400000, guid: 5b8cefaa674dbb649a9e8ccea1a370e7, type: 2}
-    - Key:
-        actionType: 0
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 1024
-      Value: {fileID: 11400000, guid: 15278fbe6a466a3429e047de7d3846e2, type: 2}
-    - Key:
-        actionType: 1
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 64
-      Value: {fileID: 11400000, guid: 925b50fad00e0814cafc667d8c221894, type: 2}
-    - Key:
-        actionType: 1
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 16384
-      Value: {fileID: 11400000, guid: 19f8fa79a50c1794caae32aa81bcfe5b, type: 2}
-    - Key:
-        actionType: 1
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 32768
-      Value: {fileID: 11400000, guid: 21aaed756f5fc974789aa8c2c90b294c, type: 2}
-    - Key:
-        actionType: 1
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 1024
-      Value: {fileID: 11400000, guid: fa0128468762f784ca3059d8aedbcbe5, type: 2}
-    - Key:
-        actionType: 2
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 64
-      Value: {fileID: 11400000, guid: 4be3e89887bcaa64bbc99114a5140352, type: 2}
-    - Key:
-        actionType: 2
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 16384
-      Value: {fileID: 11400000, guid: b64f94df25b91dc47aa9a036e40c228d, type: 2}
-    - Key:
-        actionType: 2
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 32768
-      Value: {fileID: 11400000, guid: 632346a58634cdc45a60e6b5c2fa3d34, type: 2}
-    - Key:
-        actionType: 2
-        materialLayer:
-          serializedVersion: 2
-          m_Bits: 1024
-      Value: {fileID: 11400000, guid: 01acbda506cb5d04c96a29fea461a9af, type: 2}
 --- !u!1 &7363741091481350650
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +318,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1917034807
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1160426279, guid: b4e6e6ea7824d4a4b9159eacbfe400d4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -788,7 +714,6 @@ GameObject:
   - component: {fileID: 2774391687644902663}
   - component: {fileID: 7363741092985079729}
   - component: {fileID: 1098224640033834070}
-  - component: {fileID: 3521928051518276039}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Player
@@ -911,28 +836,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnInitializeMaxHealth:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &3521928051518276039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363741092985079733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4fe9118c32c8e469379e57a5fdb58b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  triggerTag: 
-  <TriggerCounter>k__BackingField: 0
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
-  OnExit:
     m_PersistentCalls:
       m_Calls: []

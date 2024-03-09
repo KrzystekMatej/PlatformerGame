@@ -10,7 +10,7 @@ public class InputController : MonoBehaviour
 
     protected AgentInstanceData instanceData;
 
-    private void Start()
+    protected void Start()
     {
         instanceData = GetComponentInChildren<Agent>().InstanceData;
     }

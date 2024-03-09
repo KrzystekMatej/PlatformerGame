@@ -13,8 +13,7 @@ public class WeaponInitializer : MonoBehaviour
         if (agent == null) return;
         foreach (AgentWeapon item in startWeapons)
         {
-            item.Initialize();
-            agent.WeaponManager.AddWeapon(item);
+            agent.WeaponManager.AddWeaponWithSwap(item);
         }
     }
 

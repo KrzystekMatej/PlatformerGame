@@ -9,7 +9,7 @@ public class StopMovement : ActionNode
     protected override State OnUpdate()
     {
         if (context.Steering != null) context.Steering.UpdateCurrentPipeline(null);
-        context.InputController.StopMoving(context.Agent.RigidBody.velocity);
+        context.InputController.StopMoving();
         return State.Success;
     }
 }

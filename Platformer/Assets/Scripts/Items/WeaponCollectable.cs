@@ -26,7 +26,7 @@ public class WeaponCollectable : Collectable
         Agent agent = collider.gameObject.GetComponent<Agent>();
         if (agent.WeaponManager != null)
         {
-            agent.WeaponManager.AddWeapon(weapon);
+            agent.WeaponManager.AddWeaponWithSwap(weapon);
             agent.AudioFeedback.PlaySpecificSound(collectSound);
         }
     }

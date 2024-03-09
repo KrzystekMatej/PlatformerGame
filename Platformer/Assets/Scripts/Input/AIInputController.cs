@@ -1,90 +1,103 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class AIInputController : InputController
 {
-    private bool jumpKey = false;
-    private bool crouchKey = false;
-    private bool attackKey = false;
-    private bool swapWeaponKey = false;
-    private Dictionary<(InputState, bool), InputState> inputFixTable;
-
-    private void Awake()
-    {
-        inputFixTable = new Dictionary<(InputState, bool), InputState>()
-        {
-            { (InputState.Inactive, true), InputState.Pressed },
-            { (InputState.Pressed, true), InputState.Held },
-            { (InputState.Pressed, false), InputState.Released },
-            { (InputState.Held, false), InputState.Released },
-            { (InputState.Released, true), InputState.Pressed },
-            { (InputState.Released, false), InputState.Inactive },
-        };
-    }
+    private Vector2 suggestedSteeringForce;
+    private bool stopRequest;
+    private bool forceRequest;
+    private bool jumpRequest;
+    private bool crouchRequest;
+    private bool attackRequest;
 
 
     private void Update()
     {
-        inputData.Jump = GetFixedInputState(inputData.Jump, jumpKey);
-        inputData.Crouch = GetFixedInputState(inputData.Crouch, crouchKey);
-        inputData.Attack = GetFixedInputState(inputData.Attack, attackKey);
-        inputData.WeaponSwap = GetFixedInputState(inputData.WeaponSwap, swapWeaponKey);
-        attackKey = false;
-        swapWeaponKey = false;
-    }
-
-    private InputState GetFixedInputState(InputState state, bool keyFlag)
-    {
-        (InputState, bool) searchKey = (state, keyFlag);
-        if (inputFixTable.ContainsKey(searchKey))
+        if (stopRequest)
         {
-            return inputFixTable[searchKey];
+            inputData.SteeringForce = Vector2.zero;
+            DecelerationFlags = (true, true);
+            stopRequest = false;
         }
-        return state;
+        else if (forceRequest)
+        {
+            inputData.SteeringForce = Vector2.ClampMagnitude(suggestedSteeringForce, instanceData.MaxForce);
+            DecelerationFlags = (false, false);
+        }
+
+        inputData.Jump = GetFixedInput(inputData.Jump, jumpRequest);
+        inputData.Crouch = GetFixedInput(inputData.Crouch, crouchRequest);
+        inputData.Attack = GetFixedInput(inputData.Attack, attackRequest);
+        suggestedSteeringForce = Vector2.zero;
+        forceRequest = false;
+        attackRequest = false;
     }
 
-
-    public void SetSteeringForce(Vector2 steeringForce)
+    private InputState GetFixedInput(InputState state, bool actionRequest)
     {
-        inputData.SteeringForce = Vector2.ClampMagnitude(steeringForce, instanceData.MaxForce);
-        DecelerationFlags = (false, false);
+        const int inactiveDown = ((int)InputState.Inactive * 2) ^ 1;
+        const int pressedUp = ((int)InputState.Pressed * 2) ^ 0;
+        const int pressedDown = ((int)InputState.Pressed * 2) ^ 1;
+        const int heldUp = ((int)InputState.Held * 2) ^ 0;
+        const int releasedUp = ((int)InputState.Released * 2) ^ 0;
+        const int releasedDown = ((int)InputState.Released * 2) ^ 1;
+
+        int key = ((int)state * 2) ^ (actionRequest ? 1 : 0);
+
+        switch (key)
+        {
+            case inactiveDown:
+                return InputState.Pressed;
+            case pressedUp:
+                return InputState.Released;
+            case pressedDown:
+                return InputState.Held;
+            case heldUp:
+                return InputState.Released;
+            case releasedUp:
+                return InputState.Inactive;
+            case releasedDown:
+                return InputState.Pressed;
+            default:
+                return state;
+        }
     }
 
-    public void StopMoving(Vector2 currentVelocity)
+    public void StopMoving()
     {
-        inputData.SteeringForce = Vector2.zero;
-        DecelerationFlags = (currentVelocity.x != 0, currentVelocity.y != 0);
+        stopRequest = true;
+    }
+
+    public void AddSteeringForce(Vector2 steeringForce)
+    {
+        suggestedSteeringForce += steeringForce;
+        forceRequest = true;
     }
 
     public void StartJumping()
     {
-        jumpKey = true;
+        jumpRequest = true;
     }
 
     public void StopJumping()
     {
-        jumpKey = false;
+        jumpRequest = false;
     }
 
     public void StartCrouching()
     {
-        crouchKey = true;
+        crouchRequest = true;
     }
 
     public void StopCrouching()
     {
-        crouchKey = false;
+        crouchRequest = false;
     }
 
     public void Attack()
     {
-        attackKey = true;
-    }
-
-    public void SwapWeapon()
-    {
-        swapWeaponKey = true;
+        attackRequest = true;
     }
 }

@@ -10,7 +10,7 @@ public class WeaponManager : MonoBehaviour
     public UnityEvent<AgentWeapon> OnAdd;
 
     private List<AgentWeapon> weapons = new List<AgentWeapon>();
-    private int currentWeapon = -1;
+    private int currentWeapon = 0;
 
     private SpriteRenderer spriteRenderer;
 
@@ -25,31 +25,71 @@ public class WeaponManager : MonoBehaviour
         spriteRenderer.enabled = isVisible;
     }
 
+    public bool AddWeaponWithSwap(AgentWeapon weapon)
+    {
+        if (AddWeapon(weapon))
+        {
+            OnAdd?.Invoke(weapon);
+            SwapWeaponByIndex(weapons.Count - 1);
+            return true;
+        }
+        return false;
+    }
+
     public bool AddWeapon(AgentWeapon weapon)
     {
-        if (weapons.Any(w => w.name == weapon.name))
-            return false;
-        weapon.Initialize();
+        if (weapons.Any(w => w.WeaponName == weapon.WeaponName)) return false;
         weapons.Add(weapon);
-        currentWeapon = weapons.Count - 1;
-        spriteRenderer.sprite = weapons[currentWeapon].WeaponSprite;
-        OnSwap?.Invoke(spriteRenderer.sprite);
-        OnAdd?.Invoke(weapon);
         return true;
     }
 
-    public void SwapWeapon()
+    public bool RemoveWeapon(AgentWeapon weapon)
     {
-        if (currentWeapon == -1)
-            return;
-        currentWeapon = (currentWeapon + 1) % weapons.Count;
+        return weapons.Remove(weapon);
+    }
+
+    public bool RemoveWeaponByName(string weaponName)
+    {
+        int weaponIndex = weapons.FindIndex(w => w.WeaponName == weaponName);
+        if (weaponIndex > 0)
+        {
+            weapons.RemoveAt(weaponIndex);
+            return true;
+        }
+        return false;
+    }
+
+    public bool SwapWeapon()
+    {
+        if (weapons.Count > 0)
+        {
+            SwapWeaponByIndex((currentWeapon + 1) % weapons.Count);
+            return true;
+        }
+        return false;
+    }
+
+    public bool SwapWeaponByName(string weaponName)
+    {
+        int weaponIndex = weapons.FindIndex(w => w.WeaponName == weaponName);
+        if (weaponIndex > 0)
+        {
+            SwapWeaponByIndex(weaponIndex);
+            return true;
+        }
+        return false;
+    }
+
+    private void SwapWeaponByIndex(int weaponIndex)
+    {
+        currentWeapon = weaponIndex;
         spriteRenderer.sprite = weapons[currentWeapon].WeaponSprite;
         OnSwap?.Invoke(spriteRenderer.sprite);
     }
 
     public AgentWeapon GetWeapon()
     {
-        return currentWeapon == -1 ? null : weapons[currentWeapon];
+        return weapons.Count > 0 ? weapons[currentWeapon] : null;
     }
 }
 

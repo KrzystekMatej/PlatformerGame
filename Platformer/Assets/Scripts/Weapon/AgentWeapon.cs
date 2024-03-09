@@ -10,7 +10,6 @@ public abstract class AgentWeapon : Weapon
     public Sprite WeaponSprite;
     public Sound WeaponSound;
 
-    public virtual void Initialize() { }
     public abstract bool IsUseable(Agent agent);
     public abstract void Attack(Agent agent, Vector2 direction, LayerMask hitMask);
 
