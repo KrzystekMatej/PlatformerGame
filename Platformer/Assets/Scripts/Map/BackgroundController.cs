@@ -126,9 +126,9 @@ public class BackgroundController : MonoBehaviour
         backgroundData = tempBackgroundData;
     }
 
-    public bool IsFollowed(Agent agent)
+    public bool IsFollowed(AgentManager agent)
     {
         if (virtualCamera == null) return false;
-        return agent == virtualCamera.Follow.GetComponent<Agent>();
+        return agent == virtualCamera.Follow.GetComponent<AgentManager>();
     }
 }

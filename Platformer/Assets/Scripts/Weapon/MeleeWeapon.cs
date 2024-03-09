@@ -7,26 +7,21 @@ using UnityEngine;
 using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 [CreateAssetMenu(fileName = "MeleeWeapon", menuName = "Weapons/MeleeWeapon")]
-public class MeleeWeapon : AgentWeapon
+public class MeleeWeapon : AttackingWeapon
 {
-    public override void Attack(Agent agent, Vector2 direction, LayerMask hitMask)
+    public override void Attack(Collider2D attacker, Vector2 direction, LayerMask hitMask)
     {
         AttackDetector.DetectLayerMask = hitMask;
-        Vector2 origin = agent.CenterPosition + direction * (AttackDetector.Size.x / 2);
+        Vector2 origin = (Vector2)attacker.bounds.center + direction * (AttackDetector.Size.x / 2);
         int colliderCount = AttackDetector.Detect(origin);
 
 
         for (int i = 0; i < colliderCount; i++)
         {
-            if (AttackDetector.Colliders[i].gameObject == agent.gameObject) continue;
+            if (AttackDetector.Colliders[i].gameObject == attacker.gameObject) continue;
             IHittable damageable = AttackDetector.Colliders[i].GetComponent<IHittable>();
-            if (damageable != null) damageable.Hit(agent.TriggerCollider, this);
+            if (damageable != null) damageable.Hit(attacker, this);
         }
-    }
-
-    public override bool IsUseable(Agent agent)
-    {
-        return agent.GroundDetector.Detected || !IsGroundWeapon;
     }
 
 

@@ -51,7 +51,7 @@ public class SteeringPipeline : MonoBehaviour
         blackboard.DataTable[PipelineName + actuator.GetType().Name] = actuator;
     }
 
-    public Vector2? GetSteering(Agent agent)
+    public Vector2? GetSteering(AgentManager agent)
     {
         SteeringGoal goal = new SteeringGoal();
 
@@ -97,7 +97,7 @@ public class SteeringPipeline : MonoBehaviour
         return GetDeadlockSteering(agent);
     }
 
-    private Vector2? GetDeadlockSteering(Agent agent)
+    private Vector2? GetDeadlockSteering(AgentManager agent)
     {
         return deadlock != null ? deadlock.GetSteering(agent) : null;
     }

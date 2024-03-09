@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Decomposer : MonoBehaviour
 {
-    public abstract SteeringGoal Decompose(Agent agent, SteeringGoal goal);
+    public abstract SteeringGoal Decompose(AgentManager agent, SteeringGoal goal);
 }

@@ -9,14 +9,14 @@ public class AIManager : MonoBehaviour
     private float aiUpdateInterval = 0.1f;
 
     public AIInputController InputController { get; private set; }
-    public Agent Agent { get; private set; }
+    public AgentManager Agent { get; private set; }
     public BehaviourTreeRunner TreeRunner { get; private set; }
     public Steering Steering { get; private set; }
 
     private void Awake()
     {
         InputController = GetComponentInParent<AIInputController>();
-        Agent = InputController.GetComponentInChildren<Agent>();
+        Agent = InputController.GetComponentInChildren<AgentManager>();
         Steering = GetComponentInChildren<Steering>();
         TreeRunner = GetComponentInChildren<BehaviourTreeRunner>();
     }

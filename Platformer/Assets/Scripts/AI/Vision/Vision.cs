@@ -13,7 +13,7 @@ public class Vision : MonoBehaviour
     [SerializeField]
     private List<VisionDetector> detectors = new List<VisionDetector>();
 
-    private Agent gizmoAgent;
+    private AgentManager gizmoAgent;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class Vision : MonoBehaviour
         Vector2 origin;
         if (!Application.isPlaying)
         {
-            Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
+            AgentManager agent = GetComponentInParent<AIInputController>().GetComponentInChildren<AgentManager>();
             origin = agent.GetComponent<Collider2D>().bounds.center;
         }
         else origin = gizmoAgent.CenterPosition;

@@ -5,13 +5,13 @@ using UnityEngine;
 public class WeaponInitializer : MonoBehaviour
 {
     [SerializeField]
-    private List<AgentWeapon> startWeapons = new List<AgentWeapon>();
+    private List<AttackingWeapon> startWeapons = new List<AttackingWeapon>();
 
     void Start()
     {
-        Agent agent = GetComponentInChildren<Agent>();
+        AgentManager agent = GetComponentInChildren<AgentManager>();
         if (agent == null) return;
-        foreach (AgentWeapon item in startWeapons)
+        foreach (AttackingWeapon item in startWeapons)
         {
             agent.WeaponManager.AddWeaponWithSwap(item);
         }

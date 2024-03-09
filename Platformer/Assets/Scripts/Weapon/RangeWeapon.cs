@@ -3,25 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "RangeWeapon", menuName = "Weapons/RangeWeapon")]
-public class RangeWeapon : AgentWeapon
+public class RangeWeapon : AttackingWeapon
 {
-    public GameObject RangeWeaponPrefab;
+    public GameObject DamageItemPrefab;
+    public Sound HitSound;
     public float FlySpeed = 1f;
     public bool IsUnstoppable = false;
+    public float RotationSpeed = 0;
 
 
-    public override void Attack(Agent agent, Vector2 direction, LayerMask hitMask)
+    public override void Attack(Collider2D attacker, Vector2 direction, LayerMask hitMask)
     {
-        agent.WeaponManager.SetWeaponVisibility(false);
-        GameObject flyingObject = Instantiate(RangeWeaponPrefab, agent.CenterPosition, Quaternion.identity);
-        flyingObject.GetComponent<Throwable>().Initialize(AttackDetector.Size.x, direction, FlySpeed);
-        flyingObject.GetComponent<DamageDealer>().Initialize(agent.TriggerCollider, this, hitMask);
-        flyingObject.GetComponent<Rotator>().Direction = direction;
-    }
-
-    public override bool IsUseable(Agent agent)
-    {
-        return agent.GroundDetector.Detected || !IsGroundWeapon;
+        GameObject damageItem = Instantiate(DamageItemPrefab, attacker.bounds.center, Quaternion.identity);
+        damageItem.GetComponent<DamageItem>().Initialize(HitSound, attacker, this, hitMask);
+        damageItem.GetComponent<SpriteRenderer>().sprite = WeaponSprite;
+        damageItem.AddComponent<Mover>().Initialize(AttackDetector.Size.x, direction * FlySpeed);
+        if (RotationSpeed > 0) damageItem.AddComponent<Rotator>().Initialize(RotationSpeed, direction.x);
     }
 
 #if UNITY_EDITOR

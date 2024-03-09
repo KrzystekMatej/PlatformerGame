@@ -9,7 +9,7 @@ public class GenericToHurtTransition : InterruptTransition
         interruptFilter.EnableInterrupt(InterruptType.Hit);
     }
 
-    public override void RunTransitionAction(Agent agent)
+    public override void RunTransitionAction(AgentManager agent)
     {
         if (agent.Invulnerability != null)
         {
@@ -17,7 +17,7 @@ public class GenericToHurtTransition : InterruptTransition
         }
     }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return agent.HealthManager.IsAlive() && (agent.Invulnerability == null || (agent.Invulnerability != null && !agent.Invulnerability.IsActive));
     }

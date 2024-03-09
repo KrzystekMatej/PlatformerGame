@@ -9,7 +9,7 @@ public class AttackToIdleTransition : InterruptTransition
         interruptFilter.EnableInterrupt(InterruptType.AnimationComplete);
     }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return agent.GroundDetector.Detected;
     }

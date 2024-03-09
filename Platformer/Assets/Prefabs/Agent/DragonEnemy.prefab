@@ -846,7 +846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a943af6535fef4982913235f3f03a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToCreate: {fileID: 5489649921723222096, guid: 8d18f4677c8074e45b118604fca4d52b, type: 3}
+  objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
   probability: 0.306
 --- !u!114 &8137952877383292111 stripped
 MonoBehaviour:

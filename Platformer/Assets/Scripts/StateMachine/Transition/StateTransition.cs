@@ -16,8 +16,8 @@ public abstract class StateTransition
         return StateType;
     }
 
-    public virtual void RunTransitionAction(Agent agent) {}
+    public virtual void RunTransitionAction(AgentManager agent) {}
 
-    public abstract bool IsTriggered(Agent agent);
+    public abstract bool IsTriggered(AgentManager agent);
 }
 

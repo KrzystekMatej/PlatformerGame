@@ -15,9 +15,9 @@ public class CanAttackAgent : Condition
 
     protected override bool IsConditionSatisfied()
     {
-        AgentWeapon weapon = context.Agent.WeaponManager.GetWeapon();
+        AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         int detectionCount = 0;
-        if (weapon != null && weapon.IsUseable(context.Agent))
+        if (weapon != null && weapon.IsUseable(context.Agent.GroundDetector))
         {
             Vector2 attackDirection = context.Agent.transform.right * context.Agent.OrientationController.CurrentOrientation;
             Vector2 origin = context.Agent.CenterPosition + attackDirection * weapon.AttackDetector.Size.x/2;

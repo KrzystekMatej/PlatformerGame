@@ -8,11 +8,11 @@ public class NavGraphTracker : MonoBehaviour
     private float quantizationUpdateInterval;
     [field: SerializeField]
     public PositionQuantizer Quantizer { get; private set; }
-    private Agent agent;
+    private AgentManager agent;
 
     private void Awake()
     {
-        agent = GetComponent<Agent>();
+        agent = GetComponent<AgentManager>();
         if (Quantizer.NavGraph == null) Quantizer.NavGraph = FindObjectOfType<NavGraph>();
     }
 

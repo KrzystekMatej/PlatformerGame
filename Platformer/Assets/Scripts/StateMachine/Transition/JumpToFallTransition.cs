@@ -6,7 +6,7 @@ public class JumpToFallTransition : StateTransition
 {
     public JumpToFallTransition() : base(StateType.Fall) { }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return agent.RigidBody.velocity.y <= 0;
     }

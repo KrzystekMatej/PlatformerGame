@@ -12,6 +12,6 @@ public class InputController : MonoBehaviour
 
     protected void Start()
     {
-        instanceData = GetComponentInChildren<Agent>().InstanceData;
+        instanceData = GetComponentInChildren<AgentManager>().InstanceData;
     }
 }

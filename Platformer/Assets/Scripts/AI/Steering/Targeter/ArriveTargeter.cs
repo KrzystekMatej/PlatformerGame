@@ -22,7 +22,7 @@ public class ArriveTargeter : Targeter
         if (seekTargeter == null) seekTargeter = GetComponent<SeekTargeter>();
     }
 
-    public override bool TryUpdateGoal(Agent agent, SteeringGoal goal)
+    public override bool TryUpdateGoal(AgentManager agent, SteeringGoal goal)
     {
         float distance = Vector2.Distance(agent.CenterPosition, seekTargeter.GoalPosition);
         float arriveRadius = agent.EnclosingCircleRadius;

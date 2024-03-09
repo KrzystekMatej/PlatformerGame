@@ -96,17 +96,17 @@ public class Path
         return Mathf.Clamp(index, 0, Points.Count - 1);
     }
 
-    private Vector2 GetFuturePosition(Agent agent)
+    private Vector2 GetFuturePosition(AgentManager agent)
     {
         return agent.CenterPosition + agent.RigidBody.velocity * predictTime;
     }
 
-    public void Recalculate(Agent agent)
+    public void Recalculate(AgentManager agent)
     {
         FindClosestSegment(GetFuturePosition(agent), 0, isCircular ? Points.Count - 1 : Points.Count - 2);
     }
 
-    public Vector2 CalculateGoalWithoutCoherence(Agent agent)
+    public Vector2 CalculateGoalWithoutCoherence(AgentManager agent)
     {
         Vector2 goalPosition = GetFuturePosition(agent);
 
@@ -121,7 +121,7 @@ public class Path
         return goalPosition;
     }
 
-    public Vector2 CalculateGoalWithCoherence(Agent agent)
+    public Vector2 CalculateGoalWithCoherence(AgentManager agent)
     {
         Vector2 goalPosition = GetFuturePosition(agent);
 
@@ -236,7 +236,7 @@ public class Path
         }
     }
 
-    public bool ReachedEnd(Agent agent, Vector2 goal)
+    public bool ReachedEnd(AgentManager agent, Vector2 goal)
     {
         return !isCircular && goal == Points[Points.Count - 1] && Vector2.Distance(agent.CenterPosition, goal) <= agent.EnclosingCircleRadius;
     }

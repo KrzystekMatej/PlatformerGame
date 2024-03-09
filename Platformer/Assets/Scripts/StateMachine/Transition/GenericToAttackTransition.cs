@@ -6,9 +6,9 @@ public class GenericToAttackTransition : StateTransition
 {
     public GenericToAttackTransition() : base(StateType.Attack) { }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
-        AgentWeapon weapon = agent.WeaponManager.GetWeapon();
-        return agent.InputController.InputData.Attack == InputState.Pressed && weapon != null && weapon.IsUseable(agent);
+        AttackingWeapon weapon = agent.WeaponManager.GetWeapon();
+        return agent.InputController.InputData.Attack == InputState.Pressed && weapon != null && weapon.IsUseable(agent.GroundDetector);
     }
 }

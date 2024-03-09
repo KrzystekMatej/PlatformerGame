@@ -37,7 +37,7 @@ public class AttackState : State
     {
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
         attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
-        agent.WeaponManager.GetWeapon().Attack(agent, attackDirection, HitMask);
+        agent.WeaponManager.GetWeapon().Attack(agent.TriggerCollider, attackDirection, HitMask);
     }
 
     protected override void HandleExit()
@@ -49,7 +49,7 @@ public class AttackState : State
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.red;
-        AgentWeapon weapon = agent.WeaponManager.GetWeapon();
+        AttackingWeapon weapon = agent.WeaponManager.GetWeapon();
         if (weapon != null) weapon.DrawGizmos(agent.CenterPosition, agent.transform.right * agent.OrientationController.CurrentOrientation);
     }
 }

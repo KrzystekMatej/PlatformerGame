@@ -21,7 +21,7 @@ public class PlanningDecomposer : Decomposer
         if (quantizer.NavGraph == null) quantizer.NavGraph = FindObjectOfType<NavGraph>();
     }
 
-    public override SteeringGoal Decompose(Agent agent, SteeringGoal goal)
+    public override SteeringGoal Decompose(AgentManager agent, SteeringGoal goal)
     {
         if (!goal.HasPosition) return goal;
         path.Points.Clear();
@@ -69,7 +69,7 @@ public class PlanningDecomposer : Decomposer
         return quantizer.NavGraph.FindShortestPath(start, end);
     }
 
-    private bool IsGoalVisible(Agent agent, SteeringGoal goal)
+    private bool IsGoalVisible(AgentManager agent, SteeringGoal goal)
     {
         Vector2 goalVector = goal.Position - agent.CenterPosition;
         return !Physics2D.CircleCast(agent.CenterPosition, agent.EnclosingCircleRadius, goalVector, goalVector.magnitude, quantizer.NavGraph.SolidGeometryLayerMask);
@@ -113,7 +113,7 @@ public class PlanningDecomposer : Decomposer
         return null;
     }
 
-    private int GetMostDistantReachableGoal(Agent agent)
+    private int GetMostDistantReachableGoal(AgentManager agent)
     {
         for (int i = navPath.Nodes.Count - 1; i > 0; i--)
         {

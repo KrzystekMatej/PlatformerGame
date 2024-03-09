@@ -20,7 +20,7 @@ public class CameraConfinerManager : MonoBehaviour
     private void Destroy(Collider2D objectCollider)
     {
         GameObject toDestroy = objectCollider.gameObject;
-        Agent agent = toDestroy.GetComponent<Agent>();
+        AgentManager agent = toDestroy.GetComponent<AgentManager>();
         if (agent == null)
         {
             Destroy(toDestroy);

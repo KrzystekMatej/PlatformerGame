@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc343873f9013043b18a50d74e5389f, type: 3}
+  m_Name: FireBallWeapon
+  m_EditorClassIdentifier: 
+  WeaponName: FireBall
+  AttackDamage: 1
+  KnockbackForce: 5
+  <AttackDetector>k__BackingField: {fileID: 11400000, guid: 186fff12d10ea7241b7a9762d19039e6, type: 2}
+  IsGroundWeapon: 0
+  WeaponSprite: {fileID: 21300000, guid: 0869b1e96aac6d34cb086976dc7af826, type: 3}
+  WeaponSound: {fileID: 0}
+  DamageItemPrefab: {fileID: 4983611067930591715, guid: 78d21d0c101018e4e8c6951ff1675282, type: 3}
+  HitSound: {fileID: 0}
+  FlySpeed: 20
+  IsUnstoppable: 0
+  RotationSpeed: 0

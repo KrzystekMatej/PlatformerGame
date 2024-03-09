@@ -24,12 +24,12 @@ public class FiniteStateMachine : MonoBehaviour
 
     private void Start()
     {
-        Factory.InitializeStates(GetComponentInParent<Agent>());
+        Factory.InitializeStates(GetComponentInParent<AgentManager>());
         CurrentState = InitialState;
         CurrentState.Enter();
     }
 
-    public void PerformStateUpdate(Agent agent)
+    public void PerformStateUpdate(AgentManager agent)
     {
         CurrentState.HandleUpdate();
 
@@ -41,7 +41,7 @@ public class FiniteStateMachine : MonoBehaviour
         }
     }
 
-    private void PerformTransition(StateTransition triggered, Agent agent)
+    private void PerformTransition(StateTransition triggered, AgentManager agent)
     {
         State targetState = Factory.GetState(triggered.GetTargetStateType());
 
@@ -54,7 +54,7 @@ public class FiniteStateMachine : MonoBehaviour
         }
     }
 
-    public void PerformInterruptTransition(Agent agent, InterruptType interrupt)
+    public void PerformInterruptTransition(AgentManager agent, InterruptType interrupt)
     {
         StateTransition triggered = CurrentState.InterruptTransitions.FirstOrDefault(t => t.IsTriggered(agent) && t.IsInterruptEnabled(interrupt));
 

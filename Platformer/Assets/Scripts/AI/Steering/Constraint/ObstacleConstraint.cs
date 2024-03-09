@@ -16,7 +16,7 @@ public class ObstacleConstraint : Constraint
     private int problemSegmentIndex;
     private int detectionCount;
 
-    public override bool IsViolated(Agent agent, List<Vector2> pointPath)
+    public override bool IsViolated(AgentManager agent, List<Vector2> pointPath)
     {
         if (pointPath.Count < 2) return true;
         detector.Size = new Vector2(agent.EnclosingCircleRadius, 0);
@@ -41,7 +41,7 @@ public class ObstacleConstraint : Constraint
         return false;
     }
 
-    public override SteeringGoal Suggest(Agent agent, List<Vector2> pointPath, SteeringGoal goal)
+    public override SteeringGoal Suggest(AgentManager agent, List<Vector2> pointPath, SteeringGoal goal)
     {
         RaycastHit2D closestHit = GetClosestHit();
         goal.Position = GetAvoidanceTarget(pointPath, closestHit);
@@ -82,7 +82,7 @@ public class ObstacleConstraint : Constraint
 
     private void OnDrawGizmosSelected()
     {
-        Agent agent = GetComponentInParent<AIInputController>().GetComponentInChildren<Agent>();
+        AgentManager agent = GetComponentInParent<AIInputController>().GetComponentInChildren<AgentManager>();
         Vector2 origin = agent.GetComponent<Collider2D>().bounds.center;
         Gizmos.color = Color.yellow;
 

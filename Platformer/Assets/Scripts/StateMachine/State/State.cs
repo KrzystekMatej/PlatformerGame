@@ -10,10 +10,10 @@ public abstract class State : MonoBehaviour
     public StateTransition[] Transitions { get; private set; }
     public InterruptTransition[] InterruptTransitions { get; private set; }
 
-    protected Agent agent;
+    protected AgentManager agent;
     public UnityEvent OnEnter, OnExit;
 
-    public void Initialize(Agent agent)
+    public void Initialize(AgentManager agent)
     {
         this.agent = agent;
         SetTransitions(GetTransitions());

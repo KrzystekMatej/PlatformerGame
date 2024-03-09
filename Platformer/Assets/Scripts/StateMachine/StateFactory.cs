@@ -25,7 +25,7 @@ public class StateFactory : MonoBehaviour
 
 
 
-    public void InitializeStates(Agent agent)
+    public void InitializeStates(AgentManager agent)
     {
         foreach (State state in GetComponents<State>())
         {

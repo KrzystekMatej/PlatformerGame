@@ -11,7 +11,7 @@ public class SimpleActuator : Actuator
     private Vector2 gizmoAgentCenterPosition;
 #endif
 
-    public override List<Vector2> GetPath(Agent agent, SteeringGoal goal)
+    public override List<Vector2> GetPath(AgentManager agent, SteeringGoal goal)
     {
         List<Vector2> path = new List<Vector2>();
 
@@ -24,7 +24,7 @@ public class SimpleActuator : Actuator
         return path;
     }
 
-    public override Vector2? GetSteering(Agent agent, List<Vector2> pointPath, SteeringGoal goal)
+    public override Vector2? GetSteering(AgentManager agent, List<Vector2> pointPath, SteeringGoal goal)
     {
         if (!goal.HasPosition)
         {

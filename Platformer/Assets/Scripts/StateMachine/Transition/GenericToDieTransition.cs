@@ -9,13 +9,13 @@ public class GenericToDieTransition : InterruptTransition
         interruptFilter.EnableInterrupt(InterruptType.Hit);
     }
 
-    public override void RunTransitionAction(Agent agent)
+    public override void RunTransitionAction(AgentManager agent)
     {
         agent.RigidBody.gravityScale = agent.DefaultData.GravityScale;
         agent.OnRespawnRequired.RemoveAllListeners();
     }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return !agent.HealthManager.IsAlive();
     }

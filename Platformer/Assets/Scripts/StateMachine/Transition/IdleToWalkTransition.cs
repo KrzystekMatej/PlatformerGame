@@ -7,7 +7,7 @@ public class IdleToWalkTransition : StateTransition
 {
     public IdleToWalkTransition() : base(StateType.Walk) { }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return Mathf.Abs(agent.InputController.InputData.SteeringForce.x) > 0;
     }

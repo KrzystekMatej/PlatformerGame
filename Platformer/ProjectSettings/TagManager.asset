@@ -57,7 +57,7 @@ TagManager:
   - name: Front
     uniqueID: 642602087
     locked: 0
-  - name: Collectable
+  - name: Item
     uniqueID: 167798337
     locked: 0
   - name: UI

@@ -5,5 +5,5 @@ using UnityEngine;
 
 public abstract class Targeter : MonoBehaviour
 {
-    public abstract bool TryUpdateGoal(Agent agent, SteeringGoal goal);
+    public abstract bool TryUpdateGoal(AgentManager agent, SteeringGoal goal);
 }

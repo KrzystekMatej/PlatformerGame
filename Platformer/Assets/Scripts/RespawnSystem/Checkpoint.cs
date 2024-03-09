@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Checkpoint : MonoBehaviour
 {
-    private Agent respawnTarget;
+    private AgentManager respawnTarget;
     private RespawnSystem respawnSystem;
     private TriggerDetector triggerDetector;
 
@@ -21,7 +21,7 @@ public class Checkpoint : MonoBehaviour
     public void ActivateCheckpoint(Collider2D collision)
     {
         triggerDetector.Disable();
-        respawnTarget = collision.GetComponent<Agent>();
+        respawnTarget = collision.GetComponent<AgentManager>();
         respawnTarget.OnRespawnRequired.RemoveAllListeners();
         respawnTarget.OnRespawnRequired.AddListener(RespawnPlayer);
 

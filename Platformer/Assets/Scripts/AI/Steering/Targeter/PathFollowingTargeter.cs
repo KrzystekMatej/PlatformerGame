@@ -16,13 +16,13 @@ public class PathFollowingTargeter : Targeter
         RecalculatePath(GetComponentInParent<AIManager>().Agent);
     }
 
-    public void RecalculatePath(Agent agent)
+    public void RecalculatePath(AgentManager agent)
     {
         path.SetPoints(waypoints);
         path.Recalculate(agent);
     }
 
-    public override bool TryUpdateGoal(Agent agent, SteeringGoal goal)
+    public override bool TryUpdateGoal(AgentManager agent, SteeringGoal goal)
     {
         if (isDynamic) path.SetPoints(waypoints);
 

@@ -17,7 +17,7 @@ public class SeekTargeter : Targeter
         GoalPosition = GetComponentInParent<AIManager>().Agent.CenterPosition;
     }
 
-    public override bool TryUpdateGoal(Agent agent, SteeringGoal goal)
+    public override bool TryUpdateGoal(AgentManager agent, SteeringGoal goal)
     {
         goal.Position = !isFleeing ? GoalPosition : agent.CenterPosition + (agent.CenterPosition - GoalPosition);
         goal.Owner = GoalOwner;

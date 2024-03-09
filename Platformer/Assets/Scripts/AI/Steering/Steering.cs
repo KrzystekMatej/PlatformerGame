@@ -43,7 +43,7 @@ public class Steering : MonoBehaviour
         }
     }
 
-    public void ApplySteering(Agent agent, AIInputController inputController)
+    public void ApplySteering(AgentManager agent, AIInputController inputController)
     {
         if (currentPipeline == null) return;
 

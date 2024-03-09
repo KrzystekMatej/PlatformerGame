@@ -6,9 +6,15 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [SerializeField]
-    private float rotationSpeed = 0;
+    private float rotateSpeed = 0;
+    [SerializeField]
+    public float rotateDirection = 1;
 
-    public Vector2 Direction { get; set; }
+    public void Initialize(float rotateSpeed, float rotateDirection)
+    {
+        this.rotateSpeed = rotateSpeed;
+        this.rotateDirection = rotateDirection;
+    }
 
     private void Update()
     {
@@ -17,6 +23,6 @@ public class Rotator : MonoBehaviour
     
     private void Rotate()
     {
-        transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * rotationSpeed * -Direction.x);
+        transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * rotateSpeed * rotateDirection);
     }
 }

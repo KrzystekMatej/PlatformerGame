@@ -7,7 +7,7 @@ public class ClimbToIdleTransition : StateTransition
 
     public ClimbToIdleTransition() : base(StateType.Idle) { }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return agent.ClimbDetector.TriggerCounter == 0;
     }

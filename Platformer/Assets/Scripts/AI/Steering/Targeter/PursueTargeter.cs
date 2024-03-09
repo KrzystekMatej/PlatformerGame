@@ -8,7 +8,7 @@ public class PursueTargeter : SeekTargeter
     public float MaxPrediction { get; private set; }
     public Vector2 TargetVelocity { get; set; }
 
-    public override bool TryUpdateGoal(Agent agent, SteeringGoal goal)
+    public override bool TryUpdateGoal(AgentManager agent, SteeringGoal goal)
     {
         float distance = (GoalPosition - agent.CenterPosition).magnitude;
         float speed = agent.RigidBody.velocity.magnitude;

@@ -6,7 +6,7 @@ public class GenericToJumpTransition : StateTransition
 {
     public GenericToJumpTransition() : base(StateType.Jump) { }
 
-    public override bool IsTriggered(Agent agent)
+    public override bool IsTriggered(AgentManager agent)
     {
         return agent.InputController.InputData.Jump == InputState.Pressed && agent.GroundDetector.Detected;
     }
