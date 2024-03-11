@@ -12,8 +12,8 @@ public class AgentManager : MonoBehaviour, IHittable
     public UnityEvent OnDeathComplete, OnFallOut, OnRespawnRequired;
     public UnityEvent<Collider2D, Weapon> OnHit;
     [field: SerializeField]
-    public AgentData DefaultData { get; private set; }
-    public AgentInstanceData InstanceData;
+    public AgentDefaultData DefaultData { get; private set; }
+    public AgentInstanceData InstanceData { get; set; }
     public Rigidbody2D RigidBody { get; private set; }
     public InputController InputController { get; private set; }
     public AgentAnimator Animator { get; private set; }
@@ -53,20 +53,18 @@ public class AgentManager : MonoBehaviour, IHittable
 
         InstanceData = new AgentInstanceData()
         {
-            Health = DefaultData.Health,
             MaxSpeed = DefaultData.MaxSpeed,
             MaxForce = DefaultData.MaxForce,
             JumpForce = DefaultData.JumpForce,
-            JumpGravityModifier = DefaultData.JumpGravityModifier,
-            FallGravityModifier = DefaultData.FallGravityModifier,
             ClimbSpeed = DefaultData.ClimbSpeed
         };
     }
 
     private void Start()
     {
-        HealthManager.Initialize(InstanceData.Health);
-        Animator.OnAnimationComplete.AddListener(() => StateMachine.PerformInterruptTransition(this, InterruptType.AnimationComplete));
+        HealthManager.Initialize(DefaultData.Health);
+        Animator.OnAnimationAction.AddListener(() => StateMachine.InterruptFilter |= InterruptMask.AnimationAction);
+        Animator.OnAnimationComplete.AddListener(() => StateMachine.InterruptFilter |= InterruptMask.AnimationComplete);
     }
 
     private void Update()
@@ -75,19 +73,8 @@ public class AgentManager : MonoBehaviour, IHittable
         {
             WeaponManager.SwapWeapon();
         }
-        OrientationController.SetAgentOrientation(RigidBody.velocity);
         StateMachine.PerformStateUpdate(this);
-    }
-
-    private void FixedUpdate()
-    {
-        GroundDetector.Detect();
-    }
-
-    public void FallOut()
-    {
-        OnFallOut?.Invoke();
-        OnRespawnRequired?.Invoke();
+        OrientationController.SetAgentOrientation(RigidBody.velocity);
     }
     
     public void Hit(Collider2D attacker, Weapon damageWeapon)
@@ -100,10 +87,15 @@ public class AgentManager : MonoBehaviour, IHittable
 
     public void Hit(int attackDamage)
     {
-        if (!HealthManager.IsAlive() || (Invulnerability != null && Invulnerability.IsActive)) return;
+        if (!HealthManager.IsAlive()) return;
+        if (Invulnerability != null)
+        {
+            if (Invulnerability.IsActive) return;
+            else StartCoroutine(Invulnerability.Run(StateMachine.Factory));
+        }
 
         HealthManager.ChangeHealth(-attackDamage);
-        StateMachine.PerformInterruptTransition(this, InterruptType.Hit);
+        StateMachine.InterruptFilter |= InterruptMask.Hurt;
     }
 
     public void Kill()
@@ -111,7 +103,13 @@ public class AgentManager : MonoBehaviour, IHittable
         Hit(HealthManager.CurrentHealth);
     }
 
-    public void PerformKnockback(Vector2 from, float knockbackForce)
+    public void FallOut()
+    {
+        OnFallOut?.Invoke();
+        OnRespawnRequired?.Invoke();
+    }
+
+    private void PerformKnockback(Vector2 from, float knockbackForce)
     {
         if (knockbackForce <= 0) return;
         Vector2 direction = CenterPosition - from;

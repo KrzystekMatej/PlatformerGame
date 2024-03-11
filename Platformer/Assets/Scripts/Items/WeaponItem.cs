@@ -6,19 +6,11 @@ public class WeaponItem : Item
 {
     [SerializeField]
     private AttackingWeapon weapon;
-    private SpriteRenderer spriteRenderer;
 
 
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-    }
-
-
-
-    private void Start()
-    {
-        spriteRenderer.sprite = weapon.WeaponSprite;
+        GetComponent<SpriteRenderer>().sprite = weapon.WeaponSprite;
     }
 
     public override void Collect(Collider2D collider)

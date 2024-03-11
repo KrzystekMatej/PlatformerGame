@@ -22,18 +22,18 @@ MonoBehaviour:
   - rid: 5306976818888441860
   - rid: 5306976818888441863
   - rid: 5306976818888441868
-  - rid: 5306976818888441875
   - rid: 5306976957804314637
   - rid: 7899365586350112772
   - rid: 7899365732142284800
   - rid: 7899365732142284802
   - rid: 3566663053141082112
+  - rid: 7407168188916957187
   treeState: 0
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 548, y: -10, z: 0}
+  viewPosition: {x: 473, y: 24, z: 0}
   viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
   references:
     version: 2
@@ -44,7 +44,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: cbb6e96ff24b75c49a6e604e2a072c70
-        position: {x: 73.85003, y: 797.0001}
+        position: {x: 69.37392, y: 796.99994}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -72,7 +72,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 80b3963569da0294b8a25e88b5062b3e
-        position: {x: -475.57928, y: 856.00006}
+        position: {x: -528.98206, y: 856}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -127,7 +127,7 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 5306976818888441868
-        - rid: 5306976818888441875
+        - rid: 7407168188916957187
         - rid: 5306976957804314637
     - rid: 5306976818888441863
       type: {class: WaitAfterSuccess, ns: , asm: Assembly-CSharp}
@@ -135,7 +135,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: d6a72cd0d57986447b9c1178fe4eaa8a
-        position: {x: -475.57928, y: 696}
+        position: {x: -528.98206, y: 696.00006}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -151,20 +151,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b0aedfc9cd96d9e4da5b0328f53f154e
-        position: {x: -924.5793, y: 553}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306976818888441875
-      type: {class: StopMovement, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 56e988673d988fe48a5e27257a52abba
-        position: {x: -717.9999, y: 553}
+        position: {x: -947.7746, y: 553.0001}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -177,7 +164,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 7061c841d7550be41928015433619795
-        position: {x: -475.57928, y: 553}
+        position: {x: -528.98206, y: 553.00006}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -186,6 +173,19 @@ MonoBehaviour:
         drawGizmos: 0
         child:
           rid: 5306976818888441863
+    - rid: 7407168188916957187
+      type: {class: StopMoving, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 42deb25647e092f478579774bc704db2
+        position: {x: -717.99994, y: 553.0001}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+          DataTable:
+            entries: []
+        description: 
+        drawGizmos: 0
     - rid: 7899365586350112772
       type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
       data:

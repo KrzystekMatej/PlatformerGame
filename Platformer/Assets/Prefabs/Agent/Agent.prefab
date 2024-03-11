@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7433307234973794105}
   - component: {fileID: 7018045401786011267}
   - component: {fileID: 7639093333086872763}
-  m_Layer: 13
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,10 +432,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  detectDelay: 0.02
   objectCollider: {fileID: 7363741092666616261}
   <CollisionLayerMask>k__BackingField:
     serializedVersion: 2
-    m_Bits: 655616
+    m_Bits: 663808
   boxCastXOffset: -0
   boxCastYOffset: -0.47
   boxCastWidth: 0.705
@@ -509,12 +510,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21c98ab21d43f2458e40cf145cc4dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7363741092903229675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,12 +532,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fe6dec2ee21eb48a5b4299dd06921c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7363741092903229670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,12 +554,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7132725e64abe4e48aedcdf2d7e7edc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7363741092903229669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,12 +576,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c4e2321c1f3ca4e9cdfe6424541876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &5247370467627279520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,6 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b02982b542225418ab3bdbf8c4c76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -590,6 +608,9 @@ MonoBehaviour:
   HitMask:
     serializedVersion: 2
     m_Bits: 2056
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &7363741092903229671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -602,12 +623,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d38976bb0d326d4f8eaa8ab7db0754f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &1679817844667101516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,12 +645,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00702c02dd8624346979247969e38d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &8660966007656399279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,6 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02de7f2faf07294597425eaecc98ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls:
@@ -657,6 +687,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   deathDuration: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &8605784747821516568
 MonoBehaviour:
   m_ObjectHideFlags: 0

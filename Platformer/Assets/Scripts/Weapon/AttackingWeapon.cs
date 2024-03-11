@@ -10,9 +10,9 @@ public abstract class AttackingWeapon : Weapon
     public Sprite WeaponSprite;
     public Sound WeaponSound;
 
-    public bool IsUseable(GroundDetector groundDetector)
+    public bool IsUseableByAgent(AgentManager agent)
     {
-        return groundDetector.Detected || !IsGroundWeapon;
+        return !IsGroundWeapon || agent.GroundDetector.Detected;
     }
 
     public abstract void Attack(Collider2D attacker, Vector2 direction, LayerMask hitMask);

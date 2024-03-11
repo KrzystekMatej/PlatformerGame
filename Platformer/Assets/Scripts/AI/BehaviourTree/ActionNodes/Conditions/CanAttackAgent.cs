@@ -17,7 +17,7 @@ public class CanAttackAgent : Condition
     {
         AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         int detectionCount = 0;
-        if (weapon != null && weapon.IsUseable(context.Agent.GroundDetector))
+        if (weapon != null && weapon.IsUseableByAgent(context.Agent))
         {
             Vector2 attackDirection = context.Agent.transform.right * context.Agent.OrientationController.CurrentOrientation;
             Vector2 origin = context.Agent.CenterPosition + attackDirection * weapon.AttackDetector.Size.x/2;

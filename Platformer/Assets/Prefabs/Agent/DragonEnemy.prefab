@@ -382,7 +382,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 415090757186357842, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[0]
+      value: 7407168207598387461
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[1]
+      value: 7407168207598387462
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387363]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387461]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387462]
+      value: Assembly-CSharp GenericToFlyTransition
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
@@ -403,6 +427,18 @@ PrefabInstance:
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PlaySpecificSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387363].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387461].<TargetState>k__BackingField
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387462].<TargetState>k__BackingField
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -453,13 +489,65 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hittableLayerMask.m_Bits
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[0]
+      value: 7407168207598387458
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[1]
+      value: 7407168207598387459
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[2]
+      value: 7407168207598387460
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387359]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387360]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387458]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387459]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387460]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387360].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387458].<TargetState>k__BackingField
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387459].<TargetState>k__BackingField
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387460].<TargetState>k__BackingField
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350646, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 22100000, guid: 38750315a14e58b4197a235064657fec, type: 2}
+      objectReference: {fileID: 9100000, guid: 3e1fcd98bb85efc42a6158f799e6c0c8, type: 2}
     - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -507,6 +595,26 @@ PrefabInstance:
     - target: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[2]
+      value: 7407168207598387362
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.data[3]
+      value: 7407168207598387362
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387361]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168207598387362]
+      value: Assembly-CSharp GenericToFlyTransition
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092903229673, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
@@ -646,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 1993502237472647648}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -673,6 +781,22 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: stateTable.entries.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: stateTable.entries.Array.data[0].Key
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: stateTable.entries.Array.data[1].Key
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: stateTable.entries.Array.data[2].Key
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[5].Key
       value: 6
       objectReference: {fileID: 0}
@@ -683,11 +807,11 @@ PrefabInstance:
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[1].Value
       value: 
-      objectReference: {fileID: 1993502237472647648}
+      objectReference: {fileID: 113007710221410866}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[2].Value
       value: 
-      objectReference: {fileID: 1993502237472647648}
+      objectReference: {fileID: 7993744435714839249}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[3].Value
       value: 
@@ -783,7 +907,22 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7363741092903229668, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
     - {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+    - {fileID: 7363741092903229670, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+    - {fileID: 7363741092903229669, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+    - {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+    - {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+--- !u!114 &113007710221410866 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1647915609668588414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137952876630608791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00702c02dd8624346979247969e38d64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2841504784913693691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3580818035751282821, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -800,6 +939,17 @@ CapsuleCollider2D:
   m_CorrespondingSourceObject: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
   m_PrefabInstance: {fileID: 1647915609668588414}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7993744435714839249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8660966007656399279, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1647915609668588414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137952876630608791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02de7f2faf07294597425eaecc98ff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8137952876630608791 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7363741092903229673, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -817,6 +967,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd50a714bf960245a9388a16305c510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitions:
+  - rid: 7407168207598387463
+  - rid: 7407168207598387464
+  - rid: 7407168209578360951
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -824,6 +978,21 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   flapSound: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7407168207598387463
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168207598387464
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168209578360951
+      type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 5
 --- !u!4 &8137952877383292104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363741092985079734, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

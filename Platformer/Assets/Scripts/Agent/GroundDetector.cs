@@ -5,6 +5,8 @@ using UnityEngine;
 public class GroundDetector : MonoBehaviour
 {
     [SerializeField]
+    private float detectDelay = 0.02f;
+    [SerializeField]
     private Collider2D objectCollider;
     [field: SerializeField]
     public LayerMask CollisionLayerMask { get; private set; }
@@ -28,23 +30,28 @@ public class GroundDetector : MonoBehaviour
     private void Awake()
     {
         objectCollider = objectCollider == null ? GetComponent<Collider2D>() : objectCollider;
+        StartCoroutine(Detect());
     }
 
-    public void Detect()
+    private IEnumerator Detect()
     {
-        RaycastHit2D hit = Physics2D.BoxCast
-        (
-            objectCollider.bounds.center + new Vector3(boxCastXOffset, boxCastYOffset),
-            new Vector2(boxCastWidth, boxCastHeight),
-            0,
-            Vector2.down,
-            0,
-            CollisionLayerMask
-        );
+        while (true)
+        {
+            RaycastHit2D hit = Physics2D.BoxCast
+            (
+                objectCollider.bounds.center + new Vector3(boxCastXOffset, boxCastYOffset),
+                new Vector2(boxCastWidth, boxCastHeight),
+                0,
+                Vector2.down,
+                0,
+                CollisionLayerMask
+            );
 
-        
-        Detected = (hit.collider != null) && hit.collider.IsTouching(objectCollider);
-        Hit = hit;
+
+            Detected = (hit.collider != null) && hit.collider.IsTouching(objectCollider);
+            Hit = hit;
+            yield return new WaitForSeconds(detectDelay);
+        } 
     }
 
     public Sound GetGroundSound(SoundActionType actionType)

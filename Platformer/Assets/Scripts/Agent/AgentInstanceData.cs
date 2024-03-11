@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class AgentInstanceData
 {
-    public int Health;
     public Vector2 Acceleration;
     public float MaxSpeed;
     public float MaxForce;
     public float JumpForce;
-    public float JumpGravityModifier;
-    public float FallGravityModifier;
     public Vector2 ClimbSpeed;
 }

@@ -25,9 +25,7 @@ MonoBehaviour:
   - rid: 5306976818888441870
   - rid: 5306976818888441873
   - rid: 5306976818888441874
-  - rid: 5306976818888441875
   - rid: 5306976818888441876
-  - rid: 5306976818888441877
   - rid: 5306976911331164160
   - rid: 5306976911331164161
   - rid: 5306976911331164162
@@ -45,13 +43,15 @@ MonoBehaviour:
   - rid: 5306976957804314630
   - rid: 5306976957804314631
   - rid: 5306976957804314637
+  - rid: 7407168188916957185
+  - rid: 7407168188916957186
   treeState: 0
   blackboard:
     moveToPosition: {x: 0, y: 0, z: 0}
     DataTable:
       entries: []
-  viewPosition: {x: 487, y: 134, z: 0}
-  viewScale: {x: 0.25, y: 0.25, z: 1}
+  viewPosition: {x: 492, y: -144, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -76,7 +76,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 80b3963569da0294b8a25e88b5062b3e
-        position: {x: -1150.9778, y: 1021}
+        position: {x: -1211.5908, y: 988.9999}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -132,7 +132,7 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 5306976818888441868
-        - rid: 5306976818888441875
+        - rid: 7407168188916957185
         - rid: 5306976957804314637
     - rid: 5306976818888441863
       type: {class: WaitAfterSuccess, ns: , asm: Assembly-CSharp}
@@ -140,7 +140,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: d6a72cd0d57986447b9c1178fe4eaa8a
-        position: {x: -1150.9778, y: 861}
+        position: {x: -1211.5908, y: 828.9999}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -156,7 +156,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b0aedfc9cd96d9e4da5b0328f53f154e
-        position: {x: -1599.9778, y: 718.00006}
+        position: {x: -1597.5448, y: 697.9999}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -178,7 +178,7 @@ MonoBehaviour:
         drawGizmos: 0
         children:
         - rid: 5306976818888441874
-        - rid: 5306976818888441877
+        - rid: 7407168188916957186
         - rid: 5306976818888441876
         - rid: 5306976818888441873
     - rid: 5306976818888441873
@@ -207,39 +207,13 @@ MonoBehaviour:
             entries: []
         description: 
         drawGizmos: 0
-    - rid: 5306976818888441875
-      type: {class: StopMovement, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 56e988673d988fe48a5e27257a52abba
-        position: {x: -1392.9778, y: 718.00006}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
     - rid: 5306976818888441876
       type: {class: IsOpponentBehind, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: c64f446c5b94ac54ab2788844e96caf3
-        position: {x: -369.00018, y: 696.66016}
-        blackboard:
-          moveToPosition: {x: 0, y: 0, z: 0}
-          DataTable:
-            entries: []
-        description: 
-        drawGizmos: 0
-    - rid: 5306976818888441877
-      type: {class: StopMovement, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 2cf35ee0fd5089b498402458eb917ed4
-        position: {x: -568.0002, y: 697.6601}
+        position: {x: -366.98862, y: 696.9999}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -252,7 +226,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: efaa92dc8b014d94b84f6c32e3b1e5fe
-        position: {x: 393.56235, y: 519}
+        position: {x: 393.99997, y: 516.9885}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -284,7 +258,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 34038ba1333e0bc4bb2198e5f46e26da
-        position: {x: 18.562347, y: 958.00006}
+        position: {x: 18.999989, y: 957.9999}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -331,7 +305,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 2fa2c3c39e055fa41947d94ab85c113e
-        position: {x: -99, y: 1126}
+        position: {x: -99.00004, y: 1126}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -462,7 +436,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6dbe505f265232643b087342ed846b3e
-        position: {x: 995.5624, y: 870.00006}
+        position: {x: 997.99994, y: 870}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -494,7 +468,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 7061c841d7550be41928015433619795
-        position: {x: -1150.9778, y: 718.00006}
+        position: {x: -1211.5908, y: 697.9999}
         blackboard:
           moveToPosition: {x: 0, y: 0, z: 0}
           DataTable:
@@ -503,3 +477,29 @@ MonoBehaviour:
         drawGizmos: 0
         child:
           rid: 5306976818888441863
+    - rid: 7407168188916957185
+      type: {class: StopMoving, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 235c8ce1a274e7343ab08ccad7fd2ed6
+        position: {x: -1392.9998, y: 697.9999}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+          DataTable:
+            entries: []
+        description: 
+        drawGizmos: 0
+    - rid: 7407168188916957186
+      type: {class: StopMoving, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 69fd72aa59832f9478b334d5705227e3
+        position: {x: -567.99994, y: 696.9999}
+        blackboard:
+          moveToPosition: {x: 0, y: 0, z: 0}
+          DataTable:
+            entries: []
+        description: 
+        drawGizmos: 0

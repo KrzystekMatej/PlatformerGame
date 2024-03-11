@@ -66,7 +66,7 @@ public class NavGraphNodeEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        NavGraphNode script = (NavGraphNode)target;
+        NavGraphNode node = (NavGraphNode)target;
 
         DrawDefaultInspector();
 
@@ -75,33 +75,33 @@ public class NavGraphNodeEditor : Editor
 
         if (newNeighbor && GUILayout.Button("Add Edge"))
         {
-            Undo.RecordObject(script, "Add Edge");
-            script.AddNeighbor(newNeighbor);
+            Undo.RecordObject(node, "Add Edge");
+            node.AddNeighbor(newNeighbor);
             Undo.RecordObject(newNeighbor, "Add Edge");
-            newNeighbor.AddNeighbor(script);
+            newNeighbor.AddNeighbor(node);
 
             newNeighbor = null;
         }
 
-        if (script.Neighbors.Count > 0)
+        if (node.Neighbors.Count > 0)
         {
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Neighbors:");
-            for (int i = 0; i < script.Neighbors.Count; i++)
+            for (int i = 0; i < node.Neighbors.Count; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.ObjectField(script.Neighbors[i], typeof(NavGraphNode), true);
+                EditorGUILayout.ObjectField(node.Neighbors[i], typeof(NavGraphNode), true);
 
                 if (GUILayout.Button("Remove Edge"))
                 {
-                    Undo.RecordObject(script, "Remove Edge");
-                    NavGraphNode neighbor = script.Neighbors[i];
-                    script.RemoveNeighbor(neighbor);
+                    Undo.RecordObject(node, "Remove Edge");
+                    NavGraphNode neighbor = node.Neighbors[i];
+                    node.RemoveNeighbor(neighbor);
 
                     if (neighbor != null)
                     {
                         Undo.RecordObject(neighbor, "Remove Edge");
-                        neighbor.RemoveNeighbor(script);
+                        neighbor.RemoveNeighbor(node);
                     }
                     break;
                 }
@@ -110,6 +110,6 @@ public class NavGraphNodeEditor : Editor
             }
         }
 
-        if (GUI.changed) EditorUtility.SetDirty(script);
+        if (GUI.changed) EditorUtility.SetDirty(node);
     }
 }

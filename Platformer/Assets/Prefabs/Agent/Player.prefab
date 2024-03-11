@@ -1055,6 +1055,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1111,6 +1115,10 @@ PrefabInstance:
       value: 532480
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: hittableLayerMask.m_Bits
       value: 532992
       objectReference: {fileID: 0}
@@ -1128,7 +1136,27 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 52a8a9480403f914db4355634c7662c7, type: 2}
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: <CollisionLayerMask>k__BackingField.m_Bits
-      value: 655616
+      value: 663808
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229668, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229669, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229670, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: DefaultData

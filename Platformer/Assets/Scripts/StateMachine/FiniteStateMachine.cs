@@ -14,6 +14,7 @@ public class FiniteStateMachine : MonoBehaviour
     public State CurrentState { get; private set; }
 
     public StateFactory Factory { get; private set; }
+    public InterruptMask InterruptFilter { get; set; }
 
 
     private void Awake()
@@ -39,11 +40,12 @@ public class FiniteStateMachine : MonoBehaviour
         {
             PerformTransition(triggered, agent);
         }
+        InterruptFilter = InterruptMask.None;
     }
 
     private void PerformTransition(StateTransition triggered, AgentManager agent)
     {
-        State targetState = Factory.GetState(triggered.GetTargetStateType());
+        State targetState = Factory.GetState(triggered.TargetState);
 
         if (targetState != null)
         {
@@ -51,16 +53,6 @@ public class FiniteStateMachine : MonoBehaviour
             triggered.RunTransitionAction(agent);
             CurrentState = targetState;
             CurrentState.Enter();
-        }
-    }
-
-    public void PerformInterruptTransition(AgentManager agent, InterruptType interrupt)
-    {
-        StateTransition triggered = CurrentState.InterruptTransitions.FirstOrDefault(t => t.IsTriggered(agent) && t.IsInterruptEnabled(interrupt));
-
-        if (triggered != null)
-        {
-            PerformTransition(triggered, agent);
         }
     }
 }

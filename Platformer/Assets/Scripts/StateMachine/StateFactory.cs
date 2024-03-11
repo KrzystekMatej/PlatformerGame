@@ -34,6 +34,7 @@ public class StateFactory : MonoBehaviour
     }
 }
 
+[Serializable]
 public enum StateType
 {
     Idle,

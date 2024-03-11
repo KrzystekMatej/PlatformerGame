@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886ed7807d3a34145aa6a70f38a688df, type: 3}
   m_Name: PterodactylAgentData
   m_EditorClassIdentifier: 
-  Health: 2
-  MaxSpeed: 2
-  MaxForce: 50
-  JumpForce: 12
-  JumpGravityModifier: 2
-  FallGravityModifier: 0.5
-  ClimbSpeed: {x: 2, y: 5}
-  GravityScale: 2
+  <Health>k__BackingField: 2
+  <MaxSpeed>k__BackingField: 2
+  <MaxForce>k__BackingField: 50
+  <JumpForce>k__BackingField: 12
+  <JumpGravityModifier>k__BackingField: 2
+  <FallGravityModifier>k__BackingField: 0.5
+  <ClimbSpeed>k__BackingField: {x: 2, y: 5}

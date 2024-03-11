@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 12631105}
   - component: {fileID: 12631104}
   - component: {fileID: 12631103}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: GeometryFiller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78144,7 +78144,7 @@ Transform:
   - {fileID: 1156947607}
   - {fileID: 1948338704}
   m_Father: {fileID: 1829917285}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &144909837
 GameObject:
@@ -81944,7 +81944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 451905447}
   m_Layer: 0
-  m_Name: Items
+  m_Name: CollectableItems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81957,7 +81957,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451905446}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -81966,8 +81966,8 @@ Transform:
   - {fileID: 1389014504}
   - {fileID: 1165727925}
   - {fileID: 971436987}
-  m_Father: {fileID: 2090757154}
-  m_RootOrder: 3
+  m_Father: {fileID: 1829917285}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &454547153
 GameObject:
@@ -82348,7 +82348,7 @@ GameObject:
   - component: {fileID: 469203490}
   - component: {fileID: 469203489}
   - component: {fileID: 469203494}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: Metal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82816,7 +82816,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: dedec6ccc003bdb4abf6a920577f0636, type: 2}
     - target: {fileID: 7285804527014195060, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9100927283232051166, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: rayLength
@@ -83036,7 +83036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &485728541
 Transform:
   m_ObjectHideFlags: 0
@@ -83243,7 +83243,7 @@ Transform:
   m_Children:
   - {fileID: 1649486841}
   m_Father: {fileID: 1829917285}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
@@ -84948,17 +84948,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7637320616474819882, guid: 8760664828867b746a82117003e0761a, type: 3}
   m_PrefabInstance: {fileID: 985691150}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &717780572 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
-  m_PrefabInstance: {fileID: 9057417480993644642}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c21c98ab21d43f2458e40cf145cc4dc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &718242050
 GameObject:
   m_ObjectHideFlags: 0
@@ -88839,7 +88828,7 @@ GameObject:
   - component: {fileID: 913909089}
   - component: {fileID: 913909088}
   - component: {fileID: 913909093}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93247,7 +93236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SolidGeometryLayerMask:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 139264
   precalculationEnabled: 1
   showEdges: 1
   TestPath:
@@ -101124,7 +101113,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7413313321222751368, guid: 6bee266cb3f99cd439ba0b135fafaf0d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7413313321222751369, guid: 6bee266cb3f99cd439ba0b135fafaf0d, type: 3}
       propertyPath: m_RootOrder
@@ -102059,7 +102048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   testLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 131072
 --- !u!114 &1340121977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103032,7 +103021,7 @@ Transform:
   m_Children:
   - {fileID: 43514379}
   m_Father: {fileID: 1829917285}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1531134699
 GameObject:
@@ -104565,6 +104554,590 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[0]
+      value: 7407168193608548526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[1]
+      value: 7407168193608548527
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[2]
+      value: 7407168193608548528
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[3]
+      value: 7407168193608548529
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[4]
+      value: 7407168193608548530
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[5]
+      value: 7407168193608548531
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[6]
+      value: 7407168193608548532
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[7]
+      value: 7407168193608548533
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[8]
+      value: 7407168193608548534
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[9]
+      value: 7407168193608548535
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[10]
+      value: 7407168193608548536
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[11]
+      value: 7407168193608548537
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[12]
+      value: 7407168193608548538
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[13]
+      value: 7407168193608548539
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[14]
+      value: 7407168193608548540
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: Transitions.Array.data[15]
+      value: 7407168193608548541
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.size
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[0]
+      value: 7407168193608548832
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[1]
+      value: 7407168193608548833
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[2]
+      value: 7407168193608548834
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[3]
+      value: 7407168193608548835
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[4]
+      value: 7407168193608548836
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[5]
+      value: 7407168193608548837
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[6]
+      value: 7407168193608548838
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[7]
+      value: 7407168193608548839
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[8]
+      value: 7407168193608548840
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[9]
+      value: 7407168193608548841
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[10]
+      value: 7407168193608548842
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[11]
+      value: 7407168193608548843
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[12]
+      value: 7407168193608548844
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[13]
+      value: 7407168193608548845
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[14]
+      value: 7407168193608548846
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[15]
+      value: 7407168193608548847
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[16]
+      value: 7407168193608548558
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[17]
+      value: 7407168193608548559
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[18]
+      value: 7407168193608548560
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[19]
+      value: 7407168193608548561
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[20]
+      value: 7407168193608548562
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[21]
+      value: 7407168193608548563
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[22]
+      value: 7407168193608548564
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[23]
+      value: 7407168193608548565
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[24]
+      value: 7407168193608548566
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[25]
+      value: 7407168193608548567
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[26]
+      value: 7407168193608548568
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[27]
+      value: 7407168193608548569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[28]
+      value: 7407168193608548570
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[29]
+      value: 7407168193608548571
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[30]
+      value: 7407168193608548572
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[31]
+      value: 7407168193608548573
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548526]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548527]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548528]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548529]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548530]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548531]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548532]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548533]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548534]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548535]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548536]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548537]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548538]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548539]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548540]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548541]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548542]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548543]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548544]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548545]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548546]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548547]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548548]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548549]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548550]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548551]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548552]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548553]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548554]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548555]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548556]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548557]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548558]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548559]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548560]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548561]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548562]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548563]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548564]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548565]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548566]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548567]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548568]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548569]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548570]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548571]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548572]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548573]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548574]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548575]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548576]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548577]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548578]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548579]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548580]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548581]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548582]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548583]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548584]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548585]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548586]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548587]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548588]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548589]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548807]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548808]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548809]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548810]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548811]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548812]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548813]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548814]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548815]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548816]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548817]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548818]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548819]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548820]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548821]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548822]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548832]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548833]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548834]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548835]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548836]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548837]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548838]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548839]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548840]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548841]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548842]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548843]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548844]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548845]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548846]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7407168193608548847]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
     - target: {fileID: 4983029550968296733, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
       propertyPath: m_Name
       value: SceneController
@@ -127679,12 +128252,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 451905447}
   - {fileID: 2059465033}
   - {fileID: 144120983}
   - {fileID: 510641523}
   - {fileID: 1530858706}
   m_Father: {fileID: 2090757154}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1837200608
 GameObject:
@@ -129336,7 +129910,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: dedec6ccc003bdb4abf6a920577f0636, type: 2}
     - target: {fileID: 7285804527014195060, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9100927283232051166, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: rayLength
@@ -129697,7 +130271,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285804527014195060, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7471444707383146534, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: m_Enabled
@@ -130242,7 +130816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2059465033
 Transform:
   m_ObjectHideFlags: 0
@@ -130258,7 +130832,7 @@ Transform:
   - {fileID: 956827710}
   - {fileID: 1582247055}
   m_Father: {fileID: 1829917285}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2061556146
 GameObject:
@@ -130593,7 +131167,7 @@ GameObject:
   - component: {fileID: 2072462971}
   - component: {fileID: 2072462970}
   - component: {fileID: 2072462975}
-  m_Layer: 17
+  m_Layer: 13
   m_Name: Grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134559,7 +135133,6 @@ Transform:
   - {fileID: 172890409}
   - {fileID: 1010286596}
   - {fileID: 503150270}
-  - {fileID: 451905447}
   - {fileID: 1829917285}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -135335,6 +135908,22 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[2]
       value: 
       objectReference: {fileID: 1885805485}
+    - target: {fileID: 6777061088779483102, guid: 7cec2dc663a0e294cbabfe8a2c9d419f, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777061088779483102, guid: 7cec2dc663a0e294cbabfe8a2c9d419f, type: 3}
+      propertyPath: testTransitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777061088779483102, guid: 7cec2dc663a0e294cbabfe8a2c9d419f, type: 3}
+      propertyPath: testTransitions.Array.data[0]
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777061088779483102, guid: 7cec2dc663a0e294cbabfe8a2c9d419f, type: 3}
+      propertyPath: testTransitions.Array.data[1]
+      value: -2
+      objectReference: {fileID: 0}
     - target: {fileID: 7325101189958284097, guid: 7cec2dc663a0e294cbabfe8a2c9d419f, type: 3}
       propertyPath: waypoints.Array.size
       value: 3
@@ -136000,7 +136589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7285804527014195060, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9100927283232051166, guid: e106c303a9aa1534ebc661697cc77976, type: 3}
       propertyPath: rayLength
@@ -136576,7 +137165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2180191300250177260, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2462881855649804259, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: m_SizeDelta.x
@@ -136825,7 +137414,7 @@ PrefabInstance:
     - target: {fileID: 8987675166430331806, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: <InitialState>k__BackingField
       value: 
-      objectReference: {fileID: 717780572}
+      objectReference: {fileID: 0}
     - target: {fileID: 9057417479348478740, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -136923,8 +137512,32 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 9057417480407522389, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522389, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: transitions.Array.data[0]
+      value: 7407168193608548826
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522389, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548826]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522389, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: OnStep.m_PersistentCalls.m_Calls.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522392, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: Transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522392, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: Transitions.Array.data[0]
+      value: 7407168193608548628
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522392, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548628]
+      value: Assembly-CSharp ClimbToIdleTransition
       objectReference: {fileID: 0}
     - target: {fileID: 9057417480407522392, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.size
@@ -136953,6 +137566,302 @@ PrefabInstance:
     - target: {fileID: 9057417480407522392, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: OnEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: Transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: transitions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: Transitions.Array.data[0]
+      value: 7407168193608548593
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: Transitions.Array.data[1]
+      value: 7407168193608548593
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: Transitions.Array.data[2]
+      value: 7407168193608548385
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: transitions.Array.data[0]
+      value: 7407168193608548831
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957477]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957478]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957513]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957514]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957515]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957516]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957517]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957518]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957519]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957588]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957625]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957626]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957627]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957628]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957663]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957664]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957665]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957700]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957701]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957736]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957737]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957772]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957807]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957808]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957843]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957844]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957879]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957880]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957915]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957916]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957953]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957954]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957955]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916957956]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958127]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958128]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958163]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958164]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958165]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958200]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958201]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958202]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168188916958203]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548382]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548383]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548384]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548385]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548420]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548421]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548456]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548457]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548590]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548591]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548592]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548593]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548698]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548699]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548701]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548702]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548805]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548806]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548823]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548824]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548825]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548827]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548829]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480407522394, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: managedReferences[7407168193608548831]
+      value: Assembly-CSharp AttackToFallTransition
       objectReference: {fileID: 0}
     - target: {fileID: 9057417480407522395, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: OnExit.m_PersistentCalls.m_Calls.Array.size
@@ -136985,6 +137894,10 @@ PrefabInstance:
     - target: {fileID: 9057417480644603256, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: colliderMask.m_Bits
       value: 574528
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057417480644603256, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
+      propertyPath: <CollisionLayerMask>k__BackingField.m_Bits
+      value: 663808
       objectReference: {fileID: 0}
     - target: {fileID: 9057417480854917628, guid: 3783b6500cad6404295693b19e7244a1, type: 3}
       propertyPath: m_AnchorMax.y
