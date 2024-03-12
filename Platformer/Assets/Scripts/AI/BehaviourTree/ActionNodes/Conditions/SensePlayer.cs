@@ -9,23 +9,28 @@ public class SensePlayer : Condition
     private OverlapDetector senseDetector;
 
 
-    public override void Initialize()
+    public override void OnInit()
     {
-        blackboard.DataTable["GoalPosition"] = null;
-        blackboard.DataTable["TargetOwner"] = null;
+        blackboard.SetValue<Vector2?>("GoalPosition", null);
+        blackboard.SetValue<GameObject>("TargetOwner", null);
     }
+
+    protected override void OnStart() { }
 
     protected override bool IsConditionSatisfied()
     {
         int detectionCount = senseDetector.Detect(context.Agent.CenterPosition);
         if (detectionCount > 0)
         {
-            blackboard.DataTable["GoalPosition"] = (Vector2)senseDetector.Colliders[0].gameObject.transform.position;
-            blackboard.DataTable["GoalOwner"] = senseDetector.Colliders[0].gameObject;
+            blackboard.SetValue<Vector2?>("GoalPosition", senseDetector.Colliders[0].gameObject.transform.position);
+            blackboard.SetValue("TargetOwner", senseDetector.Colliders[0].gameObject);
             return true;
         }
-        blackboard.DataTable["GoalPosition"] = null;
-        blackboard.DataTable["GoalOwner"] = null;
+        blackboard.SetValue<Vector2?>("GoalPosition", null);
+        blackboard.SetValue<GameObject>("TargetOwner", null);
         return false;
     }
+
+
+    protected override void OnStop() { }
 }

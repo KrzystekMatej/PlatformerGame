@@ -19,20 +19,25 @@ public class RepeatUntil : DecoratorNode
         startTime = Time.time;
     }
 
-    protected override State OnUpdate()
+    protected override NodeState OnUpdate()
     {
-        State state = child.Update();
+        NodeState state = child.Update();
         if (Time.time - startTime > duration)
         {
 
-            return State.Success;
+            return NodeState.Success;
         }
 
-        if ((!repeatOnSuccess && state == State.Success) || (!repeatOnFailure && state == State.Failure))
+        if ((!repeatOnSuccess && state == NodeState.Success) || (!repeatOnFailure && state == NodeState.Failure))
         {
             return state;
         }
 
-        return State.Running;
+        return NodeState.Running;
+    }
+
+    protected override void OnStop()
+    {
+
     }
 }

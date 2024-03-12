@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367330958343508886}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 668570889393267656}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4504165587787064423
 MonoBehaviour:
@@ -68,13 +68,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444819533292539961}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5279868880968376784}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2778156916591170950
 GameObject:
@@ -100,6 +100,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2778156916591170950}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -107,7 +108,6 @@ Transform:
   m_Children:
   - {fileID: 1669770839440501068}
   m_Father: {fileID: 668570889393267656}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &91778178657419374
 MonoBehaviour:
@@ -147,13 +147,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4286384393339523267}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3426019859473785553}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2299227263688197828
 MonoBehaviour:
@@ -229,13 +229,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5142373644606100356}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 668570889393267656}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2574111137823132897
 MonoBehaviour:
@@ -249,7 +249,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tree: {fileID: 11400000, guid: 0c8c8a7dd4ce4fb4787bed7676ae0d4a, type: 2}
+  behaviourTree: {fileID: 11400000, guid: 66502fdd4445dbc4aa53d9abf508d86e, type: 2}
+  validate: 1
+  blackboardOverrides: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &5279868880968376785
 GameObject:
   m_ObjectHideFlags: 0
@@ -276,6 +281,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5279868880968376785}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.71, y: 2.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -285,7 +291,6 @@ Transform:
   - {fileID: 255006811333691554}
   - {fileID: 668570889393267656}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3321102830200026872
 MonoBehaviour:
@@ -349,6 +354,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7995080124411605162}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -358,7 +364,6 @@ Transform:
   - {fileID: 8016354232200348499}
   - {fileID: 3426019859473785553}
   m_Father: {fileID: 5279868880968376784}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2777265237074659739
 MonoBehaviour:
@@ -378,6 +383,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 5279868880968376784}
     m_Modifications:
     - target: {fileID: 415090757186357842, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -397,6 +403,18 @@ PrefabInstance:
       value: 7407168207598387462
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.data[0]
+      value: 7407168211064717724
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.data[1]
+      value: 7407168211064718066
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: managedReferences[7407168207598387363]
       value: Assembly-CSharp GenericToFlyTransition
       objectReference: {fileID: 0}
@@ -406,6 +424,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: managedReferences[7407168207598387462]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168211064718066]
       value: Assembly-CSharp GenericToFlyTransition
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -438,6 +460,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: managedReferences[7407168207598387462].<TargetState>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168211064718066].<TargetState>k__BackingField
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1679817844667101516, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -509,6 +535,14 @@ PrefabInstance:
       value: 7407168207598387460
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.data[2]
+      value: 7407168211064718065
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: managedReferences[7407168207598387359]
       value: Assembly-CSharp AttackToFallTransition
       objectReference: {fileID: 0}
@@ -529,6 +563,10 @@ PrefabInstance:
       value: Assembly-CSharp GenericToFlyTransition
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168211064718065]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: managedReferences[7407168207598387360].<TargetState>k__BackingField
       value: 0
       objectReference: {fileID: 0}
@@ -542,6 +580,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: managedReferences[7407168207598387460].<TargetState>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168211064718065].<TargetState>k__BackingField
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350646, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -782,7 +824,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[0].Key
@@ -795,6 +837,10 @@ PrefabInstance:
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[2].Key
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: stateTable.entries.Array.data[3].Key
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[5].Key
@@ -815,7 +861,7 @@ PrefabInstance:
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[3].Value
       value: 
-      objectReference: {fileID: 1993502237472647648}
+      objectReference: {fileID: 6777061088779483102}
     - target: {fileID: 8605784747821516568, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: stateTable.entries.Array.data[5].Value
       value: 
@@ -911,6 +957,15 @@ PrefabInstance:
     - {fileID: 7363741092903229669, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
     - {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
     - {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8159016673358674706}
+    - targetCorrespondingSourceObject: {fileID: 7363741092903229673, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1993502237472647648}
   m_SourcePrefab: {fileID: 100100000, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
 --- !u!114 &113007710221410866 stripped
 MonoBehaviour:
@@ -939,6 +994,17 @@ CapsuleCollider2D:
   m_CorrespondingSourceObject: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
   m_PrefabInstance: {fileID: 1647915609668588414}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6777061088779483102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1647915609668588414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137952876630608791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90b02982b542225418ab3bdbf8c4c76f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7993744435714839249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8660966007656399279, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -967,10 +1033,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd50a714bf960245a9388a16305c510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions:
-  - rid: 7407168207598387463
-  - rid: 7407168207598387464
-  - rid: 7407168209578360951
+  orderedTransitions:
+  - rid: 7407168211064718067
+  - rid: 7407168211064718068
+  - rid: 7407168211064718069
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -981,15 +1047,15 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7407168207598387463
+    - rid: 7407168211064718067
       type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 9
-    - rid: 7407168207598387464
+    - rid: 7407168211064718068
       type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 8
-    - rid: 7407168209578360951
+    - rid: 7407168211064718069
       type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 5

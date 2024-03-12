@@ -8,10 +8,12 @@ public class CanAttackAgent : Condition
 {
     private AttackState attackState;
 
-    public override void Initialize()
+    public override void OnInit()
     {
         attackState = context.Agent.GetComponentInChildren<AttackState>();
     }
+
+    protected override void OnStart() { }
 
     protected override bool IsConditionSatisfied()
     {
@@ -26,4 +28,6 @@ public class CanAttackAgent : Condition
         }
         return detectionCount != 0;
     }
+
+    protected override void OnStop() { }
 }

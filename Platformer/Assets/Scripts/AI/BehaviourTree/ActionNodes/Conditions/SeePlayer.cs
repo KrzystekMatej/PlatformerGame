@@ -9,6 +9,8 @@ public class SeePlayer : Condition
     [SerializeField]
     private CastDetector left;
 
+    protected override void OnStart() { }
+
     protected override bool IsConditionSatisfied()
     {
         float orientation = context.Agent.OrientationController.CurrentOrientation;
@@ -16,4 +18,6 @@ public class SeePlayer : Condition
         int detectionCount = detector.Detect(context.Agent.CenterPosition);
         return detectionCount != 0 && detector.Hits[0].collider.CompareTag("Player");
     }
+
+    protected override void OnStop() { }
 }

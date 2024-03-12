@@ -8,8 +8,8 @@ public abstract class Condition : ActionNode
 {
     protected abstract bool IsConditionSatisfied();
 
-    protected override State OnUpdate()
+    protected override NodeState OnUpdate()
     {
-        return IsConditionSatisfied() ? State.Success : State.Failure;
+        return IsConditionSatisfied() ? NodeState.Success : NodeState.Failure;
     }
 }

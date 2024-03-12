@@ -34,7 +34,7 @@ public class Steering : MonoBehaviour
         return pipelineTable[pipelineName];
     }
 
-    public void BindBlackboard(Blackboard blackboard)
+    public void Bind(Blackboard blackboard)
     {
         foreach (SteeringPipeline pipeline in pipelineTable.Values)
         {

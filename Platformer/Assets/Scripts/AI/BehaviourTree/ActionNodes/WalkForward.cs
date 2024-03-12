@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class WalkForward : ActionNode
 {
-    public override void Initialize()
+    public override void OnInit()
     {
         float currentHorizontalInput = context.Agent.InputController.InputData.SteeringForce.x;
         float currentAgentOrientation = context.Agent.OrientationController.CurrentOrientation;
-        blackboard.DataTable["HorizontalDirection"] = currentHorizontalInput != 0 ? currentHorizontalInput : currentAgentOrientation;
+        blackboard.SetValue("HorizontalDirection", currentHorizontalInput != 0 ? currentHorizontalInput : currentAgentOrientation);
     }
 
+    protected override void OnStart() { }
 
-    protected override State OnUpdate()
+
+    protected override NodeState OnUpdate()
     {
-        context.InputController.AddSteeringForce(new Vector2((float)blackboard.DataTable["HorizontalDirection"] * context.Agent.InstanceData.MaxForce, 0));
-        return State.Success;
+        context.InputController.AddSteeringForce(new Vector2(blackboard.GetValue<float>("HorizontalDirection") * context.Agent.InstanceData.MaxForce, 0));
+        return NodeState.Success;
     }
+
+    protected override void OnStop() { }
 }

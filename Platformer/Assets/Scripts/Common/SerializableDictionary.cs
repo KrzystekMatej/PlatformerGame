@@ -21,7 +21,11 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         dictionary = new Dictionary<TKey, TValue>();
         foreach (var entry in entries)
         {
-            dictionary.Add(entry.Key, entry.Value);
+            if (!dictionary.ContainsKey(entry.Key))
+            {
+                dictionary.Add(entry.Key, entry.Value);
+            }
+            else Debug.LogError($"Key {entry.Key} already exists in the dictionary.");
         }
     }
 

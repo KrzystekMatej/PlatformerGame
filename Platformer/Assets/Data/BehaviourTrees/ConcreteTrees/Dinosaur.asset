@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: Dinosaur
+  m_EditorClassIdentifier: 
+  rootNode:
+    rid: 7407168234541285393
+  nodes:
+  - rid: 7407168234541285393
+  - rid: 7407168234541285526
+  - rid: 7407168234541285527
+  - rid: 7407168234541285528
+  treeState: 0
+  blackboard:
+    keys: []
+  viewPosition: {x: 730, y: 182, z: 0}
+  viewScale: {x: 0.8695652, y: 0.8695652, z: 1}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7407168234541285393
+      type: {class: RootNode, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8ec61d65-11ec-4fd7-a4f4-0f8384b1664a
+        position: {x: 0, y: 0}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        child:
+          rid: 7407168234541285526
+    - rid: 7407168234541285526
+      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: ba70fb6810a66714288e45bd12cce195
+        position: {x: -15, y: 180}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        child:
+          rid: -2
+        restartOnSuccess: 1
+        restartOnFailure: 0
+        maxRepeats: 0
+    - rid: 7407168234541285527
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: b7d838ae53af7294ab356a2f3212aad6
+        position: {x: -300, y: 390}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        children: []
+    - rid: 7407168234541285528
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8cf408e21f5b86e419a4a832e51d53cc
+        position: {x: 180, y: 435}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        children: []

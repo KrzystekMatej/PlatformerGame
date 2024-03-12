@@ -510,7 +510,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21c98ab21d43f2458e40cf145cc4dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717684
+  - rid: 7407168211064717685
+  - rid: 7407168211064717686
+  - rid: 7407168211064717711
+  - rid: 7407168211064717712
+  - rid: 7407168211064717713
+  - rid: 7407168211064717714
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -519,7 +526,35 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717684
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168211064717685
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168211064717686
+      type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 5
+    - rid: 7407168211064717711
+      type: {class: GenericToJumpTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 3
+    - rid: 7407168211064717712
+      type: {class: GenericToClimbTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 6
+    - rid: 7407168211064717713
+      type: {class: IdleToWalkTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 1
+    - rid: 7407168211064717714
+      type: {class: GenericToFallTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 4
 --- !u!114 &7363741092903229675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -532,7 +567,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fe6dec2ee21eb48a5b4299dd06921c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717691
+  - rid: 7407168211064717692
+  - rid: 7407168211064717693
+  - rid: 7407168211064717694
+  - rid: 7407168211064717695
+  - rid: 7407168211064717696
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -541,7 +582,31 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717691
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168211064717692
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168211064717693
+      type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 5
+    - rid: 7407168211064717694
+      type: {class: GenericToJumpTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 3
+    - rid: 7407168211064717695
+      type: {class: WalkToIdleTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 0
+    - rid: 7407168211064717696
+      type: {class: GenericToFallTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 4
 --- !u!114 &7363741092903229670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,7 +619,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7132725e64abe4e48aedcdf2d7e7edc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717697
+  - rid: 7407168211064717698
+  - rid: 7407168211064717699
+  - rid: 7407168211064717701
+  - rid: 7407168211064717702
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -563,7 +633,27 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717697
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168211064717698
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168211064717699
+      type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 5
+    - rid: 7407168211064717701
+      type: {class: GenericToClimbTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 6
+    - rid: 7407168211064717702
+      type: {class: JumpToFallTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 4
 --- !u!114 &7363741092903229669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +666,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c4e2321c1f3ca4e9cdfe6424541876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717703
+  - rid: 7407168211064717704
+  - rid: 7407168211064717705
+  - rid: 7407168211064717708
+  - rid: 7407168211064717709
+  - rid: 7407168211064717710
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -585,7 +681,31 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717703
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168211064717704
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168211064717705
+      type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 5
+    - rid: 7407168211064717708
+      type: {class: GenericToClimbTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 6
+    - rid: 7407168211064717709
+      type: {class: FallToWalkTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 1
+    - rid: 7407168211064717710
+      type: {class: FallToIdleTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 0
 --- !u!114 &5247370467627279520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +718,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b02982b542225418ab3bdbf8c4c76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717715
+  - rid: 7407168211064717716
+  - rid: 7407168211064717717
+  - rid: 7407168211064717718
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -610,7 +734,23 @@ MonoBehaviour:
     m_Bits: 2056
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717715
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168211064717716
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168211064717717
+      type: {class: AttackToIdleTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 0
+    - rid: 7407168211064717718
+      type: {class: AttackToFallTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 4
 --- !u!114 &7363741092903229671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d38976bb0d326d4f8eaa8ab7db0754f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717719
+  - rid: 7407168211064717720
+  - rid: 7407168211064717721
+  - rid: 7407168211064717722
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -632,7 +776,23 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717719
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
+    - rid: 7407168211064717720
+      type: {class: GenericToHurtTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168211064717721
+      type: {class: ClimbToJumpTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 3
+    - rid: 7407168211064717722
+      type: {class: ClimbToIdleTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 0
 --- !u!114 &1679817844667101516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,7 +805,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00702c02dd8624346979247969e38d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions:
+  - rid: 7407168211064717723
+  - rid: 7407168211064717724
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -654,7 +816,15 @@ MonoBehaviour:
       m_Calls: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7407168211064717723
+      type: {class: HurtToIdleTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 0
+    - rid: 7407168211064717724
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 9
 --- !u!114 &8660966007656399279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02de7f2faf07294597425eaecc98ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitions: []
+  orderedTransitions: []
   OnEnter:
     m_PersistentCalls:
       m_Calls:

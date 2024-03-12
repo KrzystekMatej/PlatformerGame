@@ -35,20 +35,20 @@ public class SteeringPipeline : MonoBehaviour
     {
         foreach (Targeter targeter in targeters)
         {
-            blackboard.DataTable[PipelineName + targeter.GetType().Name] = targeter;
+            blackboard.SetValue(PipelineName + targeter.GetType().Name, targeter);
         }
 
         foreach (Decomposer decomposer in decomposers)
         {
-            blackboard.DataTable[PipelineName + decomposer.GetType().Name] = decomposer;
+            blackboard.SetValue(PipelineName + decomposer.GetType().Name, decomposer);
         }
 
         foreach (Constraint constraint in constraints)
         {
-            blackboard.DataTable[PipelineName + constraint.GetType().Name] = constraint;
+            blackboard.SetValue(PipelineName + constraint.GetType().Name, constraint);
         }
 
-        blackboard.DataTable[PipelineName + actuator.GetType().Name] = actuator;
+        blackboard.SetValue(PipelineName + actuator.GetType().Name, actuator);
     }
 
     public Vector2? GetSteering(AgentManager agent)

@@ -10,22 +10,24 @@ public class WaitAfterSuccess : DecoratorNode
     private float duration = 1.0f;
     private float startTime;
 
-    public override void Initialize()
+    protected override void OnStart()
     {
-        startTime = -duration;
+        state = child.Update();
+        if (state == NodeState.Success)
+        {
+            startTime = Time.time;
+            state = NodeState.Failure;
+        }
     }
 
-    protected override State OnUpdate()
+    protected override NodeState OnUpdate()
     {
         if (Time.time - startTime > duration)
         {
-            State state = child.Update();
-            if (state == State.Success)
-            {
-                startTime = Time.time;
-            }
-            return state;
+            return NodeState.Success;
         }
-        return State.Failure;
+        return state;
     }
+
+    protected override void OnStop() { }
 }

@@ -7,9 +7,13 @@ using DG.Tweening;
 [System.Serializable]
 public class TurnAround : ActionNode
 {
-    protected override State OnUpdate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
-        blackboard.DataTable["HorizontalDirection"] = -(float)blackboard.DataTable["HorizontalDirection"];
-        return State.Success;
+        blackboard.SetValue("HorizontalDirection", -blackboard.GetValue<float>("HorizontalDirection"));
+        return NodeState.Success;
     }
+
+    protected override void OnStop() { }
 }

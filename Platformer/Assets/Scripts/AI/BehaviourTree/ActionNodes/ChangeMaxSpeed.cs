@@ -8,9 +8,13 @@ public class ChangeMaxSpeed : ActionNode
     [SerializeField]
     private float maxSpeedMultiplier = 2f;
 
-    protected override State OnUpdate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
         context.Agent.InstanceData.MaxSpeed = context.Agent.DefaultData.MaxSpeed * maxSpeedMultiplier;
-        return State.Success;
+        return NodeState.Success;
     }
+
+    protected override void OnStop() { }
 }

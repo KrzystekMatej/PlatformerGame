@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class ReactivatePathFollowing : ActionNode
 {
-    protected override State OnUpdate()
+    protected override void OnStart() { }
+
+    protected override NodeState OnUpdate()
     {
-        PathFollowingTargeter pathFollowing = (PathFollowingTargeter)blackboard.DataTable[context.Steering.CurrentPipelineName + nameof(PathFollowingTargeter)];
+        PathFollowingTargeter pathFollowing = blackboard.GetValue<PathFollowingTargeter>(context.Steering.CurrentPipelineName + nameof(PathFollowingTargeter));
         pathFollowing.RecalculatePath(context.Agent);
-        return State.Success;
+        return NodeState.Success;
     }
+
+    protected override void OnStop() { }
 }
 

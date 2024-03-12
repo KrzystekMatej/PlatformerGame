@@ -1,0 +1,53 @@
+using DG.Tweening;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class AttackState : State
+{
+    private Vector2 attackDirection;
+    [SerializeField]
+    public LayerMask HitMask;
+
+    protected override void HandleEnter()
+    {
+        agent.Animator.PlayByType(AnimationType.Attack);
+        agent.WeaponManager.SetWeaponVisibility(true);
+        if (agent.GroundDetector != null && agent.GroundDetector.Detected) agent.RigidBody.velocity = Vector3.zero;
+        PerformAttack();
+    }
+
+    private void PerformAttack()
+    {
+        agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
+        attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
+        agent.WeaponManager.GetWeapon().Attack(agent.TriggerCollider, attackDirection, HitMask);
+    }
+
+    protected override void HandleExit()
+    {
+        agent.WeaponManager.SetWeaponVisibility(false);
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (!Application.isPlaying) return;
+        Gizmos.color = Color.red;
+        AttackingWeapon weapon = agent.WeaponManager.GetWeapon();
+        if (weapon != null) weapon.DrawGizmos(agent.CenterPosition, agent.transform.right * agent.OrientationController.CurrentOrientation);
+    }
+}
+
+[CustomEditor(typeof(AttackState), true)]
+public class AttackStateEditor : StateEditor
+{
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        DrawDefaultInspector();
+    }
+}
+

@@ -1,0 +1,112 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d285eb63c2cdd74180de7cfceaa96ad, type: 3}
+  m_Name: AttackTree
+  m_EditorClassIdentifier: 
+  rootNode:
+    rid: 7407168234541285530
+  nodes:
+  - rid: 7407168234541285530
+  - rid: 7407168234541285532
+  - rid: 7407168234541285533
+  - rid: 7407168234541285534
+  - rid: 7407168234541285535
+  - rid: 7407168234541285536
+  treeState: 0
+  blackboard:
+    keys: []
+  viewPosition: {x: 644, y: 395, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7407168234541285530
+      type: {class: RootNode, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 214e6248-26c5-41f8-97bf-19c90c8e4132
+        position: {x: 0, y: 0}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        log: 0
+        child:
+          rid: 7407168234541285534
+    - rid: 7407168234541285532
+      type: {class: Attack, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 95a12efcce546074589688626e9bc0df
+        position: {x: 255, y: 615}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        log: 0
+    - rid: 7407168234541285533
+      type: {class: WaitAfterSuccess, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 572ca53257b394d4899ad8f71e4e9934
+        position: {x: 240, y: 420}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        log: 0
+        child:
+          rid: 7407168234541285532
+        duration: 1
+    - rid: 7407168234541285534
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: b83eca320894cc54ba9b23ed506251ad
+        position: {x: 0, y: 225}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        log: 0
+        children:
+        - rid: 7407168234541285535
+        - rid: 7407168234541285536
+        - rid: 7407168234541285533
+    - rid: 7407168234541285535
+      type: {class: CanAttackAgent, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: eaa7426d31a04ac4baaa3ff939d7c5bd
+        position: {x: -255, y: 435}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        log: 0
+    - rid: 7407168234541285536
+      type: {class: StopMoving, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 9e43c4e77e331ad45957fa5cff89b460
+        position: {x: 0, y: 420}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        log: 0

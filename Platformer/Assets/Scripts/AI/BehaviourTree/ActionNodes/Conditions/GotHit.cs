@@ -8,7 +8,7 @@ public class GotHit : Condition
 {
     bool hit = false;
 
-    public override void Initialize()
+    public override void OnInit()
     {
         context.Agent.OnHit.AddListener(SetHit);
     }
@@ -16,9 +16,11 @@ public class GotHit : Condition
     public void SetHit(Collider2D attackerCollider, Weapon attackingWeapon)
     {
         hit = true;
-        blackboard.DataTable["OpponentPosition"] = (Vector2)attackerCollider.bounds.center;
-        blackboard.DataTable["AttackingWeapon"] = attackingWeapon;
+        blackboard.SetValue("OpponentPosition", (Vector2)attackerCollider.bounds.center);
+        blackboard.SetValue("AttackingWeapon", attackingWeapon);
     }
+
+    protected override void OnStart() { }
 
     protected override bool IsConditionSatisfied()
     {
@@ -26,4 +28,6 @@ public class GotHit : Condition
         hit = false;
         return temp;
     }
+
+    protected override void OnStop() { }
 }

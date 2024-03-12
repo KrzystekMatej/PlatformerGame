@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public static class Utility
@@ -54,5 +53,14 @@ public static class Utility
         T temp = a;
         a = b;
         b = temp;
+    }
+
+    public static IEnumerable<T> GetArrayPropertyEnumerable<T>(SerializedProperty serializedProperty)
+    {
+        for (int i = 0; i < serializedProperty.arraySize; i++)
+        {
+            object item = serializedProperty.GetArrayElementAtIndex(i).managedReferenceValue;
+            yield return (T)item;
+        }
     }
 }

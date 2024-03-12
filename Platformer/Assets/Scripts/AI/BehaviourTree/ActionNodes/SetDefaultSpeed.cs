@@ -6,10 +6,13 @@ using TheKiwiCoder;
 [System.Serializable]
 public class SetDefaultSpeed : ActionNode
 {
-    protected override State OnUpdate()
-    {
+    protected override void OnStart() { }
 
+    protected override NodeState OnUpdate()
+    {
         context.Agent.InstanceData.MaxSpeed = context.Agent.DefaultData.MaxSpeed;
-        return State.Success;
+        return NodeState.Success;
     }
+
+    protected override void OnStop() { }
 }
