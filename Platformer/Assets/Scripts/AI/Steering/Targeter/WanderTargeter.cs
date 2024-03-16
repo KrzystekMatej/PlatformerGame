@@ -20,7 +20,7 @@ public class WanderTargeter : SeekTargeter
     public override bool TryUpdateGoal(AgentManager agent, SteeringGoal goal)
     {
         wanderOrientation += MathUtility.GetRandomBinomial() * Mathf.PI * wanderRate;
-        float agentOrientation = MathUtility.GetVectorAngle(agent.RigidBody.velocity);
+        float agentOrientation = MathUtility.GetVectorRadAngle(agent.RigidBody.velocity);
         float targetOrientation = wanderOrientation + agentOrientation;
         GoalPosition = agent.CenterPosition + MathUtility.PolarCoordinatesToVector2(agentOrientation, wanderOffset);
 

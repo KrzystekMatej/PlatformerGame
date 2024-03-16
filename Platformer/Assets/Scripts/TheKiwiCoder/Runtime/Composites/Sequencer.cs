@@ -14,22 +14,22 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
-            for (int i = current; i < children.Count; ++i) {
+        protected override ProcessState OnUpdate() {
+            for (int i = current; i < children.Count; i++) {
                 current = i;
                 var child = children[current];
 
                 switch (child.Update()) {
-                    case NodeState.Running:
-                        return NodeState.Running;
-                    case NodeState.Failure:
-                        return NodeState.Failure;
-                    case NodeState.Success:
+                    case ProcessState.Running:
+                        return ProcessState.Running;
+                    case ProcessState.Failure:
+                        return ProcessState.Failure;
+                    case ProcessState.Success:
                         continue;
                 }
             }
 
-            return NodeState.Success;
+            return ProcessState.Success;
         }
     }
 }

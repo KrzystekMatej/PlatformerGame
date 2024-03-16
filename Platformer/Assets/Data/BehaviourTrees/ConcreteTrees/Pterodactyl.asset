@@ -16,26 +16,214 @@ MonoBehaviour:
     rid: 7407168234541285395
   nodes:
   - rid: 7407168234541285395
+  - rid: 7407168259542745394
+  - rid: 7407168259542745396
+  - rid: 7407168259542745397
+  - rid: 7407168259542745400
+  - rid: 7407168259542745401
+  - rid: 7407168307214680890
+  - rid: 7407168307214680891
+  - rid: 7407168309800468488
+  - rid: 7407168309800468489
+  - rid: 7407168309800468490
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 600, y: 300, z: 0}
-  viewScale: {x: 1, y: 1, z: 1}
+  viewPosition: {x: 694, y: 130, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 7407168234541285395
       type: {class: RootNode, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 25091d8f-1f48-4d94-b053-e96d4247235a
-        position: {x: 0, y: 0}
+        position: {x: -90, y: 0}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
         child:
-          rid: -2
+          rid: 7407168259542745394
+    - rid: 7407168259542745394
+      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: b93bd2d21aa504542a0822cd05343f6e
+        position: {x: -90, y: 210}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7407168309800468490
+        restartOnSuccess: 1
+        restartOnFailure: 0
+        maxRepeats: 0
+    - rid: 7407168259542745396
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 6cee7afef3ab02f4f853494abb1fdf83
+        position: {x: 285, y: 1080}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7407168307214680890
+        - rid: 7407168307214680891
+        - rid: 7407168259542745400
+    - rid: 7407168259542745397
+      type: {class: SubTree, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: e8e83a01fd3a9b6439745110edf23d36
+        position: {x: -255, y: 615}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        treeAsset: {fileID: 11400000, guid: 441da56c00914ba4c8ec381cd76c55b7, type: 2}
+        treeInstance: {fileID: 0}
+    - rid: 7407168259542745400
+      type: {class: SeekToTarget, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: a7c529aec0995114c8b941ee3323881e
+        position: {x: 510, y: 1305}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        maxSeekDistance: 20
+    - rid: 7407168259542745401
+      type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8ef235094112b7f4aa4106ad5beac551
+        position: {x: -105, y: 885}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        targetPipelineName: SeekPipeline
+    - rid: 7407168307214680890
+      type: {class: CastVision, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 60543685207a1af47a21fddbab388cd0
+        position: {x: 60, y: 1305}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        visionDetector: {fileID: 11400000, guid: 4cf755b3daa068c49822ab304fcb63f6, type: 2}
+        distance: 0
+        changeDirectionByOrientation: 0
+        changeOffsetByOrientation: 0
+    - rid: 7407168307214680891
+      type: {class: CheckVision, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 58f8e08d5771c2649a5dc6beb029b016
+        position: {x: 285, y: 1305}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        visionDetector: {fileID: 11400000, guid: 4cf755b3daa068c49822ab304fcb63f6, type: 2}
+        minCount: 1
+        maxCount: 2147483647
+        minDistance: 0
+        maxDistance: Infinity
+        mask:
+          serializedVersion: 2
+          m_Bits: 8
+        tag: 
+    - rid: 7407168309800468488
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 608e14a033fb85043886b52633afcfb8
+        position: {x: 75, y: 630}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7407168259542745401
+        - rid: 7407168309800468489
+    - rid: 7407168309800468489
+      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 9a74f65c56a0dae49b7164406af9f4ac
+        position: {x: 270, y: 885}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7407168259542745396
+        restartOnSuccess: 1
+        restartOnFailure: 0
+        maxRepeats: 0
+    - rid: 7407168309800468490
+      type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: a6c08e5f235f2b24cb8899d0a45d9117
+        position: {x: -90, y: 405}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7407168259542745397
+        - rid: 7407168309800468488

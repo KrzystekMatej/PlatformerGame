@@ -10,10 +10,10 @@ public class ChangeMaxSpeed : ActionNode
 
     protected override void OnStart() { }
 
-    protected override NodeState OnUpdate()
+    protected override ProcessState OnUpdate()
     {
         context.Agent.InstanceData.MaxSpeed = context.Agent.DefaultData.MaxSpeed * maxSpeedMultiplier;
-        return NodeState.Success;
+        return ProcessState.Success;
     }
 
     protected override void OnStop() { }

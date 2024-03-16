@@ -28,7 +28,7 @@ public class PathFollowingTargeter : Targeter
 
         goal.Position = path.CalculateGoalWithCoherence(agent);
         
-        return !path.ReachedEnd(agent, goal.Position);
+        return path.ReachedEnd(agent, goal.Position);
     }
 
     private void OnDrawGizmosSelected()

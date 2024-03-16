@@ -6,13 +6,7 @@ namespace TheKiwiCoder {
 
     [System.Serializable]
     public abstract class Node {
-        public enum NodeState {
-            Running,
-            Failure,
-            Success
-        }
-
-        [HideInInspector] public NodeState state = NodeState.Running;
+        [HideInInspector] public ProcessState state = ProcessState.Running;
         [HideInInspector] public bool started = false;
         [HideInInspector] public string guid = System.Guid.NewGuid().ToString();
         [HideInInspector] public Vector2 position;
@@ -21,32 +15,35 @@ namespace TheKiwiCoder {
         [TextArea] public string description;
         [Tooltip("When enabled, the nodes OnDrawGizmos will be invoked")] public bool drawGizmos = false;
 #if UNITY_EDITOR
-        public bool log = false;
+        public bool logStart = false;
+        public bool logState = false;
+        public bool logStop = false;
 #endif
 
         public virtual void OnInit() {
             // Nothing to do here
         }
 
-        public NodeState Update() {
+        public ProcessState Update() {
 
             if (!started) {
                 OnStart();
                 started = true;
-
 #if UNITY_EDITOR
-                if (log) Log("Started");
+                if (logStart) Log(LogType.Log, "Start");
 #endif
             }
 
             state = OnUpdate();
+#if UNITY_EDITOR
+            if (logState) Log(LogType.Log, state);
+#endif
 
-            if (state != NodeState.Running) {
+            if (state != ProcessState.Running) {
                 OnStop();
                 started = false;
-
 #if UNITY_EDITOR
-                if (log) Log("Ended");
+                if (logStop) Log(LogType.Log, "Stop");
 #endif
             }
 
@@ -56,8 +53,11 @@ namespace TheKiwiCoder {
         public void Abort() {
             BehaviourTree.Traverse(this, (node) => {
                 node.started = false;
-                node.state = NodeState.Running;
+                node.state = ProcessState.Running;
                 node.OnStop();
+#if UNITY_EDITOR
+                if (node.logStop) Log(LogType.Log, "Stop");
+#endif
             });
         }
 
@@ -65,10 +65,29 @@ namespace TheKiwiCoder {
 
         protected abstract void OnStart();
         protected abstract void OnStop();
-        protected abstract NodeState OnUpdate();
+        protected abstract ProcessState OnUpdate();
 
-        protected virtual void Log(string message) {
-            Debug.Log($"[{GetType()}]{message}");
+        protected virtual void Log(LogType type, object message) {
+            message = $"[{GetType()}]{message}";
+            switch (type)
+            {
+                case LogType.Log:
+                    Debug.Log(message);
+                    break;
+                case LogType.Warning:
+                    Debug.LogWarning(message);
+                    break;
+                case LogType.Error:
+                    Debug.LogError(message);
+                    break;
+            }
         }
+    }
+
+    public enum ProcessState
+    {
+        Running,
+        Failure,
+        Success
     }
 }

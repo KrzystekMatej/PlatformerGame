@@ -17,16 +17,18 @@ MonoBehaviour:
   nodes:
   - rid: 7407168234541285394
   - rid: 7407168234541285465
-  - rid: 7407168234541285466
   - rid: 7407168234541285472
   - rid: 7407168234541285473
   - rid: 7407168234541285474
   - rid: 7407168234541285588
+  - rid: 7407168309800468492
+  - rid: 7407168309800468493
+  - rid: 7407168309800468494
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 131, y: 238, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 310, y: 170, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -36,12 +38,14 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: c15fd6a1-f125-4b2a-ab71-43b86f68d6a0
-        position: {x: 780, y: -150}
+        position: {x: 675, y: -150}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        log: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
         child:
           rid: 7407168234541285465
     - rid: 7407168234541285465
@@ -50,44 +54,33 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 84c58023c93b8b84991d189a856e2143
-        position: {x: 780, y: 45}
+        position: {x: 675, y: 60}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        log: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
         child:
-          rid: 7407168234541285466
+          rid: 7407168309800468494
         restartOnSuccess: 1
         restartOnFailure: 1
         maxRepeats: 0
-    - rid: 7407168234541285466
-      type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 43152eb3ab3c0d5459cffc3254a75b8c
-        position: {x: 765, y: 285}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        log: 0
-        children:
-        - rid: 7407168234541285588
-        - rid: 7407168234541285473
     - rid: 7407168234541285472
       type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: a332e1b20a74e574fafd3dbeffdef4a8
-        position: {x: 960, y: 735}
+        position: {x: 570, y: 900}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        log: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
         targetPipelineName: PathFollowingPipeline
     - rid: 7407168234541285473
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
@@ -95,12 +88,14 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 02c343ab2b84d7e4fb7297f42e1800c3
-        position: {x: 1140, y: 510}
+        position: {x: 750, y: 675}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        log: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
         children:
         - rid: 7407168234541285472
         - rid: 7407168234541285474
@@ -110,23 +105,76 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 7b5409a642c08f7458d43b27c9916ac9
-        position: {x: 1230, y: 720}
+        position: {x: 855, y: 915}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        log: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
     - rid: 7407168234541285588
       type: {class: SubTree, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 597fcf52776521f43876dde19b997514
-        position: {x: 570, y: 495}
+        position: {x: 465, y: 465}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        treeAsset: {fileID: 11400000, guid: 441da56c00914ba4c8ec381cd76c55b7, type: 2}
+        treeInstance: {fileID: 0}
+    - rid: 7407168309800468492
+      type: {class: Wait, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 6e8db3b83463a34449e87e8483fd9e28
+        position: {x: 1065, y: 690}
         blackboard:
           keys: []
         description: 
         drawGizmos: 0
-        log: 0
-        treeAsset: {fileID: 11400000, guid: 441da56c00914ba4c8ec381cd76c55b7, type: 2}
-        treeInstance: {fileID: 0}
+        logStart: 0
+        logState: 0
+        logStop: 0
+        duration: Infinity
+    - rid: 7407168309800468493
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 69ac4f59887956c4ab0790a769b74623
+        position: {x: 885, y: 495}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7407168234541285473
+        - rid: 7407168309800468492
+    - rid: 7407168309800468494
+      type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: ee941bf8075e0d74fad2ceeaed08ce37
+        position: {x: 675, y: 225}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 0
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7407168234541285588
+        - rid: 7407168309800468493

@@ -12,7 +12,7 @@ public class RangeWeapon : AttackingWeapon
     public float RotationSpeed = 0;
 
 
-    public override void Attack(Collider2D attacker, Vector2 direction, LayerMask hitMask)
+    public override void Attack(Collider2D attacker, LayerMask hitMask, Vector2 direction)
     {
         GameObject damageItem = Instantiate(DamageItemPrefab, attacker.bounds.center, Quaternion.identity);
         damageItem.GetComponent<DamageItem>().Initialize(HitSound, attacker, this, hitMask);
@@ -20,11 +20,4 @@ public class RangeWeapon : AttackingWeapon
         damageItem.AddComponent<Mover>().Initialize(AttackDetector.Size.x, direction * FlySpeed);
         if (RotationSpeed > 0) damageItem.AddComponent<Rotator>().Initialize(RotationSpeed, direction.x);
     }
-
-#if UNITY_EDITOR
-    public override void DrawGizmos(Vector2 origin, Vector2 direction)
-    {
-        return;
-    }
-#endif
 }

@@ -105,7 +105,10 @@ public class AgentManager : MonoBehaviour, IHittable
 
     public void FallOut()
     {
+        Invulnerability temp = Invulnerability;
+        Invulnerability = null;
         OnFallOut?.Invoke();
+        Invulnerability = temp;
         OnRespawnRequired?.Invoke();
     }
 

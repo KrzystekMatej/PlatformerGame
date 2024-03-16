@@ -16,11 +16,11 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             
             pair.WriteValue();
             
-            return NodeState.Success;
+            return ProcessState.Success;
         }
     }
 }

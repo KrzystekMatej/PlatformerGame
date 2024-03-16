@@ -6,7 +6,8 @@ using UnityEngine;
 public class AIManager : MonoBehaviour
 {
     [SerializeField]
-    private float aiUpdateInterval = 0.1f;
+    [Range(0f, 1f)]
+    private float aiUpdateInterval;
 
     public AIInputController InputController { get; private set; }
     public AgentManager Agent { get; private set; }
@@ -32,8 +33,11 @@ public class AIManager : MonoBehaviour
 
         while (true)
         {
-            TreeRunner.TreeUpdate();
-            if (Steering != null) Steering.ApplySteering(Agent, InputController);
+            if (Time.timeScale > 0)
+            {
+                TreeRunner.TreeUpdate();
+                if (Steering != null) Steering.ApplySteering(Agent, InputController);
+            }
             yield return new WaitForSeconds(aiUpdateInterval);
         }
     }

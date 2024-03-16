@@ -15,13 +15,13 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             if (child == null) {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
 
             if (Time.time - startTime > duration) {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
 
             return child.Update();

@@ -149,11 +149,7 @@ namespace TheKiwiCoder {
                 return;
             }
 
-            BehaviourTree.Traverse(runtimeTree.rootNode, (n) => {
-                if (n.drawGizmos) {
-                    n.OnDrawGizmos();
-                }
-            });
+            runtimeTree.OnDrawGizmos();
         }
 
         public BlackboardKey<T> FindBlackboardKey<T>(string keyName) {

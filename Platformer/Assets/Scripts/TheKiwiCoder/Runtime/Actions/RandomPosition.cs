@@ -22,12 +22,12 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             Vector3 pos = new Vector3();
             pos.x = Random.Range(min.x, max.x);
             pos.y = Random.Range(min.y, max.y);
             result.Value = pos;
-            return NodeState.Success;
+            return ProcessState.Success;
         }
     }
 }

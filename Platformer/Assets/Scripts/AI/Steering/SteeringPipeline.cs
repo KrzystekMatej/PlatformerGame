@@ -51,13 +51,13 @@ public class SteeringPipeline : MonoBehaviour
         blackboard.SetValue(PipelineName + actuator.GetType().Name, actuator);
     }
 
-    public Vector2? GetSteering(AgentManager agent)
+    public (ProcessState, Vector2) GetSteering(AgentManager agent)
     {
         SteeringGoal goal = new SteeringGoal();
-
+        
         foreach (Targeter targeter in targeters)
         {
-            if (!targeter.TryUpdateGoal(agent, goal)) return null;
+            if (targeter.TryUpdateGoal(agent, goal)) return (ProcessState.Success, Vector2.zero);
         }
 
         if (goal.HasNothing()) return GetDeadlockSteering(agent);
@@ -88,7 +88,7 @@ public class SteeringPipeline : MonoBehaviour
             if (validPath)
             {
                 Vector2? steeringForce = actuator.GetSteering(agent, path, goal);
-                if (steeringForce != null) return steeringForce;
+                if (steeringForce != null) return (ProcessState.Running, (Vector2)steeringForce);
                 else break;
             }
 
@@ -97,9 +97,9 @@ public class SteeringPipeline : MonoBehaviour
         return GetDeadlockSteering(agent);
     }
 
-    private Vector2? GetDeadlockSteering(AgentManager agent)
+    private (ProcessState, Vector2) GetDeadlockSteering(AgentManager agent)
     {
-        return deadlock != null ? deadlock.GetSteering(agent) : null;
+        return deadlock != null ? deadlock.GetSteering(agent) : (ProcessState.Failure, Vector2.zero);
     }
 
     private void OnDrawGizmosSelected()

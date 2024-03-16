@@ -2,24 +2,19 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using TheKiwiCoder;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Steering : MonoBehaviour
 {
+    public UnityEvent<SteeringPipeline, SteeringPipeline> OnPipelineSwitch;
+
+
     private SteeringPipeline currentPipeline;
 
-    public string CurrentPipelineName
-    {
-        get
-        {
-            if (currentPipeline != null)
-            {
-                return currentPipeline.PipelineName;
-            }
-            return null;
-        }
-    }
-    
     private Dictionary<string, SteeringPipeline> pipelineTable = new Dictionary<string, SteeringPipeline>();
+
+    public string CurrentPipelineName => currentPipeline != null ? currentPipeline.PipelineName : null;
+    public ProcessState State { get; private set; }
 
     private void Awake()
     {
@@ -47,18 +42,20 @@ public class Steering : MonoBehaviour
     {
         if (currentPipeline == null) return;
 
-        Vector2? steeringForce = currentPipeline.GetSteering(agent);
+        (ProcessState state, Vector2 force) = currentPipeline.GetSteering(agent);
+        State = state;
 
-        if (steeringForce == null)
+        if (state != ProcessState.Running)
         {
             UpdateCurrentPipeline(null);
             inputController.StopMoving();
         }
-        else inputController.AddSteeringForce(steeringForce.Value);
+        else inputController.AddSteeringForce(force);
     }
 
     public bool UpdateCurrentPipeline(SteeringPipeline newPipeline)
     {
+        SteeringPipeline previous = currentPipeline;
         if (currentPipeline != null)
         {
             if (newPipeline == currentPipeline) return false;
@@ -78,7 +75,12 @@ public class Steering : MonoBehaviour
 #endif
         }
         else currentPipeline = null;
-
+        OnPipelineSwitch?.Invoke(previous, currentPipeline);
         return true;
+    }
+
+    public bool IsRunning()
+    {
+        return currentPipeline != null;
     }
 }

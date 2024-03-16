@@ -9,18 +9,21 @@ public class Attack : ActionNode
     {
         context.InputController.Attack();
         context.Agent.StateMachine.OnTransition.AddListener(AttackFinished);
-        state = NodeState.Running;
+        state = ProcessState.Running;
     }
 
     private void AttackFinished(State previous, State next)
     {
-        if (previous is AttackState) state = NodeState.Success;
+        if (previous is AttackState) state = ProcessState.Success;
     }
 
-    protected override NodeState OnUpdate()
+    protected override ProcessState OnUpdate()
     {
         return state;
     }
 
-    protected override void OnStop() { }
+    protected override void OnStop()
+    {
+        context.Agent.StateMachine.OnTransition.RemoveListener(AttackFinished);
+    }
 }

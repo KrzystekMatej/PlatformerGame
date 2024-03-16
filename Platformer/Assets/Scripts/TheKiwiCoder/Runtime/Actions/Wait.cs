@@ -8,7 +8,7 @@ namespace TheKiwiCoder {
     public class Wait : ActionNode {
 
         [Tooltip("Amount of time to wait before returning success")] public float duration = 1;
-        float startTime;
+        private float startTime;
 
         protected override void OnStart() {
             startTime = Time.time;
@@ -17,13 +17,13 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             
             float timeRemaining = Time.time - startTime;
             if (timeRemaining > duration) {
-                return NodeState.Success;
+                return ProcessState.Success;
             }
-            return NodeState.Running;
+            return ProcessState.Running;
         }
     }
 }

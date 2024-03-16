@@ -14,9 +14,9 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             Debug.Log($"{message.Value}");
-            return NodeState.Success;
+            return ProcessState.Success;
         }
     }
 }

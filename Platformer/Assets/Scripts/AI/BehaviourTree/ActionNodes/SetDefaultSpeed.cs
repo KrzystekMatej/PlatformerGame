@@ -8,10 +8,10 @@ public class SetDefaultSpeed : ActionNode
 {
     protected override void OnStart() { }
 
-    protected override NodeState OnUpdate()
+    protected override ProcessState OnUpdate()
     {
         context.Agent.InstanceData.MaxSpeed = context.Agent.DefaultData.MaxSpeed;
-        return NodeState.Success;
+        return ProcessState.Success;
     }
 
     protected override void OnStop() { }

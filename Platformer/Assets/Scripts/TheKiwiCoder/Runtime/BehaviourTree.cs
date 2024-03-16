@@ -14,7 +14,7 @@ namespace TheKiwiCoder {
         [SerializeReference]
         public List<Node> nodes = new List<Node>();
 
-        public Node.NodeState treeState = Node.NodeState.Running;
+        public ProcessState treeState = ProcessState.Running;
 
         public Blackboard blackboard = new Blackboard();
 
@@ -38,8 +38,8 @@ namespace TheKiwiCoder {
             });
         }
 
-        public Node.NodeState Update() {
-            if (treeState == Node.NodeState.Running) {
+        public ProcessState Update() {
+            if (treeState == ProcessState.Running) {
                 treeState = rootNode.Update();
             }
             return treeState;
@@ -81,6 +81,16 @@ namespace TheKiwiCoder {
                 node.context = context;
                 node.blackboard = blackboard;
                 node.OnInit();
+            });
+        }
+
+        public void OnDrawGizmos()
+        {
+            Traverse(rootNode, (n) => {
+                if (n.drawGizmos)
+                {
+                    n.OnDrawGizmos();
+                }
             });
         }
     }

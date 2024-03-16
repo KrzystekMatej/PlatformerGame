@@ -20,10 +20,10 @@ public class OrientationController : MonoBehaviour
     }
 
 
-    public void SetAgentOrientation(Vector2 input)
+    public void SetAgentOrientation(Vector2 velocity)
     {
         
-        if (Mathf.Abs(input.x) > flipThreshold && Mathf.Sign(input.x) != Mathf.Sign(CurrentOrientation))
+        if (Mathf.Abs(velocity.x) > flipThreshold && Mathf.Sign(velocity.x) != Mathf.Sign(CurrentOrientation))
         {
             Flip();
         }

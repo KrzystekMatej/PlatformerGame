@@ -5,6 +5,8 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+
 public class MaterialCheck : MonoBehaviour
 {
     [SerializeField]
@@ -53,3 +55,4 @@ public class MaterialCheckEditor : Editor
         }
     }
 }
+#endif

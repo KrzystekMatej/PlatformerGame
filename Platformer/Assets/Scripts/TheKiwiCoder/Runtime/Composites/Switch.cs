@@ -17,7 +17,7 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             
             if (interruptable) {
                 int nextIndex = index.Value;
@@ -30,7 +30,7 @@ namespace TheKiwiCoder {
             if (currentIndex < children.Count) {
                 return children[currentIndex].Update();
             }
-            return NodeState.Failure;
+            return ProcessState.Failure;
         }
     }
 }

@@ -20,38 +20,38 @@ namespace TheKiwiCoder {
 
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             if (child == null) {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
 
             switch (child.Update()) {
-                case NodeState.Running:
+                case ProcessState.Running:
                     break;
-                case NodeState.Failure:
+                case ProcessState.Failure:
                     if (restartOnFailure) {
                         iterationCount++;
                         if (iterationCount >= maxRepeats && maxRepeats > 0) {
-                            return NodeState.Failure;
+                            return ProcessState.Failure;
                         } else {
-                            return NodeState.Running;
+                            return ProcessState.Running;
                         }
                     } else {
-                        return NodeState.Failure;
+                        return ProcessState.Failure;
                     }
-                case NodeState.Success:
+                case ProcessState.Success:
                     if (restartOnSuccess) {
                         iterationCount++;
                         if (iterationCount >= maxRepeats && maxRepeats > 0) {
-                            return NodeState.Success;
+                            return ProcessState.Success;
                         } else {
-                            return NodeState.Running;
+                            return ProcessState.Running;
                         }
                     } else {
-                        return NodeState.Success;
+                        return ProcessState.Success;
                     }
             }
-            return NodeState.Running;
+            return ProcessState.Running;
         }
     }
 

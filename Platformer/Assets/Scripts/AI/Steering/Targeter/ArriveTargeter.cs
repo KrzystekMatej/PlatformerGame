@@ -39,7 +39,7 @@ public class ArriveTargeter : Targeter
 
         if (distance <= arriveRadius)
         {
-            return false;
+            return true;
         }
 
         if (slowRadius != 0 && distance <= arriveRadius + slowRadius) goal.Speed = agent.InstanceData.MaxSpeed * Mathf.Pow((distance - arriveRadius) / slowRadius, slowDegree);
@@ -47,10 +47,10 @@ public class ArriveTargeter : Targeter
 
         if (goal.Speed <= minSpeed)
         {
-            return false;
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     private void OnDrawGizmosSelected()

@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public static class MathUtility
 {
@@ -16,7 +18,7 @@ public static class MathUtility
         if (segmentLength == 0) return 0;
 
         Vector2 n = v / segmentLength;
-        
+
         return Mathf.Clamp(Vector2.Dot(u, n), 0, segmentLength);
     }
 
@@ -30,7 +32,7 @@ public static class MathUtility
         if (d < 0) return 0;
         else if (Mathf.Abs(d) < Mathf.Epsilon && intersections.Length >= 1)
         {
-            float t = -b/(2 * a);
+            float t = -b / (2 * a);
             intersections[0] = point + direction * t;
             return 1;
         }
@@ -106,7 +108,12 @@ public static class MathUtility
         return new Vector2(Math.Sign(vector.x), Math.Sign(vector.y));
     }
 
-    public static float GetVectorAngle(Vector2 vector)
+    public static Vector2 GetAbsoluteVector(Vector2 vector)
+    {
+        return new Vector2(Mathf.Abs(vector.x), Mathf.Abs(vector.y));
+    }
+
+    public static float GetVectorRadAngle(Vector2 vector)
     {
         return Mathf.Atan2(vector.y, vector.x);
     }
@@ -119,6 +126,8 @@ public static class MathUtility
         int r = index - length * qNegInfRounding;
         return r;
     }
+
+
 
     public static bool IsPointInsidePolygon(Vector2 point, Vector2[] polygonPoints)
     {
@@ -175,5 +184,20 @@ public static class MathUtility
         }
 
         return directions;
+    }
+
+    public static Vector2 CalculateStopOffset(Vector2 currentVelocity, float maxForce)
+    {
+        return - new Vector2(CalculateStopDistance(currentVelocity.x, maxForce), CalculateStopDistance(currentVelocity.y, maxForce));
+    }
+
+    public static float CalculateStopDistance(float currentSpeed, float maxForce)
+    {
+        return currentSpeed * currentSpeed / (maxForce * 2);
+    }
+
+    public static float CalculateTimeToStop(float currentSpeed, float maxForce)
+    {
+        return currentSpeed / maxForce;
     }
 }

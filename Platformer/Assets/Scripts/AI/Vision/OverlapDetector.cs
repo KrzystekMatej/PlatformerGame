@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using Overlap = System.Func<UnityEngine.Vector2, UnityEngine.Vector2, UnityEngine.CapsuleDirection2D,
     float, UnityEngine.Collider2D[], UnityEngine.LayerMask, int>;
@@ -57,8 +58,11 @@ public class OverlapDetector : VisionDetector
 
         switch (DetectShapeType)
         {
+            case ShapeType.Primitive:
+                Gizmos.DrawWireSphere(origin, 0.1f);
+                return;
             case ShapeType.Box:
-                Gizmos.DrawWireCube(origin, Size);
+                DrawBox(origin, GetRotatedBox());
                 return;
             case ShapeType.Circle:
                 Gizmos.DrawWireSphere(origin, Size.x);

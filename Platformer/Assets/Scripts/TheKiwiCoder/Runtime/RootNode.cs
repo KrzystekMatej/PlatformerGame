@@ -19,11 +19,11 @@ namespace TheKiwiCoder {
 
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             if (child != null) {
                 return child.Update();
             } else {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
         }
     }

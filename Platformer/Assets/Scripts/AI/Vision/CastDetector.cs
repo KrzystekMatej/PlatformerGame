@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,20 +61,42 @@ public class CastDetector : VisionDetector
     public override void DrawGizmos(Vector2 origin)
     {
         Gizmos.color = gizmoColor;
-        origin += OriginOffset;
+        
+        Vector2 offsetOrigin = origin + OriginOffset;
+
+        Vector2 end = offsetOrigin + Direction.normalized * Distance;
         switch (DetectShapeType)
         {
             case ShapeType.Primitive:
-                Vector2 end = origin + Direction * Distance;
-                Gizmos.DrawLine(origin, end);
+                Gizmos.DrawLine(offsetOrigin, end);
                 return;
             case ShapeType.Box:
-                Gizmos.DrawWireCube(origin, Size);
+                var box = GetRotatedBox();
+                DrawBox(offsetOrigin, box);
+                DrawBox(end, box);
+
+                Gizmos.DrawLine(offsetOrigin + box.rightUp, end + box.rightUp);
+                Gizmos.DrawLine(offsetOrigin + box.rightDown, end + box.rightDown);
+                Gizmos.DrawLine(offsetOrigin + box.leftUp, end + box.leftUp);
+                Gizmos.DrawLine(offsetOrigin + box.leftDown, end + box.leftDown);
                 return;
             case ShapeType.Circle:
-                Gizmos.DrawWireSphere(origin, Size.x);
+                DrawCircleCast(offsetOrigin, end);
                 return;
         }
+    }
+
+    private void DrawCircleCast(Vector2 origin, Vector2 end)
+    {
+        Gizmos.DrawWireSphere(origin, Size.x);
+        Vector2 normal = Direction.Perpendicular1().normalized;
+        Vector2 firstStart = origin + normal * Size.x;
+        Vector2 secondStart = origin - normal * Size.x;
+        Vector2 firstEnd = end + normal * Size.x;
+        Vector2 secondEnd = end - normal * Size.x;
+        Gizmos.DrawLine(firstStart, firstEnd);
+        Gizmos.DrawLine(secondStart, secondEnd);
+        Gizmos.DrawWireSphere(end, Size.x);
     }
 #endif
 }

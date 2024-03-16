@@ -11,20 +11,20 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             if (child == null) {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
 
             switch (child.Update()) {
-                case NodeState.Running:
-                    return NodeState.Running;
-                case NodeState.Failure:
-                    return NodeState.Success;
-                case NodeState.Success:
-                    return NodeState.Failure;
+                case ProcessState.Running:
+                    return ProcessState.Running;
+                case ProcessState.Failure:
+                    return ProcessState.Success;
+                case ProcessState.Success:
+                    return ProcessState.Failure;
             }
-            return NodeState.Failure;
+            return ProcessState.Failure;
         }
     }
 }

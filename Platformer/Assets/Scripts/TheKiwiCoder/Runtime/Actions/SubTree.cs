@@ -16,23 +16,32 @@ namespace TheKiwiCoder {
             if (treeAsset) {
                 treeInstance = treeAsset.Clone();
                 treeInstance.Bind(context);
+                drawGizmos = true;
             }
         }
 
         protected override void OnStart() {
             if (treeInstance) {
-                treeInstance.treeState = Node.NodeState.Running;
+                treeInstance.treeState = ProcessState.Running;
             }
         }
 
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             if (treeInstance) {
                 return treeInstance.Update();
             }
-            return NodeState.Failure;
+            return ProcessState.Failure;
+        }
+
+        public override void OnDrawGizmos()
+        {
+            if (treeInstance)
+            {
+                treeInstance.OnDrawGizmos();
+            }
         }
     }
 }

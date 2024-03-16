@@ -7,13 +7,26 @@ using DG.Tweening;
 [System.Serializable]
 public class TurnAround : ActionNode
 {
-    protected override void OnStart() { }
+    private float turnedDirection;
 
-    protected override NodeState OnUpdate()
+    protected override void OnStart()
     {
-        blackboard.SetValue("HorizontalDirection", -blackboard.GetValue<float>("HorizontalDirection"));
-        return NodeState.Success;
+        turnedDirection = -blackboard.GetValue<float>("HorizontalDirection");
     }
 
-    protected override void OnStop() { }
+    protected override ProcessState OnUpdate()
+    {
+        blackboard.SetValue("HorizontalDirection", turnedDirection);
+        context.InputController.AddSteeringForce(new Vector2(turnedDirection * context.Agent.InstanceData.MaxForce, 0f));
+        if (context.Agent.OrientationController.CurrentOrientation == turnedDirection)
+        {
+            return ProcessState.Success;
+        }
+        return ProcessState.Running;
+    }
+
+    protected override void OnStop()
+    {
+        context.InputController.AddSteeringForce(Vector2.zero);
+    }
 }

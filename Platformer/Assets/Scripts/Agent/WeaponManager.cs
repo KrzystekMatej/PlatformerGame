@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 
 public class WeaponManager : MonoBehaviour
 {
     public UnityEvent<Sprite> OnSwap;
     public UnityEvent<AttackingWeapon> OnAdd;
-
+    [SerializeField]
     private List<AttackingWeapon> weapons = new List<AttackingWeapon>();
     private int currentWeapon = 0;
 
@@ -17,7 +18,19 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        InitializeStartingWeapons();
         SetWeaponVisibility(false);
+    }
+
+    private void InitializeStartingWeapons()
+    {
+        List<AttackingWeapon> startWeapons = weapons
+            .GroupBy(w => w.WeaponName)
+            .Select(group => group.First())
+            .ToList();
+        weapons.Clear();
+        startWeapons.ForEach(w => weapons.Add(w));
+        SwapWeaponByIndex(0);
     }
 
     public void SetWeaponVisibility(bool isVisible)
@@ -29,7 +42,6 @@ public class WeaponManager : MonoBehaviour
     {
         if (AddWeapon(weapon))
         {
-            OnAdd?.Invoke(weapon);
             SwapWeaponByIndex(weapons.Count - 1);
             return true;
         }
@@ -40,6 +52,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (weapons.Any(w => w.WeaponName == weapon.WeaponName)) return false;
         weapons.Add(weapon);
+        OnAdd?.Invoke(weapon);
         return true;
     }
 
@@ -90,6 +103,15 @@ public class WeaponManager : MonoBehaviour
     public AttackingWeapon GetWeapon()
     {
         return weapons.Count > 0 ? weapons[currentWeapon] : null;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Collider2D collider = GetComponentInParent<Collider2D>();
+        OrientationController orientationController = GetComponentInParent<AgentManager>().GetComponentInChildren<OrientationController>();
+        AttackingWeapon weapon = GetWeapon();
+        if (weapon != null) weapon.DrawGizmos(collider.bounds.center, Vector2.right * orientationController.CurrentOrientation);
     }
 }
 

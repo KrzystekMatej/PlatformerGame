@@ -7,11 +7,11 @@ public class ReactivatePathFollowing : ActionNode
 {
     protected override void OnStart() { }
 
-    protected override NodeState OnUpdate()
+    protected override ProcessState OnUpdate()
     {
         PathFollowingTargeter pathFollowing = blackboard.GetValue<PathFollowingTargeter>(context.Steering.CurrentPipelineName + nameof(PathFollowingTargeter));
         pathFollowing.RecalculatePath(context.Agent);
-        return NodeState.Success;
+        return ProcessState.Success;
     }
 
     protected override void OnStop() { }

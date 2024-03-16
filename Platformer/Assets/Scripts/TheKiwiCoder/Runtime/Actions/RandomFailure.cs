@@ -15,12 +15,12 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             float value = Random.value;
             if (value > chanceOfFailure) {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
-            return NodeState.Success;
+            return ProcessState.Success;
         }
     }
 }

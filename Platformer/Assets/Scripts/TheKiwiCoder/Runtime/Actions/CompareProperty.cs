@@ -16,17 +16,17 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             BlackboardKey source = pair.value;
             BlackboardKey destination = pair.key;
 
             if (source != null && destination != null) {
                 if (destination.Equals(source)) {
-                    return NodeState.Success;
+                    return ProcessState.Success;
                 }
             }
 
-            return NodeState.Failure;
+            return ProcessState.Failure;
         }
     }
 }

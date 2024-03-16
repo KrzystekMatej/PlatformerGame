@@ -151,15 +151,15 @@ namespace TheKiwiCoder {
 
             if (Application.isPlaying) {
                 switch (node.state) {
-                    case Node.NodeState.Running:
+                    case ProcessState.Running:
                         if (node.started) {
                             AddToClassList("running");
                         }
                         break;
-                    case Node.NodeState.Failure:
+                    case  ProcessState.Failure:
                         AddToClassList("failure");
                         break;
-                    case Node.NodeState.Success:
+                    case ProcessState.Success:
                         AddToClassList("success");
                         break;
                 }

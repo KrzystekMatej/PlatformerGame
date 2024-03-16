@@ -7,19 +7,20 @@ public class WalkForward : ActionNode
 {
     public override void OnInit()
     {
-        float currentHorizontalInput = context.Agent.InputController.InputData.SteeringForce.x;
-        float currentAgentOrientation = context.Agent.OrientationController.CurrentOrientation;
-        blackboard.SetValue("HorizontalDirection", currentHorizontalInput != 0 ? currentHorizontalInput : currentAgentOrientation);
+        blackboard.SetValue("HorizontalDirection", 1f);
     }
 
     protected override void OnStart() { }
 
-
-    protected override NodeState OnUpdate()
+    protected override ProcessState OnUpdate()
     {
-        context.InputController.AddSteeringForce(new Vector2(blackboard.GetValue<float>("HorizontalDirection") * context.Agent.InstanceData.MaxForce, 0));
-        return NodeState.Success;
+        float direction = blackboard.GetValue<float>("HorizontalDirection");
+        context.InputController.AddSteeringForce(new Vector2(direction * context.Agent.InstanceData.MaxForce, 0f));
+        return ProcessState.Running;
     }
 
-    protected override void OnStop() { }
+    protected override void OnStop()
+    {
+        context.InputController.AddSteeringForce(Vector2.zero);
+    }
 }

@@ -23,7 +23,7 @@ public class SeekTargeter : Targeter
         goal.Owner = GoalOwner;
 
         GoalPosition = isPositionCached ? goal.Position : agent.CenterPosition;
-        return true;
+        return false;
     }
 
     private void OnDrawGizmosSelected()

@@ -11,14 +11,14 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             if (child == null) {
-                return NodeState.Failure;
+                return ProcessState.Failure;
             }
 
             var state = child.Update();
-            if (state == NodeState.Success) {
-                return NodeState.Failure;
+            if (state == ProcessState.Success) {
+                return ProcessState.Failure;
             }
             return state;
         }

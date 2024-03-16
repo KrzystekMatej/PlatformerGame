@@ -15,7 +15,7 @@ namespace TheKiwiCoder {
         protected override void OnStop() {
         }
 
-        protected override NodeState OnUpdate() {
+        protected override ProcessState OnUpdate() {
             var child = children[current];
             return child.Update();
         }

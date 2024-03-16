@@ -17,10 +17,10 @@ public class SwitchSteeringPipeline : ActionNode
 
     protected override void OnStart() { }
 
-    protected override NodeState OnUpdate()
+    protected override ProcessState OnUpdate()
     {
         bool hasChanged = context.Steering.UpdateCurrentPipeline(targetPipeline);
-        return hasChanged ? NodeState.Success : NodeState.Failure;
+        return hasChanged ? ProcessState.Success : ProcessState.Failure;
     }
 
     protected override void OnStop() { }
