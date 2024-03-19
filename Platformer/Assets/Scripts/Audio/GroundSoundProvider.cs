@@ -11,15 +11,15 @@ public class GroundSoundProvider : MonoBehaviour
     [SerializeField]
     private Sound land;
 
-    public Sound GetSound(SoundActionType actionType)
+    public Sound GetSound(StateType actionType)
     {
         switch (actionType)
         {
-            case SoundActionType.Step:
+            case StateType.Walk:
                 return step;
-            case SoundActionType.Jump:
+            case StateType.Jump:
                 return jump;
-            case SoundActionType.Land:
+            case StateType.Fall:
                 return land;
             default:
                 return null;

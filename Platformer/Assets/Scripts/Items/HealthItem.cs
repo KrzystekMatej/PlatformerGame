@@ -13,7 +13,7 @@ public class HealthItem : Item
         AgentManager agent = collider.gameObject.GetComponent<AgentManager>();
         if (agent.HealthManager != null)
         {
-            agent.HealthManager.ChangeHealth(healthValue);
+            agent.HealthManager.AddHealth(healthValue);
             agent.AudioFeedback.PlaySpecificSound(collectSound);
         }
     }

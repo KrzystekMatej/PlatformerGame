@@ -8,7 +8,6 @@ using UnityEngine.Networking;
 public class WeaponManager : MonoBehaviour
 {
     public UnityEvent<Sprite> OnSwap;
-    public UnityEvent<AttackingWeapon> OnAdd;
     [SerializeField]
     private List<AttackingWeapon> weapons = new List<AttackingWeapon>();
     private int currentWeapon = 0;
@@ -52,7 +51,6 @@ public class WeaponManager : MonoBehaviour
     {
         if (weapons.Any(w => w.WeaponName == weapon.WeaponName)) return false;
         weapons.Add(weapon);
-        OnAdd?.Invoke(weapon);
         return true;
     }
 

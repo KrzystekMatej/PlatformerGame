@@ -10,7 +10,7 @@ public class FallState : WalkState
 {
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Fall);
+        agent.Animator.PlayByType(StateType.Fall);
         agent.RigidBody.gravityScale = agent.DefaultData.GravityScale;
     }
 
@@ -28,7 +28,7 @@ public class FallState : WalkState
 
     protected override void HandleExit()
     {
-        agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(SoundActionType.Land));
+        agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(StateType.Fall));
     }
 }
 

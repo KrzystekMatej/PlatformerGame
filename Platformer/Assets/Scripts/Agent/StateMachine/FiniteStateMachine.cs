@@ -52,9 +52,10 @@ public class FiniteStateMachine : MonoBehaviour
         if (targetState != null)
         {
             CurrentState.Exit();
-            triggered.RunTransitionAction(agent);
+
             OnTransition?.Invoke(CurrentState, targetState);
 
+            triggered.RunTransitionAction(agent);
             CurrentState = targetState;
             CurrentState.Enter();
         }

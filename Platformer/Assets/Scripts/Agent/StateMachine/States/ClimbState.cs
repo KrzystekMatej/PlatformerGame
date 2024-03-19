@@ -10,7 +10,7 @@ public class ClimbState : State
 
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Climb);
+        agent.Animator.PlayByType(StateType.Climb);
         agent.Animator.Disable();
         agent.RigidBody.gravityScale = 0;
         agent.RigidBody.velocity = Vector3.zero;

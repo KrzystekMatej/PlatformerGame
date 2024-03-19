@@ -1130,6 +1130,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 52a8a9480403f914db4355634c7662c7, type: 2}
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: detector
+      value: 
+      objectReference: {fileID: 11400000, guid: 708502a5e0ca59942a0f9cfa554fbde3, type: 2}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: <CollisionLayerMask>k__BackingField.m_Bits
       value: 663808
       objectReference: {fileID: 0}

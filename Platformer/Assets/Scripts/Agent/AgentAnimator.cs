@@ -7,15 +7,15 @@ public class AgentAnimator : MonoBehaviour
 {
     private Animator animator;
 
-    public UnityEvent OnAnimationAction;
     public UnityEvent OnAnimationComplete;
+    public UnityEvent OnAnimationAction;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
 
-    public void PlayByType(AnimationType animationType)
+    public void PlayByType(StateType animationType)
     {
         animator.Play(animationType.ToString(), -1, 0f);
     }
@@ -44,19 +44,4 @@ public class AgentAnimator : MonoBehaviour
     {
         OnAnimationComplete?.Invoke();
     }
-}
-
-
-public enum AnimationType
-{
-    Die,
-    Hurt,
-    Idle,
-    Attack,
-    Walk,
-    Jump,
-    Fall,
-    Climb,
-    Land,
-    Fly
 }

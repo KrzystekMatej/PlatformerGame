@@ -9,11 +9,7 @@ public class HealthManager : MonoBehaviour
     private int maxHealth;
     public int CurrentHealth { get; private set; }
 
-    public UnityEvent OnDie;
-
-    public UnityEvent<int> OnHealthChange;
-
-    public UnityEvent<int> OnInitializeMaxHealth;
+    public UnityEvent<int> OnHealthChange, OnInitializeMaxHealth;
 
     public void Initialize(int health)
     {
@@ -22,14 +18,15 @@ public class HealthManager : MonoBehaviour
         CurrentHealth = maxHealth;
     }
 
-    public void ChangeHealth(int value)
+    public void AddHealth(int value)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, maxHealth);
-        if (CurrentHealth <= 0)
-        {
-            OnDie?.Invoke();
-        }
         OnHealthChange?.Invoke(CurrentHealth);
+    }
+
+    public void Kill()
+    {
+        AddHealth(-CurrentHealth);
     }
 
     public bool IsAlive()

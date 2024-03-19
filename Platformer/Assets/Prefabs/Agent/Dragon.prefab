@@ -121,6 +121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5fb8512ba40b043ae6ff76dfb055e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnPipelineSwitch:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4286384393339523267
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +677,7 @@ PrefabInstance:
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 8137952877383292111}
+      objectReference: {fileID: 1865405012676597544}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -701,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Agent, Assembly-CSharp
+      value: HealthManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnDeathComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -971,6 +974,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00702c02dd8624346979247969e38d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1865405012676597544 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1098224640033834070, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1647915609668588414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137952877383292107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86108a57e213034cb8aafb6c81ed0bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2841504784913693691 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3580818035751282821, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -1076,14 +1090,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
   probability: 0.306
---- !u!114 &8137952877383292111 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
-  m_PrefabInstance: {fileID: 1647915609668588414}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8137952877383292107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c277f60bab9ff3418f25492d3b3c301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

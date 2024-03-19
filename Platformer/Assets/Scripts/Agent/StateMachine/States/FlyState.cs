@@ -10,7 +10,7 @@ public class FlyState : WalkState
 
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Fly);
+        agent.Animator.PlayByType(StateType.Fly);
         agent.Animator.OnAnimationAction.AddListener(PlayFlapSound);
         agent.RigidBody.gravityScale = 0;
     }

@@ -320,6 +320,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: detector
+      value: 
+      objectReference: {fileID: 11400000, guid: d7b8d8f7c9da87145893bb5b73af76c8, type: 2}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: boxCastWidth
       value: 0.691
       objectReference: {fileID: 0}
@@ -334,6 +338,10 @@ PrefabInstance:
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: boxCastYOffset
       value: -0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: <CollisionLayerMask>k__BackingField.m_Bits
+      value: 8448
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
@@ -438,7 +446,7 @@ PrefabInstance:
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 499778370858099351}
+      objectReference: {fileID: 8062427638380454256}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -465,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Agent, Assembly-CSharp
+      value: HealthManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnDeathComplete.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -742,17 +750,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
   probability: 0.306
---- !u!114 &499778370858099351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
-  m_PrefabInstance: {fileID: 6980247669020632358}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499778370858099347}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c277f60bab9ff3418f25492d3b3c301, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &499778371711450562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092903229668, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -811,6 +808,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a116309e888f5e74b8e6e54219960fb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8062427638380454256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1098224640033834070, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 6980247669020632358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499778370858099347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86108a57e213034cb8aafb6c81ed0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8615732606640034922 stripped

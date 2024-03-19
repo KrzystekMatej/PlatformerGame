@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415090757186357842}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7363741091481350651}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7018045401786011267
 SpriteRenderer:
@@ -100,9 +100,7 @@ MonoBehaviour:
   OnSwap:
     m_PersistentCalls:
       m_Calls: []
-  OnAdd:
-    m_PersistentCalls:
-      m_Calls: []
+  weapons: []
 --- !u!1 &2675105344776821214
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,13 +126,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675105344776821214}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7363741092985079734}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &9135688367114563810
 AudioSource:
@@ -270,6 +268,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363741091481350650}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -277,7 +276,6 @@ Transform:
   m_Children:
   - {fileID: 7433307234973794105}
   m_Father: {fileID: 7363741092985079734}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7363741091481350647
 SpriteRenderer:
@@ -364,10 +362,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc2b1c4c23f12c45a8e81beff4c11e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnAnimationAction:
+  OnAnimationComplete:
     m_PersistentCalls:
       m_Calls: []
-  OnAnimationComplete:
+  OnAnimationAction:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &7363741092666616267
@@ -396,13 +394,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363741092666616267}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7363741092985079734}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &7363741092666616261
 CapsuleCollider2D:
@@ -414,6 +412,25 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -434,9 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectDelay: 0.02
   objectCollider: {fileID: 7363741092666616261}
-  <CollisionLayerMask>k__BackingField:
-    serializedVersion: 2
-    m_Bits: 663808
+  detector: {fileID: 11400000, guid: 708502a5e0ca59942a0f9cfa554fbde3, type: 2}
   boxCastXOffset: -0
   boxCastYOffset: -0.47
   boxCastWidth: 0.705
@@ -456,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectCollider: {fileID: 7363741092666616261}
-  flipThreshold: 0.1
+  flipThreshold: 1.1
 --- !u!1 &7363741092903229673
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,13 +505,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363741092903229673}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7363741092985079734}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7363741092903229668
 MonoBehaviour:
@@ -904,6 +919,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InitialState>k__BackingField: {fileID: 7363741092903229668}
   <CurrentState>k__BackingField: {fileID: 0}
+  OnTransition:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7363741092985079733
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,6 +949,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363741092985079733}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -941,7 +960,6 @@ Transform:
   - {fileID: 7363741092903229674}
   - {fileID: 7231147595225947246}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &7363741092985079728
 Rigidbody2D:
@@ -960,6 +978,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 254880110753c0a45bde3847ecb0e12d, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -974,6 +998,25 @@ CapsuleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1032,9 +1075,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 0
-  OnDie:
-    m_PersistentCalls:
-      m_Calls: []
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []

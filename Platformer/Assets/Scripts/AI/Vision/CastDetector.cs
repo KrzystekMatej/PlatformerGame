@@ -60,7 +60,7 @@ public class CastDetector : VisionDetector
 #if UNITY_EDITOR
     public override void DrawGizmos(Vector2 origin)
     {
-        Gizmos.color = gizmoColor;
+        Gizmos.color = GizmoColor;
         
         Vector2 offsetOrigin = origin + OriginOffset;
 

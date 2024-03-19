@@ -13,13 +13,13 @@ public class WalkState : State
 
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Walk);
+        agent.Animator.PlayByType(StateType.Walk);
         agent.Animator.OnAnimationAction.AddListener(PlayStepSound);
     }
 
     private void PlayStepSound()
     {
-        agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(SoundActionType.Step));
+        agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(StateType.Walk));
     }
 
     public override void HandleUpdate()

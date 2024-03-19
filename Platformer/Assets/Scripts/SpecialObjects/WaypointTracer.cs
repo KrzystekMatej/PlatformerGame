@@ -18,10 +18,7 @@ public class WaypointTracer : MonoBehaviour
         if (Vector2.Distance(waypoints[current].transform.position, transform.position) < arriveDistance)
         {
             current++;
-            if (current >= waypoints.Length)
-            {
-                current = 0;
-            }
+            if (current >= waypoints.Length) current = 0;
         }
         transform.position = Vector2.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
     }

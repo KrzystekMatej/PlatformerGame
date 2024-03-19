@@ -10,11 +10,3 @@ public class Sound : ScriptableObject
     [Range(0f, 1f)]
     public float Volume;
 }
-
-public enum SoundActionType
-{
-    Step,
-    Jump,
-    Land,
-    Attack
-}

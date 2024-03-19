@@ -14,7 +14,7 @@ public class AttackState : State
 
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Attack);
+        agent.Animator.PlayByType(StateType.Attack);
         agent.WeaponManager.SetWeaponVisibility(true);
         if (agent.GroundDetector != null && agent.GroundDetector.Detected) agent.RigidBody.velocity = Vector3.zero;
         PerformAttack();

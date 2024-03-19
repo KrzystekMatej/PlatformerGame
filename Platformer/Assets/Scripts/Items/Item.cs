@@ -9,4 +9,13 @@ public abstract class Item : MonoBehaviour
 
     public abstract void Collect(Collider2D collider);
 
+
+    public void OnDestroy()
+    {
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+    }
+
 }

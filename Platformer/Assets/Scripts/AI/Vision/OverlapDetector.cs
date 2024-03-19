@@ -53,7 +53,7 @@ public class OverlapDetector : VisionDetector
 #if UNITY_EDITOR
     public override void DrawGizmos(Vector2 origin)
     {
-        Gizmos.color = gizmoColor;
+        Gizmos.color = GizmoColor;
         origin += OriginOffset;
 
         switch (DetectShapeType)

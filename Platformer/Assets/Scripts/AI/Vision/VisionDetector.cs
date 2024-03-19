@@ -7,8 +7,8 @@ using UnityEngine;
 
 public abstract class VisionDetector : ScriptableObject
 {
-    [SerializeField]
-    protected Color gizmoColor = Color.red;
+    [field: SerializeField]
+    public Color GizmoColor { get; set; } = Color.red;
     [field: SerializeField]
     public Vector2 Size { get; set; }
     [field: SerializeField]
@@ -41,7 +41,7 @@ public abstract class VisionDetector : ScriptableObject
 #if UNITY_EDITOR
     public abstract void DrawGizmos(Vector2 origin);
 
-    public void DrawBox(Vector2 origin, (Vector2 rightUp, Vector2 rightDown, Vector2 leftUp, Vector2 leftDown) box)
+    protected void DrawBox(Vector2 origin, (Vector2 rightUp, Vector2 rightDown, Vector2 leftUp, Vector2 leftDown) box)
     {
         Gizmos.DrawLine(origin + box.rightUp, origin + box.rightDown);
         Gizmos.DrawLine(origin + box.rightUp, origin + box.leftUp);
@@ -49,7 +49,7 @@ public abstract class VisionDetector : ScriptableObject
         Gizmos.DrawLine(origin + box.leftUp, origin + box.leftDown);
     }
 
-    public (Vector2 rightUp, Vector2 rightDown, Vector2 leftUp, Vector2 leftDown) GetRotatedBox()
+    protected (Vector2 rightUp, Vector2 rightDown, Vector2 leftUp, Vector2 leftDown) GetRotatedBox()
     {
         Quaternion rotation = Quaternion.Euler(0, 0, Angle);
         Vector2 halfSize = Size / 2;

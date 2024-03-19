@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Tilemaps;
@@ -69,10 +70,7 @@ public class AgentManager : MonoBehaviour, IHittable
 
     private void Update()
     {
-        if (InputController.InputData.WeaponSwap == InputState.Pressed)
-        {
-            WeaponManager.SwapWeapon();
-        }
+        if (InputController.InputData.WeaponSwap == InputState.Pressed && WeaponManager != null) WeaponManager.SwapWeapon();
         StateMachine.PerformStateUpdate(this);
         OrientationController.SetAgentOrientation(RigidBody.velocity);
     }
@@ -94,13 +92,8 @@ public class AgentManager : MonoBehaviour, IHittable
             else StartCoroutine(Invulnerability.Run(StateMachine.Factory));
         }
 
-        HealthManager.ChangeHealth(-attackDamage);
+        HealthManager.AddHealth(-attackDamage);
         StateMachine.InterruptFilter |= InterruptMask.Hurt;
-    }
-
-    public void Kill()
-    {
-        Hit(HealthManager.CurrentHealth);
     }
 
     public void FallOut()

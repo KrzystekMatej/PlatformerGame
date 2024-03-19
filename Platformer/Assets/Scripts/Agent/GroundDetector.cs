@@ -8,12 +8,13 @@ public class GroundDetector : MonoBehaviour
     private float detectDelay = 0.02f;
     [SerializeField]
     private Collider2D objectCollider;
-    [field: SerializeField]
-    public LayerMask CollisionLayerMask { get; private set; }
+    [SerializeField]
+    private CastDetector detector;
 
     public bool Detected { get; private set; }
     public RaycastHit2D Hit { get; private set; }
 
+#if UNITY_EDITOR
     [Header("Gizmo parameters")]
     [Range(-2f, 2f)]
     [SerializeField]
@@ -26,6 +27,13 @@ public class GroundDetector : MonoBehaviour
     private float boxCastWidth = 1f, boxCastHeight = 1f;
     [SerializeField]
     private Color gizmoColorDetected = Color.red, gizmoColorNotDetected = Color.green;
+#endif
+
+    private void OnValidate()
+    {
+        detector.OriginOffset = new Vector2(boxCastXOffset, boxCastYOffset);
+        detector.Size = new Vector2(boxCastWidth, boxCastHeight);
+    }
 
     private void Awake()
     {
@@ -37,29 +45,20 @@ public class GroundDetector : MonoBehaviour
     {
         while (true)
         {
-            RaycastHit2D hit = Physics2D.BoxCast
-            (
-                objectCollider.bounds.center + new Vector3(boxCastXOffset, boxCastYOffset),
-                new Vector2(boxCastWidth, boxCastHeight),
-                0,
-                Vector2.down,
-                0,
-                CollisionLayerMask
-            );
+            int detectionCount = detector.Detect(objectCollider.bounds.center);
 
-
-            Detected = (hit.collider != null) && hit.collider.IsTouching(objectCollider);
-            Hit = hit;
+            Detected = (detectionCount > 0) && detector.Hits[0].collider.IsTouching(objectCollider);
+            Hit = detector.Hits[0];
             yield return new WaitForSeconds(detectDelay);
         } 
     }
 
-    public Sound GetGroundSound(SoundActionType actionType)
+    public Sound GetGroundSound(StateType stateType)
     {
         if (Hit)
         {
             GroundSoundProvider soundProvider = Hit.collider.GetComponent<GroundSoundProvider>();
-            if (soundProvider != null) return soundProvider.GetSound(actionType);
+            if (soundProvider != null) return soundProvider.GetSound(stateType);
         }
 
         return null;
@@ -67,10 +66,8 @@ public class GroundDetector : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (objectCollider == null)
-            return;
-        Gizmos.color = Detected ? gizmoColorDetected : gizmoColorNotDetected;
-
-        Gizmos.DrawWireCube(objectCollider.bounds.center + new Vector3(boxCastXOffset, boxCastYOffset), new Vector3(boxCastWidth, boxCastHeight));
+        if (objectCollider == null) return;
+        detector.GizmoColor = Detected ? gizmoColorDetected : gizmoColorNotDetected;
+        detector.DrawGizmos(objectCollider.bounds.center);
     }
 }

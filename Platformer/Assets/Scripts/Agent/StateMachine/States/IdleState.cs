@@ -8,7 +8,7 @@ public class IdleState : State
 {
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Idle);
+        agent.Animator.PlayByType(StateType.Idle);
         agent.RigidBody.velocity = agent.GroundDetector.Detected ? Vector2.zero : agent.RigidBody.velocity;
     }
 }

@@ -11,7 +11,7 @@ public class DieState : State
 
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Die);
+        agent.Animator.PlayByType(StateType.Die);
         agent.Animator.OnAnimationComplete.AddListener(CompleteTheDeath);
         agent.RigidBody.velocity = new Vector2(0, agent.RigidBody.velocity.y);
     }

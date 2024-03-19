@@ -8,7 +8,7 @@ public class HurtState : State
 {
     protected override void HandleEnter()
     {
-        agent.Animator.PlayByType(AnimationType.Hurt);
+        agent.Animator.PlayByType(StateType.Hurt);
     }
 }
 
