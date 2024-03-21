@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class HittableBlock : MonoBehaviour
 {
 
-    public void Hit(GameObject gameObject, Weapon attackingWeapon)
+    public void Hit(GameObject gameObject, AttackingWeapon attackingWeapon)
     {
         GetComponent<Animator>().SetTrigger("Attack");
         GetComponent<BoxCollider2D>().enabled = false;

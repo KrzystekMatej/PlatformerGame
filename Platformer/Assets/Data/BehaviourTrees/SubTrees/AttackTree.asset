@@ -27,8 +27,8 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 546, y: 58, z: 0}
-  viewScale: {x: 0.65751624, y: 0.65751624, z: 1}
+  viewPosition: {x: 608, y: 93, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -60,7 +60,7 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         logStart: 0
-        logState: 1
+        logState: 0
         logStop: 0
     - rid: 7407168234541285534
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
@@ -91,7 +91,7 @@ MonoBehaviour:
         description: 
         drawGizmos: 1
         logStart: 0
-        logState: 1
+        logState: 0
         logStop: 0
         useStopApproximation: 1
     - rid: 7407168262723339013
@@ -123,7 +123,7 @@ MonoBehaviour:
         description: 
         drawGizmos: 0
         logStart: 0
-        logState: 1
+        logState: 0
         logStop: 0
     - rid: 7407168296016675037
       type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
@@ -165,7 +165,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 2e3bdb3856dd653469cba1dd7d187958
-        position: {x: 450, y: 675}
+        position: {x: 435, y: 660}
         blackboard:
           keys: []
         description: 

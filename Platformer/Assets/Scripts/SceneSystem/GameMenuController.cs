@@ -4,37 +4,29 @@ using UnityEngine;
 
 public class GameMenuController : MonoBehaviour
 {
-    private SceneController sceneController;
-
-    private void Awake()
-    {
-        sceneController = FindObjectOfType<SceneController>();
-    }
-
-
     public void ToggleMenu()
     {
         gameObject.SetActive(!gameObject.activeSelf);
 
         if (gameObject.activeSelf)
         {
-            sceneController.StopTime();
+            SceneController.Instance.StopTime();
         }
         else
         {
-            sceneController.StartTime();
+            SceneController.Instance.StartTime();
         }
     }
 
     public void LoadMainMenu()
     {
-        sceneController.StartTime();
-        sceneController.LoadMainMenu();
+        SceneController.Instance.StartTime();
+        SceneController.Instance.LoadMainMenu();
     }
 
     public void RestartLevel()
     {
-        sceneController.StartTime();
-        sceneController.LoadCurrentScene();
+        SceneController.Instance.StartTime();
+        SceneController.Instance.LoadCurrentScene();
     }
 }

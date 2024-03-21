@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac4dca0c7f4f0d4f8636ce681f73f2b, type: 3}
   m_Name: Eat
   m_EditorClassIdentifier: 
-  Name: Eat
   AudioClip: {fileID: 8300000, guid: d32e7a54bab577f4e8cf2f579e700905, type: 3}
+  Mixer: {fileID: 5109656521951484014, guid: cf505303fc6b62f478c3f1c5dbd95230, type: 2}
   Volume: 0.353

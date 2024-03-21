@@ -11,9 +11,9 @@ public static class LevelSaveManager
         return PlayerPrefs.GetInt(reachedLevelKey);
     }
 
-    public static void SaveLevelProgress(SceneController sceneController)
+    public static void SaveLevelProgress()
     {
-        int reachedLevel = sceneController.GetCurrentLevelIndex();
-        if (reachedLevel != -1) PlayerPrefs.SetInt(reachedLevelKey, reachedLevel);
+        int currentLevel = SceneController.Instance.GetCurrentLevelIndex();
+        if (currentLevel != -1 && currentLevel > GetReachedLevel()) PlayerPrefs.SetInt(reachedLevelKey, currentLevel);
     }
 }

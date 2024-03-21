@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class Checkpoint : MonoBehaviour
 {
+    [SerializeField]
+    private bool playActivationSound = true;
     private AgentManager respawnTarget;
     private RespawnSystem respawnSystem;
     private TriggerDetector triggerDetector;
@@ -29,11 +31,13 @@ public class Checkpoint : MonoBehaviour
         {
             if (controller.IsFollowed(respawnTarget)) controller.CacheBackgroundData();
         }
+
+        if (playActivationSound) respawnTarget.AudioFeedback.PlaySpecificSound(respawnSystem.ActivationSound);
     }
 
     private void RespawnPlayer()
     {
-        respawnTarget.transform.position = transform.position;
+        respawnTarget.transform.position = GetComponent<Collider2D>().bounds.center;
 
         foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
         {

@@ -7,12 +7,10 @@ public class WinningPoint : MonoBehaviour
 {
     [SerializeField]
     private float waitDuration = 1;
-    private SceneController sceneController;
     private AudioSource audioSource;
 
     private void Awake()
     {
-        sceneController = FindObjectOfType<SceneController>();
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -20,7 +18,7 @@ public class WinningPoint : MonoBehaviour
     public void WinningPointReached()
     {
         audioSource.Play();
-        LevelSaveManager.SaveLevelProgress(sceneController);
+        LevelSaveManager.SaveLevelProgress();
         StartCoroutine(LoadNextScene());
     }
 
@@ -28,6 +26,6 @@ public class WinningPoint : MonoBehaviour
     IEnumerator LoadNextScene()
     {
         yield return new WaitForSeconds(waitDuration);
-        sceneController.LoadNextScene();
+        SceneController.Instance.LoadNextScene();
     }
 }

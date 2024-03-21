@@ -12,12 +12,12 @@ public abstract class AttackingWeapon : Weapon
     public Sprite WeaponSprite;
     public Sound WeaponSound;
 
+    public abstract void Attack(Collider2D attacker, LayerMask hitMask, Vector2 direction);
+
     public bool IsUseableByAgent(AgentManager agent)
     {
         return !IsGroundWeapon || agent.GroundDetector.Detected;
     }
-
-    public abstract void Attack(Collider2D attacker, LayerMask hitMask, Vector2 direction);
 
     public int DetectInAttackRange(Collider2D attacker, LayerMask hitMask, Vector2 direction) => DetectInAttackRange(attacker, hitMask, direction, Vector2.zero);
 

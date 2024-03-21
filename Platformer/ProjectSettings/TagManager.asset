@@ -16,7 +16,7 @@ TagManager:
   - Climbable
   - Platform
   - Checkpoint
-  - CollectableItem
+  - Collectable
   - Enemy
   - Trap
   - SolidGeometry
@@ -57,7 +57,7 @@ TagManager:
   - name: Front
     uniqueID: 642602087
     locked: 0
-  - name: CollectableItem
+  - name: Collectable
     uniqueID: 167798337
     locked: 0
   - name: UI

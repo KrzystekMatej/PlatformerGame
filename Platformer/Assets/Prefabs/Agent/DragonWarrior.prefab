@@ -56,8 +56,6 @@ GameObject:
   - component: {fileID: 5069396936925411513}
   - component: {fileID: 2380482323876147089}
   - component: {fileID: 2211380407839643415}
-  - component: {fileID: 1940983899023610047}
-  - component: {fileID: 6610329081560960693}
   m_Layer: 0
   m_Name: DragonWarrior
   m_TagString: Untagged
@@ -106,38 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9fd10fc7de08b4f931c87e0bb32461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1940983899023610047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5069396936925411512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c6f9b140a52a14881ec09eaebb66eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  behaviourTree: {fileID: 0}
-  validate: 1
-  blackboardOverrides: []
-  references:
-    version: 2
-    RefIds: []
---- !u!114 &6610329081560960693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5069396936925411512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3352f9d625dbeb141801802a3bb0e20c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startWeapons:
-  - {fileID: 11400000, guid: 5ff0eeb05a305c142bc7930f6f7c889e, type: 2}
 --- !u!1 &7056008537242134979
 GameObject:
   m_ObjectHideFlags: 0

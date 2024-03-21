@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,17 @@ public class SceneController : MonoBehaviour
     private int menuIndex;
     [SerializeField]
     private int startLevelIndex;
+
+    public static SceneController Instance { get; private set; }
+
+    private void Awake()
+    {
+#if UNITY_EDITOR
+        var controllers = FindObjectsOfType<SceneController>();
+        if (controllers.Count() > 1) Debug.LogWarning("Multiple scene controllers present in one scene.");
+#endif
+        Instance = this;
+    }
 
     public void LoadCurrentScene()
     {

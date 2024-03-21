@@ -20,7 +20,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 24832
   <OriginOffset>k__BackingField: {x: -0.07, y: -0.26}
-  detectShapeType: 0
+  detectShapeType: 1
   maxDetections: 1
   <Distance>k__BackingField: 0
   <Direction>k__BackingField: {x: 0, y: 0}
