@@ -10,9 +10,9 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 [CreateAssetMenu(fileName = "MeleeWeapon", menuName = "Weapons/MeleeWeapon")]
 public class MeleeWeapon : AttackingWeapon
 {
-    public override void Attack(Collider2D attacker, LayerMask hitMask, Vector2 direction)
+    public override void Attack(Collider2D attacker, Vector2 direction, LayerMask hitMask)
     {
-        int detectionCount = DetectInAttackRange(attacker, hitMask, direction);
+        int detectionCount = DetectInAttackRange(attacker.bounds.center, direction, hitMask);
 
 
         for (int i = 0; i < detectionCount; i++)

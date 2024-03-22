@@ -24,13 +24,13 @@ public class CanAttackAgent : Condition
     {
         AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         int targetCount = 0;
-        if (weapon != null && weapon.IsUseableByAgent(context.Agent))
+        if (weapon != null && weapon.IsUseable(context.Agent))
         {
             float orientation = context.Agent.OrientationController.CurrentOrientation;
             Vector2 offset = useStopApproximation
                 ? MathUtility.CalculateStopOffset(context.Agent.RigidBody.velocity, context.Agent.InstanceData.MaxForce) * orientation
                 : Vector2.zero;
-            targetCount = weapon.DetectInAttackRange(context.Agent.TriggerCollider, attackState.HitMask, context.Agent.transform.right * orientation, offset);
+            targetCount = weapon.DetectInAttackRange(context.Agent.CenterPosition, context.Agent.transform.right * orientation, attackState.HitMask, offset);
         }
         return targetCount != 0;
     }
@@ -41,7 +41,7 @@ public class CanAttackAgent : Condition
     {
         Gizmos.color = Color.yellow;
         AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
-        if (weapon != null && weapon.IsUseableByAgent(context.Agent))
+        if (weapon != null && weapon.IsUseable(context.Agent))
         {
             float orientation = context.Agent.OrientationController.CurrentOrientation;
             Vector2 offset = Vector2.zero;

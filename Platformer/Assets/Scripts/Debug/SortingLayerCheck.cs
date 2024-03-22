@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Tilemaps;
 
 #if UNITY_EDITOR
 
@@ -13,10 +14,10 @@ public class SortingLayerCheck : MonoBehaviour
 
     public void CheckLayer()
     {
-        SpriteRenderer[] allSpriteRenderers = FindObjectsOfType<SpriteRenderer>();
+        Renderer[] allSpriteRenderers = FindObjectsOfType<Renderer>();
         bool found = false;
 
-        foreach (SpriteRenderer renderer in allSpriteRenderers)
+        foreach (Renderer renderer in allSpriteRenderers)
         {
             if (renderer.sortingLayerName == testSortingLayerName)
             {

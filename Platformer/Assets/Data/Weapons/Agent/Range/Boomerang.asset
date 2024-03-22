@@ -20,7 +20,5 @@ MonoBehaviour:
   WeaponSprite: {fileID: 21300000, guid: 6ed654e071b11504b8d6a6c01eb19bed, type: 3}
   WeaponSound: {fileID: 11400000, guid: 4beefcc0d12164140ae58aaa5825dc85, type: 2}
   DamageItemPrefab: {fileID: 4983611067930591715, guid: 78d21d0c101018e4e8c6951ff1675282, type: 3}
-  HitSound: {fileID: 0}
   FlySpeed: 20
-  IsUnstoppable: 0
   RotationSpeed: 600

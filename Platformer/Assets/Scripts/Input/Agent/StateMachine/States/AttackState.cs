@@ -8,7 +8,6 @@ using UnityEngine.Events;
 
 public class AttackState : State
 {
-    private Vector2 attackDirection;
     [SerializeField]
     public LayerMask HitMask;
 
@@ -16,14 +15,9 @@ public class AttackState : State
     {
         agent.WeaponManager.SetWeaponVisibility(true);
         if (agent.GroundDetector != null && agent.GroundDetector.Detected) agent.RigidBody.velocity = Vector3.zero;
-        PerformAttack();
-    }
 
-    private void PerformAttack()
-    {
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
-        attackDirection = agent.transform.right * agent.OrientationController.CurrentOrientation;
-        agent.WeaponManager.GetWeapon().Attack(agent.TriggerCollider, HitMask, attackDirection);
+        agent.WeaponManager.GetWeapon().Attack(agent.TriggerCollider, agent.transform.right * agent.OrientationController.CurrentOrientation, HitMask);
     }
 
     protected override void HandleExit()

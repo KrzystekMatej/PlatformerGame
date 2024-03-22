@@ -12,23 +12,22 @@ public abstract class AttackingWeapon : Weapon
     public Sprite WeaponSprite;
     public Sound WeaponSound;
 
-    public abstract void Attack(Collider2D attacker, LayerMask hitMask, Vector2 direction);
+    public abstract void Attack(Collider2D attacker, Vector2 direction, LayerMask hitMask);
 
-    public bool IsUseableByAgent(AgentManager agent)
-    {
-        return !IsGroundWeapon || agent.GroundDetector.Detected;
-    }
+    public int DetectInAttackRange(Vector2 attackerCenter, Vector2 direction, LayerMask hitMask) => DetectInAttackRange(attackerCenter, direction, hitMask, Vector2.zero);
 
-    public int DetectInAttackRange(Collider2D attacker, LayerMask hitMask, Vector2 direction) => DetectInAttackRange(attacker, hitMask, direction, Vector2.zero);
-
-    public int DetectInAttackRange(Collider2D attacker, LayerMask hitMask, Vector2 direction, Vector2 offset)
+    public int DetectInAttackRange(Vector2 attackerCenter, Vector2 direction, LayerMask hitMask, Vector2 offset)
     {
         AttackDetector.DetectLayerMask = hitMask;
         AttackDetector.OriginOffset = offset + direction * (AttackDetector.Size.x / 2);
         AttackDetector.Angle = MathUtility.GetVectorRadAngle(direction) * Mathf.Rad2Deg;
 
-        int colliderCount = AttackDetector.Detect(attacker.bounds.center);
+        int colliderCount = AttackDetector.Detect(attackerCenter);
         return colliderCount;
+    }
+    public bool IsUseable(AgentManager agent)
+    {
+        return !IsGroundWeapon || (agent.GroundDetector && agent.GroundDetector.Detected);
     }
 
 #if UNITY_EDITOR
