@@ -11,26 +11,14 @@ public class StateFactory : MonoBehaviour
 
     public State GetState(StateType stateType)
     {
-        if (stateTable.ContainsKey(stateType))
-        {
-            return stateTable[stateType];
-        }
-        return null;
+        State result;
+        stateTable.InnerTable.TryGetValue(stateType, out result);
+        return result;
     }
 
     public void SetState(StateType stateType, State state)
     {
-        stateTable[stateType] = state;
-    }
-
-
-
-    public void InitializeStates(AgentManager agent)
-    {
-        foreach (State state in GetComponents<State>())
-        {
-            state.Initialize(agent);
-        }
+        stateTable.InnerTable[stateType] = state;
     }
 }
 
@@ -44,7 +32,6 @@ public enum StateType
     Fall,
     Attack,
     Climb,
-    Crouch,
     Hurt,
     Die
 }

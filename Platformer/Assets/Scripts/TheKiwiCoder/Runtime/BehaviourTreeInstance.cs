@@ -141,15 +141,22 @@ namespace TheKiwiCoder {
         }
 
         private void OnDrawGizmosSelected() {
-            if (!Application.isPlaying) {
-                return;
-            }
 
-            if (!runtimeTree) {
-                return;
+            if (Application.isPlaying && runtimeTree)
+            {
+                AgentManager agent = context.Agent;
+                if (!agent) return;
+                runtimeTree.OnDrawTreeGizmos(agent);
             }
+            else if (!Application.isPlaying && behaviourTree)
+            {
+                AIInputController input = GetComponentInParent<AIInputController>();
+                if (!input) return;
 
-            runtimeTree.OnDrawGizmos();
+                AgentManager agent = input.GetComponentInChildren<AgentManager>();
+                if (!agent) return;
+                behaviourTree.OnDrawTreeGizmos(agent);
+            }
         }
 
         public BlackboardKey<T> FindBlackboardKey<T>(string keyName) {

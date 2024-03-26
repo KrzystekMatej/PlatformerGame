@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GenericToFallTransition : StateTransition
 {
-    public GenericToFallTransition() : base(StateType.Fall) { }
+    protected GenericToFallTransition() : base(StateType.Fall) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

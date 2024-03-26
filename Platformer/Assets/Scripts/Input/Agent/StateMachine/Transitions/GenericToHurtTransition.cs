@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GenericToHurtTransition : InterruptTransition
+public class GenericToHurtTransition : StateTransition
 {
-    public GenericToHurtTransition() : base(StateType.Hurt) {}
+    protected GenericToHurtTransition() : base(StateType.Hurt) {}
 
     public override bool IsTriggered(AgentManager agent)
     {

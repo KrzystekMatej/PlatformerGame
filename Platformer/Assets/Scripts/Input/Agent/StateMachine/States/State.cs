@@ -1,24 +1,29 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
 public abstract class State : MonoBehaviour
 {
+    [SerializeField]
+    protected AgentManager agent;
     [HideInInspector]
     [SerializeReference]
     private List<StateTransition> orderedTransitions = new List<StateTransition>();
 
     public List<StateTransition> OrderedTransitions => orderedTransitions;
+    public UnityEvent OnEnter, OnUpdate, OnExit;
 
-    protected AgentManager agent;
-    public UnityEvent OnEnter, OnExit;
-
-    public void Initialize(AgentManager agent)
+    public void Awake()
     {
-        this.agent = agent;
+        agent = agent ? agent : GetComponentInParent<AgentManager>();
+    }
+
+    public void Start()
+    {
         InitializeTransitions();
     }
 
@@ -27,30 +32,37 @@ public abstract class State : MonoBehaviour
         List<StateTransition> globalTransitions = new List<StateTransition>();
         for (int i = 0; i < orderedTransitions.Count; i++)
         {
-            StateTransition transition = GlobalTransitionManager.Instance.GetTransitionByName(orderedTransitions[i].GetType().Name);
+            StateTransition transition = TransitionManager.Instance.GetTransitionByName(orderedTransitions[i].GetType().Name);
             if (transition != null) globalTransitions.Add(transition);
         }
         orderedTransitions.Clear();
         orderedTransitions.AddRange(globalTransitions);
     }
 
-    public void Enter()
+    public void PerformEnterActions()
     {
-        OnEnter?.Invoke();
         HandleEnter();
+        OnEnter?.Invoke();
     }
 
-    protected virtual void HandleEnter() { }
+    protected abstract void HandleEnter();
 
-    public virtual void HandleUpdate() { }
-    
-    public void Exit()
+
+    public void PerformUpdateActions()
     {
-        OnExit?.Invoke();
-        HandleExit();
+        HandleUpdate();
+        OnUpdate?.Invoke();
     }
 
-    protected virtual void HandleExit() { }
+    protected abstract void HandleUpdate();
+    
+    public void PerformExitActions()
+    {
+        HandleExit();
+        OnExit?.Invoke();
+    }
+
+    protected abstract void HandleExit();
 }
 
 [CustomEditor(typeof(State))]
@@ -61,7 +73,7 @@ public class StateEditor : Editor
 
     private void OnEnable()
     {
-        GlobalTransitionManager transitionManager = FindObjectOfType<GlobalTransitionManager>();
+        TransitionManager transitionManager = FindObjectOfType<TransitionManager>();
         if (transitionManager != null)
         {
             availableTransitions = transitionManager.AvailableTransitions;
@@ -107,7 +119,10 @@ public class StateEditor : Editor
                 Undo.RecordObject(state, "Add Transition");
                 transitionsProperty.arraySize++;
                 SerializedProperty newElement = transitionsProperty.GetArrayElementAtIndex(transitionsProperty.arraySize - 1);
-                newElement.managedReferenceValue = Activator.CreateInstance(availableTransitions[selectedIndex].GetType());
+                ConstructorInfo constructorInfo = availableTransitions[selectedIndex]
+                    .GetType()
+                    .GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[0], null);
+                newElement.managedReferenceValue = constructorInfo.Invoke(null);
                 serializedObject.ApplyModifiedProperties();
             }
             else Debug.Log($"This state already has {availableTransitions[selectedIndex].GetType().Name}.");

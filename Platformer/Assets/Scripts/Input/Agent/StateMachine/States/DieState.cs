@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DieState : State
 {
@@ -25,13 +26,12 @@ public class DieState : State
     private IEnumerator Wait()
     {
         yield return new WaitForSeconds(deathDuration);
-        agent.OnDeathComplete?.Invoke();
+        PerformExitActions();
     }
 
-    public override void HandleUpdate()
-    {
-        agent.RigidBody.velocity = new Vector2(0, agent.RigidBody.velocity.y);
-    }
+    protected override void HandleUpdate() { }
+
+    protected override void HandleExit() { }
 }
 
 [CustomEditor(typeof(DieState), true)]

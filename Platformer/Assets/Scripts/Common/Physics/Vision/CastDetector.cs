@@ -63,8 +63,8 @@ public class CastDetector : VisionDetector
         Gizmos.color = GizmoColor;
         
         Vector2 offsetOrigin = origin + OriginOffset;
-
         Vector2 end = offsetOrigin + Direction.normalized * Distance;
+
         switch (DetectShapeType)
         {
             case ShapeType.Primitive:

@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 9135688367114563810}
   - component: {fileID: 3580818035751282821}
   m_Layer: 0
-  m_Name: AudioFeedback
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -471,6 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectCollider: {fileID: 7363741092666616261}
+  rigidBody: {fileID: 0}
   flipThreshold: 1.1
 --- !u!1 &7363741092903229673
 GameObject:
@@ -525,6 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21c98ab21d43f2458e40cf145cc4dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
   - rid: 7407168211064717684
   - rid: 7407168211064717685
@@ -534,6 +536,9 @@ MonoBehaviour:
   - rid: 7407168211064717713
   - rid: 7407168211064717714
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -582,6 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36fe6dec2ee21eb48a5b4299dd06921c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
   - rid: 7407168211064717691
   - rid: 7407168211064717692
@@ -590,6 +596,9 @@ MonoBehaviour:
   - rid: 7407168211064717695
   - rid: 7407168211064717696
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -634,6 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7132725e64abe4e48aedcdf2d7e7edc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
   - rid: 7407168211064717697
   - rid: 7407168211064717698
@@ -641,6 +651,9 @@ MonoBehaviour:
   - rid: 7407168211064717701
   - rid: 7407168211064717702
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -681,6 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c4e2321c1f3ca4e9cdfe6424541876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
   - rid: 7407168211064717703
   - rid: 7407168211064717704
@@ -689,6 +703,9 @@ MonoBehaviour:
   - rid: 7407168211064717709
   - rid: 7407168211064717710
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -733,12 +750,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b02982b542225418ab3bdbf8c4c76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
   - rid: 7407168211064717715
   - rid: 7407168211064717716
   - rid: 7407168211064717717
   - rid: 7407168211064717718
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -778,12 +799,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d38976bb0d326d4f8eaa8ab7db0754f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
   - rid: 7407168211064717719
   - rid: 7407168211064717720
   - rid: 7407168211064717721
   - rid: 7407168211064717722
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -820,10 +845,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00702c02dd8624346979247969e38d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions:
-  - rid: 7407168211064717723
-  - rid: 7407168211064717724
+  - rid: 7407168546783887380
+  - rid: 7407168546783887381
   OnEnter:
+    m_PersistentCalls:
+      m_Calls: []
+  OnUpdate:
     m_PersistentCalls:
       m_Calls: []
   OnExit:
@@ -832,14 +861,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 7407168211064717723
+    - rid: 7407168546783887380
+      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 8
+    - rid: 7407168546783887381
       type: {class: HurtToIdleTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 0
-    - rid: 7407168211064717724
-      type: {class: GenericToDieTransition, ns: , asm: Assembly-CSharp}
-      data:
-        <TargetState>k__BackingField: 9
 --- !u!114 &8660966007656399279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,6 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b02de7f2faf07294597425eaecc98ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   orderedTransitions: []
   OnEnter:
     m_PersistentCalls:
@@ -868,6 +898,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  OnUpdate:
+    m_PersistentCalls:
+      m_Calls: []
   OnExit:
     m_PersistentCalls:
       m_Calls: []
@@ -901,9 +934,9 @@ MonoBehaviour:
       Value: {fileID: 5247370467627279520}
     - Key: 6
       Value: {fileID: 7363741092903229671}
-    - Key: 8
+    - Key: 7
       Value: {fileID: 1679817844667101516}
-    - Key: 9
+    - Key: 8
       Value: {fileID: 8660966007656399279}
 --- !u!114 &7438126095448475424
 MonoBehaviour:
@@ -919,6 +952,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <InitialState>k__BackingField: {fileID: 7363741092903229668}
   <CurrentState>k__BackingField: {fileID: 0}
+  agent: {fileID: 0}
   OnTransition:
     m_PersistentCalls:
       m_Calls: []
@@ -1035,9 +1069,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c277f60bab9ff3418f25492d3b3c301, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnDeathComplete:
-    m_PersistentCalls:
-      m_Calls: []
   OnFallOut:
     m_PersistentCalls:
       m_Calls:

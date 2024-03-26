@@ -14,16 +14,17 @@ public class DamageItem : Item
         this.collectSound = collectSound;
         this.attacker = attacker;
         this.damageWeapon = damageWeapon;
-        GetComponent<TriggerDetector>().ChangeTriggerMask(hitMask);
+        GetComponent<TriggerFilter>().ChangeTriggerMask(hitMask);
     }
 
     public override void Collect(Collider2D collider)
     {
-        AgentManager agent = collider.GetComponent<AgentManager>();
-        if (agent != null)
+        IHittable hittable = collider.GetComponent<IHittable>();
+        if (hittable != null)
         {
-            agent.Hit(attacker, damageWeapon);
-            agent.AudioFeedback.PlaySpecificSound(collectSound);
+            hittable.Hit(attacker, damageWeapon);
+            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
+            if (audio) audio.PlaySpecificSound(collectSound);
         }
     }
 }

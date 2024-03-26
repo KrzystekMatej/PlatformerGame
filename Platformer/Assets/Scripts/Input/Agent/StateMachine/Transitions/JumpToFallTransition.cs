@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class JumpToFallTransition : StateTransition
 {
-    public JumpToFallTransition() : base(StateType.Fall) { }
+    protected JumpToFallTransition() : base(StateType.Fall) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

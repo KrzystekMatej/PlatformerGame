@@ -10,13 +10,13 @@ public class Checkpoint : MonoBehaviour
     private bool playActivationSound = true;
     private AgentManager respawnTarget;
     private RespawnSystem respawnSystem;
-    private TriggerDetector triggerDetector;
+    private TriggerFilter triggerDetector;
 
 
     private void Awake()
     {
         respawnSystem = GetComponentInParent<RespawnSystem>();
-        triggerDetector = GetComponent<TriggerDetector>();
+        triggerDetector = GetComponent<TriggerFilter>();
     }
 
 

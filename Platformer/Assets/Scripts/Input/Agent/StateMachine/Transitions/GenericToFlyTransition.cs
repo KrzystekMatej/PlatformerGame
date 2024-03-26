@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class GenericToFlyTransition : InterruptTransition
+public class GenericToFlyTransition : StateTransition
 {
-    public GenericToFlyTransition() : base(StateType.Fly) { }
+    protected GenericToFlyTransition() : base(StateType.Fly) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

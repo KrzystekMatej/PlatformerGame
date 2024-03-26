@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AttackToIdleTransition : InterruptTransition
+public class AttackToIdleTransition : StateTransition
 {
-    public AttackToIdleTransition() : base(StateType.Idle) {}
+    protected AttackToIdleTransition() : base(StateType.Idle) {}
 
     public override bool IsTriggered(AgentManager agent)
     {

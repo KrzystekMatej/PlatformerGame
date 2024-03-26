@@ -20,6 +20,8 @@ public class AttackState : State
         agent.WeaponManager.GetWeapon().Attack(agent.TriggerCollider, agent.transform.right * agent.OrientationController.CurrentOrientation, HitMask);
     }
 
+    protected override void HandleUpdate() { }
+
     protected override void HandleExit()
     {
         agent.WeaponManager.SetWeaponVisibility(false);

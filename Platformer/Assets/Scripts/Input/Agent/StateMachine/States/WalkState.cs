@@ -21,7 +21,7 @@ public class WalkState : State
         agent.AudioFeedback.PlaySpecificSound(agent.GroundDetector.GetGroundSound(StateType.Walk));
     }
 
-    public override void HandleUpdate()
+    protected override void HandleUpdate()
     {
         CalculateAcceleration();
         CalculateVelocity();

@@ -11,11 +11,12 @@ public class PointItem : Item
 
     public override void Collect(Collider2D collider)
     {
-        AgentManager agent = collider.gameObject.GetComponent<AgentManager>();
-        if (agent.PointManager != null)
+        PointManager pointManager = collider.GetComponentInChildren<PointManager>();
+        if (pointManager)
         {
-            agent.PointManager.AddPoints(collectValue);
-            agent.AudioFeedback.PlaySpecificSound(collectSound);
+            pointManager.AddPoints(collectValue);
+            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
+            if (audio) audio.PlaySpecificSound(collectSound);
         }
     }
 }

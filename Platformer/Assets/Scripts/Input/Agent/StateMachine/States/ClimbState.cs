@@ -12,10 +12,10 @@ public class ClimbState : State
     {
         agent.Animator.Disable();
         agent.RigidBody.gravityScale = 0;
-        agent.RigidBody.velocity = Vector3.zero;
+        agent.RigidBody.velocity = Vector2.zero;
     }
 
-    public override void HandleUpdate()
+    protected override void HandleUpdate()
     {
         Vector2 steeringForce = agent.InputController.InputData.SteeringForce;
         if (steeringForce.magnitude > 0)

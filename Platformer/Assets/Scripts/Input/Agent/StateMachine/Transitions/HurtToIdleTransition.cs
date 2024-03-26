@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class HurtToIdleTransition : InterruptTransition
+public class HurtToIdleTransition : StateTransition
 {
-    public HurtToIdleTransition() : base(StateType.Idle) {}
+    protected HurtToIdleTransition() : base(StateType.Idle) {}
 
     public override bool IsTriggered(AgentManager agent)
     {

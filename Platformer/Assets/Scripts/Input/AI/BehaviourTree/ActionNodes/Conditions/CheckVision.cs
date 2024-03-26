@@ -17,8 +17,6 @@ public class CheckVision : Condition
     private float maxDistance = float.PositiveInfinity;
     [SerializeField]
     private LayerMask mask;
-    [SerializeField]
-    private string tag;
 
 #if UNITY_EDITOR
     public override void OnInit()
@@ -68,7 +66,6 @@ public class CheckVision : Condition
     {
         return (hit.distance >= minDistance)
             && (hit.distance <= maxDistance)
-            && (tag == "" || hit.collider.tag == tag)
             && (mask == 0 || Utility.CheckLayer(hit.collider.gameObject.layer, mask));
     }
 }

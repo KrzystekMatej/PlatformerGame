@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheKiwiCoder;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class CastVision : Condition
@@ -12,21 +15,14 @@ public class CastVision : Condition
     private bool changeDirectionByOrientation;
     [SerializeField]
     private bool changeOffsetByOrientation;
+#if UNITY_EDITOR
+    [SerializeField]
+    private Color gizmoColor = Color.red;
+#endif
 
     protected override void OnStart()
     {
-        visionDetector.Distance = distance;
-
-        float orientation = context.Agent.OrientationController.CurrentOrientation;
-        if (changeDirectionByOrientation)
-        {
-            visionDetector.Direction = new Vector2(orientation, 0);
-        }
-        if (changeOffsetByOrientation)
-        {
-            float xOffset = Mathf.Abs(visionDetector.OriginOffset.x) * orientation;
-            visionDetector.OriginOffset = new Vector2(xOffset, visionDetector.OriginOffset.y);
-        }
+        InitializeDetector(context.Agent.OrientationController.CurrentOrientation);
     }
 
     protected override bool IsConditionSatisfied()
@@ -38,4 +34,28 @@ public class CastVision : Condition
     }
 
     protected override void OnStop() { }
+
+    private void InitializeDetector(float orientation)
+    {
+        visionDetector.Distance = distance;
+        if (changeDirectionByOrientation)
+        {
+            visionDetector.Direction = new Vector2(orientation, 0);
+        }
+        if (changeOffsetByOrientation)
+        {
+            float xOffset = Mathf.Abs(visionDetector.OriginOffset.x) * orientation;
+            visionDetector.OriginOffset = new Vector2(xOffset, visionDetector.OriginOffset.y);
+        }
+    }
+
+#if UNITY_EDITOR
+
+    public override void OnDrawGizmos(AgentManager agent)
+    {
+        InitializeDetector(agent.GetComponentInChildren<OrientationController>().CurrentOrientation);
+        visionDetector.GizmoColor = gizmoColor;
+        visionDetector.DrawGizmos(agent.GetComponent<Collider2D>().bounds.center);   
+    }
+#endif
 }

@@ -29,8 +29,8 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 683, y: 130, z: 0}
-  viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
+  viewPosition: {x: 648, y: 89, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
@@ -143,7 +143,7 @@ MonoBehaviour:
         blackboard:
           keys: []
         description: 
-        drawGizmos: 0
+        drawGizmos: 1
         logStart: 0
         logState: 0
         logStop: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
         distance: 0
         changeDirectionByOrientation: 0
         changeOffsetByOrientation: 0
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
     - rid: 7407168307214680891
       type: {class: CheckVision, ns: , asm: Assembly-CSharp}
       data:
@@ -173,7 +174,6 @@ MonoBehaviour:
         mask:
           serializedVersion: 2
           m_Bits: 8
-        tag: 
     - rid: 7407168309800468488
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:

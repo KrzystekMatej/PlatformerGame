@@ -15,11 +15,12 @@ public class WeaponItem : Item
 
     public override void Collect(Collider2D collider)
     {
-        AgentManager agent = collider.gameObject.GetComponent<AgentManager>();
-        if (agent.WeaponManager != null)
+        WeaponManager weaponManager = collider.GetComponentInChildren<WeaponManager>();
+        if (weaponManager)
         {
-            agent.WeaponManager.AddWeaponWithSwap(weapon);
-            agent.AudioFeedback.PlaySpecificSound(collectSound);
+            weaponManager.AddWeaponWithSwap(weapon);
+            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
+            if (audio) audio.PlaySpecificSound(collectSound);
         }
     }
 }

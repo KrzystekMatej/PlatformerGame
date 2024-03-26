@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class WalkToIdleTransition : StateTransition
 {
-    public WalkToIdleTransition() : base(StateType.Idle) { }
+    protected WalkToIdleTransition() : base(StateType.Idle) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

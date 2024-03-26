@@ -6,10 +6,11 @@ using UnityEngine.Windows;
 
 public class IdleState : State
 {
-    protected override void HandleEnter()
-    {
-        agent.RigidBody.velocity = agent.GroundDetector.Detected ? Vector2.zero : agent.RigidBody.velocity;
-    }
+    protected override void HandleEnter() => agent.RigidBody.velocity = Vector2.zero;
+
+    protected override void HandleUpdate() { }
+
+    protected override void HandleExit() { }
 }
 
 [CustomEditor(typeof(IdleState), true)]

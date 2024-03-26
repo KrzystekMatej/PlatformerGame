@@ -36,11 +36,15 @@ namespace TheKiwiCoder {
             return ProcessState.Failure;
         }
 
-        public override void OnDrawGizmos()
+        public override void OnDrawGizmos(AgentManager agent)
         {
-            if (treeInstance)
+            if (Application.isPlaying && treeInstance)
             {
-                treeInstance.OnDrawGizmos();
+                treeInstance.OnDrawTreeGizmos(agent);
+            }
+            else if (!Application.isPlaying && treeAsset)
+            {
+                treeAsset.OnDrawTreeGizmos(agent);
             }
         }
     }

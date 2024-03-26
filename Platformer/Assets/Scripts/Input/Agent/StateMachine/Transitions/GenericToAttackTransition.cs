@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GenericToAttackTransition : StateTransition
 {
-    public GenericToAttackTransition() : base(StateType.Attack) { }
+    protected GenericToAttackTransition() : base(StateType.Attack) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

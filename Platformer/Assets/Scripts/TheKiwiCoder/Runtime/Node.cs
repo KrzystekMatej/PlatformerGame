@@ -13,7 +13,7 @@ namespace TheKiwiCoder {
         [HideInInspector] public Context context;
         [HideInInspector] public Blackboard blackboard;
         [TextArea] public string description;
-        [Tooltip("When enabled, the nodes OnDrawGizmos will be invoked")] public bool drawGizmos = false;
+        [Tooltip("When enabled, the nodes OnDrawGizmos will be invoked")] public bool drawGizmos = true;
 #if UNITY_EDITOR
         public bool logStart = false;
         public bool logState = false;
@@ -61,7 +61,7 @@ namespace TheKiwiCoder {
             });
         }
 
-        public virtual void OnDrawGizmos() { }
+        public virtual void OnDrawGizmos(AgentManager agent) { }
 
         protected abstract void OnStart();
         protected abstract void OnStop();

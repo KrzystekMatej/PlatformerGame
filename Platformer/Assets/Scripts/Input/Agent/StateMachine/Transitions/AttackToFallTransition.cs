@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AttackToFallTransition : InterruptTransition
+public class AttackToFallTransition : StateTransition
 {
-    public AttackToFallTransition() : base(StateType.Fall) { }
+    protected AttackToFallTransition() : base(StateType.Fall) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

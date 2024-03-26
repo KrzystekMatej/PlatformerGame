@@ -10,12 +10,17 @@ public abstract class StateTransition
     [field: SerializeField]
     public StateType TargetState { get; protected set; }
 
-    public StateTransition(StateType stateType)
+    protected StateTransition(StateType stateType)
     {
         TargetState = stateType;
     }
 
-    public virtual void RunTransitionAction(AgentManager agent)
+    protected static bool IsInterruptAllowed(InterruptMask allowedMask, InterruptMask incomingMask)
+    {
+        return (allowedMask & incomingMask) > 0;
+    }
+
+    public virtual void PerformTransitionAction(AgentManager agent)
     {
         agent.Animator.PlayByType(TargetState);
     }

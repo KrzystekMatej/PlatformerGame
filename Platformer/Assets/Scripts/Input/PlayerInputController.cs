@@ -8,9 +8,15 @@ using UnityEngine.Events;
 public class PlayerInputController : InputController
 {
     [SerializeField]
-    private KeyCode rightKey, leftKey, upKey, downKey, jumpKey, attackKey, weaponSwapKey, crouchKey, menuKey;
+    private KeyCode rightKey, leftKey, upKey, downKey, jumpKey, attackKey, weaponSwapKey, menuKey;
     public UnityEvent OnMenuKeyPressed;
 
+    private WeaponManager weaponManager;
+
+    private void Awake()
+    {
+        weaponManager = GetComponentInChildren<WeaponManager>();
+    }
 
     private void Update()
     {
@@ -19,8 +25,7 @@ public class PlayerInputController : InputController
             inputData.SteeringForce = GetSteeringForce();
             inputData.Jump = GetInputState(jumpKey);
             inputData.Attack = GetInputState(attackKey);
-            inputData.WeaponSwap = GetInputState(weaponSwapKey);
-            inputData.Crouch = GetInputState(crouchKey);
+            if (GetInputState(weaponSwapKey) == InputState.Pressed) weaponManager.SwapWeapon();
         }
 
         GetMenuInput();

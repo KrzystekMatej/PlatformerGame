@@ -85,7 +85,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: eaa7426d31a04ac4baaa3ff939d7c5bd
-        position: {x: -285, y: 420}
+        position: {x: -300, y: 405}
         blackboard:
           keys: []
         description: 

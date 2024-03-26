@@ -24,6 +24,8 @@ public class SteeringPipeline : MonoBehaviour
 
 #if UNITY_EDITOR
     Vector2 gizmoGoalPosition;
+    bool gizmoValidPath;
+    List<Vector2> gizmoPath;
 #endif
 
     private void Awake()
@@ -83,6 +85,8 @@ public class SteeringPipeline : MonoBehaviour
             }
 
 #if UNITY_EDITOR
+            gizmoValidPath = validPath;
+            gizmoPath = path;
             gizmoGoalPosition = goal.Position;
 #endif
             if (validPath)
@@ -107,5 +111,10 @@ public class SteeringPipeline : MonoBehaviour
         if (!Application.isPlaying) return;
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(gizmoGoalPosition, 0.3f);
+        if (!gizmoValidPath) return;
+        foreach (Vector2 point in gizmoPath)
+        {
+
+        }
     }
 }

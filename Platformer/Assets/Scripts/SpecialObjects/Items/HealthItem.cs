@@ -10,11 +10,12 @@ public class HealthItem : Item
 
     public override void Collect(Collider2D collider)
     {
-        AgentManager agent = collider.gameObject.GetComponent<AgentManager>();
-        if (agent.HealthManager != null)
+        HealthManager healthManager = collider.GetComponentInChildren<HealthManager>();
+        if (healthManager)
         {
-            agent.HealthManager.AddHealth(healthValue);
-            agent.AudioFeedback.PlaySpecificSound(collectSound);
+            healthManager.AddHealth(healthValue);
+            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
+            if (audio) audio.PlaySpecificSound(collectSound);
         }
     }
 }

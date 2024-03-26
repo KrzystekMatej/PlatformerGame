@@ -6,10 +6,10 @@ using UnityEngine.Windows;
 [System.Serializable]
 public class IdleToWalkTransition : StateTransition
 {
-    public IdleToWalkTransition() : base(StateType.Walk) { }
+    protected IdleToWalkTransition() : base(StateType.Walk) { }
 
     public override bool IsTriggered(AgentManager agent)
     {
-        return Mathf.Abs(agent.InputController.InputData.SteeringForce.x) > 0;
+        return agent.InputController.InputData.SteeringForce.x != 0;
     }
 }

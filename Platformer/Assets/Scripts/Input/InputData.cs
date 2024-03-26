@@ -8,8 +8,6 @@ public struct InputData
     public Vector2 SteeringForce;
     public InputState Jump;
     public InputState Attack;
-    public InputState WeaponSwap;
-    public InputState Crouch;
 }
 
 public enum InputState

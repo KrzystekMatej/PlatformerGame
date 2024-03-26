@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GenericToDieTransition : StateTransition
 {
-    public GenericToDieTransition() : base(StateType.Die) {}
+    protected GenericToDieTransition() : base(StateType.Die) {}
 
     public override bool IsTriggered(AgentManager agent)
     {

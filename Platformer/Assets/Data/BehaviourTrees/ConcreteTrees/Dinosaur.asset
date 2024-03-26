@@ -40,7 +40,7 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 728, y: -70, z: 0}
+  viewPosition: {x: 900, y: -11, z: 0}
   viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
@@ -243,25 +243,26 @@ MonoBehaviour:
         blackboard:
           keys: []
         description: 
-        drawGizmos: 0
+        drawGizmos: 1
         logStart: 0
         logState: 0
         logStop: 0
         visionDetector: {fileID: 11400000, guid: 588df0a69f385ba4380813114a535383, type: 2}
-        distance: 5.5
+        distance: 20
         changeDirectionByOrientation: 1
         changeOffsetByOrientation: 0
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
     - rid: 7407168253177626966
       type: {class: CastVision, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: cc419a0f923f8544292631307cefe6b5
-        position: {x: -150, y: 1395}
+        position: {x: -150, y: 1380}
         blackboard:
           keys: []
         description: 
-        drawGizmos: 0
+        drawGizmos: 1
         logStart: 0
         logState: 0
         logStop: 0
@@ -269,6 +270,7 @@ MonoBehaviour:
         distance: 1.2
         changeDirectionByOrientation: 0
         changeOffsetByOrientation: 1
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
     - rid: 7407168253177627090
       type: {class: CheckVision, ns: , asm: Assembly-CSharp}
       data:
@@ -291,7 +293,6 @@ MonoBehaviour:
         mask:
           serializedVersion: 2
           m_Bits: 8
-        tag: 
     - rid: 7407168253177627091
       type: {class: CheckVision, ns: , asm: Assembly-CSharp}
       data:
@@ -314,7 +315,6 @@ MonoBehaviour:
         mask:
           serializedVersion: 2
           m_Bits: 8192
-        tag: 
     - rid: 7407168253177627589
       type: {class: Inverter, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:

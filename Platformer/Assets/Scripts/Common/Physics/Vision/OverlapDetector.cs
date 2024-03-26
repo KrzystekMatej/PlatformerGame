@@ -54,6 +54,7 @@ public class OverlapDetector : VisionDetector
     public override void DrawGizmos(Vector2 origin)
     {
         Gizmos.color = GizmoColor;
+
         origin += OriginOffset;
 
         switch (DetectShapeType)

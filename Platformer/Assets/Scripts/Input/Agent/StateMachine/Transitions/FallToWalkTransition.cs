@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class FallToWalkTransition : StateTransition
 {
-    public FallToWalkTransition() : base(StateType.Walk) { }
+    protected FallToWalkTransition() : base(StateType.Walk) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

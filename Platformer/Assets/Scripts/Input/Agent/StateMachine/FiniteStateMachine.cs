@@ -13,28 +13,29 @@ public class FiniteStateMachine : MonoBehaviour
     public State InitialState { get; private set; }
     [field: SerializeField]
     public State CurrentState { get; private set; }
+    [SerializeField]
+    private AgentManager agent;
 
     public StateFactory Factory { get; private set; }
     public InterruptMask InterruptFilter { get; set; }
     public UnityEvent<State, State> OnTransition;
 
-
     private void Awake()
     {
         Factory = GetComponent<StateFactory>();
-        InitialState = InitialState == null ? GetComponent<IdleState>() : InitialState;
+        InitialState = InitialState ? InitialState : GetComponent<IdleState>();
+        agent = agent ? agent : GetComponentInParent<AgentManager>();
     }
 
     private void Start()
     {
-        Factory.InitializeStates(GetComponentInParent<AgentManager>());
         CurrentState = InitialState;
-        CurrentState.Enter();
+        CurrentState.PerformEnterActions();
     }
 
-    public void PerformStateUpdate(AgentManager agent)
+    private void Update()
     {
-        CurrentState.HandleUpdate();
+        CurrentState.PerformUpdateActions();
 
         StateTransition triggered = CurrentState.OrderedTransitions.FirstOrDefault(t => t.IsTriggered(agent));
 
@@ -42,6 +43,7 @@ public class FiniteStateMachine : MonoBehaviour
         {
             PerformTransition(triggered, agent);
         }
+
         InterruptFilter = InterruptMask.None;
     }
 
@@ -51,13 +53,13 @@ public class FiniteStateMachine : MonoBehaviour
 
         if (targetState != null)
         {
-            CurrentState.Exit();
+            CurrentState.PerformExitActions();
 
             OnTransition?.Invoke(CurrentState, targetState);
 
-            triggered.RunTransitionAction(agent);
+            triggered.PerformTransitionAction(agent);
             CurrentState = targetState;
-            CurrentState.Enter();
+            CurrentState.PerformEnterActions();
         }
     }
 }

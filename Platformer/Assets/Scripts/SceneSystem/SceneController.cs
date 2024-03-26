@@ -5,23 +5,12 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+public class SceneController : GlobalComponent<SceneController>
 {
     [SerializeField]
     private int menuIndex;
     [SerializeField]
     private int startLevelIndex;
-
-    public static SceneController Instance { get; private set; }
-
-    private void Awake()
-    {
-#if UNITY_EDITOR
-        var controllers = FindObjectsOfType<SceneController>();
-        if (controllers.Count() > 1) Debug.LogWarning("Multiple scene controllers present in one scene.");
-#endif
-        Instance = this;
-    }
 
     public void LoadCurrentScene()
     {
@@ -53,24 +42,5 @@ public class SceneController : MonoBehaviour
             return levelIndex;
         }
         return -1;
-    }
-
-    public void StartTime()
-    {
-        Time.timeScale = 1f;
-    }
-
-    public void StopTime()
-    {
-        Time.timeScale = 0f;
-    }
-
-    public void ExitGame()
-    {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
     }
 }

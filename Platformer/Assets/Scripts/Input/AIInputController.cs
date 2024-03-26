@@ -9,7 +9,6 @@ public class AIInputController : InputController
     private bool stopRequest;
     private bool forceRequest;
     private bool jumpRequest;
-    private bool crouchRequest;
     private bool attackRequest;
 
 
@@ -28,7 +27,6 @@ public class AIInputController : InputController
         }
 
         inputData.Jump = GetFixedInput(inputData.Jump, jumpRequest);
-        inputData.Crouch = GetFixedInput(inputData.Crouch, crouchRequest);
         inputData.Attack = GetFixedInput(inputData.Attack, attackRequest);
         suggestedSteeringForce = Vector2.zero;
         forceRequest = false;
@@ -84,16 +82,6 @@ public class AIInputController : InputController
     public void StopJumping()
     {
         jumpRequest = false;
-    }
-
-    public void StartCrouching()
-    {
-        crouchRequest = true;
-    }
-
-    public void StopCrouching()
-    {
-        crouchRequest = false;
     }
 
     public void Attack()

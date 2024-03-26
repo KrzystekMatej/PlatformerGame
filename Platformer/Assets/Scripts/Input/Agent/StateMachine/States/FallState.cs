@@ -13,11 +13,10 @@ public class FallState : WalkState
         agent.RigidBody.gravityScale = agent.DefaultData.GravityScale;
     }
 
-    public override void HandleUpdate()
+    protected override void HandleUpdate()
     {
         ControlFall();
-        CalculateAcceleration();
-        CalculateVelocity();
+        base.HandleUpdate();
     }
 
     private void ControlFall()

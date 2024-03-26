@@ -84,12 +84,12 @@ namespace TheKiwiCoder {
             });
         }
 
-        public void OnDrawGizmos()
+        public void OnDrawTreeGizmos(AgentManager agent)
         {
             Traverse(rootNode, (n) => {
                 if (n.drawGizmos)
                 {
-                    n.OnDrawGizmos();
+                    n.OnDrawGizmos(agent);
                 }
             });
         }

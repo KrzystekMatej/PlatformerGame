@@ -12,11 +12,11 @@ public class Repeater : MonoBehaviour
     [SerializeField]
     private float repeatDelay = 1;
 
-    private TriggerDetector triggerDetector;
+    private TriggerFilter triggerDetector;
 
     private void Awake()
     {
-        triggerDetector = GetComponent<TriggerDetector>();
+        triggerDetector = GetComponent<TriggerFilter>();
     }
 
     public void Trigger(Collider2D collider)

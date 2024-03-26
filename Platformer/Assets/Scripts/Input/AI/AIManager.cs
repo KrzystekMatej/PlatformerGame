@@ -36,7 +36,7 @@ public class AIManager : MonoBehaviour
             if (Time.timeScale > 0)
             {
                 TreeRunner.TreeUpdate();
-                if (Steering != null) Steering.ApplySteering(Agent, InputController);
+                if (Steering) Steering.ApplySteering(Agent, InputController);
             }
             yield return new WaitForSeconds(aiUpdateInterval);
         }

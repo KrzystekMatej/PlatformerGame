@@ -37,16 +37,17 @@ public class CanAttackAgent : Condition
 
     protected override void OnStop() { }
 
-    public override void OnDrawGizmos()
+    public override void OnDrawGizmos(AgentManager agent)
     {
+        if (!Application.isPlaying) return;
         Gizmos.color = Color.yellow;
-        AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
-        if (weapon != null && weapon.IsUseable(context.Agent))
+        AttackingWeapon weapon = agent.GetComponentInChildren<WeaponManager>().GetWeapon();
+        if (weapon != null)
         {
-            float orientation = context.Agent.OrientationController.CurrentOrientation;
+            float orientation = agent.OrientationController.CurrentOrientation;
             Vector2 offset = Vector2.zero;
-            if (useStopApproximation) offset = MathUtility.CalculateStopOffset(context.Agent.RigidBody.velocity, context.Agent.InstanceData.MaxForce);
-            weapon.DrawGizmos(context.Agent.CenterPosition, context.Agent.transform.right * context.Agent.OrientationController.CurrentOrientation, offset * orientation);
+            if (useStopApproximation) offset = MathUtility.CalculateStopOffset(agent.RigidBody.velocity, agent.InstanceData.MaxForce);
+            weapon.DrawGizmos(agent.CenterPosition, agent.transform.right * agent.OrientationController.CurrentOrientation, offset * orientation);
         }
     }
 }

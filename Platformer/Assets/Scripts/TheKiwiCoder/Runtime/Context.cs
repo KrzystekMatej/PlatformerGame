@@ -14,7 +14,6 @@ namespace TheKiwiCoder {
         // Add other game specific systems here
         public AIInputController InputController { get; private set; }
         public AgentManager Agent { get; private set; }
-        public Vision Vision { get; private set; }
         public Steering Steering { get; private set; }
 
         public static Context CreateFromGameObject(GameObject gameObject)

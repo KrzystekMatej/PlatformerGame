@@ -4,7 +4,14 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class HurtState : State { }
+public class HurtState : State
+{
+    protected override void HandleEnter() => agent.RigidBody.velocity = Vector3.zero;
+
+    protected override void HandleUpdate() { }
+
+    protected override void HandleExit() { }
+}
 
 [CustomEditor(typeof(HurtState), true)]
 public class HurtStateEditor : StateEditor

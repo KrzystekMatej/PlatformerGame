@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class ClimbToIdleTransition : StateTransition
 {
-    public ClimbToIdleTransition() : base(StateType.Idle) { }
+    protected ClimbToIdleTransition() : base(StateType.Idle) { }
 
     public override bool IsTriggered(AgentManager agent)
     {
-        return agent.ClimbDetector.TriggerCounter == 0;
+        return agent.ClimbDetector.TriggerCounter == 0 || (agent.GroundDetector.Detected && agent.InputController.InputData.SteeringForce.y == 0);
     }
 }

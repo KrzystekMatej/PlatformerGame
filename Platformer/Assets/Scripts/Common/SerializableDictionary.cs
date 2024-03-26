@@ -11,44 +11,21 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
     [SerializeField]
     private List<SerializableDictionaryEntry<TKey, TValue>> entries = new List<SerializableDictionaryEntry<TKey, TValue>>();
 
-    [NonSerialized]
-    private Dictionary<TKey, TValue> dictionary = new Dictionary<TKey, TValue>();
+    public Dictionary<TKey, TValue> InnerTable { get; private set; } = new Dictionary<TKey, TValue>();
 
     public void OnBeforeSerialize() {}
 
     public void OnAfterDeserialize()
     {
-        dictionary = new Dictionary<TKey, TValue>();
+        InnerTable = new Dictionary<TKey, TValue>();
         foreach (var entry in entries)
         {
-            if (!dictionary.ContainsKey(entry.Key))
+            if (!InnerTable.ContainsKey(entry.Key))
             {
-                dictionary.Add(entry.Key, entry.Value);
+                InnerTable.Add(entry.Key, entry.Value);
             }
             else Debug.LogError($"Key {entry.Key} already exists in the dictionary.");
         }
-    }
-
-    public TValue this[TKey key]
-    {
-        get 
-        {
-            return dictionary[key];
-        }
-        set 
-        {
-            dictionary[key] = value;
-        }
-    }
-
-    public bool ContainsKey(TKey key)
-    {
-        return dictionary.ContainsKey(key);
-    }
-
-    public Dictionary<TKey, TValue>.ValueCollection GetAllEntries()
-    {
-        return dictionary.Values;
     }
 }
 

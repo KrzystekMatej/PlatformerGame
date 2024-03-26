@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GenericToJumpTransition : StateTransition
 {
-    public GenericToJumpTransition() : base(StateType.Jump) { }
+    protected GenericToJumpTransition() : base(StateType.Jump) { }
 
     public override bool IsTriggered(AgentManager agent)
     {

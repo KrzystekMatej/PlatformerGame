@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class CameraConfinerManager : MonoBehaviour
 {
-    TriggerDetector destroyDetector;
+    TriggerFilter destroyDetector;
 
     private void Awake()
     {
-        destroyDetector = GetComponent<TriggerDetector>();
+        destroyDetector = GetComponent<TriggerFilter>();
     }
 
     private void Start()

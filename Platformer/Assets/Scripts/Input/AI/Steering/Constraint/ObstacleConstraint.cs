@@ -9,9 +9,10 @@ using UnityEngine.UIElements;
 
 public class ObstacleConstraint : Constraint
 {
+    [SerializeField]
     private CastDetector detector;
     [SerializeField]
-    private float margin;
+    private float margin = 1.1f;
 
     private int problemSegmentIndex;
     private int detectionCount;
@@ -83,9 +84,6 @@ public class ObstacleConstraint : Constraint
     private void OnDrawGizmosSelected()
     {
         AgentManager agent = GetComponentInParent<AIInputController>().GetComponentInChildren<AgentManager>();
-        Vector2 origin = agent.GetComponent<Collider2D>().bounds.center;
-        Gizmos.color = Color.yellow;
-
-        Gizmos.DrawWireSphere(origin, agent.EnclosingCircleRadius);
+        
     }
 }
