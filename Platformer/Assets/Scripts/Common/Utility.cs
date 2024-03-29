@@ -54,13 +54,4 @@ public static class Utility
         a = b;
         b = temp;
     }
-
-    public static IEnumerable<T> GetArrayPropertyEnumerable<T>(SerializedProperty serializedProperty)
-    {
-        for (int i = 0; i < serializedProperty.arraySize; i++)
-        {
-            object item = serializedProperty.GetArrayElementAtIndex(i).managedReferenceValue;
-            yield return (T)item;
-        }
-    }
 }

@@ -24,12 +24,11 @@ MonoBehaviour:
   - rid: 7407168307214680890
   - rid: 7407168307214680891
   - rid: 7407168309800468488
-  - rid: 7407168309800468489
   - rid: 7407168309800468490
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 648, y: 89, z: 0}
+  viewPosition: {x: 625, y: 137, z: 0}
   viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
@@ -75,7 +74,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6cee7afef3ab02f4f853494abb1fdf83
-        position: {x: 285, y: 1080}
+        position: {x: 270, y: 900}
         blackboard:
           keys: []
         description: 
@@ -109,7 +108,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a7c529aec0995114c8b941ee3323881e
-        position: {x: 510, y: 1305}
+        position: {x: 495, y: 1125}
         blackboard:
           keys: []
         description: 
@@ -139,7 +138,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 60543685207a1af47a21fddbab388cd0
-        position: {x: 60, y: 1305}
+        position: {x: 15, y: 1110}
         blackboard:
           keys: []
         description: 
@@ -158,7 +157,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 58f8e08d5771c2649a5dc6beb029b016
-        position: {x: 285, y: 1305}
+        position: {x: 270, y: 1125}
         blackboard:
           keys: []
         description: 
@@ -190,26 +189,7 @@ MonoBehaviour:
         logStop: 0
         children:
         - rid: 7407168259542745401
-        - rid: 7407168309800468489
-    - rid: 7407168309800468489
-      type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 9a74f65c56a0dae49b7164406af9f4ac
-        position: {x: 270, y: 885}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        child:
-          rid: 7407168259542745396
-        restartOnSuccess: 1
-        restartOnFailure: 0
-        maxRepeats: 0
+        - rid: 7407168259542745396
     - rid: 7407168309800468490
       type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:

@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 #if UNITY_EDITOR
 public class NavGraphGenerator : MonoBehaviour
 {
+    [SerializeField]
+    private NavGraph navGraph;
     [SerializeField]
     private float collisionAvoidanceMargin = 0.1f;
     [SerializeField]
@@ -15,18 +20,27 @@ public class NavGraphGenerator : MonoBehaviour
     [SerializeField]
     private Sprite nodeSprite;
     [SerializeField]
-    private NavGraph navGraph;
-    [SerializeField]
     private float minNodeDistance = Mathf.Epsilon;
     [SerializeField]
-    private float redundantPathMargin = Mathf.Epsilon;
+    private float circlePathRatio = 0.5f;
+
+
+    [SerializeField]
+    private GameObject solidGeometryContainer;
     [SerializeField]
     [HideInInspector]
     private GameObject nodeContainer;
 
     public void GenerateNodes()
     {
-        CompositeCollider2D[] solidColliders = GetComponentsInChildren<CompositeCollider2D>().Where(c => Utility.CheckLayer(c.gameObject.layer, navGraph.SolidGeometryLayerMask)).ToArray();
+        SerializedObject navGraphObject = new SerializedObject(navGraph);
+        SerializedProperty nodesProperty = navGraphObject.FindProperty("Nodes");
+
+        Collider2D[] solidColliders = solidGeometryContainer
+            .GetComponentsInChildren<Collider2D>()
+            .Where(c => Utility.CheckLayer(c.gameObject.layer, navGraph.WallMask) && c is not TilemapCollider2D)
+            .ToArray();
+
         Collider2D[] traversableZones = navGraph.GetComponentsInChildren<Collider2D>();
 
         DeleteNodes();
@@ -34,29 +48,36 @@ public class NavGraphGenerator : MonoBehaviour
         nodeContainer = new GameObject("Nodes");
         nodeContainer.transform.parent = navGraph.transform;
 
-        foreach (CompositeCollider2D collider in solidColliders)
+
+        List<List<Vector2[]>> colliderPathCollection = solidColliders.Select(c => MathUtility.GetColliderPaths(c, circlePathRatio)).ToList();
+
+
+
+        for (int i = 0; i < solidColliders.Length; i++)
         {
-            string layerName = LayerMask.LayerToName(collider.gameObject.layer);
+            List<Vector2[]> paths = colliderPathCollection[i];
 
-            for (int i = 0; i < collider.pathCount; i++)
+            for (int j = 0; j < paths.Count; j++)
             {
-                Vector2[] pathPoints = new Vector2[collider.GetPathPointCount(i)];
-                collider.GetPath(i, pathPoints);
+                Vector2[] points = paths[j];
+                int nodeCount = 0;
 
-                for (int j = 0; j < pathPoints.Length; j++)
+                for (int k = 0; k < points.Length; k++)
                 {
-                    Vector2 edgeA = pathPoints[MathUtility.GetCircularIndex(j - 1, pathPoints.Length)] - pathPoints[j];
-                    Vector2 edgeB = pathPoints[MathUtility.GetCircularIndex(j + 1, pathPoints.Length)] - pathPoints[j];
+                    Vector2 ingoing = (points[k] - points[MathUtility.GetCircularIndex(k - 1, points.Length)]).normalized;
+                    Vector2 outgoing = (points[MathUtility.GetCircularIndex(k + 1, points.Length)] - points[k]).normalized;
 
-                    if (MathUtility.IsAngleConvexCC(edgeA, edgeB)) continue;
+                    if (MathUtility.IsAngleConvexCC(-ingoing, outgoing)) continue;
+                    if (ingoing == Vector2.zero || outgoing == Vector2.zero) Debug.Log("ahoj");
 
-                    Vector2 normalA = edgeA.Perpendicular2().normalized;
-                    Vector2 normalB = edgeB.Perpendicular1().normalized;
+                    Vector2 nodePosition = points[k] + MathUtility.GetExpansionOffsetCC(ingoing, outgoing, collisionAvoidanceMargin);
 
-                    Vector2 expansionVector = normalA + normalB;
-                    Vector2 nodePosition = pathPoints[j] + expansionVector * collisionAvoidanceMargin;
+                    bool isInZone = traversableZones.Any(z => z.OverlapPoint(nodePosition));
+                    bool isInCollider = colliderPathCollection
+                        .Any(c => c.Any(p => MathUtility.IsPointInsidePolygon(nodePosition, p)));
 
-                    if (traversableZones.Any(z => z.OverlapPoint(nodePosition)) && !solidColliders.Any(c => MathUtility.IsPointInsideCompositeCollider(nodePosition, c)))
+                    
+                    if (isInZone && !isInCollider)
                     {
                         GameObject nodeObject = new GameObject();
                         nodeObject.transform.parent = nodeContainer.transform;
@@ -66,18 +87,24 @@ public class NavGraphGenerator : MonoBehaviour
                         renderer.sortingLayerName = "UI";
 
                         NavGraphNode node = nodeObject.AddComponent<NavGraphNode>();
-                        node.Index = navGraph.Nodes.Count;
-                        node.ExpansionVector = expansionVector;
                         node.transform.position = nodePosition;
-                        node.name = $"{layerName} {i}-{j}";
+                        node.name = $"{solidColliders[i].gameObject.name} {j}-{nodeCount}";
 
-                        navGraph.Nodes.Add(node);
+                        SerializedObject serializedNode = new SerializedObject(node);
+                        serializedNode.FindProperty("Ingoing").SetValue(ingoing);
+                        serializedNode.FindProperty("Outgoing").SetValue(outgoing);
+                        serializedNode.FindProperty("Index").SetValue(nodeCount);
+
+                        nodesProperty.ArrayAdd(node);
+                        navGraphObject.ApplyModifiedProperties();
+
+                        nodeCount++;
                     }
                 }
             }
         }
 
-        DeleteCloseNodes();
+        //DeleteCloseNodes(navGraphObject, nodesProperty);
         Debug.Log($"Number of generated nodes is {navGraph.Nodes.Count}.");
     }
 
@@ -92,7 +119,7 @@ public class NavGraphGenerator : MonoBehaviour
                 Vector2 expandedNode = navGraph.Nodes[i].GetExpandedPosition(maxAllowedRadius);
                 Vector2 expandedNeighbor = navGraph.Nodes[j].GetExpandedPosition(maxAllowedRadius);
                 Vector2 neighborVector = expandedNeighbor - expandedNode;
-                RaycastHit2D hit = Physics2D.CircleCast(expandedNode, maxAllowedRadius, neighborVector, neighborVector.magnitude, navGraph.SolidGeometryLayerMask);
+                RaycastHit2D hit = Physics2D.CircleCast(expandedNode, maxAllowedRadius, neighborVector, neighborVector.magnitude, navGraph.WallMask);
 
                 if (!hit)
                 {
@@ -108,7 +135,10 @@ public class NavGraphGenerator : MonoBehaviour
 
     public void DeleteNodes()
     {
-        navGraph.Nodes.Clear();
+        SerializedObject serializedObject = new SerializedObject(navGraph);
+        SerializedProperty nodesProperty = serializedObject.FindProperty("Nodes");
+        nodesProperty.ClearArray();
+        serializedObject.ApplyModifiedProperties();
         navGraph.TestPath = new NavPath();
         DestroyImmediate(nodeContainer);
     }
@@ -122,110 +152,54 @@ public class NavGraphGenerator : MonoBehaviour
         }
     }
 
-    public void DeleteRedundantNodes()
+    private void DeleteCloseNodes(SerializedObject navGraphObject, SerializedProperty nodesProperty)
     {
-        List<NavGraphNode>[,] kShortestPathTable = CalculateKShortestPathTable();
+        List<NavGraphNode> nodes = nodesProperty.ArrayGetElements().Select(p => p.GetValue<NavGraphNode>()).ToList();
 
-        HashSet<NavGraphNode> redundantNodes = new HashSet<NavGraphNode>();
-
-        foreach (NavGraphNode node in navGraph.Nodes)
+        int i = 0;
+        int count = 0;
+        int deletedCount = 0;
+        while (i < nodesProperty.arraySize)
         {
-            redundantNodes.Add(node);
-        }
+            NavGraphNode nodeA = nodesProperty.ArrayGet<NavGraphNode>(i);
 
-        for (int i = 0; i < navGraph.Nodes.Count; i++)
-        {
-            for (int j = 0; j < navGraph.Nodes.Count; j++)
+            if (nodesProperty.ArrayRemove<NavGraphNode>(n => AreClose(nodeA, n)))
             {
-                List<NavGraphNode> kShortestPaths = kShortestPathTable[i, j];
-
-                if (i != j && !navGraph.Nodes[i].Neighbors.Any(n => n.Index == j) && kShortestPaths != null)
-                {
-                    if (kShortestPaths.Count == 1)
-                    {
-                        redundantNodes.Remove(kShortestPaths[0]);
-                    }
-                }
+                i = 0;
+                navGraphObject.ApplyModifiedProperties();
+                ReassignIndexes(nodesProperty);
+                deletedCount++;
             }
+            else break;
+
+            if (count > 1000)
+            {
+                Debug.Log("Bad");
+                break;
+            }
+
+            i++;
+            count++;
         }
 
-        DeleteNodesInEnumerable(redundantNodes);
+        Debug.Log($"Number of deleted nodes which were too close to each other is {deletedCount}.");
     }
 
-    private void DeleteCloseNodes()
+    private bool AreClose(NavGraphNode nodeA, NavGraphNode nodeB)
     {
-        List<NavGraphNode> redundantNodes = new List<NavGraphNode>();
-
-        for (int i = 0; i < navGraph.Nodes.Count; i++)
-        {
-            for (int j = i + 1; j < navGraph.Nodes.Count; j++)
-            {
-                if (Vector3.Distance(navGraph.Nodes[i].GetExpandedPosition(-collisionAvoidanceMargin), navGraph.Nodes[j].GetExpandedPosition(-collisionAvoidanceMargin)) <= minNodeDistance)
-                {
-                    redundantNodes.Add(navGraph.Nodes[i]);
-                    redundantNodes.Add(navGraph.Nodes[j]);
-                }
-            }
-        }
-
-        DeleteNodesInEnumerable(redundantNodes);
-        Debug.Log($"Number of deleted nodes which were too close to each other is {redundantNodes.Count}.");
+        bool isDifferent = nodeB.Index != nodeA.Index;
+        bool isClose = Vector3.Distance(nodeA.GetExpandedPosition(-collisionAvoidanceMargin), nodeB.GetExpandedPosition(-collisionAvoidanceMargin)) <= minNodeDistance;
+        return isDifferent && isClose;
     }
 
-    private void AssignIndexes()
+    private void ReassignIndexes(SerializedProperty nodesProperty)
     {
-        for (int i = 0; i < navGraph.Nodes.Count; i++)
+        for (int i = 0; i < nodesProperty.arraySize; i++)
         {
-            navGraph.Nodes[i].Index = i;
+            SerializedObject serializedNode = new SerializedObject(nodesProperty.ArrayGet<NavGraphNode>(i));
+            serializedNode.FindProperty("Index").SetValue(i);
+            serializedNode.ApplyModifiedProperties();
         }
-    }
-
-    private void DeleteNodesInEnumerable(IEnumerable nodes)
-    {
-        foreach (NavGraphNode node in nodes)
-        {
-            foreach (NavGraphNode neighbor in node.Neighbors)
-            {
-                neighbor.Neighbors.Remove(node);
-            }
-            node.Neighbors.Clear();
-            navGraph.Nodes.Remove(node);
-            DestroyImmediate(node.gameObject);
-
-            if (navGraph.TestPath != null && navGraph.TestPath.Nodes.Contains(node)) navGraph.TestPath = new NavPath();
-        }
-
-        AssignIndexes();
-    }
-
-    private List<NavGraphNode>[,] CalculateKShortestPathTable()
-    {
-        List<NavGraphNode>[,] kShortestPathTable = new List<NavGraphNode>[navGraph.Nodes.Count, navGraph.Nodes.Count];
-
-        for (int source = 0; source < navGraph.Nodes.Count; source++)
-        {
-            for (int target = 0; target < navGraph.Nodes.Count; target++)
-            {
-                if (target == source)
-                {
-                    kShortestPathTable[source, target] = new List<NavGraphNode>() { navGraph.Nodes[source] };
-                }
-
-                List<NavPath> shortestPaths = navGraph.YenShortestPaths
-                (
-                    navGraph.Nodes[source],
-                    navGraph.Nodes[target],
-                    (k, paths) => (k == 1) ? true : paths[k - 1].Length - paths[k - 2].Length <= redundantPathMargin
-                );
-
-                if (shortestPaths != null)
-                {
-                    kShortestPathTable[source, target] = shortestPaths.Select(path => path.Nodes[1]).ToList();
-                }
-            }
-        }
-
-        return kShortestPathTable;
     }
 }
 
@@ -251,7 +225,7 @@ public class NavGraphGeneratorEditor : Editor
         if (GUILayout.Button("Delete Edges")) script.DeleteEdges();
         GUILayout.EndHorizontal();
 
-        if (GUILayout.Button("Delete Redundant Nodes")) script.DeleteRedundantNodes();
+        Undo.RecordObject(script, "Modify Object");
     }
 }
 

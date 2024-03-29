@@ -35,24 +35,9 @@ public class GlobalTransitionManagerEditor : Editor
             LoadTransitionHierarchy(transitionManager, transitionsProperty, serializedObject);
         }
 
-        DeleteNullTransitions(transitionsProperty);
         RenderAvailableTransitions(transitionManager, transitionsProperty);
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed) EditorUtility.SetDirty(transitionManager);
-    }
-
-    private void DeleteNullTransitions(SerializedProperty transitionsProperty)
-    {
-        for (int i = 0; i < transitionsProperty.arraySize; i++)
-        {
-            object transition = transitionsProperty.GetArrayElementAtIndex(i).managedReferenceValue;
-
-            if (transition == null)
-            {
-                transitionsProperty.DeleteArrayElementAtIndex(i);
-                serializedObject.ApplyModifiedProperties();
-            }
-        }
     }
 
     private static void LoadTransitionHierarchyForAll()
@@ -84,9 +69,7 @@ public class GlobalTransitionManagerEditor : Editor
                 ConstructorInfo constructorInfo = type.GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[0], null);
                 if (type.IsSerializable && constructorInfo != null)
                 {
-                    transitionsProperty.arraySize++;
-                    SerializedProperty newElement = transitionsProperty.GetArrayElementAtIndex(transitionsProperty.arraySize - 1);
-                    newElement.managedReferenceValue = constructorInfo.Invoke(null);
+                    transitionsProperty.ArrayAdd(constructorInfo.Invoke(null));
                     serializedObject.ApplyModifiedProperties();
                 }
                 else
@@ -121,12 +104,12 @@ public class GlobalTransitionManagerEditor : Editor
             for (int i = 0; i < transitionsProperty.arraySize; i++)
             {
                 EditorGUILayout.BeginHorizontal("box");
-                object element = transitionsProperty.GetArrayElementAtIndex(i).managedReferenceValue;
-                EditorGUILayout.LabelField(element.GetType().Name, transitionStyle);
+                StateTransition transition = transitionsProperty.ArrayGet<StateTransition>(i);
+                EditorGUILayout.LabelField(transition.GetType().Name, transitionStyle);
                 if (GUILayout.Button("Remove Transition"))
                 {
                     Undo.RecordObject(transitionManager, "Remove Transition");
-                    transitionsProperty.DeleteArrayElementAtIndex(i);
+                    transitionsProperty.ArrayRemoveAt(i);
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }

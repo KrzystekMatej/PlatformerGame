@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HurtState : State
 {
-    protected override void HandleEnter() => agent.RigidBody.velocity = Vector3.zero;
+    protected override void HandleEnter() => agent.RigidBody.velocity = Vector2.zero;
 
     protected override void HandleUpdate() { }
 

@@ -241,23 +241,24 @@ public class Path
         return !isCircular && goal == Points[Points.Count - 1] && Vector2.Distance(agent.CenterPosition, goal) <= agent.EnclosingCircleRadius;
     }
 
-    public void DrawGizmos()
+#if UNITY_EDITOR
+    public void DrawPathGizmos()
     {
-        if (Points.Count < 2) return;
-        Vector2 a;
-        Vector2 b;
         Gizmos.color = Color.white;
         int upperLimit = isCircular ? Points.Count : Points.Count - 1;
         for (int i = 0; i < upperLimit; i++)
         {
-            a = Points[GetPointIndex(i)];
-            b = Points[GetPointIndex(i + 1)];
+            Vector2 a = Points[GetPointIndex(i)];
+            Vector2 b = Points[GetPointIndex(i + 1)];
             Gizmos.DrawLine(a, b);
         }
+    }
 
+    public void DrawGoalGizmos()
+    {
         Gizmos.color = Color.yellow;
-        a = Points[closestSegment.Index];
-        b = Points[GetPointIndex(closestSegment.Index + 1)];
+        Vector2 a = Points[closestSegment.Index];
+        Vector2 b = Points[GetPointIndex(closestSegment.Index + 1)];
         Vector2 direction = (b - a).normalized;
         b = a + direction * closestSegment.ScalarProjection;
         Gizmos.DrawLine(a, b);
@@ -272,4 +273,12 @@ public class Path
         float pointRadius = 0.1f;
         Gizmos.DrawSphere(gizmoGoalPosition, pointRadius);
     }
+
+    public void DrawAllGizmos()
+    {
+        if (Points.Count < 2) return;
+        DrawPathGizmos();
+        DrawGoalGizmos();
+    }
+#endif
 }

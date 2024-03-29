@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class NavGraphTracker : MonoBehaviour
 {
+    [field: SerializeField]
+    public NavGraph NavGraph { get; private set; }
     [SerializeField]
     private float quantizationUpdateInterval;
-    [field: SerializeField]
-    public PositionQuantizer Quantizer { get; private set; }
+
+    public NavGraphNode Current { get; private set; }
     private AgentManager agent;
 
     private void Awake()
     {
         agent = GetComponent<AgentManager>();
-        if (Quantizer.NavGraph == null) Quantizer.NavGraph = FindObjectOfType<NavGraph>();
+        NavGraph = NavGraph ? NavGraph : FindObjectOfType<NavGraph>();
     }
 
     private void Start()
@@ -25,10 +27,8 @@ public class NavGraphTracker : MonoBehaviour
     {
         while (true)
         {
-            Quantizer.QuantizePosition(agent.CenterPosition);
+            Current = NavGraph.QuantizePosition(agent.CenterPosition, Current);
             yield return new WaitForSeconds(quantizationUpdateInterval);
         }
     }
-
-
 }

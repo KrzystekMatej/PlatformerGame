@@ -12,10 +12,23 @@ public class ObstacleConstraint : Constraint
     [SerializeField]
     private CastDetector detector;
     [SerializeField]
-    private float margin = 1.1f;
+    private float margin = 0.1f;
 
     private int problemSegmentIndex;
     private int detectionCount;
+
+    private NavGraphNode startNode;
+    private NavGraphNode endNode;
+
+    private void Awake()
+    {
+        GameObject agentObject = new GameObject();
+        GameObject goalObject = new GameObject();
+        agentObject.transform.SetParent(transform);
+        goalObject.transform.SetParent(transform);
+        startNode = startNode.AddComponent<NavGraphNode>();
+        endNode = startNode.AddComponent<NavGraphNode>();
+    }
 
     public override bool IsViolated(AgentManager agent, List<Vector2> pointPath)
     {
@@ -45,8 +58,11 @@ public class ObstacleConstraint : Constraint
     public override SteeringGoal Suggest(AgentManager agent, List<Vector2> pointPath, SteeringGoal goal)
     {
         RaycastHit2D closestHit = GetClosestHit();
-        goal.Position = GetAvoidanceTarget(pointPath, closestHit);
+        NavPath path = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], agent.EnclosingCircleRadius, closestHit);
 
+        if (path == null || path.Nodes.Count < 2) return new SteeringGoal();
+
+        goal.Position = path.Nodes[1].GetExpandedPosition(agent.EnclosingCircleRadius);
         return goal;
     }
 
@@ -67,18 +83,22 @@ public class ObstacleConstraint : Constraint
         return closestHit;
     }
 
-    private Vector2 GetAvoidanceTarget(List<Vector2> pointPath, RaycastHit2D closestHit)
+    private NavPath GetAvoidancePath(Vector2 startPoint, Vector2 endPoint, float agentRadius, RaycastHit2D obstacleHit)
     {
-        Vector2 startPoint = pointPath[problemSegmentIndex];
-        Vector2 endPoint = pointPath[problemSegmentIndex + 1];
-        Vector2 center = closestHit.collider.bounds.center;
-        float radius = MathUtility.GetEnclosingCircleRadius(closestHit.collider);
+        NavGraph navGraph = obstacleHit.collider.GetComponentInChildren<NavGraph>();
+        startNode.transform.position = startPoint;
+        endNode.transform.position = endPoint;
+        navGraph.AddNode(startNode);
+        navGraph.AddEdges(startNode, agentRadius);
+        navGraph.AddNode(endNode);
+        navGraph.AddEdges(endNode, agentRadius);
+        NavPath navPath = navGraph.FindShortestPath(startNode, endNode);
 
-        float scalarProjection = MathUtility.GetScalarProjectionOnSegment(startPoint, endPoint, center);
-        Vector2 normalPoint = startPoint + (endPoint - startPoint).normalized * scalarProjection;
-        Vector2 normalDirection = (normalPoint - center).normalized;
-
-        return center + normalDirection * radius * margin;
+        navGraph.RemoveNode(startNode);
+        navGraph.RemoveNode(endNode);
+        startNode.Neighbors.Clear();
+        endNode.Neighbors.Clear();
+        return navPath;
     }
 
     private void OnDrawGizmosSelected()

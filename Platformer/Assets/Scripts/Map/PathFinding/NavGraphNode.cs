@@ -2,18 +2,22 @@ using FibonacciHeap;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 using HeapNode = FibonacciHeap.FibonacciHeapNode<NavGraphNode, float>;
 
 public class NavGraphNode : MonoBehaviour
 {
     [HideInInspector]
+    public Vector2 Ingoing;
+    [HideInInspector]
+    public Vector2 Outgoing;
+    [HideInInspector]
     public int Index;
     [HideInInspector]
     public List<NavGraphNode> Neighbors = new List<NavGraphNode>();
-    [HideInInspector]
-    public Vector2 ExpansionVector;
 
     [NonSerialized]
     public ulong SearchId;
@@ -35,7 +39,21 @@ private void Start()
 #endif
     }
 
-    public void AddNeighbor(NavGraphNode neighbor)
+    public void AddDirectNeighbor(NavGraphNode neighbor)
+    {
+        if (!Neighbors.Contains(neighbor))
+        {
+            Neighbors.Add(neighbor);
+        }
+    }
+
+
+    public void RemoveDirectNeighbor(NavGraphNode neighbor)
+    {
+        Neighbors.Remove(neighbor);
+    }
+
+    public void AddUndirectNeighbor(NavGraphNode neighbor)
     {
         if (!Neighbors.Contains(neighbor))
         {
@@ -48,14 +66,15 @@ private void Start()
     }
 
 
-    public void RemoveNeighbor(NavGraphNode neighbor)
+    public void RemoveUndirectNeighbor(NavGraphNode neighbor)
     {
-        if (Neighbors.Remove(neighbor)) neighbor.Neighbors.Remove(this);
+        Neighbors.Remove(neighbor);
+        neighbor.Neighbors.Remove(this);
     }
 
-    public Vector2 GetExpandedPosition(float expansionDistance)
+    public Vector2 GetExpandedPosition(float radius)
     {
-        return transform.position + (Vector3)ExpansionVector * expansionDistance;
+        return transform.position + (Vector3)MathUtility.GetExpansionOffsetCC(Ingoing, Outgoing, radius);
     }
 }
 
@@ -76,9 +95,10 @@ public class NavGraphNodeEditor : Editor
         if (newNeighbor && GUILayout.Button("Add Edge"))
         {
             Undo.RecordObject(node, "Add Edge");
-            node.AddNeighbor(newNeighbor);
+
+            node.AddUndirectNeighbor(newNeighbor);
             Undo.RecordObject(newNeighbor, "Add Edge");
-            newNeighbor.AddNeighbor(node);
+            newNeighbor.AddUndirectNeighbor(node);
 
             newNeighbor = null;
         }
@@ -96,12 +116,12 @@ public class NavGraphNodeEditor : Editor
                 {
                     Undo.RecordObject(node, "Remove Edge");
                     NavGraphNode neighbor = node.Neighbors[i];
-                    node.RemoveNeighbor(neighbor);
+                    node.RemoveUndirectNeighbor(neighbor);
 
                     if (neighbor != null)
                     {
                         Undo.RecordObject(neighbor, "Remove Edge");
-                        neighbor.RemoveNeighbor(node);
+                        neighbor.RemoveUndirectNeighbor(node);
                     }
                     break;
                 }

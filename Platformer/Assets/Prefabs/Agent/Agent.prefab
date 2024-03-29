@@ -804,7 +804,8 @@ MonoBehaviour:
   - rid: 7407168211064717719
   - rid: 7407168211064717720
   - rid: 7407168211064717721
-  - rid: 7407168211064717722
+  - rid: 7407168619542741574
+  - rid: 7407168619542741575
   OnEnter:
     m_PersistentCalls:
       m_Calls: []
@@ -829,7 +830,11 @@ MonoBehaviour:
       type: {class: ClimbToJumpTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 3
-    - rid: 7407168211064717722
+    - rid: 7407168619542741574
+      type: {class: ClimbToFallTransition, ns: , asm: Assembly-CSharp}
+      data:
+        <TargetState>k__BackingField: 4
+    - rid: 7407168619542741575
       type: {class: ClimbToIdleTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 0

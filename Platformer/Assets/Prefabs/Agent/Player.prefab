@@ -1256,6 +1256,34 @@ PrefabInstance:
       propertyPath: transitions.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.data[3]
+      value: 7407168619542741572
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: orderedTransitions.Array.data[4]
+      value: 7407168619542741573
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168619542741572]
+      value: Assembly-CSharp ClimbToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168619542741573]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168619542741572].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092903229671, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: managedReferences[7407168619542741573].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: transitions.Array.size
       value: 0
@@ -1698,10 +1726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <NavGraph>k__BackingField: {fileID: 0}
   quantizationUpdateInterval: 0.1
-  <Quantizer>k__BackingField:
-    <NavGraph>k__BackingField: {fileID: 0}
-    <CoherenceEnabled>k__BackingField: 1
 --- !u!114 &7184499124817944392
 MonoBehaviour:
   m_ObjectHideFlags: 0

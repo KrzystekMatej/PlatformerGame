@@ -1,3 +1,4 @@
+using Cinemachine.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,9 +75,14 @@ public class StateEditor : Editor
     private void OnEnable()
     {
         TransitionManager transitionManager = FindObjectOfType<TransitionManager>();
+        SerializedObject serializedManager = new SerializedObject(transitionManager);
         if (transitionManager != null)
         {
-            availableTransitions = transitionManager.AvailableTransitions;
+            availableTransitions = serializedManager
+                .FindProperty("availableTransitions")
+                .ArrayGetElements()
+                .Select(p => p.GetValue<StateTransition>())
+                .ToList();
         }
     }
 
@@ -100,7 +106,6 @@ public class StateEditor : Editor
         }
         catch (Exception e)
         {
-            Undo.RecordObject(state, "Remove Transition");
             state.OrderedTransitions.Clear();
             transitionsProperty.ClearArray();
             serializedObject.ApplyModifiedProperties();
@@ -113,16 +118,13 @@ public class StateEditor : Editor
     {
         if (GUILayout.Button("Add Transition"))
         {
-            var transitions = Utility.GetArrayPropertyEnumerable<StateTransition>(transitionsProperty).ToList();
-            if (transitions.Count == 0 || !transitions.Any(t => t.GetType() == availableTransitions[selectedIndex].GetType()))
+            if (transitionsProperty.arraySize == 0 || !transitionsProperty.ArrayContains<StateTransition>(t => t.GetType() == availableTransitions[selectedIndex].GetType()))
             {
                 Undo.RecordObject(state, "Add Transition");
-                transitionsProperty.arraySize++;
-                SerializedProperty newElement = transitionsProperty.GetArrayElementAtIndex(transitionsProperty.arraySize - 1);
                 ConstructorInfo constructorInfo = availableTransitions[selectedIndex]
                     .GetType()
                     .GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[0], null);
-                newElement.managedReferenceValue = constructorInfo.Invoke(null);
+                transitionsProperty.ArrayAdd(constructorInfo.Invoke(null));
                 serializedObject.ApplyModifiedProperties();
             }
             else Debug.Log($"This state already has {availableTransitions[selectedIndex].GetType().Name}.");
@@ -141,12 +143,12 @@ public class StateEditor : Editor
             for (int i = 0; i < transitionsProperty.arraySize; i++)
             {
                 EditorGUILayout.BeginHorizontal("box");
-                object transition = transitionsProperty.GetArrayElementAtIndex(i).managedReferenceValue;
+                StateTransition transition = transitionsProperty.ArrayGet<StateTransition>(i);
                 EditorGUILayout.LabelField(transition.GetType().Name, transitionStyle);
                 if (GUILayout.Button("Remove Transition"))
                 {
                     Undo.RecordObject(state, "Remove Transition");
-                    transitionsProperty.DeleteArrayElementAtIndex(i);
+                    transitionsProperty.ArrayRemoveAt(i);
                     serializedObject.ApplyModifiedProperties();
                     break;
                 }

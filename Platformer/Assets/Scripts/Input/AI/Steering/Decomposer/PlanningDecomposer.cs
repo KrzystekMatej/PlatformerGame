@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
@@ -9,116 +10,90 @@ public class PlanningDecomposer : Decomposer
 {
     [SerializeField]
     private Path path;
-    [SerializeField]
-    private PositionQuantizer quantizer;
-    
-    private const int attemptCount = 8;
-
     private NavPath navPath;
+
+    private ArriveTargeter arriveTargeter;
+    private NavGraphTracker agentTracker;
 
     private void Awake()
     {
-        if (quantizer.NavGraph == null) quantizer.NavGraph = FindObjectOfType<NavGraph>();
+        agentTracker = GetComponentInParent<AIInputController>().GetComponentInChildren<NavGraphTracker>();
+        arriveTargeter = GetComponent<ArriveTargeter>();
     }
 
     public override SteeringGoal Decompose(AgentManager agent, SteeringGoal goal)
     {
         if (!goal.HasPosition) return goal;
+
+        if (IsGoalVisible(agent.CenterPosition, arriveTargeter.ArrivePosition, agent.EnclosingCircleRadius)) return goal;
+
+        navPath = GetNavPath(agent, goal);
         path.Points.Clear();
-        Vector2? arrivePosition = GetArrivePosition(goal.Position, agent.EnclosingCircleRadius);
-        if (arrivePosition == null)
-        {
-            GetArrivePosition(goal.Position, agent.EnclosingCircleRadius);
-            return new SteeringGoal();
-        }
-        goal.Position = (Vector2)arrivePosition;
-
-        if (IsGoalVisible(agent, goal))
-        {
-            return goal;
-        }
-
-        NavGraphNode goalNode = QuantizeGoal(goal);
-        NavGraphNode agentNode = quantizer.QuantizePosition(agent.CenterPosition, goalNode);
-        navPath = CalculateNavPath(agentNode, goalNode);
         if (navPath == null) return new SteeringGoal();
 
-        int distant = GetMostDistantReachableGoal(agent);
-        int closest = GetClosestReachableNode(goal.Position, agent.EnclosingCircleRadius);
+        RecalculatePath(agent.CenterPosition, goal.Position, agent.EnclosingCircleRadius);
 
-        if (distant <= closest)
-        {
-            path.Points.AddRange(navPath.GetExpandedPositions(agent.EnclosingCircleRadius, distant, closest + 1));
-        }
-        else
-        {
-            path.Points.AddRange(navPath.GetExpandedPositions(agent.EnclosingCircleRadius, distant, navPath.Nodes.Count));
-        }
-
-
-        path.Points.Add(goal.Position);
-
-        goal.Position = path.CalculateGoalWithoutCoherence(agent);
+        goal.Position = path.CalculateGoalWithCoherence(agent);
+    
         return goal;
     }
 
-    private NavPath CalculateNavPath(NavGraphNode start, NavGraphNode end)
+    private bool IsGoalVisible(Vector2 agentPosition, Vector2 goalPosition, float enclosingCircleRadius)
     {
-        if (start == null || end == null) return null;
-        if (navPath != null && navPath.GetStart() == start && navPath.GetEnd() == end) return navPath;
-        return quantizer.NavGraph.FindShortestPath(start, end);
+        Vector2 goalVector = goalPosition - agentPosition;
+        return !Physics2D.CircleCast(agentPosition, enclosingCircleRadius, goalVector, goalVector.magnitude, agentTracker.NavGraph.WallMask);
     }
 
-    private bool IsGoalVisible(AgentManager agent, SteeringGoal goal)
+    private NavPath GetNavPath(AgentManager agent, SteeringGoal goal)
     {
-        Vector2 goalVector = goal.Position - agent.CenterPosition;
-        return !Physics2D.CircleCast(agent.CenterPosition, agent.EnclosingCircleRadius, goalVector, goalVector.magnitude, quantizer.NavGraph.SolidGeometryLayerMask);
+        NavGraphNode start = agentTracker.Current;
+        NavGraphNode end = QuantizeGoal(goal);
+        
+        if (start && end)
+        {
+            if (navPath != null && navPath.GetStart() == start && navPath.GetEnd() == end) return navPath;
+            else return agentTracker.NavGraph.FindShortestPath(start, end);
+        }
+        else return null;
     }
 
     private NavGraphNode QuantizeGoal(SteeringGoal goal)
     {
+        if (path.Points.Count > 0 && goal.Position == path.Points[path.Points.Count-1]) return navPath.GetEnd();
+
         if (goal.HasOwner)
         {
-            NavGraphTracker goalTracker = goal.Owner.GetComponent<NavGraphTracker>();
-            if (goalTracker != null) return goalTracker.Quantizer.CoherenceNode;
+            NavGraphTracker tracker = goal.Owner.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph == agentTracker.NavGraph);
+            if (tracker && tracker.NavGraph == agentTracker.NavGraph) return tracker.Current;
         }
-        quantizer.CoherenceEnabled = false;
-        NavGraphNode result = quantizer.QuantizePosition(goal.Position);
-        quantizer.CoherenceEnabled = true;
-        return result;
+
+        return agentTracker.NavGraph.QuantizePosition(goal.Position);
     }
 
-    private Vector2? GetArrivePosition(Vector2 goalPosition, float enclosingCircleRadius)
+    private void RecalculatePath(Vector2 agentPosition, Vector2 goalPosition, float enclosingCircleRadius)
     {
-        const float safetyMargin = 0.1f;
-        float angleStep = 720;
+        int distant = GetMostDistantReachableGoal(agentPosition, enclosingCircleRadius);
+        int closest = GetClosestReachableNode(goalPosition, enclosingCircleRadius);
 
-        for (int i = 0; i < attemptCount; i++)
+        if (distant <= closest)
         {
-            bool collision = Physics2D.OverlapCircle(goalPosition, enclosingCircleRadius, quantizer.NavGraph.SolidGeometryLayerMask);
-            if (!collision) return goalPosition;
-            for (float angle = angleStep / 2; angle <= 360; angle += angleStep)
-            {
-                Vector2 direction = Quaternion.Euler(0, 0, angle) * Vector2.down;
-                RaycastHit2D hit = Physics2D.Raycast(goalPosition, direction, enclosingCircleRadius, quantizer.NavGraph.SolidGeometryLayerMask);
-                if (!hit) continue;
-
-                Vector2 endPoint = (Vector2)MathUtility.FindLineLineIntersection(goalPosition, hit.normal, hit.point, hit.normal.Perpendicular1());
-                float shiftDistance = enclosingCircleRadius - Vector2.Distance(goalPosition, endPoint) + safetyMargin;
-                goalPosition += hit.normal * shiftDistance;
-            } 
-            angleStep /= 2;
+            path.Points.AddRange(navPath.GetExpandedPositions(enclosingCircleRadius, distant, closest + 1));
+        }
+        else
+        {
+            path.Points.AddRange(navPath.GetExpandedPositions(enclosingCircleRadius, distant, navPath.Nodes.Count));
         }
 
-        return null;
+
+        path.Points.Add(goalPosition);
     }
 
-    private int GetMostDistantReachableGoal(AgentManager agent)
+    private int GetMostDistantReachableGoal(Vector2 agentPosition, float enclosingCircleRadius)
     {
         for (int i = navPath.Nodes.Count - 1; i > 0; i--)
         {
-            Vector2 nodeVector = navPath.Nodes[i].GetExpandedPosition(agent.EnclosingCircleRadius) - agent.CenterPosition;
-            if (!Physics2D.CircleCast(agent.CenterPosition, agent.EnclosingCircleRadius, nodeVector, nodeVector.magnitude, quantizer.NavGraph.SolidGeometryLayerMask))
+            Vector2 nodeVector = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius) - agentPosition;
+            if (!Physics2D.CircleCast(agentPosition, enclosingCircleRadius, nodeVector, nodeVector.magnitude, agentTracker.NavGraph.WallMask))
             {
                 return i;
             }
@@ -131,8 +106,8 @@ public class PlanningDecomposer : Decomposer
     {
         for (int i = 0; i < navPath.Nodes.Count - 1; i++)
         {
-            Vector2 nodeVector = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius) - arrivePosition; 
-            if (!Physics2D.CircleCast(arrivePosition, enclosingCircleRadius, nodeVector, nodeVector.magnitude, quantizer.NavGraph.SolidGeometryLayerMask))
+            Vector2 nodeVector = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius) - arrivePosition;
+            if (!Physics2D.CircleCast(arrivePosition, enclosingCircleRadius, nodeVector, nodeVector.magnitude, agentTracker.NavGraph.WallMask))
             {
                 return i;
             }
@@ -144,6 +119,6 @@ public class PlanningDecomposer : Decomposer
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
-        path.DrawGizmos();
+        path.DrawAllGizmos();
     }
 }

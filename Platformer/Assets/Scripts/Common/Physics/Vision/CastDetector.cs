@@ -89,7 +89,7 @@ public class CastDetector : VisionDetector
     private void DrawCircleCast(Vector2 origin, Vector2 end)
     {
         Gizmos.DrawWireSphere(origin, Size.x);
-        Vector2 normal = Direction.Perpendicular1().normalized;
+        Vector2 normal = MathUtility.PerpendicularCC(Direction.normalized);
         Vector2 firstStart = origin + normal * Size.x;
         Vector2 secondStart = origin - normal * Size.x;
         Vector2 firstEnd = end + normal * Size.x;

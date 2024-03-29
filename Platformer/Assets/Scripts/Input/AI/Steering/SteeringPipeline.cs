@@ -18,8 +18,6 @@ public class SteeringPipeline : MonoBehaviour
     private Constraint[] constraints;
     [SerializeField]
     private Actuator actuator;
-    [SerializeField]
-    private SteeringPipeline deadlock;
     private int constraintSteps;
 
 #if UNITY_EDITOR
@@ -62,7 +60,7 @@ public class SteeringPipeline : MonoBehaviour
             if (targeter.TryUpdateGoal(agent, goal)) return (ProcessState.Success, Vector2.zero);
         }
 
-        if (goal.HasNothing()) return GetDeadlockSteering(agent);
+        if (goal.HasNothing()) return (ProcessState.Failure, Vector2.zero);
 
         foreach (Decomposer decomposer in decomposers)
         {
@@ -98,12 +96,7 @@ public class SteeringPipeline : MonoBehaviour
 
         }
 
-        return GetDeadlockSteering(agent);
-    }
-
-    private (ProcessState, Vector2) GetDeadlockSteering(AgentManager agent)
-    {
-        return deadlock != null ? deadlock.GetSteering(agent) : (ProcessState.Failure, Vector2.zero);
+        return (ProcessState.Failure, Vector2.zero);
     }
 
     private void OnDrawGizmosSelected()
@@ -112,9 +105,9 @@ public class SteeringPipeline : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(gizmoGoalPosition, 0.3f);
         if (!gizmoValidPath) return;
-        foreach (Vector2 point in gizmoPath)
+        for (int i = 0; i < gizmoPath.Count - 1; i++)
         {
-
+            Gizmos.DrawLine(gizmoPath[i], gizmoPath[i + 1]);
         }
     }
 }

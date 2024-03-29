@@ -2,19 +2,30 @@ using FibonacciHeap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TheKiwiCoder;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using static Unity.VisualScripting.Member;
 
 public class NavGraph : MonoBehaviour
 {
-    public LayerMask SolidGeometryLayerMask;
+    public LayerMask WallMask;
     [SerializeField]
     private bool precalculationEnabled;
+    public float CollisionAvoidanceMargin = 0.1f;
+    public float MaxAllowedRadius = 0.9f;
+    public float CirclePathRatio = 0.5f;
 
 #if UNITY_EDITOR
-    [SerializeField]
-    private bool showEdges;
+    public Sprite NodeSprite;
+    public List<Collider2D> TraversableZones;
+    public List<Collider2D> Walls;
+    [HideInInspector]
+    public GameObject NodeContainer;
+
+    public bool ShowEdges;
     public NavPath TestPath;
 #endif
 
@@ -26,6 +37,44 @@ public class NavGraph : MonoBehaviour
     private void Awake()
     {
         if (precalculationEnabled) PrecalculateShortestPaths();
+    }
+
+    public void AddNode(NavGraphNode nodeA)
+    {
+        nodeA.Index = Nodes.Count;
+        Nodes.Add(nodeA);
+    }
+
+    public void RemoveNode(NavGraphNode nodeA)
+    {
+
+        foreach (NavGraphNode nodeB in Nodes)
+        {
+            nodeB.RemoveUndirectNeighbor(nodeA);
+        }
+
+        Nodes.RemoveAt(nodeA.Index);
+
+        for (int i = nodeA.Index; i < Nodes.Count; i++)
+        {
+            Nodes[i].Index = i;
+        }
+    }
+
+    public void AddEdges(NavGraphNode nodeA, float radius)
+    {
+        foreach (NavGraphNode nodeB in Nodes)
+        {
+            Vector2 positionA = nodeA.GetExpandedPosition(radius);
+            Vector2 positionB = nodeB.GetExpandedPosition(radius);
+            Vector2 edgeVector = positionB - positionA;
+            RaycastHit2D hit = Physics2D.CircleCast(positionA, radius, edgeVector, edgeVector.magnitude, WallMask);
+
+            if (!hit)
+            {
+                nodeA.AddUndirectNeighbor(nodeB);
+            }
+        }
     }
 
 
@@ -130,7 +179,7 @@ public class NavGraph : MonoBehaviour
                     if (relatedPath.Count < i + 1) continue;
                     if (rootPath.SequenceEqual(relatedPath.GetRange(0, i + 1)))
                     {
-                        relatedPath[i].RemoveNeighbor(relatedPath[i + 1]);
+                        relatedPath[i].RemoveUndirectNeighbor(relatedPath[i + 1]);
                         relatedPathIndexes.Add(j);
                     }
                 }
@@ -159,7 +208,7 @@ public class NavGraph : MonoBehaviour
 
                 foreach (int pathIndex in relatedPathIndexes)
                 {
-                    kShortestPaths[pathIndex].Nodes[i].AddNeighbor(kShortestPaths[pathIndex].Nodes[i + 1]);
+                    kShortestPaths[pathIndex].Nodes[i].AddUndirectNeighbor(kShortestPaths[pathIndex].Nodes[i + 1]);
                 }
 
                 for (int j = 0; j < i; j++)
@@ -306,12 +355,47 @@ public class NavGraph : MonoBehaviour
         }
     }
 
+    public NavGraphNode QuantizePosition(Vector2 origin, NavGraphNode coherenceNode = null)
+    {
+        if (coherenceNode)
+        {
+            coherenceNode.Neighbors.Add(coherenceNode);
+            NavGraphNode quantizedPosition = QuantizePositionFromList(origin, coherenceNode.Neighbors);
+            coherenceNode.Neighbors.RemoveAt(coherenceNode.Neighbors.Count - 1);
+            return quantizedPosition;
+        }
+        return QuantizePositionFromList(origin, Nodes);
+    }
+
+    private NavGraphNode QuantizePositionFromList(Vector2 origin, IEnumerable<NavGraphNode> nodesToCheck)
+    {
+        NavGraphNode result = null;
+        float minDistance = float.PositiveInfinity;
+
+        foreach (NavGraphNode node in nodesToCheck)
+        {
+            Vector2 nodeVector = (Vector2)node.transform.position - origin;
+
+            float distance = Vector2.Distance(origin, node.transform.position);
+            if (distance < minDistance && !Physics2D.Raycast(origin, nodeVector, nodeVector.magnitude, WallMask))
+            {
+                minDistance = distance;
+                result = node;
+            }
+        }
+
+        return result;
+    }
+
+
     private void OnDrawGizmosSelected()
     {
-        if (!showEdges) return;
+        if (!ShowEdges) return;
+        if (Nodes == null) return;
         foreach (NavGraphNode node in Nodes)
         {
             Gizmos.color = Color.cyan;
+            if (node.Neighbors == null) continue;
             foreach (NavGraphNode neighbor in node.Neighbors)
             {
                 Gizmos.DrawLine(node.transform.position, neighbor.transform.position);
@@ -325,80 +409,6 @@ public class NavGraph : MonoBehaviour
             {
                 Gizmos.DrawLine(TestPath.Nodes[i].transform.position, TestPath.Nodes[i + 1].transform.position);
             }
-        }
-    }
-}
-
-
-[CustomEditor(typeof(NavGraph))]
-public class NavGraphEditor : Editor
-{
-    private NavGraphNode start;
-    private NavGraphNode end;
-    private int k;
-
-    public override void OnInspectorGUI()
-    {
-        NavGraph script = (NavGraph)target;
-
-        serializedObject.Update();
-
-        DrawDefaultInspector();
-
-        start = (NavGraphNode)EditorGUILayout.ObjectField("Start", start, typeof(NavGraphNode), true);
-        end = (NavGraphNode)EditorGUILayout.ObjectField("End", end, typeof(NavGraphNode), true);
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Calculate Shortest Path"))
-        {
-            if (start == null || end == null)
-            {
-                Debug.Log("No node can be null.");
-                return;
-            }
-            System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var path = script.AStarShortestPath(start, end);
-            if (path.Nodes != null)
-            {
-                script.TestPath = path;
-            }
-            else
-            {
-                script.TestPath = null;
-                Debug.Log("Path does not exist.");
-            }
-            stopwatch.Stop();
-            Debug.Log($"Method execution time is {stopwatch.Elapsed.TotalSeconds} seconds.");
-        }
-
-        EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        k = EditorGUILayout.IntField("K", k);
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Calculate Kth Shortest Path"))
-        {
-            if (start == null || end == null)
-            {
-                Debug.Log("No node can be null.");
-                return;
-            }
-            System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var paths = script.YenKShortestPaths(start, end, k);
-            stopwatch.Stop();
-            if (paths != null && paths.Count > k)
-            {
-                script.TestPath = paths[k];
-            }
-            else
-            {
-                script.TestPath = null;
-                Debug.Log("Path does not exist.");
-            }
-            Debug.Log($"Method execution time is {stopwatch.Elapsed.TotalSeconds} seconds.");
         }
     }
 }

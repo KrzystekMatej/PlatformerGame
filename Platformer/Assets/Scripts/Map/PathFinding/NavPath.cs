@@ -56,11 +56,11 @@ public class NavPath : IComparable<NavPath>
         return 0;
     }
 
-    public IEnumerable<Vector2> GetExpandedPositions(float expansionDistance, int start, int count)
+    public IEnumerable<Vector2> GetExpandedPositions(float radius, int start, int count)
     {
         for (int i = start; i < count; i++)
         {
-            yield return (Vector2)Nodes[i].transform.position + Nodes[i].ExpansionVector * expansionDistance;
+            yield return Nodes[i].GetExpandedPosition(radius);
         }
     }
 }

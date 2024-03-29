@@ -34,6 +34,6 @@ public class PathFollowingTargeter : Targeter
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
-        path.DrawGizmos();
+        path.DrawAllGizmos();
     }
 }

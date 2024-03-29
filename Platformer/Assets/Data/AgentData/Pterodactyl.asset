@@ -19,3 +19,4 @@ MonoBehaviour:
   <JumpGravityModifier>k__BackingField: 2
   <FallGravityModifier>k__BackingField: 0.5
   <ClimbSpeed>k__BackingField: {x: 2, y: 5}
+  <GravityScale>k__BackingField: 2

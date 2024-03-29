@@ -62,8 +62,7 @@ GameObject:
   - component: {fileID: 8018527025378207147}
   - component: {fileID: 8448524356590432070}
   - component: {fileID: 2245584684669175667}
-  - component: {fileID: 425993995980375926}
-  - component: {fileID: 2842447663772043084}
+  - component: {fileID: 8137118716958301342}
   m_Layer: 0
   m_Name: SteeringPipeline 0
   m_TagString: Untagged
@@ -104,9 +103,9 @@ MonoBehaviour:
   - {fileID: 8448524356590432070}
   decomposers:
   - {fileID: 2245584684669175667}
-  constraints: []
+  constraints:
+  - {fileID: 8137118716958301342}
   actuator: {fileID: 377242489695348582}
-  deadlock: {fileID: 425993995980375926}
 --- !u!114 &377242489695348582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +147,6 @@ MonoBehaviour:
   slowRadius: 1
   slowDegree: 1
   minSpeed: 0.1
-  seekTargeter: {fileID: 0}
 --- !u!114 &2245584684669175667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,10 +164,7 @@ MonoBehaviour:
     offset: 0.1
     radius: 0
     isCircular: 0
-  quantizer:
-    <NavGraph>k__BackingField: {fileID: 0}
-    <CoherenceEnabled>k__BackingField: 1
---- !u!114 &425993995980375926
+--- !u!114 &8137118716958301342
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,33 +173,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2905118906616369720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0148bb15f137bd34a9f4fee6ccdcebe5, type: 3}
+  m_Script: {fileID: 11500000, guid: 33708de290221ff4f8213b099f29768c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PipelineName>k__BackingField: WanderDeadlock
-  targeters:
-  - {fileID: 2842447663772043084}
-  decomposers: []
-  constraints: []
-  actuator: {fileID: 377242489695348582}
-  deadlock: {fileID: 0}
---- !u!114 &2842447663772043084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2905118906616369720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7d985aa38eef3740ac4abe2278661d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFleeing: 0
-  isPositionCached: 0
-  wanderOffset: 6
-  wanderRadius: 2
-  wanderRate: 0.2
+  detector: {fileID: 11400000, guid: a4a4c2c1aad0f5840a2881b5239ae6d8, type: 2}
+  margin: 1.1
 --- !u!1 &4706410004552603123
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,7 +686,7 @@ PrefabInstance:
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: f0f049d8bda9745438495a46ac4cc4da, type: 2}
+      objectReference: {fileID: 11400000, guid: 717e1d4b97522b248ab4b6e60b22cc3a, type: 2}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnAdd.m_PersistentCalls.m_Calls.Array.size
       value: 0
@@ -935,6 +908,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6817917235784146507}
+    - targetCorrespondingSourceObject: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3287157618120887066}
     - targetCorrespondingSourceObject: {fileID: 7363741092903229673, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3751193155364834489}
@@ -1082,6 +1058,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
   probability: 0.306
+--- !u!114 &3287157618120887066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6866701850769994130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <NavGraph>k__BackingField: {fileID: 0}
+  quantizationUpdateInterval: 0
 --- !u!114 &8189875991959016071 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5247370467627279520, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
