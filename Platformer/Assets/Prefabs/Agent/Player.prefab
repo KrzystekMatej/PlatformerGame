@@ -1726,7 +1726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <NavGraph>k__BackingField: {fileID: 0}
+  navGraphName: FlySpace
   quantizationUpdateInterval: 0.1
 --- !u!114 &7184499124817944392
 MonoBehaviour:

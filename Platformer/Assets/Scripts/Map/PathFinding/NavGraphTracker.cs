@@ -1,26 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class NavGraphTracker : MonoBehaviour
 {
-    [field: SerializeField]
-    public NavGraph NavGraph { get; private set; }
+    [SerializeField]
+    private string navGraphName;
     [SerializeField]
     private float quantizationUpdateInterval;
 
+
+    public NavGraph NavGraph { get; private set; }
     public NavGraphNode Current { get; private set; }
     private AgentManager agent;
 
     private void Awake()
     {
         agent = GetComponent<AgentManager>();
-        NavGraph = NavGraph ? NavGraph : FindObjectOfType<NavGraph>();
+        NavGraph = FindObjectsOfType<NavGraph>().FirstOrDefault(n => n.name == navGraphName);
     }
 
     private void Start()
     {
-        StartCoroutine(UpdateTracker());
+        if (NavGraph != null) StartCoroutine(UpdateTracker());
     }
 
     private IEnumerator UpdateTracker()

@@ -1,4 +1,5 @@
 using FibonacciHeap;
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ public class NavGraph : MonoBehaviour
     public LayerMask WallMask;
     [SerializeField]
     private bool precalculationEnabled;
+    [field: SerializeField]
+    public int RecommendedFreeCollisionAttemptCount { get; private set; } = 16;
     public float CollisionAvoidanceMargin = 0.1f;
     public float MaxAllowedRadius = 0.9f;
     public float CirclePathRatio = 0.5f;
@@ -61,19 +64,44 @@ public class NavGraph : MonoBehaviour
         }
     }
 
-    public void AddEdges(NavGraphNode nodeA, float radius)
+    public void AddEdges(NavGraphNode nodeA, float radius, NavGraphNode coherenceNode = null)
     {
-        foreach (NavGraphNode nodeB in Nodes)
+        List<NavGraphNode> candidates = coherenceNode ? coherenceNode.Neighbors : Nodes;
+
+        foreach (NavGraphNode nodeB in candidates)
         {
+            if (nodeA == nodeB) continue;
             Vector2 positionA = nodeA.GetExpandedPosition(radius);
             Vector2 positionB = nodeB.GetExpandedPosition(radius);
             Vector2 edgeVector = positionB - positionA;
             RaycastHit2D hit = Physics2D.CircleCast(positionA, radius, edgeVector, edgeVector.magnitude, WallMask);
 
-            if (!hit)
-            {
-                nodeA.AddUndirectNeighbor(nodeB);
-            }
+            if (!hit) nodeA.AddUndirectNeighbor(nodeB);
+        }
+    }
+
+    public void AddClosestEdges(NavGraphNode nodeA, float radius, int edgeCount)
+    {
+        List<(NavGraphNode node, float distance)> candidates = new List<(NavGraphNode, float)>();
+
+        foreach (NavGraphNode nodeB in Nodes)
+        {
+            if (nodeA == nodeB) continue;
+            Vector2 positionA = nodeA.GetExpandedPosition(radius);
+            Vector2 positionB = nodeB.GetExpandedPosition(radius);
+            Vector2 edgeVector = positionB - positionA;
+            float distance = edgeVector.magnitude;
+            RaycastHit2D hit = Physics2D.CircleCast(positionA, radius, edgeVector, distance, WallMask);
+
+            if (!hit) candidates.Add((nodeB, distance));
+        }
+
+        candidates.Sort((a, b) => a.distance.CompareTo(b.distance));
+        int selectedCount = Mathf.Min(candidates.Count, edgeCount);
+
+        for (int i = 0; i < selectedCount; i++)
+        {
+            nodeA.AddUndirectNeighbor(candidates[i].node);
         }
     }
 

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac4dca0c7f4f0d4f8636ce681f73f2b, type: 3}
   m_Name: Dinosaur_Hurt
   m_EditorClassIdentifier: 
-  Name: Dinosaur_Hurt
   AudioClip: {fileID: 8300000, guid: 2ebf9882aa3fbe64b922bb9022d87c13, type: 3}
+  Mixer: {fileID: 0}
   Volume: 1

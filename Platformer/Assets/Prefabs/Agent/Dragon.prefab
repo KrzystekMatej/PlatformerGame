@@ -131,7 +131,6 @@ MonoBehaviour:
   decomposers: []
   constraints: []
   actuator: {fileID: 6762963787823031888}
-  deadlock: {fileID: 0}
 --- !u!114 &7325101189958284097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c337428734816f84188fb88ea9682442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeToTarget: 0.1
 --- !u!1 &5142373644606100356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +1009,7 @@ MonoBehaviour:
   OnExit:
     m_PersistentCalls:
       m_Calls: []
-  flapSound: {fileID: 0}
+  flapSound: {fileID: 11400000, guid: c30f3fb83a12d084eaeda90121b20813, type: 2}
   references:
     version: 2
     RefIds:

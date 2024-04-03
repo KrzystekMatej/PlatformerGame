@@ -19,12 +19,12 @@ public class DamageItem : Item
 
     public override void Collect(Collider2D collider)
     {
+        if (collider == attacker) return;
         IHittable hittable = collider.GetComponent<IHittable>();
         if (hittable != null)
         {
             hittable.Hit(attacker, damageWeapon);
-            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
-            if (audio) audio.PlaySpecificSound(collectSound);
+            PerformCollectActions(collider);
         }
     }
 }

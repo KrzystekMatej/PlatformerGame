@@ -38,7 +38,7 @@ public static class MathUtility
 
     public static Vector2 GetExpansionOffsetCC(Vector2 ingoing, Vector2 outgoing, float radius)
     {
-        if (ingoing == Vector2.zero || outgoing == Vector2.zero) return Vector2.zero;
+        if (ingoing == Vector2.zero && outgoing == Vector2.zero) return Vector2.zero;
         Vector2 normal1 = PerpendicularCC(ingoing);
         Vector2 normal2 = PerpendicularCC(outgoing);
 
@@ -165,6 +165,22 @@ public static class MathUtility
         return area / 2;
     }
 
+    public static bool IsPointInsideCompositeCollider(Vector2 point, CompositeCollider2D collider)
+    {
+        for (int i = 0; i < collider.pathCount; i++)
+        {
+            Vector2[] pathPoints = new Vector2[collider.GetPathPointCount(i)];
+            collider.GetPath(i, pathPoints);
+
+            if (IsPointInsidePolygon(point, pathPoints))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static bool IsPointInsidePolygon(Vector2 point, Vector2[] polygonPoints)
     {
         int intersections = 0;
@@ -187,22 +203,6 @@ public static class MathUtility
         return (intersections % 2) == 1;
     }
 
-    public static bool IsPointInsideCompositeCollider(Vector2 point, CompositeCollider2D collider)
-    {
-        for (int i = 0; i < collider.pathCount; i++)
-        {
-            Vector2[] pathPoints = new Vector2[collider.GetPathPointCount(i)];
-            collider.GetPath(i, pathPoints);
-
-            if (IsPointInsidePolygon(point, pathPoints))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static float GetEnclosingCircleRadius(Collider2D collider)
     {
         if (collider is CircleCollider2D circleCollider) return circleCollider.radius;
@@ -214,6 +214,24 @@ public static class MathUtility
 
         float diagonal = Mathf.Sqrt(collider.bounds.size.x * collider.bounds.size.x + collider.bounds.size.y * collider.bounds.size.y);
         return diagonal / 2;
+    }
+
+    public static Vector2? GetCollisionFreePosition(Vector2 position, float agentRadius, int attemptCount, LayerMask collisionMask)
+    {
+        const float safetyMargin = 0.001f;
+        for (int i = 0; i < attemptCount; i++)
+        {
+            RaycastHit2D hit = Physics2D.CircleCast(position, agentRadius, Vector2.zero, 0, collisionMask);
+            if (hit)
+            {
+                Vector2 direction = (hit.point - position).normalized;
+                hit = Physics2D.Raycast(position, direction, agentRadius, collisionMask);
+                position = position - direction * (safetyMargin + agentRadius - hit.distance);
+            }
+            else return position;
+        }
+
+        return null;
     }
 
     public static Vector2[] GetBoxColliderPath(BoxCollider2D collider)

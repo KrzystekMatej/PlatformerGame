@@ -17,7 +17,6 @@ MonoBehaviour:
   nodes:
   - rid: 7407168234541285395
   - rid: 7407168259542745394
-  - rid: 7407168259542745396
   - rid: 7407168259542745397
   - rid: 7407168259542745400
   - rid: 7407168259542745401
@@ -28,8 +27,8 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 625, y: 137, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 661, y: 278, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -66,26 +65,8 @@ MonoBehaviour:
         child:
           rid: 7407168309800468490
         restartOnSuccess: 1
-        restartOnFailure: 0
+        restartOnFailure: 1
         maxRepeats: 0
-    - rid: 7407168259542745396
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 6cee7afef3ab02f4f853494abb1fdf83
-        position: {x: 270, y: 900}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7407168307214680890
-        - rid: 7407168307214680891
-        - rid: 7407168259542745400
     - rid: 7407168259542745397
       type: {class: SubTree, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -108,7 +89,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a7c529aec0995114c8b941ee3323881e
-        position: {x: 495, y: 1125}
+        position: {x: 330, y: 900}
         blackboard:
           keys: []
         description: 
@@ -123,7 +104,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8ef235094112b7f4aa4106ad5beac551
-        position: {x: -105, y: 885}
+        position: {x: 60, y: 900}
         blackboard:
           keys: []
         description: 
@@ -138,7 +119,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 60543685207a1af47a21fddbab388cd0
-        position: {x: 15, y: 1110}
+        position: {x: -345, y: 900}
         blackboard:
           keys: []
         description: 
@@ -157,7 +138,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 58f8e08d5771c2649a5dc6beb029b016
-        position: {x: 270, y: 1125}
+        position: {x: -150, y: 885}
         blackboard:
           keys: []
         description: 
@@ -188,8 +169,10 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         children:
+        - rid: 7407168307214680890
+        - rid: 7407168307214680891
         - rid: 7407168259542745401
-        - rid: 7407168259542745396
+        - rid: 7407168259542745400
     - rid: 7407168309800468490
       type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:

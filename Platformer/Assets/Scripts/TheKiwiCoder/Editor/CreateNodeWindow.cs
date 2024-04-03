@@ -64,6 +64,7 @@ namespace TheKiwiCoder {
             };
 
             // Action nodes can only be added as children
+
             if (isSourceParent || source == null)
             {
                 tree.Add(new SearchTreeGroupEntry(new GUIContent("Actions")) { level = 1 });

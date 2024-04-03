@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
   m_Name: SensePlayer
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 20, y: 0}
+  <GizmoColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  <Size>k__BackingField: {x: 15, y: 0}
   <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:

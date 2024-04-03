@@ -14,8 +14,7 @@ public class HealthItem : Item
         if (healthManager)
         {
             healthManager.AddHealth(healthValue);
-            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
-            if (audio) audio.PlaySpecificSound(collectSound);
+            PerformCollectActions(collider);
         }
     }
 }

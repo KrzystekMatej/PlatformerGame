@@ -14,7 +14,7 @@ namespace TheKiwiCoder {
         // Add other game specific systems here
         public AIInputController InputController { get; private set; }
         public AgentManager Agent { get; private set; }
-        public Steering Steering { get; private set; }
+        public MovementSteering Steering { get; private set; }
 
         public static Context CreateFromGameObject(GameObject gameObject)
         {
@@ -22,7 +22,7 @@ namespace TheKiwiCoder {
             Context context = new Context();
             // Add whatever else you need here...
             AIManager manager = gameObject.GetComponentInParent<AIManager>();
-            context.InputController = manager.InputController;
+            context.InputController = (AIInputController)manager.Agent.InputController;
             context.Agent = manager.Agent;
             context.Steering = manager.Steering;
 

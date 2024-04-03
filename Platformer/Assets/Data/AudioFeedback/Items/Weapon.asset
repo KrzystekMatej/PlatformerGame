@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac4dca0c7f4f0d4f8636ce681f73f2b, type: 3}
+  m_Name: Weapon
+  m_EditorClassIdentifier: 
+  AudioClip: {fileID: 8300000, guid: 30a5879a3d7840e479d5cb6c4fa87bcc, type: 3}
+  Mixer: {fileID: 5109656521951484014, guid: cf505303fc6b62f478c3f1c5dbd95230, type: 2}
+  Volume: 0.243

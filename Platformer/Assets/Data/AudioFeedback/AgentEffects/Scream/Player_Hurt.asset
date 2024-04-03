@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac4dca0c7f4f0d4f8636ce681f73f2b, type: 3}
   m_Name: Player_Hurt
   m_EditorClassIdentifier: 
-  Name: Scream_5
   AudioClip: {fileID: 8300000, guid: f62e90f08ad250440b42b1b98c5b0b30, type: 3}
+  Mixer: {fileID: 0}
   Volume: 0.25

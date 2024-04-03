@@ -27,8 +27,8 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 608, y: 93, z: 0}
-  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
+  viewPosition: {x: 476, y: 82, z: 0}
+  viewScale: {x: 0.8695652, y: 0.8695652, z: 1}
   references:
     version: 2
     RefIds:
@@ -68,7 +68,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b83eca320894cc54ba9b23ed506251ad
-        position: {x: 0, y: 210}
+        position: {x: 0, y: 195}
         blackboard:
           keys: []
         description: 
@@ -93,7 +93,6 @@ MonoBehaviour:
         logStart: 0
         logState: 0
         logStop: 0
-        useStopApproximation: 1
     - rid: 7407168262723339013
       type: {class: DelaySuccess, ns: , asm: Assembly-CSharp}
       data:
@@ -125,6 +124,7 @@ MonoBehaviour:
         logStart: 0
         logState: 0
         logStop: 0
+        stopImmediately: 1
     - rid: 7407168296016675037
       type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -165,7 +165,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 2e3bdb3856dd653469cba1dd7d187958
-        position: {x: 435, y: 660}
+        position: {x: 420, y: 660}
         blackboard:
           keys: []
         description: 
@@ -173,3 +173,4 @@ MonoBehaviour:
         logStart: 0
         logState: 0
         logStop: 0
+        stopImmediately: 1

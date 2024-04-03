@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 7363741091481350651}
   - component: {fileID: 7363741091481350647}
   - component: {fileID: 7363741091481350646}
-  - component: {fileID: 7363741091481350644}
+  - component: {fileID: 170339088191832514}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -350,7 +350,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7363741091481350644
+--- !u!114 &170339088191832514
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7363741091481350650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc2b1c4c23f12c45a8e81beff4c11e3, type: 3}
+  m_Script: {fileID: 11500000, guid: e7566f32870905c4eb074b01eeb2aec0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   OnAnimationComplete:

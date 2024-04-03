@@ -19,8 +19,7 @@ public class WeaponItem : Item
         if (weaponManager)
         {
             weaponManager.AddWeaponWithSwap(weapon);
-            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
-            if (audio) audio.PlaySpecificSound(collectSound);
+            PerformCollectActions(collider);
         }
     }
 }

@@ -65,11 +65,22 @@ private void Start()
         }
     }
 
+    public void ConnectToNavGraph(NavGraph navGraph, float agentRadius, NavGraphNode coherenceNode = null)
+    {
+        navGraph.AddEdges(this, agentRadius, coherenceNode);
+        navGraph.AddNode(this);
+    }
+
+    public void DisconnectFromNavGraph(NavGraph navGraph)
+    {
+        navGraph.RemoveNode(this);
+        Neighbors.Clear();
+    }
+
 
     public void RemoveUndirectNeighbor(NavGraphNode neighbor)
     {
-        Neighbors.Remove(neighbor);
-        neighbor.Neighbors.Remove(this);
+        if (Neighbors.Remove(neighbor)) neighbor.Neighbors.Remove(this);
     }
 
     public Vector2 GetExpandedPosition(float radius)

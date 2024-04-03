@@ -20,6 +20,4 @@ public class HittableBlock : MonoBehaviour, IHittable
             GetComponent<AudioSource>().Play();
         }
     }
-
-    public void Hit(int attackDamage) { }
 }

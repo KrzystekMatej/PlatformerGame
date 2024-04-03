@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pterodactyl
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 2
-  <MaxSpeed>k__BackingField: 2
+  <MaxSpeed>k__BackingField: 3
   <MaxForce>k__BackingField: 50
   <JumpForce>k__BackingField: 12
   <JumpGravityModifier>k__BackingField: 2

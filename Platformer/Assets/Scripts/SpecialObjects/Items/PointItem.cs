@@ -15,8 +15,7 @@ public class PointItem : Item
         if (pointManager)
         {
             pointManager.AddPoints(collectValue);
-            AudioFeedback audio = collider.GetComponentInChildren<AudioFeedback>();
-            if (audio) audio.PlaySpecificSound(collectSound);
+            PerformCollectActions(collider);
         }
     }
 }

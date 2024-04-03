@@ -40,7 +40,7 @@ namespace TheKiwiCoder {
                 context = CreateBehaviourTreeContext();
                 runtimeTree = behaviourTree.Clone();
                 runtimeTree.blackboard.OnInit();
-                if (context.Steering != null) context.Steering.Bind(runtimeTree.blackboard);
+                if (context.Steering != null) context.Steering.BindBlackboard(runtimeTree.blackboard);
                 runtimeTree.Bind(context);
                 
 
