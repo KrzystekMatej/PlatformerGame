@@ -10,7 +10,7 @@ public class IsAttackerBehind : ConditionNode
 
     protected override bool IsConditionSatisfied()
     {
-        Vector2 attackerPosition = blackboard.GetValue<Vector2>("AttackerPosition");
+        Vector2 attackerPosition = blackboard.GetValue<Collider2D>("Attacker").bounds.center;
         Vector2 orientation = context.Agent.OrientationController.CurrentOrientation;
         Vector2 agentPosition = context.Agent.CenterPosition;
 

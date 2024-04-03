@@ -61,7 +61,8 @@ public class MovementSteering : MonoBehaviour
         if (currentPipeline != null)
         {
             if (newPipeline == currentPipeline) return false;
-            currentPipeline.Enable();
+            currentPipeline.Disable();
+            inputController.StopMoving();
 #if UNITY_EDITOR
             Debug.Log("Deactivated");
 #endif
@@ -71,8 +72,8 @@ public class MovementSteering : MonoBehaviour
         if (newPipeline != null)
         {
             currentPipeline = newPipeline;
-            currentPipeline.Disable();
-            inputController.StopMoving();
+            currentPipeline.Enable();
+            State = ProcessState.Running;
 #if UNITY_EDITOR
             Debug.Log("Activated");
 #endif

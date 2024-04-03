@@ -23,7 +23,6 @@ public class SeekToTarget : ActionNode
             float distance = Vector2.Distance(hit.collider.bounds.center, context.Agent.CenterPosition);
             if (distance < minDistance) goal = hit.collider;
         }
-
     }
 
     protected override ProcessState OnUpdate()

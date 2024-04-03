@@ -13,11 +13,11 @@ public class GotHit : ConditionNode
         context.Agent.OnHit.AddListener(SetHit);
     }
 
-    public void SetHit(Collider2D attackerCollider, Weapon attackingWeapon)
+    public void SetHit(Collider2D attacker, Weapon damageWeapon)
     {
         hit = true;
-        blackboard.SetValue("AttackerPosition", (Vector2)attackerCollider.bounds.center);
-        blackboard.SetValue("AttackingWeapon", attackingWeapon);
+        blackboard.SetValue("Attacker", attacker);
+        blackboard.SetValue("DamageWeapon", damageWeapon);
     }
 
     protected override void OnStart() { }

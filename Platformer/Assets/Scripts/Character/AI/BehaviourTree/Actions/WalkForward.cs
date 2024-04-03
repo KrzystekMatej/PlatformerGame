@@ -17,7 +17,7 @@ public class WalkForward : ActionNode
     {
         const float lookAhead = 2f;
         seekTargeter.GoalPosition = context.Agent.CenterPosition + context.Agent.OrientationController.CurrentOrientation * context.Agent.EnclosingCircleRadius * lookAhead;
-        return ProcessState.Running;
+        return context.Steering.State;
     }
 
     protected override void OnStop() { }
