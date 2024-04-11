@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TheKiwiCoder;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -7,6 +8,8 @@ using UnityEngine;
 
 public class CastVision : ConditionNode
 {
+    [SerializeField]
+    private NodeProperty<List<RaycastHit2D>> hits;
     [SerializeField]
     private CastDetector visionDetector;
     [SerializeField]
@@ -27,9 +30,14 @@ public class CastVision : ConditionNode
         Vector2 offset = visionDetector.OriginOffset;
         InitializeDetector(context.Agent.OrientationController.CurrentOrientation);
         int detectionCount = visionDetector.Detect(context.Agent.CenterPosition);
+
+        if (hits.IsBlackboardKey())
+        {
+            hits.Value.Clear();
+            for (int i = 0; i < detectionCount; i++) hits.Value.Add(visionDetector.Hits[i]);
+        }
+
         visionDetector.OriginOffset = offset;
-        blackboard.SetValue(visionDetector.name + "VisionHits", visionDetector.Hits);
-        blackboard.SetValue(visionDetector.name + "VisionCount", detectionCount);
         return detectionCount > 0;
     }
 

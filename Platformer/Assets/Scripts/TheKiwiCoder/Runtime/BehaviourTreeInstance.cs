@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace TheKiwiCoder {
@@ -40,11 +38,9 @@ namespace TheKiwiCoder {
                 context = CreateBehaviourTreeContext();
                 runtimeTree = behaviourTree.Clone();
                 runtimeTree.blackboard.OnInit();
-                if (context.Steering != null) context.Steering.BindBlackboard(runtimeTree.blackboard);
-                runtimeTree.Bind(context);
-                
-
+                context.Steering.WritePipelinesToBlackboard(runtimeTree.blackboard);
                 ApplyBlackboardOverrides();
+                runtimeTree.Bind(context);
             } else {
                 runtimeTree = null;
             }
@@ -161,7 +157,7 @@ namespace TheKiwiCoder {
 
         public BlackboardKey<T> FindBlackboardKey<T>(string keyName) {
             if (runtimeTree) {
-                return runtimeTree.blackboard.Find<T>(keyName);
+                return runtimeTree.blackboard.Find(keyName) as BlackboardKey<T>;
             }
             return null;
         }

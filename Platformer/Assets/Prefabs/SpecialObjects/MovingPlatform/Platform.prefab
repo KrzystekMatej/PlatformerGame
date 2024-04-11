@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1620851343503850149}
   - component: {fileID: 1620851343503850150}
   - component: {fileID: 1178710869945371998}
+  - component: {fileID: 7316855092024322094}
   m_Layer: 8
   m_Name: Platform
   m_TagString: Untagged
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 642602087
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2cebb83e3d9b5b247be3eb722143beb7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -164,7 +165,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32768
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 1
@@ -172,3 +173,18 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &7316855092024322094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620851343503850147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7fc028830ad29740b682a217a8181bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  step: {fileID: 11400000, guid: 15278fbe6a466a3429e047de7d3846e2, type: 2}
+  jump: {fileID: 11400000, guid: fa0128468762f784ca3059d8aedbcbe5, type: 2}
+  land: {fileID: 11400000, guid: 01acbda506cb5d04c96a29fea461a9af, type: 2}

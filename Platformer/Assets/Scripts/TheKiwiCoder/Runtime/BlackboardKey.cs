@@ -3,8 +3,7 @@ using UnityEngine;
 namespace TheKiwiCoder {
 
     [System.Serializable]
-    public abstract class BlackboardKey : ISerializationCallbackReceiver{
-
+    public abstract class BlackboardKey : ISerializationCallbackReceiver {
         public string name;
         public System.Type underlyingType;
         public string typeName;
@@ -24,28 +23,12 @@ namespace TheKiwiCoder {
 
         public abstract void CopyFrom(BlackboardKey key);
         public abstract bool Equals(BlackboardKey key);
+        public abstract void SetValue(object value);
+
+        public abstract object GetValue();
 
         public static BlackboardKey CreateKey(System.Type type) {
             return System.Activator.CreateInstance(type) as BlackboardKey;
-        }
-
-
-        public override bool Equals(object obj)
-        {
-            if (obj == null || !this.GetType().Equals(obj.GetType()))
-            {
-                return false;
-            }
-            else
-            {
-                BlackboardKey b = (BlackboardKey)obj;
-                return name == b.name;
-            }
-        }
-
-        public override int GetHashCode()
-        {
-            return name.GetHashCode();
         }
     }
 
@@ -75,5 +58,11 @@ namespace TheKiwiCoder {
             }
             return false;
         }
+
+        public override void SetValue(object value) {
+            this.value = (T)value;
+        }
+
+        public override object GetValue() => value;
     }
 }

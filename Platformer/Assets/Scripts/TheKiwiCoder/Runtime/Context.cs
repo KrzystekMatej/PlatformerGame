@@ -14,18 +14,15 @@ namespace TheKiwiCoder {
         // Add other game specific systems here
         public AIInputController InputController { get; private set; }
         public AgentManager Agent { get; private set; }
-        public MovementSteering Steering { get; private set; }
+        public SteeringController Steering { get; private set; }
 
         public static Context CreateFromGameObject(GameObject gameObject)
         {
-            // Fetch all commonly used components
             Context context = new Context();
-            // Add whatever else you need here...
+            context.InputController = gameObject.GetComponentInParent<AIInputController>();
             AIManager manager = gameObject.GetComponentInParent<AIManager>();
-            context.InputController = (AIInputController)manager.Agent.InputController;
             context.Agent = manager.Agent;
             context.Steering = manager.Steering;
-
             return context;
         }
     }

@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TheKiwiCoder;
 using UnityEngine;
 
 public class CheckVision : ConditionNode
 {
     [SerializeField]
-    private CastDetector visionDetector;
+    private NodeProperty<List<RaycastHit2D>> originalHits;
+    [SerializeField]
+    private NodeProperty<List<RaycastHit2D>> checkedHits;
     [SerializeField]
     private int minCount = 1;
     [SerializeField]
@@ -18,9 +21,10 @@ public class CheckVision : ConditionNode
     [SerializeField]
     private LayerMask mask;
 
-#if UNITY_EDITOR
+
     public override void OnInit()
     {
+#if UNITY_EDITOR
         if (minCount > maxCount)
         {
             Log(LogType.Warning, "Min count is bigger than max count.");
@@ -29,34 +33,33 @@ public class CheckVision : ConditionNode
         {
             Log(LogType.Warning, "Min distance is bigger than max distance.");
         }
-    }
 #endif
+    }
+
 
 
     protected override void OnStart() { }
 
     protected override bool IsConditionSatisfied()
     {
-        RaycastHit2D[] hits = blackboard.GetValue<RaycastHit2D[]>(visionDetector.name + "VisionHits");
-        int visionCount = blackboard.GetValue<int>(visionDetector.name + "VisionCount");
-        List<RaycastHit2D> checkedHits = new List<RaycastHit2D>();
         int count = 0;
-        for (int i = 0; i < visionCount; i++)
+        checkedHits.Value.Clear();
+        foreach (RaycastHit2D hit in originalHits.Value)
         {
-            if (CheckHit(hits[i]))
+            if (CheckHit(hit))
             {
                 count++;
 
                 if (count > maxCount) break;
-                checkedHits.Add(hits[i]);
+                checkedHits.Value.Add(hit);
             }
         }
 
         if (count >= minCount && count <= maxCount)
         {
-            blackboard.SetValue("CheckedHits", checkedHits);
             return true;
         }
+        checkedHits.Value.Clear();
         return false;
     }
 

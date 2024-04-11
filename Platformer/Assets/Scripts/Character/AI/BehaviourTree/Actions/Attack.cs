@@ -14,6 +14,7 @@ public class Attack : ActionNode
 
     private void AttackFinished(State previous, State next)
     {
+        if (next is not AttackState) state = ProcessState.Failure;
         if (previous is AttackState) state = ProcessState.Success;
     }
 

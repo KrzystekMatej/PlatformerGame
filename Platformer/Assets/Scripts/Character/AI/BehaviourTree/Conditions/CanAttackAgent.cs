@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TheKiwiCoder;
-using Unity.VisualScripting;
-using static UnityEngine.UI.Image;
 
 [System.Serializable]
 public class CanAttackAgent : ConditionNode
@@ -30,6 +25,7 @@ public class CanAttackAgent : ConditionNode
 
     protected override void OnStop() { }
 
+#if UNITY_EDITOR
     public override void OnDrawGizmos(AgentManager agent)
     {
         if (!Application.isPlaying) return;
@@ -40,4 +36,5 @@ public class CanAttackAgent : ConditionNode
             weapon.DrawGizmos(agent.CenterPosition, context.Agent.OrientationController.CurrentOrientation);
         }
     }
+#endif
 }

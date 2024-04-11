@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class SteeringPipeline : MonoBehaviour
 {
-    [field: SerializeField]
-    public string PipelineName { get; private set; }
     [SerializeField]
     private Targeter[] targeters;
     [SerializeField]
@@ -27,37 +25,17 @@ public class SteeringPipeline : MonoBehaviour
         constraintSteps = constraints.Length + 1;
     }
 
-    public void Disable()
-    {
-        foreach (Targeter t in targeters) t.Enable();
-        foreach (Decomposer d in decomposers) d.Enable();
-        foreach (Constraint c in constraints) c.Enable();
-        actuator.Enable();
-    }
-
-    public void Enable()
-    {
-        foreach (Targeter t in targeters) t.Disable();
-        foreach (Decomposer d in decomposers) d.Disable();
-        foreach (Constraint c in constraints) c.Disable();
-        actuator.Disable();
-    }
-
-    public void BindBlackboard(Blackboard blackboard)
-    {
-        foreach (Targeter t in targeters) blackboard.SetValue(PipelineName + t.GetType().Name, t);
-        foreach (Decomposer d in decomposers) blackboard.SetValue(PipelineName + d.GetType().Name, d);
-        foreach (Constraint c in constraints) blackboard.SetValue(PipelineName + c.GetType().Name, c);
-        blackboard.SetValue(PipelineName + actuator.GetType().Name, actuator);
-    }
-
     public (ProcessState, Vector2) GetSteering()
     {
         SteeringGoal goal = new SteeringGoal();
         
         foreach (Targeter targeter in targeters)
         {
-            if (targeter.TryUpdateGoal(goal)) return (ProcessState.Success, Vector2.zero);
+            ProcessState targeterState = targeter.TryUpdateGoal(goal);
+            if (targeterState != ProcessState.Running)
+            {
+                return (targeterState, Vector2.zero);
+            }
         }
 
         if (goal.HasNothing()) return (ProcessState.Failure, Vector2.zero);
@@ -88,7 +66,7 @@ public class SteeringPipeline : MonoBehaviour
             if (validPath)
             {
                 Vector2? steeringForce = actuator.GetSteering(path, goal);
-                if (steeringForce != null) return (ProcessState.Running, (Vector2)steeringForce);
+                if (steeringForce.HasValue) return (ProcessState.Running, steeringForce.Value);
                 else break;
             }
         }
@@ -96,10 +74,36 @@ public class SteeringPipeline : MonoBehaviour
         return (ProcessState.Failure, Vector2.zero);
     }
 
+    public void Enable()
+    {
+        foreach (Targeter t in targeters) t.Enable();
+        foreach (Decomposer d in decomposers) d.Enable();
+        foreach (Constraint c in constraints) c.Enable();
+        actuator.Enable();
+    }
+
+    public void Disable()
+    {
+        foreach (Targeter t in targeters) t.Disable();
+        foreach (Decomposer d in decomposers) d.Disable();
+        foreach (Constraint c in constraints) c.Disable();
+        actuator.Disable();
+    }
+
+    public void WriteComponentsToBlackboard(Blackboard blackboard)
+    {
+        foreach (Targeter t in targeters) t.WriteToCorrespondingKeys(blackboard);
+        foreach (Decomposer d in decomposers) d.WriteToCorrespondingKeys(blackboard);
+        foreach (Constraint c in constraints) c.WriteToCorrespondingKeys(blackboard);
+        actuator.WriteToCorrespondingKeys(blackboard);
+    }
+
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying || gizmoGoalPosition == null) return;
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere((Vector3)gizmoGoalPosition, 0.3f);
     }
+#endif
 }

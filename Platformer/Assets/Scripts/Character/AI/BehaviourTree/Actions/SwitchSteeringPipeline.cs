@@ -6,20 +6,13 @@ using UnityEngine;
 public class SwitchSteeringPipeline : ActionNode
 {
     [SerializeField]
-    private string targetPipelineName;
-
-    private SteeringPipeline targetPipeline;
-
-    public override void OnInit()
-    {
-        targetPipeline = context.Steering.GetPipeline(targetPipelineName);
-    }
+    private NodeProperty<SteeringPipeline> targetPipeline;
 
     protected override void OnStart() { }
 
     protected override ProcessState OnUpdate()
     {
-        context.Steering.UpdateCurrentPipeline(targetPipeline);
+        context.Steering.UpdateCurrentPipeline(targetPipeline.Value);
         return ProcessState.Success;
     }
 

@@ -26,12 +26,12 @@ public class ParentManager : MonoBehaviour
 
     public void RestorePrimaryParent()
     {
-        transform.SetParent(primaryParent);
+        if (gameObject.activeInHierarchy) transform.SetParent(primaryParent);
     }
 
     public bool SetTemporaryParent(Transform temporaryParent)
     {
-        if (isStickable)
+        if (isStickable && gameObject.activeInHierarchy)
         {
             transform.SetParent(temporaryParent);
             return true;

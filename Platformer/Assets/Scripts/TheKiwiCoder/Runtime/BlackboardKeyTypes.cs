@@ -110,7 +110,60 @@ namespace TheKiwiCoder {
     }
 
     [System.Serializable]
+    public class RigidBody2DKey : BlackboardKey<Rigidbody2D>
+    {
+
+    }
+
+    [System.Serializable]
     public class ColliderKey : BlackboardKey<Collider> {
+
+    }
+
+    [System.Serializable]
+    public class Collider2DKey : BlackboardKey<Collider2D>
+    {
+
+    }
+
+    [System.Serializable]
+    public class WeaponKey : BlackboardKey<Weapon>
+    {
+
+    }
+    [System.Serializable]
+    public class IntListKey : BlackboardKey<List<int>>
+    {
+
+    }
+
+    [System.Serializable]
+    public class RaycastHit2DKey : BlackboardKey<RaycastHit2D>
+    {
+
+    }
+
+    [System.Serializable]
+    public class RaycastHit2DListKey : BlackboardKey<List<RaycastHit2D>>
+    {
+
+    }
+
+    [System.Serializable]
+    public class SeekTargeterKey : BlackboardKey<SeekTargeter>
+    {
+
+    }
+
+    [System.Serializable]
+    public class PathTargeterKey : BlackboardKey<PathTargeter>
+    {
+
+    }
+
+    [System.Serializable]
+    public class SteeringPipelineKey : BlackboardKey<SteeringPipeline>
+    {
 
     }
 }

@@ -11,7 +11,7 @@ public class HealthItem : Item
     public override void Collect(Collider2D collider)
     {
         HealthManager healthManager = collider.GetComponentInChildren<HealthManager>();
-        if (healthManager)
+        if (healthManager && healthManager.CurrentHealth < healthManager.MaxHealth)
         {
             healthManager.AddHealth(healthValue);
             PerformCollectActions(collider);

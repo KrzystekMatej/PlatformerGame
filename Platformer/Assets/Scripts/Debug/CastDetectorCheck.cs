@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using UnityEngine;
-using UnityEngine.UIElements;
-
 #if UNITY_EDITOR
+
+using UnityEngine;
 
 public class CastDetectorCheck : MonoBehaviour
 {
@@ -29,7 +25,7 @@ public class CastDetectorCheck : MonoBehaviour
                 Gizmos.color = Color.yellow;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, detector.Hits[i].point - (Vector2)transform.position, detector.Size.x, detector.DetectLayerMask);
                 Debug.Log(hit.collider);
-                Gizmos.DrawLine(hit.point, transform.position);
+                Gizmos.DrawLine(detector.Hits[i].point, detector.Hits[i].point + detector.Hits[i].normal * 2);
             }
         }
     }

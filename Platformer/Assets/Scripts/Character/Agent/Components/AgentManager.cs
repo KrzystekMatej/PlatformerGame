@@ -1,12 +1,5 @@
-using DG.Tweening.Core.Easing;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.Tilemaps;
 
 public class AgentManager : MonoBehaviour, IHittable
 {
@@ -17,7 +10,7 @@ public class AgentManager : MonoBehaviour, IHittable
     public AgentInstanceData InstanceData { get; set; }
     public Rigidbody2D RigidBody { get; private set; }
     public InputController InputController { get; private set; }
-    public AnimatorController Animator { get; private set; }
+    public AnimatorManager Animator { get; private set; }
     public AudioFeedback AudioFeedback { get; private set; }
     public WeaponManager WeaponManager { get; private set; }
     public OrientationController OrientationController { get; private set; }
@@ -42,7 +35,7 @@ public class AgentManager : MonoBehaviour, IHittable
         InputController = GetComponentInParent<InputController>();
         RigidBody = GetComponent<Rigidbody2D>();
         RigidBody.gravityScale = DefaultData.GravityScale;
-        Animator = GetComponentInChildren<AnimatorController>();
+        Animator = GetComponentInChildren<AnimatorManager>();
         OrientationController = GetComponentInChildren<OrientationController>();
         GroundDetector = GetComponentInChildren<GroundDetector>();
         ClimbDetector = GetComponent<TriggerFilter>();
@@ -102,6 +95,7 @@ public class AgentManager : MonoBehaviour, IHittable
 
     private void PerformKnockback(Vector2 from, float knockbackForce)
     {
+        RigidBody.velocity = Vector2.zero;
         if (knockbackForce <= 0) return;
         Vector2 direction = CenterPosition - from;
         RigidBody.AddForce(new Vector2(direction.normalized.x, 0) * knockbackForce, ForceMode2D.Impulse);

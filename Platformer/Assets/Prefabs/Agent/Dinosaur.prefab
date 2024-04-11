@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 6204824286837116776}
   - component: {fileID: 4612438013691412038}
   m_Layer: 0
-  m_Name: Steering
+  m_Name: MovementSteering
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 2158025379423844227}
   - component: {fileID: 7442925342758839965}
   m_Layer: 0
-  m_Name: SteeringPipeline 0
+  m_Name: Walk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -251,7 +251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0148bb15f137bd34a9f4fee6ccdcebe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <PipelineName>k__BackingField: SeekPipeline
   targeters:
   - {fileID: 7442925342758839965}
   decomposers: []
@@ -282,6 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47fb8112f2a4b5b4c8bc948f0031a57b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxSeekDistance: Infinity
   isFleeing: 0
 --- !u!1001 &6980247669020632358
 PrefabInstance:

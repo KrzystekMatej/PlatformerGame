@@ -1,11 +1,8 @@
-using System.Collections;
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-
-#if UNITY_EDITOR
 
 public class MaterialCheck : MonoBehaviour
 {
@@ -37,22 +34,4 @@ public class MaterialCheck : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(MaterialCheck))]
-public class MaterialCheckEditor : Editor
-{
-
-    public override void OnInspectorGUI()
-    {
-        MaterialCheck script = (MaterialCheck)target;
-
-        DrawDefaultInspector();
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Check Materials"))
-        {
-            script.CheckMaterials();
-        }
-    }
-}
 #endif

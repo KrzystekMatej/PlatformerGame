@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using TheKiwiCoder;
-using UnityEngine;
-
 #if UNITY_EDITOR
+
+using UnityEngine;
 
 public class LineCastCheck : MonoBehaviour
 {

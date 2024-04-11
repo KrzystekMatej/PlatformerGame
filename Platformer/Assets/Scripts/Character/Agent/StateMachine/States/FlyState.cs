@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class FlyState : WalkState
 {
@@ -60,15 +56,5 @@ public class FlyState : WalkState
     protected override void HandleExit()
     {
         agent.Animator.OnAnimationAction.RemoveListener(PlayFlapSound);
-    }
-}
-
-[CustomEditor(typeof(FlyState), true)]
-public class FlyStateEditor : StateEditor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        DrawDefaultInspector();
     }
 }

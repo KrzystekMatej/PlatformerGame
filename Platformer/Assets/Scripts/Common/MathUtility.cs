@@ -10,6 +10,8 @@ using UnityEngine.UIElements;
 
 public static class MathUtility
 {
+    public const int recommendedFreeCollisionCount = 16;
+
     public static Vector2 PolarCoordinatesToVector2(float angleRad, float magnitude)
     {
         return new Vector2(Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * magnitude;
@@ -216,10 +218,10 @@ public static class MathUtility
         return diagonal / 2;
     }
 
-    public static Vector2? GetCollisionFreePosition(Vector2 position, float agentRadius, int attemptCount, LayerMask collisionMask)
+    public static Vector2? GetCollisionFreePosition(Vector2 position, float agentRadius, LayerMask collisionMask)
     {
         const float safetyMargin = 0.001f;
-        for (int i = 0; i < attemptCount; i++)
+        for (int i = 0; i < recommendedFreeCollisionCount; i++)
         {
             RaycastHit2D hit = Physics2D.CircleCast(position, agentRadius, Vector2.zero, 0, collisionMask);
             if (hit)
@@ -257,7 +259,7 @@ public static class MathUtility
     public static Vector2[] GetCircleColliderInscribedPath(CircleCollider2D collider, int pointCount)
     {
         return GetRegularPolygonPath(collider.radius, pointCount)
-            .Select(p => (Vector2)collider.transform.TransformPoint(p + collider.offset))
+            ?.Select(p => (Vector2)collider.transform.TransformPoint(p + collider.offset))
             .ToArray();
     }
 
@@ -266,7 +268,7 @@ public static class MathUtility
         float radius = collider.radius * (1f / Mathf.Cos(Mathf.PI/pointCount));
 
         return GetRegularPolygonPath(radius, pointCount)
-            .Select(p => (Vector2)collider.transform.TransformPoint(p + collider.offset))
+            ?.Select(p => (Vector2)collider.transform.TransformPoint(p + collider.offset))
             .ToArray();
     }
 

@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TheKiwiCoder {
@@ -45,14 +48,15 @@ namespace TheKiwiCoder {
 
         [SerializeReference]
         public List<BlackboardKey> keys = new List<BlackboardKey>();
-        private Dictionary<string, object> table = new Dictionary<string, object>();
-        
 
         public void OnInit()
         {
-            foreach (BlackboardKey key in keys)
+            foreach (var key in keys)
             {
-                table[key.name] = System.Activator.CreateInstance(key.underlyingType);
+                if (key.underlyingType.GetInterface(nameof(ICollection)) != null && key.GetValue() == null)
+                {
+                    key.SetValue(Activator.CreateInstance(key.underlyingType));
+                }
             }
         }
 
@@ -63,48 +67,28 @@ namespace TheKiwiCoder {
             });
         }
 
-        // Finds a key that matches keyName with the type specified
-        public BlackboardKey<T> Find<T>(string keyName) {
-            var foundKey = Find(keyName);
-
-            if (foundKey == null) {
-                Debug.LogWarning($"Failed to find blackboard key, invalid keyname:{keyName}");
-                return null;
-            }
-
-            if (foundKey.underlyingType != typeof(T)) {
-                Debug.LogWarning($"Failed to find blackboard key, invalid keytype:{typeof(T)}, Expected:{foundKey.underlyingType}");
-                return null;
-            }
-
-            var foundKeyTyped = foundKey as BlackboardKey<T>;
-            if (foundKeyTyped == null) {
-                Debug.LogWarning($"Failed to find blackboard key, casting failed:{typeof(T)}, Expected:{foundKey.underlyingType}");
-                return null;
-            }
-            return foundKeyTyped;
-        }
 
         // Tries to set a key to a value using the type specified.
         // Note: This may fail if the key with the matching name has a different type to the one specified
-        public bool SetValue<T>(string keyName, T value) {
-
-            table[keyName] = value;
-#if UNITY_EDITOR
-            if (!table.ContainsKey(keyName))
+        public void SetValue<T>(string keyName, T value)
+        {
+            var key = Find(keyName);
+            if (key != null)
             {
-                //....
+                key.SetValue(value);
             }
-#endif
-            return true;
         }
 
         // Tries to get a key value using the type specified.
         // Note: This may fail if the key with the matching name has a different type to the one specified
-        public T GetValue<T>(string keyName) {
-
-            table.TryGetValue(keyName, out var value);
-            return (T)value;
+        public T GetValue<T>(string keyName)
+        {
+            var key = Find(keyName);
+            if (key != null)
+            {
+                return (T)key.GetValue();
+            }
+            return default;
         }
     }
 }

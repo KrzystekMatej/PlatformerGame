@@ -1,12 +1,5 @@
-using DG.Tweening;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Windows;
 
 public class WalkState : State
 {
@@ -61,16 +54,5 @@ public class WalkState : State
     protected override void HandleExit()
     {
         agent.Animator.OnAnimationAction.RemoveListener(PlayStepSound);
-    }
-}
-
-
-[CustomEditor(typeof(WalkState), true)]
-public class WalkStateEditor : StateEditor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        DrawDefaultInspector();
     }
 }

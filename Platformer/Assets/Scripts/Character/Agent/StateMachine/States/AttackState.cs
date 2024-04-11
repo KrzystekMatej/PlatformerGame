@@ -1,10 +1,4 @@
-using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class AttackState : State
 {
@@ -27,14 +21,3 @@ public class AttackState : State
         agent.WeaponManager.SetWeaponVisibility(false);
     }
 }
-
-[CustomEditor(typeof(AttackState), true)]
-public class AttackStateEditor : StateEditor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        DrawDefaultInspector();
-    }
-}
-

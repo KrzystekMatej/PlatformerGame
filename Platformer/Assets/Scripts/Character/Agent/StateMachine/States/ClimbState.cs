@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Experimental.AI;
 
 public class ClimbState : State
 {
@@ -34,15 +29,5 @@ public class ClimbState : State
     {
         agent.RigidBody.gravityScale = agent.DefaultData.GravityScale;
         agent.Animator.Enable();
-    }
-}
-
-[CustomEditor(typeof(ClimbState), true)]
-public class ClimbStateEditor : StateEditor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        DrawDefaultInspector();
     }
 }

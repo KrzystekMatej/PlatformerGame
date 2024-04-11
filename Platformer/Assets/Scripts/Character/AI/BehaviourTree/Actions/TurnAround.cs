@@ -7,15 +7,15 @@ using DG.Tweening;
 [System.Serializable]
 public class TurnAround : ActionNode
 {
-    private SeekTargeter seekTargeter;
+    [SerializeField]
+    private NodeProperty<SeekTargeter> seekTargeter;
     private Vector2 turnedDirection;
 
     protected override void OnStart()
     {
-        seekTargeter = blackboard.GetValue<SeekTargeter>(context.Steering.CurrentPipelineName + nameof(SeekTargeter));
         const float lookAhead = 2f;
         turnedDirection = - context.Agent.OrientationController.CurrentOrientation;
-        seekTargeter.GoalPosition = context.Agent.CenterPosition + turnedDirection * context.Agent.EnclosingCircleRadius * lookAhead;
+        seekTargeter.Value.GoalPosition = context.Agent.CenterPosition + turnedDirection * context.Agent.EnclosingCircleRadius * lookAhead;
     }
 
     protected override ProcessState OnUpdate()

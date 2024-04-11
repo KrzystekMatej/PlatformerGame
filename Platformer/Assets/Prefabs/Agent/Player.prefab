@@ -1177,6 +1177,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 708502a5e0ca59942a0f9cfa554fbde3, type: 2}
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: boxCastWidth
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: boxCastHeight
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: boxCastXOffset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: boxCastYOffset
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: <CollisionLayerMask>k__BackingField.m_Bits
       value: 663808
       objectReference: {fileID: 0}
@@ -1438,7 +1454,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: weapons.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7639093333086872763, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: weapons.Array.data[0]

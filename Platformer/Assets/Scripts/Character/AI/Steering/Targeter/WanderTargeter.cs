@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheKiwiCoder;
 using UnityEngine;
 
-public class WanderTargeter : SeekTargeter
+public class WanderTargeter : Targeter
 {
     [SerializeField]
     private float wanderOffset;
@@ -17,26 +18,28 @@ public class WanderTargeter : SeekTargeter
     private Vector2 gizmoGoalPosition;
 #endif
 
-    public override bool TryUpdateGoal(SteeringGoal goal)
+    public override ProcessState TryUpdateGoal(SteeringGoal goal)
     {
         wanderOrientation += MathUtility.GetRandomBinomial() * Mathf.PI * wanderRate;
         float agentOrientation = MathUtility.GetVectorRadAngle(agent.RigidBody.velocity);
         float targetOrientation = wanderOrientation + agentOrientation;
-        GoalPosition = agent.CenterPosition + MathUtility.PolarCoordinatesToVector2(agentOrientation, wanderOffset);
+        goal.Position = agent.CenterPosition + MathUtility.PolarCoordinatesToVector2(agentOrientation, wanderOffset);
 
 #if UNITY_EDITOR
-        gizmoWanderCenterPosition = GoalPosition;
+        gizmoWanderCenterPosition = goal.Position;
 #endif
 
-        GoalPosition += MathUtility.PolarCoordinatesToVector2(targetOrientation, wanderRadius);
+        goal.Position += MathUtility.PolarCoordinatesToVector2(targetOrientation, wanderRadius);
 
 #if UNITY_EDITOR
-        gizmoGoalPosition = GoalPosition;
+        gizmoGoalPosition = goal.Position;
 #endif
 
-        return base.TryUpdateGoal(goal);
+        return ProcessState.Running;
     }
 
+
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
@@ -46,4 +49,5 @@ public class WanderTargeter : SeekTargeter
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(gizmoGoalPosition, 0.2f);
     }
+#endif
 }

@@ -47,22 +47,4 @@ public class SteeringGoal
     {
         return !HasPosition && !HasSpeed && !HasOwner;
     }
-
-    public void UpdateChannels(SteeringGoal other)
-    {
-        if (other.HasPosition)
-        {
-            Position = other.position;
-        }
-         
-        if (other.HasSpeed)
-        {
-            Speed = other.speed;
-        }
-
-        if (other.HasOwner)
-        {
-            Owner = other.owner;
-        }
-    }
 }

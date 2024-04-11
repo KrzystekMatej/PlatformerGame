@@ -29,7 +29,7 @@ public class WeaponManager : MonoBehaviour
             .ToList();
         weapons.Clear();
         startWeapons.ForEach(w => weapons.Add(w));
-        SwapWeaponByIndex(0);
+        if (weapons.Count > 0) SwapWeaponByIndex(0);
     }
 
     public void SetWeaponVisibility(bool isVisible)
@@ -103,6 +103,7 @@ public class WeaponManager : MonoBehaviour
         return weapons.Count > 0 ? weapons[currentWeapon] : null;
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -111,5 +112,6 @@ public class WeaponManager : MonoBehaviour
         AttackingWeapon weapon = GetWeapon();
         if (weapon != null) weapon.DrawGizmos(collider.bounds.center, orientationController.CurrentOrientation);
     }
+#endif
 }
 

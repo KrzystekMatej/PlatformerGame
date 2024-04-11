@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
 #if UNITY_EDITOR
+
+using System;
+using UnityEngine;
 
 public class ComponentCheck : MonoBehaviour
 {
@@ -34,25 +31,6 @@ public class ComponentCheck : MonoBehaviour
             {
                 Debug.Log($"Object with name '{obj.name}' has the component '{type}'.");
             }
-        }
-    }
-}
-
-[CustomEditor(typeof(ComponentCheck))]
-public class MonoBehaviourCheckEditor : Editor
-{
-
-    public override void OnInspectorGUI()
-    {
-        ComponentCheck script = (ComponentCheck)target;
-
-        DrawDefaultInspector();
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Check for Component"))
-        {
-            script.CheckComponent();
         }
     }
 }

@@ -5,22 +5,22 @@ using UnityEngine.Events;
 
 public class HealthManager : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth;
+    [field: SerializeField]
+    public int MaxHealth { get; private set; }
     public int CurrentHealth { get; private set; }
 
     public UnityEvent<int> OnHealthChange, OnInitializeMaxHealth;
 
     public void Initialize(int health)
     {
-        maxHealth = health;
-        OnInitializeMaxHealth?.Invoke(maxHealth);
-        CurrentHealth = maxHealth;
+        MaxHealth = health;
+        OnInitializeMaxHealth?.Invoke(MaxHealth);
+        CurrentHealth = MaxHealth;
     }
 
     public void AddHealth(int value)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, maxHealth);
+        CurrentHealth = Mathf.Clamp(CurrentHealth + value, 0, MaxHealth);
         OnHealthChange?.Invoke(CurrentHealth);
     }
 

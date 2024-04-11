@@ -1,10 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.IO.LowLevel.Unsafe;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class JumpState : WalkState
 {
@@ -29,14 +23,4 @@ public class JumpState : WalkState
     }
 
     protected override void HandleExit() { }
-}
-
-[CustomEditor(typeof(JumpState), true)]
-public class JumpStateEditor : StateEditor
-{
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        DrawDefaultInspector();
-    }
 }

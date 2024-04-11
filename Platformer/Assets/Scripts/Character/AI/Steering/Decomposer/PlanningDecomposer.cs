@@ -9,38 +9,40 @@ using UnityEngine;
 
 public class PlanningDecomposer : Decomposer
 {
+    [SerializeField]
+    private string navGraphName;
     private NavPath navPath;
 
     private NavGraphTracker agentTracker;
+    private (Vector2 position, NavGraphNode node) cachedGoalInfo = (Vector2.negativeInfinity, null);
 #if UNITY_EDITOR
-    private Vector2 gizmoAgentPosition;
-    private Vector2 gizmoGoalPosition;
+    private Vector2? gizmoAgentPosition;
+    private Vector2? gizmoGoalPosition;
 #endif
 
     protected override void Start()
     {
         base.Start();
-        agentTracker = agent.GetComponent<NavGraphTracker>();
+        agentTracker = agent.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph.name == navGraphName);
     }
 
     public override SteeringGoal Decompose(SteeringGoal goal)
     {
         if (!goal.HasPosition) return goal;
         float agentRadius = agent.EnclosingCircleRadius;
-        int attemptCount = agentTracker.NavGraph.RecommendedFreeCollisionAttemptCount;
 
-        Vector2? agentPosition = MathUtility.GetCollisionFreePosition(agent.CenterPosition, agentRadius, attemptCount, agentTracker.NavGraph.WallMask);
-        Vector2? goalPosition = MathUtility.GetCollisionFreePosition(goal.Position, agentRadius, attemptCount, agentTracker.NavGraph.WallMask);
-
-        if (agentPosition == null || goalPosition == null) return new SteeringGoal();
-        goal.Position = (Vector2)goalPosition;
+        Vector2? agentPosition = MathUtility.GetCollisionFreePosition(agent.CenterPosition, agentRadius, agentTracker.NavGraph.WallMask);
+        Vector2? goalPosition = MathUtility.GetCollisionFreePosition(goal.Position, agentRadius, agentTracker.NavGraph.WallMask);
 
 #if UNITY_EDITOR
-        gizmoAgentPosition = (Vector2)agentPosition;
-        gizmoGoalPosition = (Vector2)goalPosition;
+        gizmoAgentPosition = agentPosition;
+        gizmoGoalPosition = goalPosition;
 #endif
 
-        if (IsGoalVisible((Vector2)agentPosition, goal.Position, agentRadius))
+        if (!agentPosition.HasValue || !goalPosition.HasValue) return new SteeringGoal();
+        goal.Position = goalPosition.Value;
+
+        if (IsGoalVisible(agentPosition.Value, goal.Position, agentRadius))
         {
             return goal;
         }
@@ -48,7 +50,7 @@ public class PlanningDecomposer : Decomposer
         navPath = GetNavPath(goal);
         if (navPath == null) return new SteeringGoal();
 
-        goal.Position = navPath.Nodes[GetMostDistantReachableGoal((Vector2)agentPosition, agentRadius)].GetExpandedPosition(agentRadius);
+        goal.Position = GetMostDistantReachablePosition(agentPosition.Value, agentRadius);
         return goal;
     }
 
@@ -62,7 +64,7 @@ public class PlanningDecomposer : Decomposer
     {
         NavGraphNode startNode = agentTracker.Current;
         NavGraphNode endNode = QuantizeGoal(goal);
-
+        cachedGoalInfo = (goal.Position, endNode);
 
         
         if (startNode && endNode)
@@ -75,6 +77,8 @@ public class PlanningDecomposer : Decomposer
 
     private NavGraphNode QuantizeGoal(SteeringGoal goal)
     {
+        if (goal.Position == cachedGoalInfo.position) return cachedGoalInfo.node;
+
         if (goal.HasOwner)
         {
             NavGraphTracker tracker = goal.Owner.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph == agentTracker.NavGraph);
@@ -84,29 +88,29 @@ public class PlanningDecomposer : Decomposer
         return agentTracker.NavGraph.QuantizePosition(goal.Position);
     }
 
-    private int GetMostDistantReachableGoal(Vector2 agentPosition, float enclosingCircleRadius)
+    private Vector2 GetMostDistantReachablePosition(Vector2 agentPosition, float enclosingCircleRadius)
     {
         for (int i = navPath.Nodes.Count - 1; i > 0; i--)
         {
-            Vector2 nodeVector = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius) - agentPosition;
+            Vector2 expandedPosition = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius);
+            Vector2 nodeVector = expandedPosition - agentPosition;
             if (!Physics2D.CircleCast(agentPosition, enclosingCircleRadius, nodeVector, nodeVector.magnitude, agentTracker.NavGraph.WallMask))
             {
-                return i;
+                return expandedPosition;
             }
         }
 
-        return 0;
+        return navPath.Nodes[0].GetExpandedPosition(enclosingCircleRadius);
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        if (!Application.isPlaying) return;
-        if (navPath == null) return;
+        if (!Application.isPlaying || navPath == null || !gizmoAgentPosition.HasValue || !gizmoGoalPosition.HasValue) return;
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(gizmoAgentPosition, 0.3f);
-        Gizmos.DrawWireSphere(gizmoGoalPosition, 0.3f);
-        Gizmos.color = Color.yellow;
-        for (int i = 0; i < navPath.Nodes.Count - 1; i++)
+        Gizmos.DrawWireSphere(gizmoAgentPosition.Value, 0.3f);
+        Gizmos.DrawWireSphere(gizmoGoalPosition.Value, 0.3f);
+        for (int i = GetMostDistantReachableIndex(gizmoAgentPosition.Value, agent.EnclosingCircleRadius); i < navPath.Nodes.Count - 1; i++)
         {
             Gizmos.DrawLine
             (
@@ -117,4 +121,20 @@ public class PlanningDecomposer : Decomposer
             Gizmos.DrawWireSphere(navPath.Nodes[i + 1].GetExpandedPosition(agent.EnclosingCircleRadius), 0.3f);
         }
     }
+
+    private int GetMostDistantReachableIndex(Vector2 agentPosition, float enclosingCircleRadius)
+    {
+        for (int i = navPath.Nodes.Count - 1; i > 0; i--)
+        {
+            Vector2 expandedPosition = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius);
+            Vector2 nodeVector = expandedPosition - agentPosition;
+            if (!Physics2D.CircleCast(agentPosition, enclosingCircleRadius, nodeVector, nodeVector.magnitude, agentTracker.NavGraph.WallMask))
+            {
+                return i;
+            }
+        }
+
+        return 0;
+    }
+#endif
 }

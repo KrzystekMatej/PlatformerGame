@@ -29,11 +29,15 @@ public class MainMenuController : MonoBehaviour
 
     public void InitSelectLevelMenu()
     {
-        int reachedLevel = SaveManager.Instance.GetReachedLevel();
-        for (int i = levels.Count-1; i > reachedLevel; i--)
+        foreach (Button button in levels)
         {
-            levels[i].interactable = false;
+            button.interactable = true;
         }
+        //int reachedLevel = SaveManager.Instance.GetReachedLevel();
+        //for (int i = 0; i <= reachedLevel; i++)
+        //{
+        //    levels[i].interactable = true;
+        //}
     }
 
     public void ExitGame()

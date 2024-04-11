@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Tilemaps;
-
 #if UNITY_EDITOR
+
+using UnityEngine;
 
 public class SortingLayerCheck : MonoBehaviour
 {
@@ -30,25 +25,6 @@ public class SortingLayerCheck : MonoBehaviour
         {
             Debug.Log($"No SpriteRenderer found on {testSortingLayerName} sorting layer.");
 
-        }
-    }
-}
-
-[CustomEditor(typeof(SortingLayerCheck))]
-public class SortingLayerCheckEditor : Editor
-{
-
-    public override void OnInspectorGUI()
-    {
-        SortingLayerCheck script = (SortingLayerCheck)target;
-
-        DrawDefaultInspector();
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Check Layer"))
-        {
-            script.CheckLayer();
         }
     }
 }

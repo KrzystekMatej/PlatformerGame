@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-
 #if UNITY_EDITOR
+
+using UnityEngine;
 
 public class LayerMaskCheck : MonoBehaviour
 {
@@ -24,25 +21,6 @@ public class LayerMaskCheck : MonoBehaviour
         }
 
         if (!found) Debug.Log("No object found on the specified layers.");
-    }
-}
-
-[CustomEditor(typeof(LayerMaskCheck))]
-public class LayerMaskCheckEditor : Editor
-{
-
-    public override void OnInspectorGUI()
-    {
-        LayerMaskCheck script = (LayerMaskCheck)target;
-
-        DrawDefaultInspector();
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Check Layer"))
-        {
-            script.CheckLayer();
-        }
     }
 }
 

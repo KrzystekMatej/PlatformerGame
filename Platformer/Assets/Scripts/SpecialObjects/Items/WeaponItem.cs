@@ -16,9 +16,8 @@ public class WeaponItem : Item
     public override void Collect(Collider2D collider)
     {
         WeaponManager weaponManager = collider.GetComponentInChildren<WeaponManager>();
-        if (weaponManager)
+        if (weaponManager && weaponManager.AddWeaponWithSwap(weapon))
         {
-            weaponManager.AddWeaponWithSwap(weapon);
             PerformCollectActions(collider);
         }
     }

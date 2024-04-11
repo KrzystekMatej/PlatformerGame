@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 2
   <MaxSpeed>k__BackingField: 2
-  <MaxForce>k__BackingField: 100
+  <MaxForce>k__BackingField: 5
   <JumpForce>k__BackingField: 12
   <JumpGravityModifier>k__BackingField: 2
   <FallGravityModifier>k__BackingField: 0.5

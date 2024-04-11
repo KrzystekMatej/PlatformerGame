@@ -11,12 +11,12 @@ public class AIManager : MonoBehaviour
 
     public AgentManager Agent { get; private set; }
     public BehaviourTreeInstance TreeRunner { get; private set; }
-    public MovementSteering Steering { get; private set; }
+    public SteeringController Steering { get; private set; }
 
     private void Awake()
     {
         Agent = GetComponentInParent<InputController>().GetComponentInChildren<AgentManager>();
-        Steering = GetComponentInChildren<MovementSteering>();
+        Steering = GetComponentInChildren<SteeringController>();
         TreeRunner = GetComponentInChildren<BehaviourTreeInstance>();
     }
 

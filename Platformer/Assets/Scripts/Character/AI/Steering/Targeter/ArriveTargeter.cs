@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheKiwiCoder;
 using UnityEngine;
 
 public class ArriveTargeter : Targeter
@@ -8,17 +9,13 @@ public class ArriveTargeter : Targeter
     private float arriveRadius = 0.5f;
     [SerializeField]
     private float slowRadius;
-    [SerializeField]
-    private float slowDegree = 1;
-    [SerializeField]
-    private float minSpeed = 0.1f;
 
 #if UNITY_EDITOR
     private float gizmoArriveRadius;
     private Vector2 gizmoGoalPosition;
 #endif
 
-    public override bool TryUpdateGoal(SteeringGoal goal)
+    public override ProcessState TryUpdateGoal(SteeringGoal goal)
     {
         float distance = Vector2.Distance(agent.CenterPosition, goal.Position);
         float arriveRadius = this.arriveRadius;
@@ -29,7 +26,10 @@ public class ArriveTargeter : Targeter
             if (ownerCollider != null) arriveRadius += MathUtility.GetEnclosingCircleRadius(ownerCollider);
         }
 
-        if (distance <= arriveRadius) return true;
+        if (distance <= arriveRadius)
+        {
+            return ProcessState.Success;
+        }
 
 #if UNITY_EDITOR
         gizmoArriveRadius = arriveRadius;
@@ -37,17 +37,12 @@ public class ArriveTargeter : Targeter
 #endif
 
 
-        if (slowRadius != 0 && distance <= arriveRadius + slowRadius) goal.Speed = agent.InstanceData.MaxSpeed * Mathf.Pow((distance - arriveRadius) / slowRadius, slowDegree);
+        if (slowRadius != 0 && distance <= slowRadius) goal.Speed = agent.InstanceData.MaxSpeed * distance / slowRadius;
         else goal.Speed = agent.InstanceData.MaxSpeed;
 
-        if (goal.Speed <= minSpeed)
-        {
-            return true;
-        }
-
-        return false;
+        return ProcessState.Running;
     }
-
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying) return;
@@ -55,4 +50,5 @@ public class ArriveTargeter : Targeter
         if (gizmoArriveRadius > 0) Gizmos.DrawWireSphere(gizmoGoalPosition, gizmoArriveRadius);
         Gizmos.DrawWireSphere(gizmoGoalPosition, gizmoArriveRadius + slowRadius);
     }
+#endif
 }

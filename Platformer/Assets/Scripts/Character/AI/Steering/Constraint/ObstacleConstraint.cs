@@ -14,7 +14,7 @@ public class ObstacleConstraint : Constraint
     [SerializeField]
     private CastDetector detector;
 
-    private int problemSegmentIndex;
+    private int problemSegmentIndex = -1;
     private int detectionCount;
 
     private NavGraphNode startNode;
@@ -37,18 +37,29 @@ public class ObstacleConstraint : Constraint
 
     public override bool IsViolated(List<Vector2> pointPath)
     {
-        if (pointPath.Count < 2 || allowedPath.SequenceEqual(pointPath)) return false;
+#if UNITY_EDITOR
+        gizmoPath = null;
+#endif
+        if (pointPath.Count < 2) return false;
         detector.Size = new Vector2(agent.EnclosingCircleRadius, 0);
 
         for (int i = 0; i < pointPath.Count - 1; i++)
         {
-            Vector2 startPoint = pointPath[i];
-            Vector2 endPoint = pointPath[i + 1];
-            Vector2 direction = endPoint - startPoint;
+            Vector2? startPoint = MathUtility.GetCollisionFreePosition(pointPath[i], agent.EnclosingCircleRadius, detector.DetectLayerMask);
+            Vector2? endPoint = MathUtility.GetCollisionFreePosition(pointPath[i + 1], agent.EnclosingCircleRadius, detector.DetectLayerMask);
 
+            if (!startPoint.HasValue || !endPoint.HasValue)
+            {
+                problemSegmentIndex = -1;
+                return true;
+            }
+            pointPath[i] = startPoint.Value;
+            pointPath[i + 1] = endPoint.Value;
+
+            Vector2 direction = pointPath[i + 1] - pointPath[i];
             detector.Direction = direction.normalized;
             detector.Distance = direction.magnitude;
-            detectionCount = detector.Detect(startPoint);
+            detectionCount = detector.Detect(pointPath[i]);
 
             if (detectionCount > 0)
             {
@@ -62,18 +73,12 @@ public class ObstacleConstraint : Constraint
 
     public override SteeringGoal Suggest(List<Vector2> pointPath, SteeringGoal goal)
     {
-        Collider2D obstacle = GetClosestObstacle();
+        if (problemSegmentIndex == -1) return new SteeringGoal();
+        Collider2D obstacle = detector.Hits[0].collider;
         NavGraph navGraph = obstacle.GetComponentInChildren<NavGraph>();
-        float agentRadius = agent.EnclosingCircleRadius;
-        int attemptCount = navGraph.RecommendedFreeCollisionAttemptCount;
+        if (!navGraph) return new SteeringGoal();
 
-        Vector2? startPoint = MathUtility.GetCollisionFreePosition(pointPath[problemSegmentIndex], agentRadius, attemptCount, navGraph.WallMask);
-        Vector2? endPoint = MathUtility.GetCollisionFreePosition(pointPath[problemSegmentIndex + 1], agentRadius, attemptCount, navGraph.WallMask);
-
-        if (startPoint == null || endPoint == null) return new SteeringGoal();
-
-        NavPath navPath = GetAvoidancePath((Vector2)startPoint, (Vector2)endPoint, agentRadius, navGraph);
-
+        NavPath navPath = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], agent.EnclosingCircleRadius, navGraph);
         if (navPath == null) return new SteeringGoal();
 
 #if UNITY_EDITOR
@@ -85,23 +90,6 @@ public class ObstacleConstraint : Constraint
         allowedPath.AddRange(pointPath.Take(problemSegmentIndex + 1));
         allowedPath.Add(goal.Position);
         return goal;
-    }
-
-    private Collider2D GetClosestObstacle()
-    {
-        Collider2D obstacle = null;
-        float shortestDistance = float.PositiveInfinity;
-
-        for (int i = 0; i < detectionCount; i++)
-        {
-            if (detector.Hits[i].distance < shortestDistance)
-            {
-                shortestDistance = detector.Hits[i].distance;
-                obstacle = detector.Hits[i].collider;
-            }
-        }
-
-        return obstacle;
     }
 
     private NavPath GetAvoidancePath(Vector2 startPoint, Vector2 endPoint, float agentRadius, NavGraph navGraph)
@@ -119,11 +107,11 @@ public class ObstacleConstraint : Constraint
         return navPath;
     }
 
-
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying || gizmoPath == null) return;
-        Gizmos.color = Color.yellow;
+        Gizmos.color = Color.green;
         for (int i = 0; i < gizmoPath.Nodes.Count - 1; i++)
         {
             Gizmos.DrawLine
@@ -135,4 +123,5 @@ public class ObstacleConstraint : Constraint
             Gizmos.DrawWireSphere(gizmoPath.Nodes[i+1].GetExpandedPosition(agent.EnclosingCircleRadius), 0.3f);
         }
     }
+#endif
 }

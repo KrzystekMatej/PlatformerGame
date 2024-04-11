@@ -15,11 +15,9 @@ public class NavGraph : MonoBehaviour
     public LayerMask WallMask;
     [SerializeField]
     private bool precalculationEnabled;
-    [field: SerializeField]
-    public int RecommendedFreeCollisionAttemptCount { get; private set; } = 16;
     public float CollisionAvoidanceMargin = 0.1f;
     public float MaxAllowedRadius = 0.9f;
-    public float CirclePathRatio = 0.5f;
+    public float CirclePathRatio = 8f;
 
 #if UNITY_EDITOR
     public Sprite NodeSprite;
@@ -288,7 +286,7 @@ public class NavGraph : MonoBehaviour
     public NavPath GetPrecalculatedPath(NavGraphNode start, NavGraphNode end)
     {
         if (!precalculationEnabled) 
-            throw new InvalidOperationException("Precalculation must be enabled to reconstruct the path.");
+            throw new InvalidOperationException("Precalculation must be enabled to reconstruct a path.");
 
         if (shortestPathTable[start.Index, end.Index].nodeIndex == -1) return null;
 
@@ -415,7 +413,7 @@ public class NavGraph : MonoBehaviour
         return result;
     }
 
-
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (!ShowEdges) return;
@@ -423,7 +421,7 @@ public class NavGraph : MonoBehaviour
         foreach (NavGraphNode node in Nodes)
         {
             Gizmos.color = Color.cyan;
-            if (node.Neighbors == null) continue;
+            if (!node || node.Neighbors == null) continue;
             foreach (NavGraphNode neighbor in node.Neighbors)
             {
                 Gizmos.DrawLine(node.transform.position, neighbor.transform.position);
@@ -439,4 +437,5 @@ public class NavGraph : MonoBehaviour
             }
         }
     }
+#endif
 }

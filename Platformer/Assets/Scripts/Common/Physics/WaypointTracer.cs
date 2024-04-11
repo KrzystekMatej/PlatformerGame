@@ -7,10 +7,6 @@ using UnityEngine.Events;
 
 public class WaypointTracer : MonoBehaviour
 {
-#if UNITY_EDITOR
-    [SerializeField]
-    private Transform[] waypoints;
-#endif
     [field: SerializeField]
     public bool isCircular { get; set; } = true;
     [SerializeField] 
@@ -23,11 +19,17 @@ public class WaypointTracer : MonoBehaviour
     public List<Vector3> PathPoints { get; private set; } = new List<Vector3>();
     private int current = 0;
 
+#if UNITY_EDITOR
+    [SerializeField]
+    private Transform[] waypoints;
+
     private void OnValidate()
     {
+        if (waypoints == null || PathPoints == null) return;
         PathPoints.Clear();
         PathPoints.AddRange(waypoints.Select(w => w.position).ToList());
     }
+#endif
 
     private void Update()
     {

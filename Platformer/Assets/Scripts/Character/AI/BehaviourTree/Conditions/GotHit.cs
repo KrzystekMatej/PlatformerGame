@@ -6,6 +6,13 @@ using TheKiwiCoder;
 [System.Serializable]
 public class GotHit : ConditionNode
 {
+    [SerializeField]
+    NodeProperty<Collider2D> attacker;
+    [SerializeField]
+    NodeProperty<Weapon> damageWeapon;
+    [SerializeField]
+    NodeProperty<int> a;
+
     bool hit = false;
 
     public override void OnInit()
@@ -16,8 +23,8 @@ public class GotHit : ConditionNode
     public void SetHit(Collider2D attacker, Weapon damageWeapon)
     {
         hit = true;
-        blackboard.SetValue("Attacker", attacker);
-        blackboard.SetValue("DamageWeapon", damageWeapon);
+        this.attacker.Value = attacker;
+        this.damageWeapon.Value = damageWeapon;
     }
 
     protected override void OnStart() { }

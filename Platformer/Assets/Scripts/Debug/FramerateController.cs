@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
+#if UNITY_EDITOR
+
 using UnityEngine;
 
-
-#if UNITY_EDITOR
 public class FramerateController : MonoBehaviour
 {
     [SerializeField]
@@ -18,26 +15,6 @@ public class FramerateController : MonoBehaviour
     public void UpdateFramerate()
     {
         Application.targetFrameRate = targetFrameRate;
-    }
-}
-
-
-[CustomEditor(typeof(FramerateController))]
-public class FramerateLimiterEditor : Editor
-{
-
-    public override void OnInspectorGUI()
-    {
-        FramerateController script = (FramerateController)target;
-
-        DrawDefaultInspector();
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Update Framerate"))
-        {
-            script.UpdateFramerate();
-        }
     }
 }
 

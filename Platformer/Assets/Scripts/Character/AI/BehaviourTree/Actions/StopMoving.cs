@@ -11,8 +11,8 @@ public class StopMoving : ActionNode
 
     protected override void OnStart()
     {
+        if (!stopImmediately) context.InputController.StopMoving();
         context.Steering.UpdateCurrentPipeline(null);
-        context.InputController.StopMoving();
     }
 
     protected override ProcessState OnUpdate()
