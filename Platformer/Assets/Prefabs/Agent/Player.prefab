@@ -1663,6 +1663,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7907950120050645404}
+    - targetCorrespondingSourceObject: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4156808504575139454}
     - targetCorrespondingSourceObject: {fileID: 2675105344776821214, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3950540441721054725}
@@ -1696,17 +1699,47 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4511701468293684576}
   m_Enabled: 1
+--- !u!1 &9057417480644603253 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1982475228897019070}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4156808504575139454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057417480644603253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCollider: {fileID: 9057417480644603259}
+  detector: {fileID: 11400000, guid: 708502a5e0ca59942a0f9cfa554fbde3, type: 2}
+  boxCastXOffset: 0
+  boxCastYOffset: -0.5
+  boxCastWidth: 0.7
+  boxCastHeight: 0.3
+  gizmoColorDetected: {r: 1, g: 0, b: 0, a: 1}
+  gizmoColorNotDetected: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &9057417480644603257 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092666616263, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
   m_PrefabInstance: {fileID: 1982475228897019070}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 9057417480644603253}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &9057417480644603259 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1982475228897019070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9057417481030304520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363741092985079734, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

@@ -25,7 +25,7 @@ public class TurnAround : ActionNode
         {
             return ProcessState.Success;
         }
-        return ProcessState.Running;
+        return context.Steering.RecalculateSteering();
     }
 
     protected override void OnStop() { }

@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4428522f2b92b6c4aa62e8b8530e58dc, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  <GizmoColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 0, y: 0}
+  <GizmoColor>k__BackingField: {r: 0, g: 1, b: 0, a: 1}
+  <Size>k__BackingField: {x: 0.7, y: 0.3}
   <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 24832
-  <OriginOffset>k__BackingField: {x: 0, y: 0}
+  <OriginOffset>k__BackingField: {x: 0, y: -0.5}
   detectShapeType: 1
   maxDetections: 1
   <Distance>k__BackingField: 0

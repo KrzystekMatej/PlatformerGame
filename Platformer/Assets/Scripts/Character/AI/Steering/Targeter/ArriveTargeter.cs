@@ -43,7 +43,7 @@ public class ArriveTargeter : Targeter
         return ProcessState.Running;
     }
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    public override void DrawGizmos()
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.yellow;

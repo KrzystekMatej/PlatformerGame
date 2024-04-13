@@ -42,10 +42,7 @@ public class PlanningDecomposer : Decomposer
         if (!agentPosition.HasValue || !goalPosition.HasValue) return new SteeringGoal();
         goal.Position = goalPosition.Value;
 
-        if (IsGoalVisible(agentPosition.Value, goal.Position, agentRadius))
-        {
-            return goal;
-        }
+        if (IsGoalVisible(agentPosition.Value, goal.Position, agentRadius)) return goal;
 
         navPath = GetNavPath(goal);
         if (navPath == null) return new SteeringGoal();
@@ -104,7 +101,7 @@ public class PlanningDecomposer : Decomposer
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    public override void DrawGizmos()
     {
         if (!Application.isPlaying || navPath == null || !gizmoAgentPosition.HasValue || !gizmoGoalPosition.HasValue) return;
         Gizmos.color = Color.red;

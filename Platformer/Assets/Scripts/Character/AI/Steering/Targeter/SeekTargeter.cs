@@ -22,10 +22,12 @@ public class SeekTargeter : Targeter
         return ProcessState.Running;
     }
 
-    private void OnDrawGizmosSelected()
+#if UNITY_EDITOR
+    public override void DrawGizmos()
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(GoalPosition, 0.5f);
     }
+#endif
 }

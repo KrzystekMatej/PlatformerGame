@@ -272,7 +272,7 @@ MonoBehaviour:
     m_Bits: 16384
   precalculationEnabled: 0
   CollisionAvoidanceMargin: 0.1
-  MaxAllowedRadius: 0.9
+  MaxAllowedRadius: 0.85
   CirclePathRatio: 8
   NodeSprite: {fileID: 0}
   TraversableZones: []

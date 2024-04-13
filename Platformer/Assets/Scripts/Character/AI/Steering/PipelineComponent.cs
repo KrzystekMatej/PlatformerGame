@@ -27,4 +27,7 @@ public abstract class PipelineComponent : MonoBehaviour
             }
         }
     }
+#if UNITY_EDITOR
+    public virtual void DrawGizmos() { }
+#endif
 }

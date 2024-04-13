@@ -17,7 +17,7 @@ public class ListGet : ActionNode
 
     protected override ProcessState OnUpdate()
     {
-        if (index.Value < list.Value.Count)
+        if (index.Value < list.Value.Count && index.Value >= 0)
         {
             item.Value = (list.Value[index.Value]);
             return ProcessState.Success;

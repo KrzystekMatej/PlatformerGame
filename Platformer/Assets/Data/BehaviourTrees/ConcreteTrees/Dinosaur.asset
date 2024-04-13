@@ -23,8 +23,6 @@ MonoBehaviour:
   - rid: 7407168253177626737
   - rid: 7407168253177626781
   - rid: 7407168253177626782
-  - rid: 7407168253177626785
-  - rid: 7407168253177626786
   - rid: 7407168253177626787
   - rid: 7407168253177626948
   - rid: 7407168253177626966
@@ -33,7 +31,6 @@ MonoBehaviour:
   - rid: 7407168257990853614
   - rid: 7407168264709603995
   - rid: 7407168264709603997
-  - rid: 7888084509043195976
   - rid: 7888084628838810352
   - rid: 7888084628838810371
   - rid: 7888084646981009757
@@ -41,8 +38,10 @@ MonoBehaviour:
   - rid: 7888084646981009780
   - rid: 7888084646981009889
   - rid: 7888084646981009908
-  - rid: 7888084650115466085
   - rid: 7888084650115466086
+  - rid: 7888084729195397139
+  - rid: 7888084729195397287
+  - rid: 7888084729195397361
   treeState: 0
   blackboard:
     keys:
@@ -51,8 +50,8 @@ MonoBehaviour:
     - rid: 7888084646981009779
     - rid: 7888084650115466029
     - rid: 7888084650115466030
-  viewPosition: {x: 755, y: -112, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 739, y: 81, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -64,7 +63,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8ec61d65-11ec-4fd7-a4f4-0f8384b1664a
-        position: {x: 0, y: 45}
+        position: {x: -15, y: -30}
         blackboard:
           keys: []
         description: 
@@ -73,14 +72,14 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         child:
-          rid: 7407168234541285526
+          rid: 7888084729195397361
     - rid: 7407168234541285526
       type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: ba70fb6810a66714288e45bd12cce195
-        position: {x: 0, y: 270}
+        position: {x: -15, y: 390}
         blackboard:
           keys: []
         description: 
@@ -99,7 +98,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6da1fef279528fc4c964082eceb3e5b8
-        position: {x: -1200, y: 720}
+        position: {x: -1215, y: 840}
         blackboard:
           keys: []
         description: 
@@ -115,7 +114,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b60f18c863545a24db231fbf0c64ea1c
-        position: {x: -600, y: 975}
+        position: {x: -615, y: 1095}
         blackboard:
           keys: []
         description: 
@@ -133,7 +132,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 9005c375c37e91f4185be2d0898f9101
-        position: {x: 240, y: 1260}
+        position: {x: 225, y: 1380}
         blackboard:
           keys: []
         description: 
@@ -151,7 +150,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: e1cbe1cbb7385d441b4c9091aee1ed1b
-        position: {x: -1185, y: 1140}
+        position: {x: -1200, y: 1260}
         blackboard:
           keys: []
         description: 
@@ -168,7 +167,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 0d197dfc135d45249836c2607d55eb10
-        position: {x: 525, y: 1275}
+        position: {x: 510, y: 1395}
         blackboard:
           keys: []
         description: 
@@ -182,7 +181,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 87c16f2ac39bc924696a8f567a0bb855
-        position: {x: 465, y: 1485}
+        position: {x: 450, y: 1605}
         blackboard:
           keys: []
         description: 
@@ -191,49 +190,13 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         maxSpeedMultiplier: 4
-    - rid: 7407168253177626785
-      type: {class: TurnAround, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: bed0918d93895f844aa4bde364337730
-        position: {x: -45, y: 975}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        seekTargeter:
-          reference:
-            rid: 7888084650115466030
-          defaultValue: {fileID: 0}
-    - rid: 7407168253177626786
-      type: {class: WalkForward, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 25a15bd58201ebc4487a9c9c0c4105a3
-        position: {x: 930, y: 990}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        seekTargeter:
-          reference:
-            rid: 7888084650115466030
-          defaultValue: {fileID: 0}
     - rid: 7407168253177626787
       type: {class: GotHit, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: af5d102c5f7dc474291a8a42a2f0994e
-        position: {x: -1380, y: 1335}
+        position: {x: -1395, y: 1455}
         blackboard:
           keys: []
         description: 
@@ -259,7 +222,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8b1cfa8138ace984685e8cbf634ec413
-        position: {x: -825, y: 1455}
+        position: {x: -840, y: 1575}
         blackboard:
           keys: []
         description: 
@@ -281,7 +244,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: cc419a0f923f8544292631307cefe6b5
-        position: {x: -150, y: 1320}
+        position: {x: -165, y: 1440}
         blackboard:
           keys: []
         description: 
@@ -303,7 +266,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 5b6423e41e97ec0498c29426908e13e7
-        position: {x: -150, y: 1155}
+        position: {x: -165, y: 1275}
         blackboard:
           keys: []
         description: 
@@ -319,7 +282,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 05869740b2e52ae4a9507a36e83502f5
-        position: {x: 375, y: 1020}
+        position: {x: 360, y: 1140}
         blackboard:
           keys: []
         description: 
@@ -336,7 +299,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b99415a35523f7048963d2d3f476ab05
-        position: {x: -345, y: 765}
+        position: {x: -360, y: 885}
         blackboard:
           keys: []
         description: 
@@ -346,15 +309,14 @@ MonoBehaviour:
         logStop: 0
         children:
         - rid: 7407168253177626731
-        - rid: 7888084509043195976
-        - rid: 7407168253177626785
+        - rid: 7888084729195397139
     - rid: 7407168264709603995
       type: {class: Failure, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 909ab7cec1721eb42bcee1e8b3e5eb15
-        position: {x: 375, y: 780}
+        position: {x: 360, y: 900}
         blackboard:
           keys: []
         description: 
@@ -370,7 +332,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4cb44ae7abfca7b47bcb3b21e4cdc1e1
-        position: {x: 0, y: 495}
+        position: {x: -15, y: 615}
         blackboard:
           keys: []
         description: 
@@ -383,31 +345,13 @@ MonoBehaviour:
         - rid: 7407168257990853614
         - rid: 7407168264709603995
         - rid: 7888084650115466086
-    - rid: 7888084509043195976
-      type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 8bdffd896a0591743b602a772d54ec61
-        position: {x: -345, y: 975}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        targetPipeline:
-          reference:
-            rid: 7888084650115466029
-          defaultValue: {fileID: 0}
     - rid: 7888084628838810352
       type: {class: IsColliderInFront, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: b958f1a4e988a8546a66e84b49fbb06e
-        position: {x: -1080, y: 1485}
+        position: {x: -1095, y: 1605}
         blackboard:
           keys: []
         description: 
@@ -425,7 +369,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 0eae4b1bd750fff4f87b35708066f48c
-        position: {x: -1080, y: 1335}
+        position: {x: -1095, y: 1455}
         blackboard:
           keys: []
         description: 
@@ -455,7 +399,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: daea222133519d44b962c23a3c0387e3
-        position: {x: -615, y: 1455}
+        position: {x: -630, y: 1575}
         blackboard:
           keys: []
         description: 
@@ -479,7 +423,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 105b316ab7ef4f24b842604576db0e3a
-        position: {x: -390, y: 1455}
+        position: {x: -405, y: 1575}
         blackboard:
           keys: []
         description: 
@@ -507,7 +451,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 5209c6772cdc6bc4d876615e78f6f5b3
-        position: {x: 240, y: 1485}
+        position: {x: 225, y: 1605}
         blackboard:
           keys: []
         description: 
@@ -529,7 +473,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: ff07e44c95bc57346954524b615a0e43
-        position: {x: -615, y: 1215}
+        position: {x: -630, y: 1335}
         blackboard:
           keys: []
         description: 
@@ -547,7 +491,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 1d6c532535fdba041af64babd95434b5
-        position: {x: 15, y: 1485}
+        position: {x: 0, y: 1605}
         blackboard:
           keys: []
         description: 
@@ -579,31 +523,13 @@ MonoBehaviour:
         typeName: SeekTargeter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         value: {fileID: 0}
-    - rid: 7888084650115466085
-      type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: e39ca7c04efe81b47aca7ede59da5ab0
-        position: {x: 600, y: 990}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        targetPipeline:
-          reference:
-            rid: 7888084650115466029
-          defaultValue: {fileID: 0}
     - rid: 7888084650115466086
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: b19e5f6619c34b14290d449e77c67777
-        position: {x: 750, y: 750}
+        position: {x: 735, y: 870}
         blackboard:
           keys: []
         description: 
@@ -612,11 +538,62 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         children:
-        - rid: 7888084650115466085
-        - rid: 7407168253177626786
+        - rid: 7888084729195397287
     - rid: 7888084668328182194
       type: {class: IntKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         name: b
         typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
         value: 7
+    - rid: 7888084729195397139
+      type: {class: TurnAround, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: c297acd358dae454bbc84aae3ebe5d30
+        position: {x: -150, y: 1125}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        seekTargeter:
+          reference:
+            rid: 7888084650115466030
+          defaultValue: {fileID: 0}
+    - rid: 7888084729195397287
+      type: {class: WalkForward, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 4b9bf6b06d69f4b4a8d6be9dc1d3290c
+        position: {x: 735, y: 1110}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        seekTargeter:
+          reference:
+            rid: 7888084650115466030
+          defaultValue: {fileID: 0}
+    - rid: 7888084729195397361
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 16010776ee7faf9408de41fa9a304ec9
+        position: {x: -15, y: 165}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7407168234541285526

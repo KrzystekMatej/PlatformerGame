@@ -28,6 +28,7 @@ public class AIManager : MonoBehaviour
     private IEnumerator AIUpdate()
     {
         yield return null;
+        Steering.CurrentPipeline.Enable();
 
         while (true)
         {

@@ -14,19 +14,6 @@ public class NavGraphNode : MonoBehaviour
     [HideInInspector]
     public List<NavGraphNode> Neighbors = new List<NavGraphNode>();
 
-    [NonSerialized]
-    public ulong SearchId;
-    [NonSerialized]
-    public HeapNode HeapNode;
-    [NonSerialized]
-    public float GCost;
-    [NonSerialized]
-    public float HCost;
-    [NonSerialized]
-    public bool Closed;
-    [NonSerialized]
-    public NavGraphNode From;
-
 private void Start()
     {
 #if !UNITY_EDITOR
@@ -59,21 +46,6 @@ private void Start()
             }
         }
     }
-
-    public void ConnectToNavGraph(NavGraph navGraph, float agentRadius, NavGraphNode coherenceNode = null)
-    {
-        SearchId = 0;
-        navGraph.AddEdges(this, agentRadius, coherenceNode);
-        navGraph.AddNode(this);
-    }
-
-    public void DisconnectFromNavGraph(NavGraph navGraph)
-    {
-        SearchId = 0;
-        navGraph.RemoveNode(this);
-        Neighbors.Clear();
-    }
-
 
     public void RemoveUndirectNeighbor(NavGraphNode neighbor)
     {

@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using TheKiwiCoder;
 using Unity.VisualScripting;
-using UnityEditor;
+using UnityEditor.Searcher;
 using UnityEngine;
-using UnityEngine.Tilemaps;
-using static Unity.VisualScripting.Member;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class NavGraph : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class NavGraph : MonoBehaviour
     [SerializeField]
     private bool precalculationEnabled;
     public float CollisionAvoidanceMargin = 0.1f;
-    public float MaxAllowedRadius = 0.9f;
+    public float MaxAllowedRadius = 0.85f;
     public float CirclePathRatio = 8f;
 
 #if UNITY_EDITOR
@@ -30,23 +29,36 @@ public class NavGraph : MonoBehaviour
     public NavPath TestPath;
 #endif
 
+    private class NodeSearchState
+    {
+        public uint SearchId;
+        public FibonacciHeapNode<NavGraphNode, float> HeapNode;
+        public float GCost;
+        public float HCost;
+        public bool Closed;
+        public NavGraphNode From;
+    }
+
     [HideInInspector]
     public List<NavGraphNode> Nodes = new List<NavGraphNode>();
-    private ulong searchId;
+    private List<NodeSearchState> searchStates;
+    private uint searchId;
     private (int nodeIndex, float length)[,] shortestPathTable;
 
     private void Awake()
     {
+        searchStates = Enumerable.Range(0, Nodes.Count).Select(i => new NodeSearchState()).ToList();
         if (precalculationEnabled) PrecalculateShortestPaths();
     }
 
-    public void AddNode(NavGraphNode nodeA)
+    private void AddNode(NavGraphNode node)
     {
-        nodeA.Index = Nodes.Count;
-        Nodes.Add(nodeA);
+        node.Index = Nodes.Count;
+        Nodes.Add(node);
+        searchStates.Add(new NodeSearchState());
     }
 
-    public void RemoveNode(NavGraphNode nodeA)
+    private void RemoveNode(NavGraphNode nodeA)
     {
 
         foreach (NavGraphNode nodeB in Nodes)
@@ -55,11 +67,24 @@ public class NavGraph : MonoBehaviour
         }
 
         Nodes.RemoveAt(nodeA.Index);
+        searchStates.RemoveAt(nodeA.Index);
 
         for (int i = nodeA.Index; i < Nodes.Count; i++)
         {
             Nodes[i].Index = i;
         }
+    }
+
+    public void ConnectNode(NavGraphNode node, float agentRadius, NavGraphNode coherenceNode = null)
+    {
+        AddEdges(node, agentRadius, coherenceNode);
+        AddNode(node);
+    }
+
+    public void DisconnectNode(NavGraphNode node)
+    {
+        RemoveNode(node);
+        node.Neighbors.Clear();
     }
 
     public void AddEdges(NavGraphNode nodeA, float radius, NavGraphNode coherenceNode = null)
@@ -136,46 +161,49 @@ public class NavGraph : MonoBehaviour
 
         FibonacciHeap<NavGraphNode, float> heap = new FibonacciHeap<NavGraphNode, float>(float.NegativeInfinity);
 
-        start.SearchId = searchId;
-        start.GCost = 0;
-        start.HCost = heuristic(start);
-        start.HeapNode = new FibonacciHeapNode<NavGraphNode, float>(start, start.HCost);
-        start.Closed = false;
-        start.From = null;
-        heap.Insert(start.HeapNode);
+        NodeSearchState startState = searchStates[start.Index];
+        startState.SearchId = searchId;
+        startState.GCost = 0;
+        startState.HCost = heuristic(start);
+        startState.HeapNode = new FibonacciHeapNode<NavGraphNode, float>(start, startState.HCost);
+        startState.Closed = false;
+        startState.From = null;
+        heap.Insert(searchStates[start.Index].HeapNode);
 
         while (!heap.IsEmpty())
         {
-            NavGraphNode currentNode = heap.Min().Data;
+            NavGraphNode current = heap.Min().Data;
+            NodeSearchState currentState = searchStates[current.Index];
 
-            if (terminationCondition(currentNode)) return ReconstructPath(currentNode);
+            if (terminationCondition(current)) return ReconstructPath(current);
 
-            foreach (NavGraphNode neighbor in currentNode.Neighbors)
+            foreach (NavGraphNode neighbor in current.Neighbors)
             {
-                float neighborGCost = currentNode.GCost + Vector2.Distance(currentNode.transform.position, neighbor.transform.position);
+                float neighborGCost = currentState.GCost + Vector2.Distance(current.transform.position, neighbor.transform.position);
+                NodeSearchState neighborState = searchStates[neighbor.Index];
 
-                if (neighbor.SearchId == searchId)
+                if (neighborState.SearchId == searchId)
                 {
-                    if (neighbor.Closed) continue;
+                    if (neighborState.Closed) continue;
 
-                    if (neighborGCost < neighbor.GCost) heap.DecreaseKey(neighbor.HeapNode, neighborGCost + neighbor.HCost);
+                    if (neighborGCost < neighborState.GCost) heap.DecreaseKey(neighborState.HeapNode, neighborGCost + neighborState.HCost);
                     else continue;
                 }
                 else
                 {
-                    neighbor.SearchId = searchId;
-                    neighbor.HCost = heuristic(neighbor);
-                    neighbor.Closed = false;
-                    neighbor.HeapNode = new FibonacciHeapNode<NavGraphNode, float>(neighbor, neighborGCost + neighbor.HCost);
-                    heap.Insert(neighbor.HeapNode);
+                    neighborState.SearchId = searchId;
+                    neighborState.HCost = heuristic(neighbor);
+                    neighborState.Closed = false;
+                    neighborState.HeapNode = new FibonacciHeapNode<NavGraphNode, float>(neighbor, neighborGCost + neighborState.HCost);
+                    heap.Insert(neighborState.HeapNode);
                 }
 
-                neighbor.GCost = neighborGCost;
-                neighbor.From = currentNode;
+                neighborState.GCost = neighborGCost;
+                neighborState.From = current;
             }
 
             heap.RemoveMin();
-            currentNode.Closed = true;
+            currentState.Closed = true;
         }
 
         return null;
@@ -264,28 +292,28 @@ public class NavGraph : MonoBehaviour
 
     private void IncreaseSearchId()
     {
-        if (searchId == ulong.MaxValue)
+        if (searchId == uint.MaxValue)
         {
-            ResetPathFindingData();
+            ResetSearchData();
             searchId++;
         }
         searchId++;
     }
 
-    private void ResetPathFindingData()
+    private void ResetSearchData()
     {
-        foreach (NavGraphNode node in Nodes)
+        foreach (NodeSearchState state in searchStates)
         {
-            node.SearchId = 0;
-            node.HeapNode = null;
-            node.Closed = false;
-            node.From = null;
+            state.SearchId = 0;
+            state.HeapNode = null;
+            state.Closed = false;
+            state.From = null;
         }
     }
 
     public NavPath GetPrecalculatedPath(NavGraphNode start, NavGraphNode end)
     {
-        if (!precalculationEnabled) 
+        if (!precalculationEnabled)
             throw new InvalidOperationException("Precalculation must be enabled to reconstruct a path.");
 
         if (shortestPathTable[start.Index, end.Index].nodeIndex == -1) return null;
@@ -309,7 +337,7 @@ public class NavGraph : MonoBehaviour
         return AStarShortestPath(start, end).Length;
     }
 
-    private static NavPath ReconstructPath(NavGraphNode end)
+    private NavPath ReconstructPath(NavGraphNode end)
     {
         List<NavGraphNode> path = new List<NavGraphNode>();
 
@@ -317,11 +345,11 @@ public class NavGraph : MonoBehaviour
         while (current != null)
         {
             path.Add(current);
-            current = current.From;
+            current = searchStates[current.Index].From;
         }
 
         path.Reverse();
-        return new NavPath(path, end.GCost);
+        return new NavPath(path, searchStates[end.Index].GCost);
     }
 
     public static float GetPathSegmentLength(List<NavGraphNode> path, int start, int count)
@@ -338,8 +366,6 @@ public class NavGraph : MonoBehaviour
     {
         shortestPathTable = new (int, float)[Nodes.Count, Nodes.Count];
 
-
-
         for (int source = 0; source < Nodes.Count; source++)
         {
             DijkstraShortestPath(Nodes[source], (current) => false);
@@ -349,12 +375,15 @@ public class NavGraph : MonoBehaviour
                 if (source == target) shortestPathTable[source, target] = (target, 0);
                 else
                 {
-                    int nd = target;
-                    while (nd != source && Nodes[nd].From != null && Nodes[nd].From.SearchId == searchId)
+                    int current = target;
+                    NodeSearchState currentState = searchStates[current];
+
+                    while (current != source && currentState.From != null && searchStates[currentState.From.Index].SearchId == searchId)
                     {
-                        float length = Nodes[nd].GCost + Vector2.Distance(Nodes[nd].transform.position, Nodes[target].transform.position);
-                        shortestPathTable[Nodes[nd].From.Index, target] = (nd, length);
-                        nd = Nodes[nd].From.Index;
+                        float length = currentState.GCost + Vector2.Distance(Nodes[current].transform.position, Nodes[target].transform.position);
+                        shortestPathTable[currentState.From.Index, target] = (current, length);
+                        current = currentState.From.Index;
+                        currentState = searchStates[current];
                     }
                 }
             }
@@ -370,13 +399,13 @@ public class NavGraph : MonoBehaviour
         while (stack.Count > 0)
         {
             NavGraphNode current = stack.Pop();
-            current.SearchId = searchId;
+            searchStates[current.Index].SearchId = searchId;
 
             yield return current;
 
             foreach (NavGraphNode node in current.Neighbors)
             {
-                if (node.SearchId != searchId) stack.Push(node);
+                if (searchStates[node.Index].SearchId != searchId) stack.Push(node);
             }
         }
     }
@@ -436,6 +465,11 @@ public class NavGraph : MonoBehaviour
                 Gizmos.DrawLine(TestPath.Nodes[i].transform.position, TestPath.Nodes[i + 1].transform.position);
             }
         }
+    }
+
+    public void InitializeSearchData()
+    {
+        searchStates = Enumerable.Range(0, Nodes.Count).Select(i => new NodeSearchState()).ToList();
     }
 #endif
 }

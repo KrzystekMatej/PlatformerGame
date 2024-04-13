@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a5fb8512ba40b043ae6ff76dfb055e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <CurrentPipeline>k__BackingField: {fileID: 3326010113769828483}
   OnPipelineSwitch:
     m_PersistentCalls:
       m_Calls: []
@@ -865,6 +866,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7363741092985079733, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       insertIndex: -1
       addedObject: {fileID: 520982342285610314}
+    - targetCorrespondingSourceObject: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4612607076777266177}
   m_SourcePrefab: {fileID: 100100000, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
 --- !u!4 &499778370858099344 stripped
 Transform:
@@ -895,12 +899,42 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092666616263, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
   m_PrefabInstance: {fileID: 6980247669020632358}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 499778371479014637}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &499778371479014627 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 6980247669020632358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &499778371479014637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 6980247669020632358}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4612607076777266177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499778371479014637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCollider: {fileID: 499778371479014627}
+  detector: {fileID: 11400000, guid: d7b8d8f7c9da87145893bb5b73af76c8, type: 2}
+  boxCastXOffset: -0.07
+  boxCastYOffset: -0.28
+  boxCastWidth: 0.7
+  boxCastHeight: 0.2
+  gizmoColorDetected: {r: 1, g: 0, b: 0, a: 1}
+  gizmoColorNotDetected: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &499778371711450562 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092903229668, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

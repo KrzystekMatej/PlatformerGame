@@ -19,7 +19,6 @@ public class ObstacleConstraint : Constraint
 
     private NavGraphNode startNode;
     private NavGraphNode endNode;
-    private List<Vector2> allowedPath = new List<Vector2>();
 
 #if UNITY_EDITOR
     private NavPath gizmoPath;
@@ -37,9 +36,6 @@ public class ObstacleConstraint : Constraint
 
     public override bool IsViolated(List<Vector2> pointPath)
     {
-#if UNITY_EDITOR
-        gizmoPath = null;
-#endif
         if (pointPath.Count < 2) return false;
         detector.Size = new Vector2(agent.EnclosingCircleRadius, 0);
 
@@ -86,9 +82,6 @@ public class ObstacleConstraint : Constraint
 #endif
 
         goal.Position = navPath.Nodes[1].GetExpandedPosition(agent.EnclosingCircleRadius);
-        allowedPath.Clear();
-        allowedPath.AddRange(pointPath.Take(problemSegmentIndex + 1));
-        allowedPath.Add(goal.Position);
         return goal;
     }
 
@@ -97,18 +90,18 @@ public class ObstacleConstraint : Constraint
         startNode.transform.position = startPoint;
         endNode.transform.position = endPoint;
 
-        startNode.ConnectToNavGraph(navGraph, agentRadius);
-        endNode.ConnectToNavGraph(navGraph, agentRadius);
+        navGraph.ConnectNode(startNode, agentRadius);
+        navGraph.ConnectNode(endNode, agentRadius);
 
         NavPath navPath = navGraph.FindShortestPath(startNode, endNode);
 
-        startNode.DisconnectFromNavGraph(navGraph);
-        endNode.DisconnectFromNavGraph(navGraph);
+        navGraph.DisconnectNode(startNode);
+        navGraph.DisconnectNode(endNode);
         return navPath;
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    public override void DrawGizmos()
     {
         if (!Application.isPlaying || gizmoPath == null) return;
         Gizmos.color = Color.green;

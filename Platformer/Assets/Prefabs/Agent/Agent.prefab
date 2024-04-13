@@ -378,7 +378,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7363741092666616260}
   - component: {fileID: 7363741092666616261}
-  - component: {fileID: 7363741092666616262}
   - component: {fileID: 7363741092666616263}
   m_Layer: 15
   m_Name: Collider
@@ -437,26 +436,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.2525488, y: -0.011833847}
   m_Size: {x: 0.7742344, y: 1.2460779}
   m_Direction: 0
---- !u!114 &7363741092666616262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363741092666616267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectCollider: {fileID: 7363741092666616261}
-  detector: {fileID: 0}
-  boxCastXOffset: -0
-  boxCastYOffset: -0.47
-  boxCastWidth: 0.705
-  boxCastHeight: 0.335
-  gizmoColorDetected: {r: 1, g: 0, b: 0, a: 1}
-  gizmoColorNotDetected: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &7363741092666616263
 MonoBehaviour:
   m_ObjectHideFlags: 0

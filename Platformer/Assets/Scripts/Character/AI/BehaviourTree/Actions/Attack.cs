@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Attack : ActionNode
 {
+    private bool transitionSatisfied = false;
+
     protected override void OnStart()
     {
         context.InputController.Attack();
@@ -14,8 +16,9 @@ public class Attack : ActionNode
 
     private void AttackFinished(State previous, State next)
     {
-        if (next is not AttackState) state = ProcessState.Failure;
-        if (previous is AttackState) state = ProcessState.Success;
+        if (transitionSatisfied) state = ProcessState.Success;
+        else if (next is AttackState) transitionSatisfied = true;
+        else state = ProcessState.Failure;
     }
 
     protected override ProcessState OnUpdate()
@@ -26,5 +29,6 @@ public class Attack : ActionNode
     protected override void OnStop()
     {
         context.Agent.StateMachine.OnTransition.RemoveListener(AttackFinished);
+        transitionSatisfied = false;
     }
 }

@@ -32,9 +32,10 @@ public class NavGraphEditor : Editor
                 Debug.Log("No node can be null.");
                 return;
             }
+            navGraph.InitializeSearchData();
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var path = navGraph.AStarShortestPath(start, end);
-            if (path.Nodes != null)
+            if (path != null)
             {
                 navGraph.TestPath = path;
             }
@@ -61,6 +62,7 @@ public class NavGraphEditor : Editor
                 Debug.Log("No node can be null.");
                 return;
             }
+            navGraph.InitializeSearchData();
             System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
             var paths = navGraph.YenKShortestPaths(start, end, k);
             stopwatch.Stop();

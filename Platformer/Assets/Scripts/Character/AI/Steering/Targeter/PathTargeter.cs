@@ -41,7 +41,7 @@ public class PathTargeter : Targeter
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmosSelected()
+    public override void DrawGizmos()
     {
         if (!Application.isPlaying) return;
         path.DrawAllGizmos();

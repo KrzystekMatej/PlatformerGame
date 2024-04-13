@@ -54,7 +54,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 95a12efcce546074589688626e9bc0df
-        position: {x: 315, y: 1110}
+        position: {x: 270, y: 1200}
         blackboard:
           keys: []
         description: 
@@ -85,7 +85,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: eaa7426d31a04ac4baaa3ff939d7c5bd
-        position: {x: -300, y: 405}
+        position: {x: -195, y: 480}
         blackboard:
           keys: []
         description: 
@@ -99,7 +99,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 93c360149a14b2f48be1cd640f411663
-        position: {x: 315, y: 900}
+        position: {x: 270, y: 990}
         blackboard:
           keys: []
         description: 
@@ -116,7 +116,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4dfec44667e30e14d804af7eabb2155f
-        position: {x: -30, y: 900}
+        position: {x: -75, y: 990}
         blackboard:
           keys: []
         description: 
@@ -131,7 +131,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 1aa019430b6ce6f4d8c145233f4b1dc7
-        position: {x: 270, y: 405}
+        position: {x: 225, y: 495}
         blackboard:
           keys: []
         description: 
@@ -148,7 +148,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 02c7dac8a923f904ab2dead5df0bd077
-        position: {x: 135, y: 690}
+        position: {x: 90, y: 780}
         blackboard:
           keys: []
         description: 
@@ -165,7 +165,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 2e3bdb3856dd653469cba1dd7d187958
-        position: {x: 405, y: 675}
+        position: {x: 360, y: 765}
         blackboard:
           keys: []
         description: 

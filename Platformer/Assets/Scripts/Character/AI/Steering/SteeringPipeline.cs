@@ -1,6 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TheKiwiCoder;
 using UnityEngine;
 
@@ -32,13 +31,8 @@ public class SteeringPipeline : MonoBehaviour
         foreach (Targeter targeter in targeters)
         {
             ProcessState targeterState = targeter.TryUpdateGoal(goal);
-            if (targeterState != ProcessState.Running)
-            {
-                return (targeterState, Vector2.zero);
-            }
+            if (targeterState != ProcessState.Running) return (targeterState, Vector2.zero);
         }
-
-        if (goal.HasNothing()) return (ProcessState.Failure, Vector2.zero);
 
         foreach (Decomposer decomposer in decomposers)
         {
@@ -76,34 +70,35 @@ public class SteeringPipeline : MonoBehaviour
 
     public void Enable()
     {
-        foreach (Targeter t in targeters) t.Enable();
-        foreach (Decomposer d in decomposers) d.Enable();
-        foreach (Constraint c in constraints) c.Enable();
-        actuator.Enable();
+        enabled = true;
+        foreach (PipelineComponent c in GetAllComponents()) c.Enable();
     }
 
     public void Disable()
     {
-        foreach (Targeter t in targeters) t.Disable();
-        foreach (Decomposer d in decomposers) d.Disable();
-        foreach (Constraint c in constraints) c.Disable();
-        actuator.Disable();
+        enabled = false;
+        foreach (PipelineComponent c in GetAllComponents()) c.Disable();
     }
 
     public void WriteComponentsToBlackboard(Blackboard blackboard)
     {
-        foreach (Targeter t in targeters) t.WriteToCorrespondingKeys(blackboard);
-        foreach (Decomposer d in decomposers) d.WriteToCorrespondingKeys(blackboard);
-        foreach (Constraint c in constraints) c.WriteToCorrespondingKeys(blackboard);
-        actuator.WriteToCorrespondingKeys(blackboard);
+        foreach (PipelineComponent c in GetAllComponents()) c.WriteToCorrespondingKeys(blackboard);
+    }
+
+    private IEnumerable<PipelineComponent> GetAllComponents()
+    {
+        return targeters
+            .Select(t => (PipelineComponent)t)
+            .Concat(decomposers)
+            .Concat(constraints)
+            .Append(actuator);
     }
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (!Application.isPlaying || gizmoGoalPosition == null) return;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere((Vector3)gizmoGoalPosition, 0.3f);
+        foreach (PipelineComponent c in GetAllComponents()) c.DrawGizmos();
     }
 #endif
 }

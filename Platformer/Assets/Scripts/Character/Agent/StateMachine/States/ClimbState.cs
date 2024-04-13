@@ -5,7 +5,6 @@ public class ClimbState : State
 
     protected override void HandleEnter()
     {
-        agent.Animator.Disable();
         agent.RigidBody.gravityScale = 0;
         agent.RigidBody.velocity = Vector2.zero;
     }

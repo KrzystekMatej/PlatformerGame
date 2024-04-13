@@ -1,17 +1,16 @@
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using TheKiwiCoder;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class SteeringController : MonoBehaviour
 {
+    [field: SerializeField]
     public SteeringPipeline CurrentPipeline { get; private set; }
-    public ProcessState State { get; private set; } = ProcessState.Failure;
 
     public UnityEvent<SteeringPipeline, SteeringPipeline> OnPipelineSwitch;
 
     private AIInputController inputController;
+    private Vector2 steeringForce;
 
 
     private void Awake()
@@ -29,54 +28,37 @@ public class SteeringController : MonoBehaviour
         }
     }
 
+    public ProcessState RecalculateSteering()
+    {
+        (ProcessState state, Vector2 force) = CurrentPipeline.GetSteering();
+        steeringForce = force;
+        return state;
+    }
+
     public void ApplySteering()
     {
-        if (CurrentPipeline == null) return;
-
-        (ProcessState state, Vector2 force) = CurrentPipeline.GetSteering();
-        State = state;
-
-        if (state != ProcessState.Running)
-        {
-            UpdateCurrentPipeline(null);
-        }
-        else inputController.AddSteeringForce(force);
+        if (steeringForce == Vector2.zero) return;
+        inputController.AddSteeringForce(steeringForce);
+        steeringForce = Vector2.zero;
     }
 
     public bool UpdateCurrentPipeline(SteeringPipeline newPipeline)
     {
-        SteeringPipeline previous = CurrentPipeline;
-        if (CurrentPipeline)
-        {
-            if (newPipeline == CurrentPipeline) return false;
-            CurrentPipeline.Disable();
+        if (!newPipeline || newPipeline == CurrentPipeline) return false;
 #if UNITY_EDITOR
-            Debug.Log($"{CurrentPipeline.name} Deactivated");
+        Debug.Log($"{CurrentPipeline.name} Deactivated");
+        Debug.Log($"{newPipeline.name} Activated");
 #endif
-        }
-        else if(!newPipeline) return false;
 
-        if (newPipeline)
-        {
-            CurrentPipeline = newPipeline;
-            CurrentPipeline.Enable();
-            State = ProcessState.Running;
-#if UNITY_EDITOR
-            Debug.Log($"{CurrentPipeline.name} Activated");
-#endif
-        }
-        else
-        {
-            CurrentPipeline = null;
-            if (State == ProcessState.Running) State = ProcessState.Failure;
-        }
-
-        OnPipelineSwitch?.Invoke(previous, CurrentPipeline);
+        OnPipelineSwitch?.Invoke(CurrentPipeline, newPipeline);
+        CurrentPipeline.Disable();
+        CurrentPipeline = newPipeline;
+        CurrentPipeline.Enable();
         return true;
     }
 
     public bool IsRunning()
     {
-        return CurrentPipeline != null;
+        return CurrentPipeline;
     }
 }

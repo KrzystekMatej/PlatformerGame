@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SenseObstacle
   m_EditorClassIdentifier: 
   <GizmoColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 0.8180671, y: 0}
+  <Size>k__BackingField: {x: 0.6772616, y: 0}
   <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
@@ -21,6 +21,6 @@ MonoBehaviour:
     m_Bits: 16384
   <OriginOffset>k__BackingField: {x: 0, y: 0}
   detectShapeType: 2
-  maxDetections: 5
-  <Distance>k__BackingField: 2.481789
-  <Direction>k__BackingField: {x: -0.9399928, y: -0.34119445}
+  maxDetections: 1
+  <Distance>k__BackingField: 5.742861
+  <Direction>k__BackingField: {x: 0.98724073, y: 0.15923476}
