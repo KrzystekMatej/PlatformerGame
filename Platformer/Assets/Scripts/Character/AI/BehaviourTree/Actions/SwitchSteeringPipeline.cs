@@ -12,7 +12,7 @@ public class SwitchSteeringPipeline : ActionNode
 
     protected override ProcessState OnUpdate()
     {
-        context.Steering.UpdateCurrentPipeline(targetPipeline.Value);
+        context.Steering.SwitchPipeline(targetPipeline.Value);
         return ProcessState.Success;
     }
 

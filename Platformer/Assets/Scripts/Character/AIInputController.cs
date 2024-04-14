@@ -67,6 +67,7 @@ public class AIInputController : InputController
 
     public void AddSteeringForce(Vector2 steeringForce)
     {
+        if (steeringForce == Vector2.zero) return;
         suggestedSteeringForce += steeringForce;
         forceRequest = true;
     }

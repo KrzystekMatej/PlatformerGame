@@ -42,8 +42,8 @@ MonoBehaviour:
     - rid: 7888084650115466008
     - rid: 7888084650115466009
     - rid: 7888084650115466010
-  viewPosition: {x: 339, y: 279, z: 0}
-  viewScale: {x: 0.43232757, y: 0.43232757, z: 1}
+  viewPosition: {x: 466, y: -38, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
@@ -90,7 +90,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: a332e1b20a74e574fafd3dbeffdef4a8
-        position: {x: 975, y: 765}
+        position: {x: 1020, y: 750}
         blackboard:
           keys: []
         description: 
@@ -185,13 +185,13 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 37397926d543c58458f1f16db7e85fdf
-        position: {x: 480, y: 1725}
+        position: {x: 480, y: 1710}
         blackboard:
           keys: []
         description: 
         drawGizmos: 1
         logStart: 0
-        logState: 1
+        logState: 0
         logStop: 0
         duration: 3
     - rid: 7888084646981010258
@@ -403,7 +403,7 @@ MonoBehaviour:
         maxSeekDistance:
           reference:
             rid: -2
-          defaultValue: 0
+          defaultValue: Infinity
         seekTargeter:
           reference:
             rid: 7888084650115466010
@@ -422,7 +422,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6c67b59ae2524784086eef884ef5c9c2
-        position: {x: 1320, y: 750}
+        position: {x: 1290, y: 765}
         blackboard:
           keys: []
         description: 

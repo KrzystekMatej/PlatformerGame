@@ -28,14 +28,14 @@ public class AIManager : MonoBehaviour
     private IEnumerator AIUpdate()
     {
         yield return null;
-        Steering.CurrentPipeline.Enable();
+        Steering.InitializePipelines();
 
         while (true)
         {
             if (Time.timeScale > 0)
             {
-                TreeRunner.TreeUpdate();
-                Steering.ApplySteering();
+                TreeRunner.TraverseTree();
+                Steering.Apply();
             }
             yield return new WaitForSeconds(aiUpdateInterval);
         }

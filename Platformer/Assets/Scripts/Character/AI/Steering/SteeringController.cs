@@ -10,12 +10,22 @@ public class SteeringController : MonoBehaviour
     public UnityEvent<SteeringPipeline, SteeringPipeline> OnPipelineSwitch;
 
     private AIInputController inputController;
-    private Vector2 steeringForce;
+    private Vector2 currentForce;
 
 
     private void Awake()
     {
         inputController = GetComponentInParent<AIInputController>();
+    }
+
+    public void InitializePipelines()
+    {
+        SteeringPipeline[] pipelines = GetComponentsInChildren<SteeringPipeline>();
+        foreach (SteeringPipeline p in pipelines)
+        {
+            p.enabled = false;
+        }
+        CurrentPipeline.Enable();
     }
 
     public void WritePipelinesToBlackboard(Blackboard blackboard)
@@ -28,21 +38,20 @@ public class SteeringController : MonoBehaviour
         }
     }
 
-    public ProcessState RecalculateSteering()
+    public ProcessState Recalculate()
     {
-        (ProcessState state, Vector2 force) = CurrentPipeline.GetSteering();
-        steeringForce = force;
-        return state;
+        SteeringOutput output = CurrentPipeline.GetSteering();
+        currentForce = output.Force;
+        return output.State;
     }
 
-    public void ApplySteering()
+    public void Apply()
     {
-        if (steeringForce == Vector2.zero) return;
-        inputController.AddSteeringForce(steeringForce);
-        steeringForce = Vector2.zero;
+        inputController.AddSteeringForce(currentForce);
+        currentForce = Vector2.zero;
     }
 
-    public bool UpdateCurrentPipeline(SteeringPipeline newPipeline)
+    public bool SwitchPipeline(SteeringPipeline newPipeline)
     {
         if (!newPipeline || newPipeline == CurrentPipeline) return false;
 #if UNITY_EDITOR

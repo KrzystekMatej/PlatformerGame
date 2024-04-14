@@ -15,23 +15,24 @@ public class SteeringPipeline : MonoBehaviour
     private Actuator actuator;
     private int constraintSteps;
 
-#if UNITY_EDITOR
-    Vector2? gizmoGoalPosition;
-#endif
-
     private void Awake()
     {
         constraintSteps = constraints.Length + 1;
     }
 
-    public (ProcessState, Vector2) GetSteering()
+    public SteeringOutput GetSteering()
     {
         SteeringGoal goal = new SteeringGoal();
         
         foreach (Targeter targeter in targeters)
         {
-            ProcessState targeterState = targeter.TryUpdateGoal(goal);
-            if (targeterState != ProcessState.Running) return (targeterState, Vector2.zero);
+            switch (targeter.TryUpdateGoal(goal))
+            {
+                case ProcessState.Success: 
+                    return SteeringOutput.Success;
+                case ProcessState.Failure: 
+                    return SteeringOutput.Failure;
+            };
         }
 
         foreach (Decomposer decomposer in decomposers)
@@ -54,18 +55,13 @@ public class SteeringPipeline : MonoBehaviour
                 }
             }
 
-#if UNITY_EDITOR
-            gizmoGoalPosition = goal.HasPosition ? goal.Position : null;
-#endif
             if (validPath)
             {
-                Vector2? steeringForce = actuator.GetSteering(path, goal);
-                if (steeringForce.HasValue) return (ProcessState.Running, steeringForce.Value);
-                else break;
+                return actuator.GetSteering(path, goal);
             }
         }
 
-        return (ProcessState.Failure, Vector2.zero);
+        return SteeringOutput.Failure;
     }
 
     public void Enable()
@@ -97,7 +93,7 @@ public class SteeringPipeline : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
-        if (!Application.isPlaying || gizmoGoalPosition == null) return;
+        if (!Application.isPlaying || !enabled) return;
         foreach (PipelineComponent c in GetAllComponents()) c.DrawGizmos();
     }
 #endif

@@ -26,9 +26,9 @@ public class DirectActuator : Actuator
         return path;
     }
 
-    public override Vector2? GetSteering(List<Vector2> pointPath, SteeringGoal goal)
+    public override SteeringOutput GetSteering(List<Vector2> pointPath, SteeringGoal goal)
     {
-        if (pointPath.Count < 2) return null;
+        if (pointPath.Count < 2) return SteeringOutput.Failure;
 
         Vector2 goalDirection = (pointPath[1] - pointPath[0]).normalized;
 
@@ -36,9 +36,9 @@ public class DirectActuator : Actuator
         {
             Vector2 targetVelocity = goalDirection * goal.Speed;
             Vector2 force = targetVelocity - agent.RigidBody.velocity;
-            return force / timeToTarget;
+            return SteeringOutput.Running(force / timeToTarget);
         }
-        else return goalDirection * agent.InstanceData.MaxForce;
+        else return SteeringOutput.Running(goalDirection * agent.InstanceData.MaxForce);
     }
 
 #if UNITY_EDITOR

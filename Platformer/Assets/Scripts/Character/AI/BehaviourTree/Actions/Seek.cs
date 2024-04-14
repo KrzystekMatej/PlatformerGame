@@ -32,7 +32,7 @@ public class Seek : ActionNode
             seekTargeter.Value.GoalPosition = goalPosition.Value;
         }
 
-        return context.Steering.RecalculateSteering();
+        return context.Steering.Recalculate();
     }
 
     protected override void OnStop() { }

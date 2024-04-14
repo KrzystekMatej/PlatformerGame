@@ -9,7 +9,7 @@ public class Steer : ActionNode
 
     protected override ProcessState OnUpdate()
     {
-        return context.Steering.RecalculateSteering();
+        return context.Steering.Recalculate();
     }
 
     protected override void OnStop() { }

@@ -41,16 +41,16 @@ public class ObstacleConstraint : Constraint
 
         for (int i = 0; i < pointPath.Count - 1; i++)
         {
-            Vector2? startPoint = MathUtility.GetCollisionFreePosition(pointPath[i], agent.EnclosingCircleRadius, detector.DetectLayerMask);
-            Vector2? endPoint = MathUtility.GetCollisionFreePosition(pointPath[i + 1], agent.EnclosingCircleRadius, detector.DetectLayerMask);
+            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], agent.EnclosingCircleRadius, detector.DetectLayerMask);
+            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], agent.EnclosingCircleRadius, detector.DetectLayerMask);
 
-            if (!startPoint.HasValue || !endPoint.HasValue)
+            if (!nonBlockStart.HasValue || !nonBlockEnd.HasValue)
             {
                 problemSegmentIndex = -1;
                 return true;
             }
-            pointPath[i] = startPoint.Value;
-            pointPath[i + 1] = endPoint.Value;
+            pointPath[i] = nonBlockStart.Value;
+            pointPath[i + 1] = nonBlockEnd.Value;
 
             Vector2 direction = pointPath[i + 1] - pointPath[i];
             detector.Direction = direction.normalized;

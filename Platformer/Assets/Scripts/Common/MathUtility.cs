@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 public static class MathUtility
 {
-    public const int recommendedFreeCollisionCount = 16;
+    public const int unblockPositionAttemptCount = 16;
 
     public static Vector2 PolarCoordinatesToVector2(float angleRad, float magnitude)
     {
@@ -218,10 +218,10 @@ public static class MathUtility
         return diagonal / 2;
     }
 
-    public static Vector2? GetCollisionFreePosition(Vector2 position, float agentRadius, LayerMask collisionMask)
+    public static Vector2? UnblockPosition(Vector2 position, float agentRadius, LayerMask collisionMask)
     {
         const float safetyMargin = 0.001f;
-        for (int i = 0; i < recommendedFreeCollisionCount; i++)
+        for (int i = 0; i < unblockPositionAttemptCount; i++)
         {
             RaycastHit2D hit = Physics2D.CircleCast(position, agentRadius, Vector2.zero, 0, collisionMask);
             if (hit)

@@ -9,9 +9,9 @@ public class SteeringGoal
     public bool HasOwner { get; private set; }
 
 
-    private Vector2 position;
     private float speed;
     private GameObject owner;
+    private Vector2 position;
 
     public Vector2 Position
     {

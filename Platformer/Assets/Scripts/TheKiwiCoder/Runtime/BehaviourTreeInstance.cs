@@ -59,7 +59,7 @@ namespace TheKiwiCoder {
 
         
 
-        public void TreeUpdate()
+        public void TraverseTree()
         {
             if (runtimeTree)
             {

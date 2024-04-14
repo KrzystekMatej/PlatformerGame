@@ -18,14 +18,6 @@ public class PursueTargeter : SeekTargeter
 
     public override ProcessState TryUpdateGoal(SteeringGoal goal)
     {
-        Vector2? collisionFreeGoal = MathUtility.GetCollisionFreePosition
-        (
-            GoalPosition,
-            agent.EnclosingCircleRadius,
-            physicsMask
-        );
-        if (!collisionFreeGoal.HasValue) return ProcessState.Failure;
-        GoalPosition = collisionFreeGoal.Value;
 
         float speed = agent.RigidBody.velocity.magnitude;
         float distance = (GoalPosition - agent.CenterPosition).magnitude;
@@ -40,7 +32,7 @@ public class PursueTargeter : SeekTargeter
 
         Vector2 futureOffset = targetVelocity * prediction;
 
-        RaycastHit2D hit = Physics2D.CircleCast(GoalPosition, agent.EnclosingCircleRadius, targetVelocity, futureOffset.magnitude, physicsMask);
+        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, physicsMask);
         if (hit)
         {
             const float safetyMargin = 0.001f;

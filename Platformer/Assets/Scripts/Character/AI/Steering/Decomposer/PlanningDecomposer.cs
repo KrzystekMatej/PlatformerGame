@@ -31,23 +31,23 @@ public class PlanningDecomposer : Decomposer
         if (!goal.HasPosition) return goal;
         float agentRadius = agent.EnclosingCircleRadius;
 
-        Vector2? agentPosition = MathUtility.GetCollisionFreePosition(agent.CenterPosition, agentRadius, agentTracker.NavGraph.WallMask);
-        Vector2? goalPosition = MathUtility.GetCollisionFreePosition(goal.Position, agentRadius, agentTracker.NavGraph.WallMask);
+        Vector2? nonBlockAgent = MathUtility.UnblockPosition(agent.CenterPosition, agentRadius, agentTracker.NavGraph.WallMask);
+        Vector2? nonBlockGoal = MathUtility.UnblockPosition(goal.Position, agentRadius, agentTracker.NavGraph.WallMask);
 
 #if UNITY_EDITOR
-        gizmoAgentPosition = agentPosition;
-        gizmoGoalPosition = goalPosition;
+        gizmoAgentPosition = nonBlockAgent;
+        gizmoGoalPosition = nonBlockGoal;
 #endif
 
-        if (!agentPosition.HasValue || !goalPosition.HasValue) return new SteeringGoal();
-        goal.Position = goalPosition.Value;
+        if (!nonBlockAgent.HasValue || !nonBlockGoal.HasValue) return new SteeringGoal();
+        goal.Position = nonBlockGoal.Value;
 
-        if (IsGoalVisible(agentPosition.Value, goal.Position, agentRadius)) return goal;
+        if (IsGoalVisible(nonBlockAgent.Value, goal.Position, agentRadius)) return goal;
 
         navPath = GetNavPath(goal);
         if (navPath == null) return new SteeringGoal();
 
-        goal.Position = GetMostDistantReachablePosition(agentPosition.Value, agentRadius);
+        goal.Position = GetMostDistantReachablePosition(nonBlockAgent.Value, agentRadius);
         return goal;
     }
 
