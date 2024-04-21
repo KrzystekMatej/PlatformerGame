@@ -57,7 +57,7 @@ public class GroundDetector : MonoBehaviour
     }
 #if UNITY_EDITOR
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (!objectCollider || !detector) return;
         detector.GizmoColor = Detected ? gizmoColorDetected : gizmoColorNotDetected;

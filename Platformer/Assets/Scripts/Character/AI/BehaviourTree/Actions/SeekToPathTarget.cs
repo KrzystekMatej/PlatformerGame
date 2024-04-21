@@ -14,6 +14,7 @@ public class SeekToPathTarget : ActionNode
     {
         seekTargeter.Value.MaxSeekDistance = float.PositiveInfinity;
         seekTargeter.Value.GoalPosition = pathTargeter.Value.GetPathTarget();
+        seekTargeter.Value.GoalOwner = null;
     }
 
     protected override ProcessState OnUpdate()

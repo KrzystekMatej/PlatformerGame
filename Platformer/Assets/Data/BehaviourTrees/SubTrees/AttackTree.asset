@@ -27,7 +27,7 @@ MonoBehaviour:
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 452, y: 203, z: 0}
+  viewPosition: {x: 533, y: 104, z: 0}
   viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
@@ -38,7 +38,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 214e6248-26c5-41f8-97bf-19c90c8e4132
-        position: {x: 0, y: 0}
+        position: {x: 0, y: 105}
         blackboard:
           keys: []
         description: 
@@ -68,7 +68,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b83eca320894cc54ba9b23ed506251ad
-        position: {x: 0, y: 195}
+        position: {x: 0, y: 285}
         blackboard:
           keys: []
         description: 

@@ -51,7 +51,7 @@ public class FiniteStateMachine : MonoBehaviour
     {
         State targetState = Factory.GetState(triggered.TargetState);
 
-        if (targetState != null)
+        if (targetState)
         {
             CurrentState.PerformExitActions();
 

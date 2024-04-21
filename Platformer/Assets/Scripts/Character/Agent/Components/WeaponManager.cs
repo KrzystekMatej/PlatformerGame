@@ -104,7 +104,7 @@ public class WeaponManager : MonoBehaviour
     }
 
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Collider2D collider = GetComponentInParent<Collider2D>();

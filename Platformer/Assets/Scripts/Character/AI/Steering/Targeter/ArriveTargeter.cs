@@ -15,7 +15,7 @@ public class ArriveTargeter : Targeter
     private Vector2 gizmoGoalPosition;
 #endif
 
-    public override ProcessState TryUpdateGoal(SteeringGoal goal)
+    public override ProcessState Target(SteeringGoal goal)
     {
         float distance = Vector2.Distance(agent.CenterPosition, goal.Position);
         float arriveRadius = this.arriveRadius;
@@ -23,13 +23,15 @@ public class ArriveTargeter : Targeter
         if (goal.HasOwner)
         {
             Collider2D ownerCollider = goal.Owner.GetComponent<Collider2D>();
-            if (ownerCollider != null) arriveRadius += MathUtility.GetEnclosingCircleRadius(ownerCollider);
+            if (ownerCollider)
+            {
+                float enclosingRadius = MathUtility.GetEnclosingCircleRadius(ownerCollider);
+                if (enclosingRadius > arriveRadius) arriveRadius = enclosingRadius;
+            }
         }
 
-        if (distance <= arriveRadius)
-        {
-            return ProcessState.Success;
-        }
+        if (distance <= arriveRadius) return ProcessState.Success;
+
 
 #if UNITY_EDITOR
         gizmoArriveRadius = arriveRadius;

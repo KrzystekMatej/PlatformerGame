@@ -18,7 +18,7 @@ public class WanderTargeter : Targeter
     private Vector2 gizmoGoalPosition;
 #endif
 
-    public override ProcessState TryUpdateGoal(SteeringGoal goal)
+    public override ProcessState Target(SteeringGoal goal)
     {
         wanderOrientation += MathUtility.GetRandomBinomial() * Mathf.PI * wanderRate;
         float agentOrientation = MathUtility.GetVectorRadAngle(agent.RigidBody.velocity);

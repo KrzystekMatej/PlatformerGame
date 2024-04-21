@@ -1,6 +1,8 @@
 #if UNITY_EDITOR
 
+using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CastDetectorCheck : MonoBehaviour
 {
@@ -22,11 +24,14 @@ public class CastDetectorCheck : MonoBehaviour
                 message += $"{detector.Hits[i].collider}";
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(detector.Hits[i].point, 0.2f);
+                Gizmos.color = Color.green;
+                Vector2 direction = (detector.Hits[i].point - (Vector2)transform.position).normalized;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detector.Size.x, detector.DetectLayerMask);
+                Gizmos.DrawWireSphere(hit.point, 0.2f);
                 Gizmos.color = Color.yellow;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, detector.Hits[i].point - (Vector2)transform.position, detector.Size.x, detector.DetectLayerMask);
-                Debug.Log(hit.collider);
-                Gizmos.DrawLine(detector.Hits[i].point, detector.Hits[i].point + detector.Hits[i].normal * 2);
+                Gizmos.DrawLine(hit.point, hit.point + direction * (detector.Size.x - hit.distance));
             }
+            Debug.Log(detectionCount);
         }
     }
 }

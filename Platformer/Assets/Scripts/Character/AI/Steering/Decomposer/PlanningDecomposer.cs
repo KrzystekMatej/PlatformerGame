@@ -26,9 +26,9 @@ public class PlanningDecomposer : Decomposer
         agentTracker = agent.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph.name == navGraphName);
     }
 
-    public override SteeringGoal Decompose(SteeringGoal goal)
+    public override bool Decompose(SteeringGoal goal)
     {
-        if (!goal.HasPosition) return goal;
+        if (!goal.HasPosition) return true;
         float agentRadius = agent.EnclosingCircleRadius;
 
         Vector2? nonBlockAgent = MathUtility.UnblockPosition(agent.CenterPosition, agentRadius, agentTracker.NavGraph.WallMask);
@@ -39,16 +39,16 @@ public class PlanningDecomposer : Decomposer
         gizmoGoalPosition = nonBlockGoal;
 #endif
 
-        if (!nonBlockAgent.HasValue || !nonBlockGoal.HasValue) return new SteeringGoal();
+        if (!nonBlockAgent.HasValue || !nonBlockGoal.HasValue) return false;
         goal.Position = nonBlockGoal.Value;
 
-        if (IsGoalVisible(nonBlockAgent.Value, goal.Position, agentRadius)) return goal;
+        if (IsGoalVisible(nonBlockAgent.Value, goal.Position, agentRadius)) return true;
 
         navPath = GetNavPath(goal);
-        if (navPath == null) return new SteeringGoal();
+        if (navPath == null) return false;
 
         goal.Position = GetMostDistantReachablePosition(nonBlockAgent.Value, agentRadius);
-        return goal;
+        return true;
     }
 
     private bool IsGoalVisible(Vector2 agentPosition, Vector2 goalPosition, float agentRadius)

@@ -8,15 +8,8 @@ public class PursueTargeter : SeekTargeter
 {
     [field: SerializeField]
     public float MaxPrediction { get; private set; }
-    [SerializeField]
-    LayerMask physicsMask;
 
-    public override void Enable()
-    {
-        physicsMask = Utility.GetCollisionLayerMask(agent.PhysicsCollider.gameObject.layer);
-    }
-
-    public override ProcessState TryUpdateGoal(SteeringGoal goal)
+    public override ProcessState Target(SteeringGoal goal)
     {
 
         float speed = agent.RigidBody.velocity.magnitude;
@@ -32,7 +25,7 @@ public class PursueTargeter : SeekTargeter
 
         Vector2 futureOffset = targetVelocity * prediction;
 
-        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, physicsMask);
+        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, agent.PhysicsCollisionMask);
         if (hit)
         {
             const float safetyMargin = 0.001f;
@@ -40,6 +33,6 @@ public class PursueTargeter : SeekTargeter
         }
         else GoalPosition += futureOffset;
 
-        return base.TryUpdateGoal(goal);
+        return base.Target(goal);
     }
 }

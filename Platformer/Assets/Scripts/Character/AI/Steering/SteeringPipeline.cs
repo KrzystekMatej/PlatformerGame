@@ -26,7 +26,7 @@ public class SteeringPipeline : MonoBehaviour
         
         foreach (Targeter targeter in targeters)
         {
-            switch (targeter.TryUpdateGoal(goal))
+            switch (targeter.Target(goal))
             {
                 case ProcessState.Success: 
                     return SteeringOutput.Success;
@@ -37,7 +37,7 @@ public class SteeringPipeline : MonoBehaviour
 
         foreach (Decomposer decomposer in decomposers)
         {
-            goal = decomposer.Decompose(goal);
+            if (!decomposer.Decompose(goal)) return SteeringOutput.Failure;
         }
 
         for (int i = 0; i < constraintSteps; i++)
@@ -49,7 +49,7 @@ public class SteeringPipeline : MonoBehaviour
             {
                 if (constraint.IsViolated(path))
                 {
-                    goal = constraint.Suggest(path, goal);
+                    if (!constraint.Suggest(path, goal)) return SteeringOutput.Failure;
                     validPath = false;
                     break;
                 }

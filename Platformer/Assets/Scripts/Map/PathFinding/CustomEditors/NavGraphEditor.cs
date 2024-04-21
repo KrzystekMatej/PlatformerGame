@@ -10,7 +10,6 @@ public class NavGraphEditor : Editor
 {
     private NavGraphNode start;
     private NavGraphNode end;
-    private int k;
 
     public override void OnInspectorGUI()
     {
@@ -49,36 +48,6 @@ public class NavGraphEditor : Editor
         }
 
         EditorGUILayout.Space();
-        EditorGUILayout.Space();
-
-        k = EditorGUILayout.IntField("K", k);
-
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Calculate Kth Shortest Path"))
-        {
-            if (start == null || end == null)
-            {
-                Debug.Log("No node can be null.");
-                return;
-            }
-            navGraph.InitializeSearchData();
-            System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
-            var paths = navGraph.YenKShortestPaths(start, end, k);
-            stopwatch.Stop();
-            if (paths != null && paths.Count > k)
-            {
-                navGraph.TestPath = paths[k];
-            }
-            else
-            {
-                navGraph.TestPath = null;
-                Debug.Log("Path does not exist.");
-            }
-            Debug.Log($"Method execution time is {stopwatch.Elapsed.TotalSeconds} seconds.");
-        }
-
-        EditorGUILayout.Space();
 
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Generate Nodes")) GenerateNodes(navGraph);
@@ -105,7 +74,7 @@ public class NavGraphEditor : Editor
         serializedObject.ApplyModifiedProperties();
 
 
-        List<List<Vector2[]>> colliderPathCollection = navGraph.Walls.Select(c => MathUtility.GetColliderPaths(c, navGraph.CirclePathRatio)).ToList();
+        List<List<Vector2[]>> colliderPathCollection = navGraph.Walls.Select(c => MathUtility.GetColliderPaths(c)).ToList();
 
 
         

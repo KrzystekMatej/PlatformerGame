@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Decomposer : PipelineComponent
 {
-    public abstract SteeringGoal Decompose(SteeringGoal goal);
+    public abstract bool Decompose(SteeringGoal goal);
 }

@@ -1,16 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public static class MathUtility
 {
     public const int unblockPositionAttemptCount = 16;
+    public const float circlePathRatio = 8f;
 
     public static Vector2 PolarCoordinatesToVector2(float angleRad, float magnitude)
     {
@@ -167,22 +164,6 @@ public static class MathUtility
         return area / 2;
     }
 
-    public static bool IsPointInsideCompositeCollider(Vector2 point, CompositeCollider2D collider)
-    {
-        for (int i = 0; i < collider.pathCount; i++)
-        {
-            Vector2[] pathPoints = new Vector2[collider.GetPathPointCount(i)];
-            collider.GetPath(i, pathPoints);
-
-            if (IsPointInsidePolygon(point, pathPoints))
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static bool IsPointInsidePolygon(Vector2 point, Vector2[] polygonPoints)
     {
         int intersections = 0;
@@ -265,7 +246,7 @@ public static class MathUtility
 
     public static Vector2[] GetCircleColliderCircumscribedPath(CircleCollider2D collider, int pointCount)
     {
-        float radius = collider.radius * (1f / Mathf.Cos(Mathf.PI/pointCount));
+        float radius = collider.radius * (1f / Mathf.Cos(Mathf.PI / pointCount));
 
         return GetRegularPolygonPath(radius, pointCount)
             ?.Select(p => (Vector2)collider.transform.TransformPoint(p + collider.offset))
@@ -274,7 +255,7 @@ public static class MathUtility
 
     public static Vector2[] GetRegularPolygonPath(float radius, int pointCount)
     {
-        if (pointCount < 3) return null;
+        if (pointCount < 3 || radius <= 0) return null;
 
         float angleStep = 2 * Mathf.PI / pointCount;
         Vector2[] points = new Vector2[pointCount];
@@ -322,7 +303,7 @@ public static class MathUtility
         return paths;
     }
 
-    public static List<Vector2[]> GetColliderPaths(Collider2D collider, float circlePathRatio)
+    public static List<Vector2[]> GetColliderPaths(Collider2D collider)
     {
         if (collider is BoxCollider2D box)
         {

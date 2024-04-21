@@ -30,6 +30,9 @@ MonoBehaviour:
   - rid: 7888084729195397856
   - rid: 7888084729195397895
   - rid: 7888084738729836814
+  - rid: 7888084845085065780
+  - rid: 7888084845085065873
+  - rid: 7888084845085065874
   treeState: 0
   blackboard:
     keys:
@@ -42,7 +45,7 @@ MonoBehaviour:
     - rid: 7888084650115466004
     - rid: 7888084650115466006
     - rid: 7888084692797227531
-  viewPosition: {x: 566, y: 40, z: 0}
+  viewPosition: {x: 637, y: -7, z: 0}
   viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
@@ -106,7 +109,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8ef235094112b7f4aa4106ad5beac551
-        position: {x: 120, y: 1065}
+        position: {x: 0, y: 1080}
         blackboard:
           keys: []
         description: 
@@ -124,7 +127,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 60543685207a1af47a21fddbab388cd0
-        position: {x: -510, y: 1065}
+        position: {x: -735, y: 1065}
         blackboard:
           keys: []
         description: 
@@ -159,7 +162,7 @@ MonoBehaviour:
         - rid: 7888084646981010017
         - rid: 7888084646981010019
         - rid: 7407168259542745401
-        - rid: 7888084729195397856
+        - rid: 7888084845085065873
     - rid: 7407168309800468490
       type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -203,7 +206,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 647a6429462a96a41a82448f054e1c24
-        position: {x: 1140, y: 1065}
+        position: {x: 1170, y: 1065}
         blackboard:
           keys: []
         description: 
@@ -228,7 +231,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: f814b48f2fc91834593c58781eb44f72
-        position: {x: -285, y: 1065}
+        position: {x: -480, y: 1080}
         blackboard:
           keys: []
         description: 
@@ -258,7 +261,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 1cd9eab80034259408d8ceedecbfca98
-        position: {x: -90, y: 1065}
+        position: {x: -255, y: 1080}
         blackboard:
           keys: []
         description: 
@@ -321,7 +324,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 721bae7aec359344c845f9af71f10331
-        position: {x: 660, y: 1065}
+        position: {x: 615, y: 1065}
         blackboard:
           keys: []
         description: 
@@ -345,7 +348,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: ad072d0eda4bb5d41ad13d93c51d3758
-        position: {x: 360, y: 1065}
+        position: {x: 450, y: 1275}
         blackboard:
           keys: []
         description: 
@@ -356,7 +359,7 @@ MonoBehaviour:
         maxSeekDistance:
           reference:
             rid: 7888084692797227531
-          defaultValue: 0
+          defaultValue: 5000
         seekTargeter:
           reference:
             rid: 7888084650115465949
@@ -389,7 +392,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: ca3852123304915419c7b19955cf1eac
-        position: {x: 915, y: 1065}
+        position: {x: 930, y: 1065}
         blackboard:
           keys: []
         description: 
@@ -405,3 +408,54 @@ MonoBehaviour:
           reference:
             rid: 7888084650115465949
           defaultValue: {fileID: 0}
+    - rid: 7888084845085065780
+      type: {class: IsAlive, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: b050792befd5ec04f8bc8d09f6a12329
+        position: {x: 180, y: 1410}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        collider:
+          reference:
+            rid: 7888084646981010020
+          defaultValue: {fileID: 0}
+    - rid: 7888084845085065873
+      type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 19fd54196dd54194d97a00deab29d42d
+        position: {x: 315, y: 1065}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7888084845085065874
+        - rid: 7888084729195397856
+    - rid: 7888084845085065874
+      type: {class: Inverter, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 985f3c60083ce9a418af3fdb3f6bd58d
+        position: {x: 180, y: 1260}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7888084845085065780

@@ -263,7 +263,6 @@ public class Path
         b = a + direction * closestSegment.ScalarProjection;
         Gizmos.DrawLine(a, b);
 
-
         Gizmos.color = Color.yellow;
         a = b;
         b = gizmoFuturePosition;

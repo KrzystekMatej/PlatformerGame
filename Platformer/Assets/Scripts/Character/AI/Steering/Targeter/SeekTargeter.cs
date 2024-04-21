@@ -14,12 +14,28 @@ public class SeekTargeter : Targeter
     public Vector2 GoalPosition { get; set; }
     public GameObject GoalOwner { get; set; }
 
-    public override ProcessState TryUpdateGoal(SteeringGoal goal)
+#if UNITY_EDITOR
+    Vector2 gizmoGoalPosition;
+#endif
+
+    public override ProcessState Target(SteeringGoal goal)
     {
-        Vector2 goalPosition = isFleeing ? agent.CenterPosition + (agent.CenterPosition - GoalPosition) : GoalPosition;
-        if (Vector2.Distance(goalPosition, agent.CenterPosition) > MaxSeekDistance) return ProcessState.Failure;
-        goal.Position = goalPosition;
-        goal.Owner = GoalOwner;
+        if (!isFleeing)
+        {
+            goal.Position = GoalPosition;
+            if (Vector2.Distance(goal.Position, agent.CenterPosition) > MaxSeekDistance) return ProcessState.Failure;
+            goal.Owner = GoalOwner;
+        }
+        else
+        {
+            const float longDistance = 5000f;
+            float fleeDistance = MaxSeekDistance > longDistance ? longDistance : MaxSeekDistance;
+            goal.Position = GoalPosition + (agent.CenterPosition - GoalPosition).normalized * fleeDistance;
+            goal.Owner = null;
+        }
+#if UNITY_EDITOR
+        gizmoGoalPosition = goal.Position;
+#endif
         return ProcessState.Running;
     }
 
@@ -29,7 +45,7 @@ public class SeekTargeter : Targeter
     {
         if (!Application.isPlaying) return;
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(GoalPosition, 0.5f);
+        Gizmos.DrawWireSphere(gizmoGoalPosition, 0.5f);
     }
 #endif
 }

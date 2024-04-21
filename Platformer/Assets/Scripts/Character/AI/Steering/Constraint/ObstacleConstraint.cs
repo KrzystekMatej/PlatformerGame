@@ -12,10 +12,10 @@ using UnityEngine.UIElements;
 public class ObstacleConstraint : Constraint
 {
     [SerializeField]
-    private CastDetector detector;
+    private LayerMask obstacleMask;
 
     private int problemSegmentIndex = -1;
-    private int detectionCount;
+    private RaycastHit2D hit;
 
     private NavGraphNode startNode;
     private NavGraphNode endNode;
@@ -37,27 +37,25 @@ public class ObstacleConstraint : Constraint
     public override bool IsViolated(List<Vector2> pointPath)
     {
         if (pointPath.Count < 2) return false;
-        detector.Size = new Vector2(agent.EnclosingCircleRadius, 0);
 
         for (int i = 0; i < pointPath.Count - 1; i++)
         {
-            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], agent.EnclosingCircleRadius, detector.DetectLayerMask);
-            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], agent.EnclosingCircleRadius, detector.DetectLayerMask);
+            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], agent.EnclosingCircleRadius, obstacleMask);
+            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], agent.EnclosingCircleRadius, obstacleMask);
 
             if (!nonBlockStart.HasValue || !nonBlockEnd.HasValue)
             {
                 problemSegmentIndex = -1;
                 return true;
             }
+
             pointPath[i] = nonBlockStart.Value;
             pointPath[i + 1] = nonBlockEnd.Value;
 
-            Vector2 direction = pointPath[i + 1] - pointPath[i];
-            detector.Direction = direction.normalized;
-            detector.Distance = direction.magnitude;
-            detectionCount = detector.Detect(pointPath[i]);
+            Vector2 segmentVector = pointPath[i + 1] - pointPath[i];
+            hit = Physics2D.CircleCast(pointPath[i], agent.EnclosingCircleRadius, segmentVector, segmentVector.magnitude, obstacleMask);
 
-            if (detectionCount > 0)
+            if (hit)
             {
                 problemSegmentIndex = i;
                 return true;
@@ -67,22 +65,22 @@ public class ObstacleConstraint : Constraint
         return false;
     }
 
-    public override SteeringGoal Suggest(List<Vector2> pointPath, SteeringGoal goal)
+    public override bool Suggest(List<Vector2> pointPath, SteeringGoal goal)
     {
-        if (problemSegmentIndex == -1) return new SteeringGoal();
-        Collider2D obstacle = detector.Hits[0].collider;
-        NavGraph navGraph = obstacle.GetComponentInChildren<NavGraph>();
-        if (!navGraph) return new SteeringGoal();
+        if (problemSegmentIndex == -1) return false;
+
+        NavGraph navGraph = hit.collider.GetComponentInChildren<NavGraph>();
+        if (!navGraph) return false;
 
         NavPath navPath = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], agent.EnclosingCircleRadius, navGraph);
-        if (navPath == null) return new SteeringGoal();
+        if (navPath == null) return false;
 
 #if UNITY_EDITOR
         gizmoPath = navPath;
 #endif
 
         goal.Position = navPath.Nodes[1].GetExpandedPosition(agent.EnclosingCircleRadius);
-        return goal;
+        return true;
     }
 
     private NavPath GetAvoidancePath(Vector2 startPoint, Vector2 endPoint, float agentRadius, NavGraph navGraph)

@@ -31,7 +31,7 @@ public class PathTargeter : Targeter
     }
 
 
-    public override ProcessState TryUpdateGoal(SteeringGoal goal)
+    public override ProcessState Target(SteeringGoal goal)
     {
         if (isDynamic) Recalculate();
 

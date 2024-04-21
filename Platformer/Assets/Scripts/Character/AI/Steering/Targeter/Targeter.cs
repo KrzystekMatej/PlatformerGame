@@ -6,5 +6,5 @@ using UnityEngine;
 
 public abstract class Targeter : PipelineComponent
 {
-    public abstract ProcessState TryUpdateGoal(SteeringGoal goal);
+    public abstract ProcessState Target(SteeringGoal goal);
 }

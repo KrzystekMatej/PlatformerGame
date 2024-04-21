@@ -28,7 +28,7 @@ public class AgentManager : MonoBehaviour, IHittable
 
     public Vector2 CenterPosition { get => TriggerCollider.bounds.center; }
     public float EnclosingCircleRadius { get => MathUtility.GetEnclosingCircleRadius(TriggerCollider); }
-    public LayerMask CollisionMask { get; private set; }
+    public LayerMask PhysicsCollisionMask { get; private set; }
 
 
     private void Awake()
@@ -48,7 +48,7 @@ public class AgentManager : MonoBehaviour, IHittable
         StateMachine = GetComponentInChildren<FiniteStateMachine>();
         TriggerCollider = TriggerCollider == null ? GetComponent<Collider2D>() : TriggerCollider;
         PhysicsCollider = PhysicsCollider == null ? GetComponentInChildren<Collider2D>() : PhysicsCollider;
-        CollisionMask = Utility.GetCollisionLayerMask(PhysicsCollider.gameObject.layer);
+        PhysicsCollisionMask = Utility.GetCollisionLayerMask(PhysicsCollider.gameObject.layer);
 
         InstanceData = new AgentInstanceData()
         {

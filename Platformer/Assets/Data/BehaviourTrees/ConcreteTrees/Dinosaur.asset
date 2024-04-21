@@ -38,7 +38,6 @@ MonoBehaviour:
   - rid: 7888084646981009780
   - rid: 7888084646981009889
   - rid: 7888084646981009908
-  - rid: 7888084650115466086
   - rid: 7888084729195397139
   - rid: 7888084729195397287
   - rid: 7888084729195397361
@@ -50,8 +49,8 @@ MonoBehaviour:
     - rid: 7888084646981009779
     - rid: 7888084650115466029
     - rid: 7888084650115466030
-  viewPosition: {x: 739, y: 81, z: 0}
-  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
+  viewPosition: {x: 935, y: -30, z: 0}
+  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
     RefIds:
@@ -344,7 +343,7 @@ MonoBehaviour:
         - rid: 7407168253177626728
         - rid: 7407168257990853614
         - rid: 7407168264709603995
-        - rid: 7888084650115466086
+        - rid: 7888084729195397287
     - rid: 7888084628838810352
       type: {class: IsColliderInFront, ns: , asm: Assembly-CSharp}
       data:
@@ -523,22 +522,6 @@ MonoBehaviour:
         typeName: SeekTargeter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         value: {fileID: 0}
-    - rid: 7888084650115466086
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: b19e5f6619c34b14290d449e77c67777
-        position: {x: 735, y: 870}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7888084729195397287
     - rid: 7888084668328182194
       type: {class: IntKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -569,7 +552,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4b9bf6b06d69f4b4a8d6be9dc1d3290c
-        position: {x: 735, y: 1110}
+        position: {x: 690, y: 915}
         blackboard:
           keys: []
         description: 
