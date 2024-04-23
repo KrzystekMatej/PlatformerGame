@@ -8,7 +8,6 @@ public class AIInputController : InputController
     private bool jumpRequest;
     private bool attackRequest;
 
-
     private void Update()
     {
         if (stopRequest)

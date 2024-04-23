@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Dragon
   m_EditorClassIdentifier: 
   WeaponName: InvisibleNonGround
-  AttackDamage: 1
-  KnockbackForce: 0
+  AttackDamage: 3
+  KnockbackForce: 20
   <AttackDetector>k__BackingField: {fileID: 11400000, guid: 0d7988d1657300641a4eda4d0179bd7a, type: 2}
   IsGroundWeapon: 0
   WeaponSprite: {fileID: 0}

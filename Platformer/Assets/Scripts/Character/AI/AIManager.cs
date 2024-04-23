@@ -20,7 +20,7 @@ public class AIManager : MonoBehaviour
         TreeRunner = GetComponentInChildren<BehaviourTreeInstance>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(AIUpdate());
     }

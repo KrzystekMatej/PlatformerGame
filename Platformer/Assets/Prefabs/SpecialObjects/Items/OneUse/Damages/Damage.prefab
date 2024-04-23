@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 944058754984460113}
   - component: {fileID: 314085541728250490}
   - component: {fileID: 1536900018690885408}
+  - component: {fileID: 3830108906055078214}
   m_Layer: 10
   m_Name: Damage
   m_TagString: Untagged
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.5625, y: 1}
+  m_Size: {x: 1.2, y: 0.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -188,6 +189,7 @@ MonoBehaviour:
   collectSound: {fileID: 0}
   attacker: {fileID: 0}
   damageWeapon: {fileID: 0}
+  filter: {fileID: 944058754984460113}
 --- !u!114 &1536900018690885408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,3 +203,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <TimeToDestroy>k__BackingField: 0
+--- !u!114 &3830108906055078214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4983611067930591715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c4fe9118c32c8e469379e57a5fdb58b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerCollider: {fileID: 0}
+  triggerMask:
+    serializedVersion: 2
+    m_Bits: 24576
+  <TriggerCounter>k__BackingField: 0
+  OnEnter:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1536900018690885408}
+        m_TargetAssemblyTypeName: ObjectDestroyer, Assembly-CSharp
+        m_MethodName: Destroy
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnExit:
+    m_PersistentCalls:
+      m_Calls: []

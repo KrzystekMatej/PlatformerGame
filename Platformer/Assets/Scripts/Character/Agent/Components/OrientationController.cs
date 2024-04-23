@@ -7,6 +7,8 @@ using UnityEngine.Windows;
 public class OrientationController : MonoBehaviour
 {
     [SerializeField]
+    private bool flipOnStart;
+    [SerializeField]
     private Collider2D objectCollider;
     [SerializeField]
     private Rigidbody2D rigidBody;
@@ -20,6 +22,7 @@ public class OrientationController : MonoBehaviour
     {
         objectCollider = objectCollider ? objectCollider : GetComponent<Collider2D>();
         rigidBody = rigidBody ? rigidBody : GetComponentInParent<Rigidbody2D>();
+        if (flipOnStart) Flip();
     }
 
 

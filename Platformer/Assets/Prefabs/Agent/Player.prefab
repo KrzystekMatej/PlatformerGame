@@ -882,13 +882,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99e520aafdad1c4292039a918333194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightKey: 100
-  leftKey: 97
-  upKey: 119
-  downKey: 115
+  rightKey: 275
+  leftKey: 276
+  upKey: 273
+  downKey: 274
   jumpKey: 32
   attackKey: 113
-  weaponSwapKey: 101
+  weaponSwapKey: 114
   menuKey: 27
   OnMenuKeyPressed:
     m_PersistentCalls:
@@ -1157,6 +1157,10 @@ PrefabInstance:
       value: 532992
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
@@ -1172,6 +1176,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 52a8a9480403f914db4355634c7662c7, type: 2}
+    - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_Size.x
+      value: 0.92041016
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.26341248
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: detector
       value: 

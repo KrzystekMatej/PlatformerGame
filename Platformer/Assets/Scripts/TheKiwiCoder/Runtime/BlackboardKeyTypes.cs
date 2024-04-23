@@ -166,4 +166,10 @@ namespace TheKiwiCoder {
     {
 
     }
+
+    [System.Serializable]
+    public class ProcessStateKey : BlackboardKey<ProcessState>
+    {
+
+    }
 }

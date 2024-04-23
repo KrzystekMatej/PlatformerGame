@@ -20,13 +20,15 @@ public class NavGraphTracker : MonoBehaviour
         NavGraph = FindObjectsOfType<NavGraph>().FirstOrDefault(n => n.name == navGraphName);
     }
 
-    private void Start()
+    private void OnEnable()
     {
         if (NavGraph != null) StartCoroutine(UpdateTracker());
     }
 
     private IEnumerator UpdateTracker()
     {
+        yield return null;
+
         while (true)
         {
             Current = NavGraph.QuantizePosition(agent.CenterPosition, Current);

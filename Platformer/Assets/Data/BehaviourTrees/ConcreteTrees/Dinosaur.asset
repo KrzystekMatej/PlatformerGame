@@ -18,29 +18,23 @@ MonoBehaviour:
   - rid: 7407168234541285393
   - rid: 7407168234541285526
   - rid: 7407168253177626728
-  - rid: 7407168253177626731
   - rid: 7407168253177626736
-  - rid: 7407168253177626737
   - rid: 7407168253177626781
   - rid: 7407168253177626782
-  - rid: 7407168253177626787
-  - rid: 7407168253177626948
-  - rid: 7407168253177626966
-  - rid: 7407168253177627589
   - rid: 7407168257990853264
-  - rid: 7407168257990853614
   - rid: 7407168264709603995
   - rid: 7407168264709603997
-  - rid: 7888084628838810352
-  - rid: 7888084628838810371
-  - rid: 7888084646981009757
-  - rid: 7888084646981009777
   - rid: 7888084646981009780
-  - rid: 7888084646981009889
   - rid: 7888084646981009908
-  - rid: 7888084729195397139
-  - rid: 7888084729195397287
-  - rid: 7888084729195397361
+  - rid: 7888084949407105164
+  - rid: 7888084949407105165
+  - rid: 7888084949407105166
+  - rid: 7888084949407105167
+  - rid: 7888084949407105168
+  - rid: 7888084949407105169
+  - rid: 7888084949407105170
+  - rid: 7888084949407105171
+  - rid: 7888084960497369430
   treeState: 0
   blackboard:
     keys:
@@ -49,8 +43,8 @@ MonoBehaviour:
     - rid: 7888084646981009779
     - rid: 7888084650115466029
     - rid: 7888084650115466030
-  viewPosition: {x: 935, y: -30, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 721, y: 4, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -62,7 +56,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 8ec61d65-11ec-4fd7-a4f4-0f8384b1664a
-        position: {x: -15, y: -30}
+        position: {x: -105, y: 165}
         blackboard:
           keys: []
         description: 
@@ -71,14 +65,14 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         child:
-          rid: 7888084729195397361
+          rid: 7407168234541285526
     - rid: 7407168234541285526
       type: {class: Repeat, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: ba70fb6810a66714288e45bd12cce195
-        position: {x: -15, y: 390}
+        position: {x: -105, y: 390}
         blackboard:
           keys: []
         description: 
@@ -97,7 +91,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6da1fef279528fc4c964082eceb3e5b8
-        position: {x: -1215, y: 840}
+        position: {x: -900, y: 885}
         blackboard:
           keys: []
         description: 
@@ -107,31 +101,13 @@ MonoBehaviour:
         logStop: 0
         treeAsset: {fileID: 11400000, guid: 441da56c00914ba4c8ec381cd76c55b7, type: 2}
         treeInstance: {fileID: 0}
-    - rid: 7407168253177626731
-      type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: b60f18c863545a24db231fbf0c64ea1c
-        position: {x: -615, y: 1095}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7407168253177626737
-        - rid: 7888084646981009889
-        - rid: 7407168253177627589
     - rid: 7407168253177626736
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 9005c375c37e91f4185be2d0898f9101
-        position: {x: 225, y: 1380}
+        position: {x: 75, y: 1365}
         blackboard:
           keys: []
         description: 
@@ -143,30 +119,13 @@ MonoBehaviour:
         - rid: 7888084646981009908
         - rid: 7888084646981009780
         - rid: 7407168253177626782
-    - rid: 7407168253177626737
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: e1cbe1cbb7385d441b4c9091aee1ed1b
-        position: {x: -1200, y: 1260}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7407168253177626787
-        - rid: 7888084628838810371
     - rid: 7407168253177626781
       type: {class: SetDefaultSpeed, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 0d197dfc135d45249836c2607d55eb10
-        position: {x: 510, y: 1395}
+        position: {x: 360, y: 1380}
         blackboard:
           keys: []
         description: 
@@ -180,7 +139,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 87c16f2ac39bc924696a8f567a0bb855
-        position: {x: 450, y: 1605}
+        position: {x: 285, y: 1590}
         blackboard:
           keys: []
         description: 
@@ -189,99 +148,13 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         maxSpeedMultiplier: 4
-    - rid: 7407168253177626787
-      type: {class: GotHit, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: af5d102c5f7dc474291a8a42a2f0994e
-        position: {x: -1395, y: 1455}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        attacker:
-          reference:
-            rid: 7888084646981009556
-          defaultValue: {fileID: 0}
-        damageWeapon:
-          reference:
-            rid: -2
-          defaultValue: {fileID: 0}
-        a:
-          reference:
-            rid: 7888084668328182194
-          defaultValue: 0
-    - rid: 7407168253177626948
-      type: {class: CastVision, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 8b1cfa8138ace984685e8cbf634ec413
-        position: {x: -840, y: 1575}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        hits:
-          reference:
-            rid: 7888084628838810453
-        visionDetector: {fileID: 11400000, guid: 691c8bbdc888dc94d8f3db19d3e810bc, type: 2}
-        distance: 20
-        changeDirectionByOrientation: 1
-        changeOffsetByOrientation: 0
-        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-    - rid: 7407168253177626966
-      type: {class: CastVision, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: cc419a0f923f8544292631307cefe6b5
-        position: {x: -165, y: 1440}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        hits:
-          reference:
-            rid: -2
-        visionDetector: {fileID: 11400000, guid: 119fdd0f7b1256c488887808bdfa0299, type: 2}
-        distance: 1.2
-        changeDirectionByOrientation: 0
-        changeOffsetByOrientation: 1
-        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-    - rid: 7407168253177627589
-      type: {class: Inverter, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 5b6423e41e97ec0498c29426908e13e7
-        position: {x: -165, y: 1275}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        child:
-          rid: 7407168253177626966
     - rid: 7407168257990853264
       type: {class: Selector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 05869740b2e52ae4a9507a36e83502f5
-        position: {x: 360, y: 1140}
+        position: {x: 210, y: 1125}
         blackboard:
           keys: []
         description: 
@@ -292,30 +165,13 @@ MonoBehaviour:
         children:
         - rid: 7407168253177626736
         - rid: 7407168253177626781
-    - rid: 7407168257990853614
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: b99415a35523f7048963d2d3f476ab05
-        position: {x: -360, y: 885}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7407168253177626731
-        - rid: 7888084729195397139
     - rid: 7407168264709603995
       type: {class: Failure, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 909ab7cec1721eb42bcee1e8b3e5eb15
-        position: {x: 360, y: 900}
+        position: {x: 210, y: 885}
         blackboard:
           keys: []
         description: 
@@ -331,7 +187,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 4cb44ae7abfca7b47bcb3b21e4cdc1e1
-        position: {x: -15, y: 615}
+        position: {x: -120, y: 600}
         blackboard:
           keys: []
         description: 
@@ -341,43 +197,9 @@ MonoBehaviour:
         logStop: 0
         children:
         - rid: 7407168253177626728
-        - rid: 7407168257990853614
+        - rid: 7888084949407105170
         - rid: 7407168264709603995
-        - rid: 7888084729195397287
-    - rid: 7888084628838810352
-      type: {class: IsColliderInFront, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: b958f1a4e988a8546a66e84b49fbb06e
-        position: {x: -1095, y: 1605}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        collider:
-          reference:
-            rid: 7888084646981009556
-          defaultValue: {fileID: 0}
-    - rid: 7888084628838810371
-      type: {class: Inverter, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 0eae4b1bd750fff4f87b35708066f48c
-        position: {x: -1095, y: 1455}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        child:
-          rid: 7888084628838810352
+        - rid: 7888084960497369430
     - rid: 7888084628838810453
       type: {class: RaycastHit2DListKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -392,52 +214,6 @@ MonoBehaviour:
         typeName: UnityEngine.Collider2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
         value: {fileID: 0}
-    - rid: 7888084646981009757
-      type: {class: ListGet, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: daea222133519d44b962c23a3c0387e3
-        position: {x: -630, y: 1575}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        index:
-          reference:
-            rid: -2
-          defaultValue: 0
-        list:
-          reference:
-            rid: 7888084628838810453
-        item:
-          reference:
-            rid: 7888084646981009779
-    - rid: 7888084646981009777
-      type: {class: CheckHit, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 105b316ab7ef4f24b842604576db0e3a
-        position: {x: -405, y: 1575}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        toCheck:
-          reference:
-            rid: 7888084646981009779
-        minDistance: 0
-        maxDistance: 1.3
-        mask:
-          serializedVersion: 2
-          m_Bits: 24832
     - rid: 7888084646981009779
       type: {class: RaycastHit2DKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -450,7 +226,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 5209c6772cdc6bc4d876615e78f6f5b3
-        position: {x: 225, y: 1605}
+        position: {x: 60, y: 1590}
         blackboard:
           keys: []
         description: 
@@ -466,31 +242,13 @@ MonoBehaviour:
         mask:
           serializedVersion: 2
           m_Bits: 8
-    - rid: 7888084646981009889
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: ff07e44c95bc57346954524b615a0e43
-        position: {x: -630, y: 1335}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7407168253177626948
-        - rid: 7888084646981009757
-        - rid: 7888084646981009777
     - rid: 7888084646981009908
       type: {class: ListGet, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 1d6c532535fdba041af64babd95434b5
-        position: {x: 0, y: 1605}
+        position: {x: -150, y: 1590}
         blackboard:
           keys: []
         description: 
@@ -522,55 +280,13 @@ MonoBehaviour:
         typeName: SeekTargeter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
         value: {fileID: 0}
-    - rid: 7888084668328182194
-      type: {class: IntKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        name: b
-        typeName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
-        value: 7
-    - rid: 7888084729195397139
-      type: {class: TurnAround, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: c297acd358dae454bbc84aae3ebe5d30
-        position: {x: -150, y: 1125}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        seekTargeter:
-          reference:
-            rid: 7888084650115466030
-          defaultValue: {fileID: 0}
-    - rid: 7888084729195397287
-      type: {class: WalkForward, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 4b9bf6b06d69f4b4a8d6be9dc1d3290c
-        position: {x: 690, y: 915}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        seekTargeter:
-          reference:
-            rid: 7888084650115466030
-          defaultValue: {fileID: 0}
-    - rid: 7888084729195397361
+    - rid: 7888084949407105164
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 16010776ee7faf9408de41fa9a304ec9
-        position: {x: -15, y: 165}
+        guid: 432f5a295ee8ac04bafafa60272e15d0
+        position: {x: -780, y: 1125}
         blackboard:
           keys: []
         description: 
@@ -579,4 +295,161 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         children:
-        - rid: 7407168234541285526
+        - rid: 7888084949407105165
+        - rid: 7888084949407105166
+        - rid: 7888084949407105167
+    - rid: 7888084949407105165
+      type: {class: CastVision, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 60c0930e888ce6949b0066d94cdd19be
+        position: {x: -990, y: 1335}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        hits:
+          reference:
+            rid: 7888084628838810453
+        visionDetector: {fileID: 11400000, guid: 691c8bbdc888dc94d8f3db19d3e810bc, type: 2}
+        distance: 20
+        changeDirectionByOrientation: 1
+        changeOffsetByOrientation: 0
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+    - rid: 7888084949407105166
+      type: {class: ListGet, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 9143c15212c58b84ba71f1cffd089d43
+        position: {x: -765, y: 1350}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        index:
+          reference:
+            rid: -2
+          defaultValue: 0
+        list:
+          reference:
+            rid: 7888084628838810453
+        item:
+          reference:
+            rid: 7888084646981009779
+    - rid: 7888084949407105167
+      type: {class: CheckHit, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 4055083da8edceb40a49f8dea5a4cbc5
+        position: {x: -555, y: 1365}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        toCheck:
+          reference:
+            rid: 7888084646981009779
+        minDistance: 0
+        maxDistance: Infinity
+        mask:
+          serializedVersion: 2
+          m_Bits: 8
+    - rid: 7888084949407105168
+      type: {class: Inverter, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 32bc11ef2df6d454bb5c2f688700680f
+        position: {x: -345, y: 1140}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7888084949407105169
+    - rid: 7888084949407105169
+      type: {class: CastVision, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 131b6941f1ef1d34a98361c582e45dcb
+        position: {x: -345, y: 1365}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        hits:
+          reference:
+            rid: -2
+        visionDetector: {fileID: 11400000, guid: 119fdd0f7b1256c488887808bdfa0299, type: 2}
+        distance: 1.2
+        changeDirectionByOrientation: 0
+        changeOffsetByOrientation: 1
+        gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+    - rid: 7888084949407105170
+      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 53579b4a991369b4f9dd85919ca258f3
+        position: {x: -510, y: 900}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        children:
+        - rid: 7888084949407105164
+        - rid: 7888084949407105168
+        - rid: 7888084949407105171
+    - rid: 7888084949407105171
+      type: {class: StopMoving, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 810033b277360aa438a0bae81fa0ba0e
+        position: {x: -75, y: 1140}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        stopImmediately: 0
+    - rid: 7888084960497369430
+      type: {class: SubTree, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 91700c82477d9754d940fa66533dfdd0
+        position: {x: 600, y: 900}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        treeAsset: {fileID: 11400000, guid: 0d73d6ab986c11542aa4830d20883174, type: 2}
+        treeInstance: {fileID: 0}

@@ -106,6 +106,7 @@ public class WeaponManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
+        if (!gameObject.activeInHierarchy) return;
         Gizmos.color = Color.red;
         Collider2D collider = GetComponentInParent<Collider2D>();
         OrientationController orientationController = GetComponentInParent<AgentManager>().GetComponentInChildren<OrientationController>();

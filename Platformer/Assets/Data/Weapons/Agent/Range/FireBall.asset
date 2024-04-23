@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bdc343873f9013043b18a50d74e5389f, type: 3}
-  m_Name: FireBall
+  m_Name: Fireball
   m_EditorClassIdentifier: 
   WeaponName: FireBall
   AttackDamage: 1
@@ -18,9 +18,7 @@ MonoBehaviour:
   <AttackDetector>k__BackingField: {fileID: 11400000, guid: 358fcd77cad65234babf9349e4c3e0f3, type: 2}
   IsGroundWeapon: 0
   WeaponSprite: {fileID: 21300000, guid: 0869b1e96aac6d34cb086976dc7af826, type: 3}
-  WeaponSound: {fileID: 0}
+  WeaponSound: {fileID: 11400000, guid: d5f88c87b8eebc04fa8801c29f622b10, type: 2}
   DamageItemPrefab: {fileID: 4983611067930591715, guid: 78d21d0c101018e4e8c6951ff1675282, type: 3}
-  HitSound: {fileID: 0}
-  FlySpeed: 20
-  IsUnstoppable: 0
+  FlySpeed: 10
   RotationSpeed: 0

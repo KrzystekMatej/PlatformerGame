@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DragonWarrior
   m_EditorClassIdentifier: 
   <GizmoColor>k__BackingField: {r: 0, g: 1, b: 0, a: 1}
-  <Size>k__BackingField: {x: 0.536, y: 0.223}
+  <Size>k__BackingField: {x: 0.68, y: 0.2}
   <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 24832
-  <OriginOffset>k__BackingField: {x: -0, y: -0.57}
+  <OriginOffset>k__BackingField: {x: 0.02, y: -0.92}
   detectShapeType: 1
   maxDetections: 1
   <Distance>k__BackingField: 0

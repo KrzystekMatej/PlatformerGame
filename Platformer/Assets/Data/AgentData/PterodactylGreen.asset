@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PterodactylGreen
   m_EditorClassIdentifier: 
   <Health>k__BackingField: 2
-  <MaxSpeed>k__BackingField: 5
-  <MaxForce>k__BackingField: 16
+  <MaxSpeed>k__BackingField: 6
+  <MaxForce>k__BackingField: 20
   <JumpForce>k__BackingField: 12
   <JumpGravityModifier>k__BackingField: 2
   <FallGravityModifier>k__BackingField: 0.5

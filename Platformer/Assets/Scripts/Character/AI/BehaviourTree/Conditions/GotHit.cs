@@ -10,8 +10,6 @@ public class GotHit : ConditionNode
     NodeProperty<Collider2D> attacker;
     [SerializeField]
     NodeProperty<Weapon> damageWeapon;
-    [SerializeField]
-    NodeProperty<int> a;
 
     bool hit = false;
 

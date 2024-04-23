@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Pterodactyl
   m_EditorClassIdentifier: 
   <GizmoColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 1.8, y: 1.5}
+  <Size>k__BackingField: {x: 1.8, y: 1.2}
   <CapsuleDirection>k__BackingField: 0
-  <Angle>k__BackingField: 0
+  <Angle>k__BackingField: -180
   <DetectLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 8

@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class AnimatorManager : MonoBehaviour
 {
     private Animator animator;
+    private string currentStateName;
 
     public UnityEvent OnAnimationComplete;
     public UnityEvent OnAnimationAction;
@@ -15,9 +16,15 @@ public class AnimatorManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void PlayByType(StateType animationType)
+    private void OnEnable()
     {
-        animator.Play(animationType.ToString(), -1, 0f);
+        animator.Play(currentStateName, -1, 0f);
+    }
+
+    public void PlayByType(StateType state)
+    {
+        currentStateName = state.ToString();
+        animator.Play(currentStateName, -1, 0f);
     }
     public void Enable()
     {

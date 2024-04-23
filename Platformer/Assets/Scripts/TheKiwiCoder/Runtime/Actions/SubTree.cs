@@ -15,12 +15,14 @@ namespace TheKiwiCoder {
         public override void OnInit() {
             if (treeAsset) {
                 treeInstance = treeAsset.Clone();
+                treeInstance.blackboard.OnInit();
+                context.Steering.WritePipelinesToBlackboard(treeInstance.blackboard);
                 treeInstance.Bind(context);
                 drawGizmos = true;
             }
         }
 
-        protected override void OnStart() {
+protected override void OnStart() {
             if (treeInstance) {
                 treeInstance.treeState = ProcessState.Running;
             }

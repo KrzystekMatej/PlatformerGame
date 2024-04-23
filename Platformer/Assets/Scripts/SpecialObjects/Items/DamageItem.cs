@@ -8,13 +8,20 @@ public class DamageItem : Item
     private Collider2D attacker;
     [SerializeField]
     private Weapon damageWeapon;
+    [SerializeField]
+    private TriggerFilter filter;
+
+    private void Awake()
+    {
+        filter = filter ? filter : GetComponent<TriggerFilter>();
+    }
 
     public void Initialize(Sound collectSound, Collider2D attacker, Weapon damageWeapon, LayerMask hitMask)
     {
         this.collectSound = collectSound;
         this.attacker = attacker;
         this.damageWeapon = damageWeapon;
-        GetComponent<TriggerFilter>().ChangeTriggerMask(hitMask);
+        filter.ChangeTriggerMask(hitMask);
     }
 
     public override void Collect(Collider2D collider)

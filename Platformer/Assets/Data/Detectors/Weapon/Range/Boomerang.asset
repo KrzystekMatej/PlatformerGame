@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0893a4639a749994d85d4ed9f910b6c0, type: 3}
   m_Name: Boomerang
   m_EditorClassIdentifier: 
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
-  <Size>k__BackingField: {x: 9, y: 1}
+  <GizmoColor>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  <Size>k__BackingField: {x: 13, y: 1}
   <CapsuleDirection>k__BackingField: 0
   <Angle>k__BackingField: 0
   <DetectLayerMask>k__BackingField:

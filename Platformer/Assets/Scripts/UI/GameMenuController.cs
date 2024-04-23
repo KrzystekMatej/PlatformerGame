@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameMenuController : MonoBehaviour
 {
+
     public void ToggleMenu()
     {
         gameObject.SetActive(!gameObject.activeSelf);

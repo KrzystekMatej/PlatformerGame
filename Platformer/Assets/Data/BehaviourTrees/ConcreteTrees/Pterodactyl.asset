@@ -25,7 +25,6 @@ MonoBehaviour:
   - rid: 7888084534225535102
   - rid: 7888084534225535103
   - rid: 7888084646981010017
-  - rid: 7888084646981010019
   - rid: 7888084652045369389
   - rid: 7888084729195397856
   - rid: 7888084729195397895
@@ -33,11 +32,11 @@ MonoBehaviour:
   - rid: 7888084845085065780
   - rid: 7888084845085065873
   - rid: 7888084845085065874
+  - rid: 7888084947334332585
   treeState: 0
   blackboard:
     keys:
     - rid: 7888084633426068284
-    - rid: 7888084646981010018
     - rid: 7888084646981010020
     - rid: 7888084650115465947
     - rid: 7888084650115465948
@@ -45,7 +44,8 @@ MonoBehaviour:
     - rid: 7888084650115466004
     - rid: 7888084650115466006
     - rid: 7888084692797227531
-  viewPosition: {x: 637, y: -7, z: 0}
+    - rid: 7888084947334332586
+  viewPosition: {x: 494, y: 53, z: 0}
   viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
@@ -160,7 +160,7 @@ MonoBehaviour:
         children:
         - rid: 7407168307214680890
         - rid: 7888084646981010017
-        - rid: 7888084646981010019
+        - rid: 7888084947334332585
         - rid: 7407168259542745401
         - rid: 7888084845085065873
     - rid: 7407168309800468490
@@ -231,7 +231,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: f814b48f2fc91834593c58781eb44f72
-        position: {x: -480, y: 1080}
+        position: {x: -510, y: 1080}
         blackboard:
           keys: []
         description: 
@@ -248,34 +248,7 @@ MonoBehaviour:
             rid: 7888084633426068284
         item:
           reference:
-            rid: 7888084646981010018
-    - rid: 7888084646981010018
-      type: {class: RaycastHit2DKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        name: TargetHit
-        typeName: UnityEngine.RaycastHit2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-    - rid: 7888084646981010019
-      type: {class: HitToCollider, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 1cd9eab80034259408d8ceedecbfca98
-        position: {x: -255, y: 1080}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        hit:
-          reference:
-            rid: 7888084646981010018
-        collider:
-          reference:
-            rid: 7888084646981010020
-          defaultValue: {fileID: 0}
+            rid: 7888084947334332586
     - rid: 7888084646981010020
       type: {class: Collider2DKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -459,3 +432,30 @@ MonoBehaviour:
         logStop: 0
         child:
           rid: 7888084845085065780
+    - rid: 7888084947334332585
+      type: {class: HitToCollider, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: f1dea0bf3471def42ab9d5b7f3c7c31a
+        position: {x: -270, y: 1080}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        hit:
+          reference:
+            rid: 7888084947334332586
+        collider:
+          reference:
+            rid: 7888084646981010020
+          defaultValue: {fileID: 0}
+    - rid: 7888084947334332586
+      type: {class: RaycastHit2DKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
+      data:
+        name: ClosestHit
+        typeName: UnityEngine.RaycastHit2D, UnityEngine.Physics2DModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null

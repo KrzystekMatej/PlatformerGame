@@ -130,7 +130,7 @@ public class Path
 
         FindClosestSegment(goalPosition, ingoingSegment, outgoingSegment);
 
-        if (Mathf.Sqrt(closestSegment.SquaredDistance) >= radius) goalPosition = GetOffsetGoal(offset);
+        if (Mathf.Sqrt(closestSegment.SquaredDistance) >= radius || agent.RigidBody.velocity.magnitude < Mathf.Epsilon) goalPosition = GetOffsetGoal(offset);
 
 #if UNITY_EDITOR
         gizmoGoalPosition = goalPosition;

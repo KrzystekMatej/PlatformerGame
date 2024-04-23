@@ -5,21 +5,15 @@ using UnityEngine;
 
 public class CameraConfinerManager : MonoBehaviour
 {
-    TriggerFilter destroyDetector;
-
     private void Awake()
     {
-        destroyDetector = GetComponent<TriggerFilter>();
+        GetComponent<TriggerFilter>().OnExit.AddListener(Destroy);       
     }
 
-    private void Start()
-    {
-        destroyDetector.OnExit.AddListener(Destroy);
-    }
-
-    private void Destroy(Collider2D objectCollider)
+    public void Destroy(Collider2D objectCollider)
     {
         GameObject toDestroy = objectCollider.gameObject;
+        if (!toDestroy.activeInHierarchy) return;
         AgentManager agent = toDestroy.GetComponent<AgentManager>();
         if (agent == null)
         {

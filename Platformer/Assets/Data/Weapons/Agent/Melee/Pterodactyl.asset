@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponName: InvisibleNonGround
   AttackDamage: 1
-  KnockbackForce: 10
+  KnockbackForce: 0
   <AttackDetector>k__BackingField: {fileID: 11400000, guid: 1d4797c43ba388345ab20ed91a8c0af1, type: 2}
   IsGroundWeapon: 0
   WeaponSprite: {fileID: 0}

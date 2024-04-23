@@ -225,6 +225,7 @@ GameObject:
   - component: {fileID: 5279868880968376784}
   - component: {fileID: 3321102830200026872}
   - component: {fileID: 1274421531860815486}
+  - component: {fileID: 6066246520584760248}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -275,6 +276,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9fd10fc7de08b4f931c87e0bb32461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6066246520584760248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5279868880968376785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab6919d3f9080949aabd585b1f00415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationDistance: 60
+  proximityCheckInterval: 0.5
+  follow: {fileID: 8137952877383292104}
 --- !u!1 &7693929232022895084
 GameObject:
   m_ObjectHideFlags: 0
@@ -399,7 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30daddf41576cc4aa818bb82fd1704d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiUpdateInterval: 0
+  aiUpdateInterval: 0.02
 --- !u!1001 &1647915609668588414
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -466,19 +482,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
-      value: 2.3166049
+      value: 2.2603624
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.y
-      value: 1.741334
+      value: 1.7413585
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.17053655
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
-      value: -0.06422208
+      value: -0.0642221
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction
@@ -582,19 +598,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
-      value: 2.2673788
+      value: 1.8503944
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.y
-      value: 1.1285172
+      value: 0.9489063
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.18056852
+      value: -0.016977876
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
-      value: -0.315595
+      value: -0.225781
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction
@@ -1138,4 +1154,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
-  probability: 0.306
+  probability: 0.5

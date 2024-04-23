@@ -48,6 +48,11 @@ public class SteeringController : MonoBehaviour
     public void Apply()
     {
         inputController.AddSteeringForce(currentForce);
+        ResetForce();
+    }
+
+    public void ResetForce()
+    {
         currentForce = Vector2.zero;
     }
 

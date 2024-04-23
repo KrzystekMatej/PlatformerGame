@@ -19,16 +19,16 @@ MonoBehaviour:
   - rid: 7407168234541285532
   - rid: 7407168234541285534
   - rid: 7407168234541285535
-  - rid: 7407168262723339013
   - rid: 7407168262723339065
   - rid: 7407168296016675037
   - rid: 7407168296016675038
-  - rid: 7407168296016675039
+  - rid: 7888084960497369551
+  - rid: 7888084960497369943
   treeState: 0
   blackboard:
     keys: []
-  viewPosition: {x: 533, y: 104, z: 0}
-  viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
+  viewPosition: {x: 564, y: 148, z: 0}
+  viewScale: {x: 0.49717674, y: 0.49717674, z: 1}
   references:
     version: 2
     RefIds:
@@ -38,7 +38,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 214e6248-26c5-41f8-97bf-19c90c8e4132
-        position: {x: 0, y: 105}
+        position: {x: -45, y: 105}
         blackboard:
           keys: []
         description: 
@@ -54,7 +54,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 95a12efcce546074589688626e9bc0df
-        position: {x: 270, y: 1200}
+        position: {x: 105, y: 1185}
         blackboard:
           keys: []
         description: 
@@ -68,7 +68,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: b83eca320894cc54ba9b23ed506251ad
-        position: {x: 0, y: 285}
+        position: {x: -45, y: 285}
         blackboard:
           keys: []
         description: 
@@ -85,7 +85,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: eaa7426d31a04ac4baaa3ff939d7c5bd
-        position: {x: -195, y: 480}
+        position: {x: -180, y: 555}
         blackboard:
           keys: []
         description: 
@@ -93,30 +93,13 @@ MonoBehaviour:
         logStart: 0
         logState: 0
         logStop: 0
-    - rid: 7407168262723339013
-      type: {class: DelaySuccess, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 93c360149a14b2f48be1cd640f411663
-        position: {x: 270, y: 990}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        child:
-          rid: 7407168234541285532
-        duration: 0.5
     - rid: 7407168262723339065
       type: {class: StopMoving, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 4dfec44667e30e14d804af7eabb2155f
-        position: {x: -75, y: 990}
+        position: {x: -240, y: 960}
         blackboard:
           keys: []
         description: 
@@ -131,7 +114,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 1aa019430b6ce6f4d8c145233f4b1dc7
-        position: {x: 225, y: 495}
+        position: {x: 105, y: 540}
         blackboard:
           keys: []
         description: 
@@ -141,14 +124,14 @@ MonoBehaviour:
         logStop: 0
         children:
         - rid: 7407168296016675038
-        - rid: 7407168296016675039
+        - rid: 7888084960497369943
     - rid: 7407168296016675038
       type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
         guid: 02c7dac8a923f904ab2dead5df0bd077
-        position: {x: 90, y: 780}
+        position: {x: -60, y: 765}
         blackboard:
           keys: []
         description: 
@@ -158,18 +141,35 @@ MonoBehaviour:
         logStop: 0
         children:
         - rid: 7407168262723339065
-        - rid: 7407168262723339013
-    - rid: 7407168296016675039
+        - rid: 7888084960497369551
+    - rid: 7888084960497369551
+      type: {class: DelayAfterSuccess, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 8c73a649b01143e47b7925ec77256ada
+        position: {x: 90, y: 960}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7407168234541285532
+        duration: 0.6
+    - rid: 7888084960497369943
       type: {class: StopMoving, ns: , asm: Assembly-CSharp}
       data:
         state: 0
         started: 0
-        guid: 2e3bdb3856dd653469cba1dd7d187958
-        position: {x: 360, y: 765}
+        guid: c22048993d4255f42a6ca1d4c3e4c99a
+        position: {x: 270, y: 765}
         blackboard:
           keys: []
         description: 
-        drawGizmos: 0
+        drawGizmos: 1
         logStart: 0
         logState: 0
         logStop: 0

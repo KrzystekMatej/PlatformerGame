@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30daddf41576cc4aa818bb82fd1704d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiUpdateInterval: 0
+  aiUpdateInterval: 0.02
 --- !u!1 &2972795436447144283
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 4559221739932178312}
   - component: {fileID: 6347451679788155040}
   - component: {fileID: 7471444707383146534}
+  - component: {fileID: 4893676835287391459}
   m_Layer: 0
   m_Name: Dinosaur
   m_TagString: Untagged
@@ -206,6 +207,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f9fd10fc7de08b4f931c87e0bb32461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4893676835287391459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4559221739932178313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ab6919d3f9080949aabd585b1f00415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationDistance: 60
+  proximityCheckInterval: 0.5
+  follow: {fileID: 499778370858099344}
 --- !u!1 &8275381737104795860
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
-  probability: 0.306
+  probability: 0.5
 --- !u!114 &499778371479014625 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7363741092666616263, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
