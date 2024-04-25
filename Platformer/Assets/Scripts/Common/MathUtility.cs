@@ -6,8 +6,9 @@ using UnityEngine;
 
 public static class MathUtility
 {
-    public const int unblockPositionAttemptCount = 16;
-    public const float circlePathRatio = 8f;
+    public const int UnblockPositionAttemptCount = 16;
+    public const float CirclePathRatio = 8f;
+    public const float LongDistance = 10000;
 
     public static Vector2 PolarCoordinatesToVector2(float angleRad, float magnitude)
     {
@@ -202,7 +203,7 @@ public static class MathUtility
     public static Vector2? UnblockPosition(Vector2 position, float agentRadius, LayerMask collisionMask)
     {
         const float safetyMargin = 0.001f;
-        for (int i = 0; i < unblockPositionAttemptCount; i++)
+        for (int i = 0; i < UnblockPositionAttemptCount; i++)
         {
             RaycastHit2D hit = Physics2D.CircleCast(position, agentRadius, Vector2.zero, 0, collisionMask);
             if (hit)
@@ -311,7 +312,7 @@ public static class MathUtility
         }
         else if (collider is CircleCollider2D circle)
         {
-            return new List<Vector2[]> { GetCircleColliderCircumscribedPath(circle, (int)Mathf.Round(circle.radius * circlePathRatio)) };
+            return new List<Vector2[]> { GetCircleColliderCircumscribedPath(circle, (int)Mathf.Round(circle.radius * CirclePathRatio)) };
         }
         else if (collider is PolygonCollider2D polygon)
         {

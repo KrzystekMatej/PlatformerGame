@@ -482,15 +482,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
-      value: 2.2603624
+      value: 2.2603762
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.y
-      value: 1.7413585
+      value: 1.7413661
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: 0
+      value: -0.07377173
       objectReference: {fileID: 0}
     - target: {fileID: 2774391687644902663, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
@@ -592,6 +592,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -774865859, guid: 3048c38a175366f45b9fcf18af03fe2a, type: 3}
+    - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350650, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -1050,6 +1054,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b02982b542225418ab3bdbf8c4c76f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7054844323780958307 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8590973685764655901, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1647915609668588414}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137952877383292107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7993744435714839249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8660966007656399279, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -1089,7 +1104,7 @@ MonoBehaviour:
   OnUpdate:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8137952876862978745}
+      - m_Target: {fileID: 7054844323780958307}
         m_TargetAssemblyTypeName: OrientationController, Assembly-CSharp
         m_MethodName: SetAgentOrientation
         m_Mode: 1
@@ -1120,17 +1135,6 @@ MonoBehaviour:
       type: {class: GenericToAttackTransition, ns: , asm: Assembly-CSharp}
       data:
         <TargetState>k__BackingField: 5
---- !u!114 &8137952876862978745 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7363741092666616263, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
-  m_PrefabInstance: {fileID: 1647915609668588414}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8137952877383292104 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7363741092985079734, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

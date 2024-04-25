@@ -21,14 +21,17 @@ public class AgentManager : MonoBehaviour, IHittable
     public Invulnerability Invulnerability { get; private set; }
     public FiniteStateMachine StateMachine { get; private set; }
     [field: SerializeField]
-    public Collider2D PhysicsCollider { get; private set; }
-    [field: SerializeField]
     public Collider2D TriggerCollider { get; private set; }
+    [field: SerializeField]
+    public Collider2D PhysicsCollider { get; private set; }
+    public LayerMask TriggerMask { get; private set; }
+    public LayerMask PhysicsMask { get; private set; }
 
+    public Vector2 TriggerCenter { get => TriggerCollider.bounds.center; }
+    public Vector2 PhysicsCenter { get => PhysicsCollider.bounds.center; }
 
-    public Vector2 CenterPosition { get => TriggerCollider.bounds.center; }
-    public float EnclosingCircleRadius { get => MathUtility.GetEnclosingCircleRadius(TriggerCollider); }
-    public LayerMask PhysicsCollisionMask { get; private set; }
+    public float TriggerRadius { get => MathUtility.GetEnclosingCircleRadius(TriggerCollider); }
+    public float PhysicsRadius { get => MathUtility.GetEnclosingCircleRadius(PhysicsCollider); }
 
 
     private void Awake()
@@ -46,9 +49,8 @@ public class AgentManager : MonoBehaviour, IHittable
         PointManager = GetComponent<PointManager>();
         Invulnerability = GetComponent<Invulnerability>();
         StateMachine = GetComponentInChildren<FiniteStateMachine>();
-        TriggerCollider = TriggerCollider == null ? GetComponent<Collider2D>() : TriggerCollider;
-        PhysicsCollider = PhysicsCollider == null ? GetComponentInChildren<Collider2D>() : PhysicsCollider;
-        PhysicsCollisionMask = Utility.GetCollisionLayerMask(PhysicsCollider.gameObject.layer);
+        TriggerMask = Utility.GetCollisionLayerMask(TriggerCollider.gameObject.layer);
+        PhysicsMask = Utility.GetCollisionLayerMask(PhysicsCollider.gameObject.layer);
 
         InstanceData = new AgentInstanceData()
         {
@@ -99,14 +101,15 @@ public class AgentManager : MonoBehaviour, IHittable
     {
         RigidBody.velocity = Vector2.zero;
         if (knockbackForce <= 0) return;
-        Vector2 direction = CenterPosition - from;
+        Vector2 direction = TriggerCenter - from;
         RigidBody.AddForce(new Vector2(direction.normalized.x, 0) * knockbackForce, ForceMode2D.Impulse);
     }
 
     private void OnDrawGizmosSelected()
     {
-        Collider2D collider = GetComponent<Collider2D>();
         Gizmos.color = Color.magenta;
-        Gizmos.DrawWireSphere(CenterPosition, MathUtility.GetEnclosingCircleRadius(collider));
+        Gizmos.DrawWireSphere(TriggerCenter, TriggerRadius);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(PhysicsCenter, PhysicsRadius);
     }
 }

@@ -25,14 +25,10 @@ public class GotHit : ConditionNode
         this.damageWeapon.Value = damageWeapon;
     }
 
-    protected override void OnStart() { }
-
     protected override bool IsConditionSatisfied()
     {
         bool temp = hit;
         hit = false;
         return temp;
     }
-
-    protected override void OnStop() { }
 }

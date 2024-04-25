@@ -19,7 +19,7 @@ public class DirectActuator : Actuator
 
         if (goal.HasPosition)
         {
-            path.Add(agent.CenterPosition);
+            path.Add(agent.PhysicsCenter);
             path.Add(goal.Position);
         }
 

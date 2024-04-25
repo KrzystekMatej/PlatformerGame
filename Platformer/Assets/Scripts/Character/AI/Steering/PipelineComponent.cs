@@ -7,9 +7,9 @@ public abstract class PipelineComponent : MonoBehaviour
 {
     protected AgentManager agent;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
-        agent = GetComponentInParent<AIManager>().Agent;
+        agent = GetComponentInParent<AIInputController>().GetComponentInChildren<AgentManager>();
     }
 
     public virtual void Enable() { }

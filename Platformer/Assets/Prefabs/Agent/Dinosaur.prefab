@@ -535,7 +535,7 @@ PrefabInstance:
     - target: {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 499778371479014625}
+      objectReference: {fileID: 1722511724336262715}
     - target: {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -910,17 +910,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToCreate: {fileID: 7147631571952456576, guid: 3be24d75897598442a27c4e50c72ab5c, type: 3}
   probability: 0.5
---- !u!114 &499778371479014625 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7363741092666616263, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
-  m_PrefabInstance: {fileID: 6980247669020632358}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 499778371479014637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &499778371479014627 stripped
 CapsuleCollider2D:
   m_CorrespondingSourceObject: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -971,6 +960,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36fe6dec2ee21eb48a5b4299dd06921c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1722511724336262715 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8590973685764655901, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 6980247669020632358}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499778370858099347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1796721810552579209 stripped

@@ -4,16 +4,20 @@ using UnityEngine;
 using TheKiwiCoder;
 using System;
 
-namespace TheKiwiCoder {
+namespace TheKiwiCoder
+{
 
     [System.Serializable]
-    public class SubTree : ActionNode {
-        
+    public class SubTree : ActionNode
+    {
+
         [Tooltip("Behaviour tree asset to run as a subtree")] public BehaviourTree treeAsset;
         [HideInInspector] public BehaviourTree treeInstance;
 
-        public override void OnInit() {
-            if (treeAsset) {
+        public override void OnInit()
+        {
+            if (treeAsset)
+            {
                 treeInstance = treeAsset.Clone();
                 treeInstance.blackboard.OnInit();
                 context.Steering.WritePipelinesToBlackboard(treeInstance.blackboard);
@@ -22,17 +26,22 @@ namespace TheKiwiCoder {
             }
         }
 
-protected override void OnStart() {
-            if (treeInstance) {
+        protected override void OnStart()
+        {
+            if (treeInstance)
+            {
                 treeInstance.treeState = ProcessState.Running;
             }
         }
 
-        protected override void OnStop() {
+        protected override void OnStop()
+        {
         }
 
-        protected override ProcessState OnUpdate() {
-            if (treeInstance) {
+        protected override ProcessState OnUpdate()
+        {
+            if (treeInstance)
+            {
                 return treeInstance.Update();
             }
             return ProcessState.Failure;

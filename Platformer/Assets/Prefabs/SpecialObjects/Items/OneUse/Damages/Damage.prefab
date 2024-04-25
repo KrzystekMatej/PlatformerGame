@@ -218,7 +218,7 @@ MonoBehaviour:
   triggerCollider: {fileID: 0}
   triggerMask:
     serializedVersion: 2
-    m_Bits: 24576
+    m_Bits: 8192
   <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:

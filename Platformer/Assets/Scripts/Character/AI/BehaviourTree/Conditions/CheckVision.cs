@@ -36,10 +36,6 @@ public class CheckVision : ConditionNode
 #endif
     }
 
-
-
-    protected override void OnStart() { }
-
     protected override bool IsConditionSatisfied()
     {
         int count = 0;
@@ -62,8 +58,6 @@ public class CheckVision : ConditionNode
         checkedHits.Value.Clear();
         return false;
     }
-
-    protected override void OnStop() { }
 
     private bool CheckHit(RaycastHit2D hit)
     {

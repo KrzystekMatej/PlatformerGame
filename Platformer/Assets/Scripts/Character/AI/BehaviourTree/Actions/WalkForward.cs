@@ -13,8 +13,7 @@ public class WalkForward : ActionNode
 
     protected override ProcessState OnUpdate()
     {
-        const float lookAhead = 2f;
-        seekTargeter.Value.GoalPosition = context.Agent.CenterPosition + context.Agent.OrientationController.CurrentOrientation * context.Agent.EnclosingCircleRadius * lookAhead;
+        seekTargeter.Value.GoalPosition = context.Agent.TriggerCenter + context.Agent.OrientationController.CurrentOrientation * MathUtility.LongDistance;
 
         return context.Steering.Recalculate();
     }

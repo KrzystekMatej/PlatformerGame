@@ -887,8 +887,8 @@ MonoBehaviour:
   upKey: 273
   downKey: 274
   jumpKey: 32
-  attackKey: 113
-  weaponSwapKey: 114
+  attackKey: 114
+  weaponSwapKey: 101
   menuKey: 27
   OnMenuKeyPressed:
     m_PersistentCalls:
@@ -1166,7 +1166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 7363741091481350647, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_SortingLayerID
@@ -1231,7 +1231,7 @@ PrefabInstance:
     - target: {fileID: 7363741092903229669, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 9057417480644603257}
+      objectReference: {fileID: 7834697352002670499}
     - target: {fileID: 7363741092903229669, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1263,7 +1263,7 @@ PrefabInstance:
     - target: {fileID: 7363741092903229670, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 9057417480644603257}
+      objectReference: {fileID: 7834697352002670499}
     - target: {fileID: 7363741092903229670, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1327,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 9057417480644603257}
+      objectReference: {fileID: 7834697352002670499}
     - target: {fileID: 7363741092903229675, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnUpdate.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1711,6 +1711,17 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4511701468293684576}
   m_Enabled: 1
+--- !u!114 &7834697352002670499 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8590973685764655901, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+  m_PrefabInstance: {fileID: 1982475228897019070}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057417481030304523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9057417480644603253 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7363741092666616267, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
@@ -1736,17 +1747,6 @@ MonoBehaviour:
   boxCastHeight: 0.3
   gizmoColorDetected: {r: 1, g: 0, b: 0, a: 1}
   gizmoColorNotDetected: {r: 0, g: 1, b: 0, a: 1}
---- !u!114 &9057417480644603257 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7363741092666616263, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
-  m_PrefabInstance: {fileID: 1982475228897019070}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057417480644603253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!70 &9057417480644603259 stripped
 CapsuleCollider2D:
   m_CorrespondingSourceObject: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}

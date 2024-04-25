@@ -15,7 +15,8 @@ public class AIManager : MonoBehaviour
 
     private void Awake()
     {
-        Agent = GetComponentInParent<InputController>().GetComponentInChildren<AgentManager>();
+        AIInputController inputController = GetComponentInParent<AIInputController>();
+        Agent = inputController.GetComponentInChildren<AgentManager>();
         Steering = GetComponentInChildren<SteeringController>();
         TreeRunner = GetComponentInChildren<BehaviourTreeInstance>();
     }
@@ -28,7 +29,7 @@ public class AIManager : MonoBehaviour
     private IEnumerator AIUpdate()
     {
         yield return null;
-        Steering.InitializePipelines();
+        Steering.CurrentPipeline.Enable();
 
         while (true)
         {

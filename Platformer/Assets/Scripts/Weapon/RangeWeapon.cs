@@ -18,7 +18,7 @@ public class RangeWeapon : AttackingWeapon
         damageItem.GetComponent<SpriteRenderer>().sprite = WeaponSprite;
         Mover mover = damageItem.AddComponent<Mover>();
         mover.Initialize(AttackDetector.Size.x, direction * FlySpeed);
-        if (RotationSpeed > 0) damageItem.AddComponent<Rotator>().Initialize(RotationSpeed, direction.x);
+        if (RotationSpeed > 0) damageItem.AddComponent<Rotator>().Initialize(RotationSpeed * direction.x);
 
         mover.OnMovementFinished.AddListener(() => Destroy(damageItem));
     }

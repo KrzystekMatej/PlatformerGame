@@ -24,8 +24,9 @@ public class ObstacleConstraint : Constraint
     private NavPath gizmoPath;
 #endif
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         GameObject startObject = new GameObject("startNode");
         GameObject endObject = new GameObject("endNode");
         startObject.transform.SetParent(transform);
@@ -40,8 +41,8 @@ public class ObstacleConstraint : Constraint
 
         for (int i = 0; i < pointPath.Count - 1; i++)
         {
-            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], agent.EnclosingCircleRadius, obstacleMask);
-            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], agent.EnclosingCircleRadius, obstacleMask);
+            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], agent.PhysicsRadius, obstacleMask);
+            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], agent.PhysicsRadius, obstacleMask);
 
             if (!nonBlockStart.HasValue || !nonBlockEnd.HasValue)
             {
@@ -53,7 +54,7 @@ public class ObstacleConstraint : Constraint
             pointPath[i + 1] = nonBlockEnd.Value;
 
             Vector2 segmentVector = pointPath[i + 1] - pointPath[i];
-            hit = Physics2D.CircleCast(pointPath[i], agent.EnclosingCircleRadius, segmentVector, segmentVector.magnitude, obstacleMask);
+            hit = Physics2D.CircleCast(pointPath[i], agent.PhysicsRadius, segmentVector, segmentVector.magnitude, obstacleMask);
 
             if (hit)
             {
@@ -72,14 +73,14 @@ public class ObstacleConstraint : Constraint
         NavGraph navGraph = hit.collider.GetComponentInChildren<NavGraph>();
         if (!navGraph) return false;
 
-        NavPath navPath = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], agent.EnclosingCircleRadius, navGraph);
+        NavPath navPath = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], agent.PhysicsRadius, navGraph);
         if (navPath == null) return false;
 
 #if UNITY_EDITOR
         gizmoPath = navPath;
 #endif
 
-        goal.Position = navPath.Nodes[1].GetExpandedPosition(agent.EnclosingCircleRadius);
+        goal.Position = navPath.Nodes[1].GetExpandedPosition(agent.PhysicsRadius);
         return true;
     }
 
@@ -107,11 +108,11 @@ public class ObstacleConstraint : Constraint
         {
             Gizmos.DrawLine
             (
-                gizmoPath.Nodes[i].GetExpandedPosition(agent.EnclosingCircleRadius),
-                gizmoPath.Nodes[i + 1].GetExpandedPosition(agent.EnclosingCircleRadius)
+                gizmoPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius),
+                gizmoPath.Nodes[i + 1].GetExpandedPosition(agent.PhysicsRadius)
             );
-            Gizmos.DrawWireSphere(gizmoPath.Nodes[i].GetExpandedPosition(agent.EnclosingCircleRadius), 0.3f);
-            Gizmos.DrawWireSphere(gizmoPath.Nodes[i+1].GetExpandedPosition(agent.EnclosingCircleRadius), 0.3f);
+            Gizmos.DrawWireSphere(gizmoPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
+            Gizmos.DrawWireSphere(gizmoPath.Nodes[i+1].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
         }
     }
 #endif

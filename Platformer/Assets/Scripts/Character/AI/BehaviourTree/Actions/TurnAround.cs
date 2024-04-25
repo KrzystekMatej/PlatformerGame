@@ -13,9 +13,8 @@ public class TurnAround : ActionNode
 
     protected override void OnStart()
     {
-        const float lookAhead = 2f;
         turnedDirection = - context.Agent.OrientationController.CurrentOrientation;
-        seekTargeter.Value.GoalPosition = context.Agent.CenterPosition + turnedDirection * context.Agent.EnclosingCircleRadius * lookAhead;
+        seekTargeter.Value.GoalPosition = context.Agent.TriggerCenter + turnedDirection * MathUtility.LongDistance;
     }
 
     protected override ProcessState OnUpdate()

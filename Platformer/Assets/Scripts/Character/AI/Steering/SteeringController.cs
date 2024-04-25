@@ -16,21 +16,16 @@ public class SteeringController : MonoBehaviour
     private void Awake()
     {
         inputController = GetComponentInParent<AIInputController>();
-    }
-
-    public void InitializePipelines()
-    {
-        SteeringPipeline[] pipelines = GetComponentsInChildren<SteeringPipeline>();
+        SteeringPipeline[] pipelines = GetComponentsInChildren<SteeringPipeline>(true);
         foreach (SteeringPipeline p in pipelines)
         {
             p.enabled = false;
         }
-        CurrentPipeline.Enable();
     }
 
     public void WritePipelinesToBlackboard(Blackboard blackboard)
     {
-        SteeringPipeline[] pipelines = GetComponentsInChildren<SteeringPipeline>();
+        SteeringPipeline[] pipelines = GetComponentsInChildren<SteeringPipeline>(true);
         foreach (SteeringPipeline pipeline in pipelines)
         {
             blackboard.SetValue(pipeline.name, pipeline);
@@ -45,15 +40,15 @@ public class SteeringController : MonoBehaviour
         return output.State;
     }
 
+    public void Restart()
+    {
+        currentForce = Vector2.zero;
+    }
+
     public void Apply()
     {
         inputController.AddSteeringForce(currentForce);
-        ResetForce();
-    }
-
-    public void ResetForce()
-    {
-        currentForce = Vector2.zero;
+        Restart();
     }
 
     public bool SwitchPipeline(SteeringPipeline newPipeline)

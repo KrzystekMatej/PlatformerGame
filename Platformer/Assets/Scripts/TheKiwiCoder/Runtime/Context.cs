@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace TheKiwiCoder {
+namespace TheKiwiCoder
+{
 
     // The context is a shared object every node has access to.
     // Commonly used components and subsytems should be stored here
@@ -20,9 +21,8 @@ namespace TheKiwiCoder {
         {
             Context context = new Context();
             context.InputController = gameObject.GetComponentInParent<AIInputController>();
-            AIManager manager = gameObject.GetComponentInParent<AIManager>();
-            context.Agent = manager.Agent;
-            context.Steering = manager.Steering;
+            context.Agent = context.InputController.GetComponentInChildren<AgentManager>();
+            context.Steering = context.InputController.GetComponentInChildren<SteeringController>();
             return context;
         }
     }

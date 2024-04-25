@@ -20,18 +20,17 @@ public class PlanningDecomposer : Decomposer
     private Vector2? gizmoGoalPosition;
 #endif
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
         agentTracker = agent.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph.name == navGraphName);
     }
 
     public override bool Decompose(SteeringGoal goal)
     {
         if (!goal.HasPosition) return true;
-        float agentRadius = agent.EnclosingCircleRadius;
+        float agentRadius = agent.PhysicsRadius;
 
-        Vector2? nonBlockAgent = MathUtility.UnblockPosition(agent.CenterPosition, agentRadius, agentTracker.NavGraph.WallMask);
+        Vector2? nonBlockAgent = MathUtility.UnblockPosition(agent.PhysicsCenter, agentRadius, agentTracker.NavGraph.WallMask);
         Vector2? nonBlockGoal = MathUtility.UnblockPosition(goal.Position, agentRadius, agentTracker.NavGraph.WallMask);
 
 #if UNITY_EDITOR
@@ -107,15 +106,15 @@ public class PlanningDecomposer : Decomposer
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(gizmoAgentPosition.Value, 0.3f);
         Gizmos.DrawWireSphere(gizmoGoalPosition.Value, 0.3f);
-        for (int i = GetMostDistantReachableIndex(gizmoAgentPosition.Value, agent.EnclosingCircleRadius); i < navPath.Nodes.Count - 1; i++)
+        for (int i = GetMostDistantReachableIndex(gizmoAgentPosition.Value, agent.PhysicsRadius); i < navPath.Nodes.Count - 1; i++)
         {
             Gizmos.DrawLine
             (
-                navPath.Nodes[i].GetExpandedPosition(agent.EnclosingCircleRadius),
-                navPath.Nodes[i + 1].GetExpandedPosition(agent.EnclosingCircleRadius)
+                navPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius),
+                navPath.Nodes[i + 1].GetExpandedPosition(agent.PhysicsRadius)
             );
-            Gizmos.DrawWireSphere(navPath.Nodes[i].GetExpandedPosition(agent.EnclosingCircleRadius), 0.3f);
-            Gizmos.DrawWireSphere(navPath.Nodes[i + 1].GetExpandedPosition(agent.EnclosingCircleRadius), 0.3f);
+            Gizmos.DrawWireSphere(navPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
+            Gizmos.DrawWireSphere(navPath.Nodes[i + 1].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
         }
     }
 

@@ -6,14 +6,11 @@ using UnityEngine;
 public class Rotator : MonoBehaviour
 {
     [SerializeField]
-    private float rotateSpeed = 0;
-    [SerializeField]
-    public float rotateDirection = 1;
+    private float angularVelocity;
 
-    public void Initialize(float rotateSpeed, float rotateDirection)
+    public void Initialize(float angularVelocity)
     {
-        this.rotateSpeed = rotateSpeed;
-        this.rotateDirection = rotateDirection;
+        this.angularVelocity = angularVelocity;
     }
 
     private void Update()
@@ -23,6 +20,6 @@ public class Rotator : MonoBehaviour
     
     private void Rotate()
     {
-        transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * rotateSpeed * rotateDirection);
+        transform.rotation *= Quaternion.Euler(0, 0, Time.deltaTime * angularVelocity);
     }
 }

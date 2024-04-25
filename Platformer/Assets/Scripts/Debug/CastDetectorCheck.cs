@@ -22,16 +22,15 @@ public class CastDetectorCheck : MonoBehaviour
             for (int i = 0; i < detectionCount; i++)
             {
                 message += $"{detector.Hits[i].collider}";
-                Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(detector.Hits[i].point, 0.2f);
-                Gizmos.color = Color.green;
                 Vector2 direction = (detector.Hits[i].point - (Vector2)transform.position).normalized;
                 RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, detector.Size.x, detector.DetectLayerMask);
-                Gizmos.DrawWireSphere(hit.point, 0.2f);
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawLine(hit.point, hit.point + direction * (detector.Size.x - hit.distance));
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(detector.Hits[i].point, 0.05f);
+                Gizmos.color = Color.green;
+                Gizmos.DrawSphere(hit.point, 0.05f);
             }
-            Debug.Log(detectionCount);
         }
     }
 }

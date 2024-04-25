@@ -414,9 +414,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7363741092666616260}
   - component: {fileID: 7363741092666616261}
-  - component: {fileID: 7363741092666616263}
   m_Layer: 15
-  m_Name: Collider
+  m_Name: PhysicsCollider
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,22 +471,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.2525488, y: -0.011833847}
   m_Size: {x: 0.7742344, y: 1.2460779}
   m_Direction: 0
---- !u!114 &7363741092666616263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7363741092666616267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flipOnStart: 0
-  objectCollider: {fileID: 7363741092666616261}
-  rigidBody: {fileID: 0}
-  flipThreshold: 1.1
 --- !u!1 &7363741092903229673
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +972,7 @@ GameObject:
   - component: {fileID: 2774391687644902663}
   - component: {fileID: 7363741092985079729}
   - component: {fileID: 1098224640033834070}
+  - component: {fileID: 8590973685764655901}
   m_Layer: 0
   m_Name: Agent
   m_TagString: Player
@@ -1111,8 +1095,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <DefaultData>k__BackingField: {fileID: 0}
-  <PhysicsCollider>k__BackingField: {fileID: 7363741092666616261}
   <TriggerCollider>k__BackingField: {fileID: 2774391687644902663}
+  <PhysicsCollider>k__BackingField: {fileID: 7363741092666616261}
 --- !u!114 &1098224640033834070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,3 +1116,19 @@ MonoBehaviour:
   OnInitializeMaxHealth:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8590973685764655901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363741092985079733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1edb8d175182e45aed9ee0a6d2331f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flipOnStart: 0
+  objectCollider: {fileID: 7363741092666616261}
+  rigidBody: {fileID: 7363741092985079728}
+  flipThreshold: 1.1

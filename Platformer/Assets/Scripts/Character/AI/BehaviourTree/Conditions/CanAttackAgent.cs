@@ -3,27 +3,19 @@ using UnityEngine;
 [System.Serializable]
 public class CanAttackAgent : ConditionNode
 {
-    private AttackState attackState;
-
-    public override void OnInit()
-    {
-        attackState = context.Agent.GetComponentInChildren<AttackState>();
-    }
-
-    protected override void OnStart() { }
-
     protected override bool IsConditionSatisfied()
     {
+        AttackState attackState = (AttackState)context.Agent.StateMachine.Factory.GetState(StateType.Attack);
+        if (!attackState) return false;
+
         AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         int targetCount = 0;
         if (weapon != null && weapon.IsUseable(context.Agent))
         {
-            targetCount = weapon.DetectInAttackRange(context.Agent.CenterPosition, context.Agent.OrientationController.CurrentOrientation, attackState.HitMask);
+            targetCount = weapon.DetectInAttackRange(context.Agent.TriggerCenter, context.Agent.OrientationController.CurrentOrientation, attackState.HitMask);
         }
         return targetCount != 0;
     }
-
-    protected override void OnStop() { }
 
 #if UNITY_EDITOR
     public override void OnDrawGizmos(AgentManager agent)
@@ -31,10 +23,7 @@ public class CanAttackAgent : ConditionNode
         if (!Application.isPlaying) return;
         Gizmos.color = Color.yellow;
         AttackingWeapon weapon = agent.GetComponentInChildren<WeaponManager>().GetWeapon();
-        if (weapon != null)
-        {
-            weapon.DrawGizmos(agent.CenterPosition, context.Agent.OrientationController.CurrentOrientation);
-        }
+        if (weapon) weapon.DrawGizmos(agent.TriggerCenter, context.Agent.OrientationController.CurrentOrientation);
     }
 #endif
 }

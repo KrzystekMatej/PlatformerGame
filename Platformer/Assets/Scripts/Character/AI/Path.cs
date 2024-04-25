@@ -98,7 +98,7 @@ public class Path
 
     private Vector2 GetFuturePosition(AgentManager agent)
     {
-        return agent.CenterPosition + agent.RigidBody.velocity * predictTime;
+        return agent.PhysicsCenter + agent.RigidBody.velocity * predictTime;
     }
 
     public void Recalculate(AgentManager agent)
@@ -238,7 +238,7 @@ public class Path
 
     public bool ReachedEnd(AgentManager agent, Vector2 goal)
     {
-        return !isCircular && goal == Points[Points.Count - 1] && Vector2.Distance(agent.CenterPosition, goal) <= agent.EnclosingCircleRadius;
+        return !isCircular && goal == Points[Points.Count - 1] && Vector2.Distance(agent.PhysicsCenter, goal) <= agent.PhysicsRadius;
     }
 
 #if UNITY_EDITOR

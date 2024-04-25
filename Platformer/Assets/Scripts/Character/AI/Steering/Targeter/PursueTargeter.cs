@@ -13,7 +13,7 @@ public class PursueTargeter : SeekTargeter
     {
 
         float speed = agent.RigidBody.velocity.magnitude;
-        float distance = (GoalPosition - agent.CenterPosition).magnitude;
+        float distance = (GoalPosition - agent.PhysicsCenter).magnitude;
         float prediction = speed <= distance / MaxPrediction ? MaxPrediction : distance / speed;
 
         Vector2 targetVelocity = Vector2.zero;
@@ -25,11 +25,11 @@ public class PursueTargeter : SeekTargeter
 
         Vector2 futureOffset = targetVelocity * prediction;
 
-        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, agent.PhysicsCollisionMask);
+        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, agent.PhysicsMask);
         if (hit)
         {
             const float safetyMargin = 0.001f;
-            GoalPosition = hit.point + hit.normal * (agent.EnclosingCircleRadius + safetyMargin);
+            GoalPosition = hit.point + hit.normal * (agent.PhysicsRadius + safetyMargin);
         }
         else GoalPosition += futureOffset;
 

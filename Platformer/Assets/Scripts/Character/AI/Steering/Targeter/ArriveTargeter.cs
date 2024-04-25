@@ -17,7 +17,7 @@ public class ArriveTargeter : Targeter
 
     public override ProcessState Target(SteeringGoal goal)
     {
-        float distance = Vector2.Distance(agent.CenterPosition, goal.Position);
+        float distance = Vector2.Distance(agent.PhysicsCenter, goal.Position);
         float arriveRadius = this.arriveRadius;
 
         if (goal.HasOwner)

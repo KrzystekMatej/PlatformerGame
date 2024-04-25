@@ -31,7 +31,6 @@ public class Seek : ActionNode
         {
             seekTargeter.Value.GoalPosition = goalPosition.Value;
         }
-
         return context.Steering.Recalculate();
     }
 

@@ -13,7 +13,7 @@ public class StopMoving : ActionNode
 
     protected override ProcessState OnUpdate()
     {
-        context.Steering.ResetForce();
+        context.Steering.Restart();
         context.InputController.StopMoving();
         if (stopImmediately)
         {

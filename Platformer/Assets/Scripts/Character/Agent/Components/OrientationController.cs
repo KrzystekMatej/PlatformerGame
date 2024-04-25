@@ -20,8 +20,6 @@ public class OrientationController : MonoBehaviour
 
     private void Awake()
     {
-        objectCollider = objectCollider ? objectCollider : GetComponent<Collider2D>();
-        rigidBody = rigidBody ? rigidBody : GetComponentInParent<Rigidbody2D>();
         if (flipOnStart) Flip();
     }
 
@@ -40,13 +38,13 @@ public class OrientationController : MonoBehaviour
     public void Flip()
     {
         CurrentOrientation = -CurrentOrientation;
-        transform.parent.localScale = new Vector3
+        transform.localScale = new Vector3
         (
-            Mathf.Sign(CurrentOrientation.x) * Mathf.Abs(transform.parent.localScale.x),
-            transform.parent.localScale.y,
-            transform.parent.localScale.z
+            Mathf.Sign(CurrentOrientation.x) * Mathf.Abs(transform.localScale.x),
+            transform.localScale.y,
+            transform.localScale.z
         );
 
-        transform.parent.position = new Vector2(transform.parent.position.x - CurrentOrientation.x * objectCollider.offset.x * 2, transform.parent.position.y);
+        transform.position = new Vector2(transform.position.x - CurrentOrientation.x * objectCollider.offset.x * 2, transform.position.y);
     }
 }

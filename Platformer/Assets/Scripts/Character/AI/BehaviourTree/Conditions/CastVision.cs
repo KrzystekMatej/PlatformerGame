@@ -23,13 +23,11 @@ public class CastVision : ConditionNode
     private Color gizmoColor = Color.red;
 #endif
 
-    protected override void OnStart() { }
-
     protected override bool IsConditionSatisfied()
     {
         Vector2 offset = visionDetector.OriginOffset;
         InitializeDetector(context.Agent.OrientationController.CurrentOrientation);
-        int detectionCount = visionDetector.Detect(context.Agent.CenterPosition);
+        int detectionCount = visionDetector.Detect(context.Agent.TriggerCenter);
 
         if (hits.IsBlackboardKey())
         {
@@ -40,8 +38,6 @@ public class CastVision : ConditionNode
         visionDetector.OriginOffset = offset;
         return detectionCount > 0;
     }
-
-    protected override void OnStop() { }
 
     private void InitializeDetector(Vector2 orientation)
     {

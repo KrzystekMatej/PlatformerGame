@@ -20,17 +20,36 @@ public class SteeringPipeline : MonoBehaviour
         constraintSteps = constraints.Length + 1;
     }
 
+    public void Enable()
+    {
+        if (enabled) return;
+        enabled = true;
+        foreach (PipelineComponent c in GetAllComponents()) c.Enable();
+    }
+
+    public void Disable()
+    {
+        if (!enabled) return;
+        enabled = false;
+        foreach (PipelineComponent c in GetAllComponents()) c.Disable();
+    }
+
+    public void WriteComponentsToBlackboard(Blackboard blackboard)
+    {
+        foreach (PipelineComponent c in GetAllComponents()) c.WriteToCorrespondingKeys(blackboard);
+    }
+
     public SteeringOutput GetSteering()
     {
         SteeringGoal goal = new SteeringGoal();
-        
+
         foreach (Targeter targeter in targeters)
         {
             switch (targeter.Target(goal))
             {
-                case ProcessState.Success: 
+                case ProcessState.Success:
                     return SteeringOutput.Success;
-                case ProcessState.Failure: 
+                case ProcessState.Failure:
                     return SteeringOutput.Failure;
             };
         }
@@ -62,23 +81,6 @@ public class SteeringPipeline : MonoBehaviour
         }
 
         return SteeringOutput.Failure;
-    }
-
-    public void Enable()
-    {
-        enabled = true;
-        foreach (PipelineComponent c in GetAllComponents()) c.Enable();
-    }
-
-    public void Disable()
-    {
-        enabled = false;
-        foreach (PipelineComponent c in GetAllComponents()) c.Disable();
-    }
-
-    public void WriteComponentsToBlackboard(Blackboard blackboard)
-    {
-        foreach (PipelineComponent c in GetAllComponents()) c.WriteToCorrespondingKeys(blackboard);
     }
 
     private IEnumerable<PipelineComponent> GetAllComponents()
