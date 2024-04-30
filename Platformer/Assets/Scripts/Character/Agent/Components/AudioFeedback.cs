@@ -18,7 +18,7 @@ public class AudioFeedback : MonoBehaviour
 
     public void PlaySpecificSound(Sound sound)
     {
-        if (sound != null)
+        if (sound)
         {
             AudioMixerGroup defaultGroup = audioSource.outputAudioMixerGroup;
             audioSource.outputAudioMixerGroup = sound.Mixer ? sound.Mixer : defaultGroup;

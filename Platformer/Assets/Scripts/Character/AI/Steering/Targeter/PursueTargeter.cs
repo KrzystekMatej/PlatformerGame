@@ -12,8 +12,8 @@ public class PursueTargeter : SeekTargeter
     public override ProcessState Target(SteeringGoal goal)
     {
 
-        float speed = agent.RigidBody.velocity.magnitude;
-        float distance = (GoalPosition - agent.PhysicsCenter).magnitude;
+        float speed = Agent.RigidBody.velocity.magnitude;
+        float distance = (GoalPosition - Agent.PhysicsCenter).magnitude;
         float prediction = speed <= distance / MaxPrediction ? MaxPrediction : distance / speed;
 
         Vector2 targetVelocity = Vector2.zero;
@@ -25,11 +25,11 @@ public class PursueTargeter : SeekTargeter
 
         Vector2 futureOffset = targetVelocity * prediction;
 
-        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, agent.PhysicsMask);
+        RaycastHit2D hit = Physics2D.Raycast(GoalPosition, targetVelocity, futureOffset.magnitude, Agent.PhysicsMask);
         if (hit)
         {
             const float safetyMargin = 0.001f;
-            GoalPosition = hit.point + hit.normal * (agent.PhysicsRadius + safetyMargin);
+            GoalPosition = hit.point + hit.normal * (Agent.PhysicsRadius + safetyMargin);
         }
         else GoalPosition += futureOffset;
 

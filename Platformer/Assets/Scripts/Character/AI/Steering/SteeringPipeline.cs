@@ -23,6 +23,9 @@ public class SteeringPipeline : MonoBehaviour
     public void Enable()
     {
         if (enabled) return;
+#if UNITY_EDITOR
+        Debug.Log($"{name} Activated");
+#endif
         enabled = true;
         foreach (PipelineComponent c in GetAllComponents()) c.Enable();
     }
@@ -30,6 +33,9 @@ public class SteeringPipeline : MonoBehaviour
     public void Disable()
     {
         if (!enabled) return;
+#if UNITY_EDITOR
+        Debug.Log($"{name} Deactivated");
+#endif
         enabled = false;
         foreach (PipelineComponent c in GetAllComponents()) c.Disable();
     }

@@ -26,7 +26,7 @@ public class NavGraphEditor : Editor
 
         if (GUILayout.Button("Calculate Shortest Path"))
         {
-            if (start == null || end == null)
+            if (!start || !end)
             {
                 Debug.Log("No node can be null.");
                 return;

@@ -13,7 +13,7 @@ public class CastDetectorCheck : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (detector == null) return;
+        if (!detector) return;
         detector.DrawGizmos(transform.position);
         if (isTestingActive)
         {

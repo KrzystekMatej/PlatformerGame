@@ -97,14 +97,14 @@ public class BackgroundController : MonoBehaviour
 
     private void SwitchBackgrounds(float currentCameraPositionX)
     {
-       if (currentCameraPositionX > backgroundData.NextBounds.startX && currentCameraPositionX < backgroundData.NextBounds.startX + backgroundData.NextBounds.length)
-       {
+        if (currentCameraPositionX > backgroundData.NextBounds.startX && currentCameraPositionX < backgroundData.NextBounds.startX + backgroundData.NextBounds.length)
+        {
             Utility.SwapReferences(ref current, ref next);
             var tempCurrentBounds = backgroundData.CurrentBounds;
             backgroundData.CurrentBounds = backgroundData.NextBounds;
             backgroundData.NextBounds = tempCurrentBounds;
             backgroundData.IsOnLeft = !backgroundData.IsOnLeft;
-       }
+        }
     }
 
     private void ApplyParallaxEffect(Vector3 currentCameraPosition)

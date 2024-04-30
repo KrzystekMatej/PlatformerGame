@@ -10,7 +10,7 @@ public class CanAttackAgent : ConditionNode
 
         AttackingWeapon weapon = context.Agent.WeaponManager.GetWeapon();
         int targetCount = 0;
-        if (weapon != null && weapon.IsUseable(context.Agent))
+        if (weapon && weapon.IsUseable(context.Agent))
         {
             targetCount = weapon.DetectInAttackRange(context.Agent.TriggerCenter, context.Agent.OrientationController.CurrentOrientation, attackState.HitMask);
         }

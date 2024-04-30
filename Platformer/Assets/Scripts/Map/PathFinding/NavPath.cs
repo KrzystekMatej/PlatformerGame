@@ -54,6 +54,16 @@ public class NavPath : IComparable<NavPath>
         return 0;
     }
 
+    public float RecalculateLength()
+    {
+        Length = 0f;
+        for (int i = 0; i < Nodes.Count - 1; i++)
+        {
+            Length += Vector2.Distance(Nodes[i].transform.position, Nodes[i + 1].transform.position);
+        }
+        return Length;
+    }
+
     public IEnumerable<Vector2> GetExpandedPositions(float radius, int start, int count)
     {
         for (int i = start; i < count; i++)

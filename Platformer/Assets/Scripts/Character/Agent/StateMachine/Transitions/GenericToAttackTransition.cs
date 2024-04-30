@@ -10,6 +10,6 @@ public class GenericToAttackTransition : StateTransition
     public override bool IsTriggered(AgentManager agent)
     {
         AttackingWeapon weapon = agent.WeaponManager.GetWeapon();
-        return agent.InputController.InputData.Attack == InputState.Pressed && weapon != null && weapon.IsUseable(agent);
+        return agent.InputController.InputData.Attack == InputState.Pressed && weapon && weapon.IsUseable(agent);
     }
 }

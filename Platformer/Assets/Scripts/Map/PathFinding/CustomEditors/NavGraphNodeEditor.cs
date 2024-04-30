@@ -43,7 +43,7 @@ public class NavGraphNodeEditor : Editor
                     NavGraphNode neighbor = node.Neighbors[i];
                     node.RemoveUndirectNeighbor(neighbor);
 
-                    if (neighbor != null)
+                    if (neighbor)
                     {
                         Undo.RecordObject(neighbor, "Remove Edge");
                         neighbor.RemoveUndirectNeighbor(node);

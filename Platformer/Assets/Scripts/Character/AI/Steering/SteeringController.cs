@@ -54,15 +54,10 @@ public class SteeringController : MonoBehaviour
     public bool SwitchPipeline(SteeringPipeline newPipeline)
     {
         if (!newPipeline || newPipeline == CurrentPipeline) return false;
-#if UNITY_EDITOR
-        Debug.Log($"{CurrentPipeline.name} Deactivated");
-        Debug.Log($"{newPipeline.name} Activated");
-#endif
-
         OnPipelineSwitch?.Invoke(CurrentPipeline, newPipeline);
-        CurrentPipeline.Disable();
+        //CurrentPipeline.Disable();
         CurrentPipeline = newPipeline;
-        CurrentPipeline.Enable();
+        //CurrentPipeline.Enable();
         return true;
     }
 

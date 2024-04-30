@@ -22,15 +22,15 @@ public class PlanningDecomposer : Decomposer
 
     protected void Start()
     {
-        agentTracker = agent.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph.name == navGraphName);
+        agentTracker = Agent.GetComponents<NavGraphTracker>().FirstOrDefault(t => t.NavGraph.name == navGraphName);
     }
 
     public override bool Decompose(SteeringGoal goal)
     {
         if (!goal.HasPosition) return true;
-        float agentRadius = agent.PhysicsRadius;
+        float agentRadius = Agent.PhysicsRadius;
 
-        Vector2? nonBlockAgent = MathUtility.UnblockPosition(agent.PhysicsCenter, agentRadius, agentTracker.NavGraph.WallMask);
+        Vector2? nonBlockAgent = MathUtility.UnblockPosition(Agent.PhysicsCenter, agentRadius, agentTracker.NavGraph.WallMask);
         Vector2? nonBlockGoal = MathUtility.UnblockPosition(goal.Position, agentRadius, agentTracker.NavGraph.WallMask);
 
 #if UNITY_EDITOR
@@ -65,8 +65,26 @@ public class PlanningDecomposer : Decomposer
         
         if (startNode && endNode)
         {
-            NavPath navPath = agentTracker.NavGraph.FindShortestPath(startNode, endNode);
-            return navPath;
+            NavPath newNavPath = agentTracker.NavGraph.FindShortestPath(startNode, endNode);
+
+            if (navPath != null && newNavPath != null && navPath.GetStart() != newNavPath.GetStart())
+            {
+                for (int i = 0; i < navPath.Nodes.Count; i++)
+                {
+                    for (int j = 1; j < newNavPath.Nodes.Count; j++)
+                    {
+                        if (navPath.Nodes[i] == newNavPath.Nodes[j])
+                        {
+                            var oldPathPart = navPath.Nodes.Take(i);
+                            var newPathPart = newNavPath.Nodes.Skip(j);
+                            newNavPath.Nodes = oldPathPart.Concat(newPathPart).ToList();
+                            return newNavPath;
+                        }
+                    }
+                }
+            }
+
+            return newNavPath;
         }
         else return null;
     }
@@ -99,6 +117,11 @@ public class PlanningDecomposer : Decomposer
         return navPath.Nodes[0].GetExpandedPosition(enclosingCircleRadius);
     }
 
+    public override void Disable()
+    {
+        navPath = null;
+    }
+
 #if UNITY_EDITOR
     public override void DrawGizmos()
     {
@@ -106,15 +129,15 @@ public class PlanningDecomposer : Decomposer
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(gizmoAgentPosition.Value, 0.3f);
         Gizmos.DrawWireSphere(gizmoGoalPosition.Value, 0.3f);
-        for (int i = GetMostDistantReachableIndex(gizmoAgentPosition.Value, agent.PhysicsRadius); i < navPath.Nodes.Count - 1; i++)
+        for (int i = GetMostDistantReachableIndex(gizmoAgentPosition.Value, Agent.PhysicsRadius); i < navPath.Nodes.Count - 1; i++)
         {
             Gizmos.DrawLine
             (
-                navPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius),
-                navPath.Nodes[i + 1].GetExpandedPosition(agent.PhysicsRadius)
+                navPath.Nodes[i].GetExpandedPosition(Agent.PhysicsRadius),
+                navPath.Nodes[i + 1].GetExpandedPosition(Agent.PhysicsRadius)
             );
-            Gizmos.DrawWireSphere(navPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
-            Gizmos.DrawWireSphere(navPath.Nodes[i + 1].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
+            Gizmos.DrawWireSphere(navPath.Nodes[i].GetExpandedPosition(Agent.PhysicsRadius), 0.3f);
+            Gizmos.DrawWireSphere(navPath.Nodes[i + 1].GetExpandedPosition(Agent.PhysicsRadius), 0.3f);
         }
     }
 

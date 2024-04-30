@@ -23,13 +23,13 @@ public class SeekTargeter : Targeter
         if (!isFleeing)
         {
             goal.Position = GoalPosition;
-            if (Vector2.Distance(goal.Position, agent.PhysicsCenter) > MaxSeekDistance) return ProcessState.Failure;
+            if (Vector2.Distance(goal.Position, Agent.PhysicsCenter) > MaxSeekDistance) return ProcessState.Failure;
             goal.Owner = GoalOwner;
         }
         else
         {
             float fleeDistance = MaxSeekDistance > MathUtility.LongDistance ? MathUtility.LongDistance : MaxSeekDistance;
-            goal.Position = GoalPosition + (agent.PhysicsCenter - GoalPosition).normalized * fleeDistance;
+            goal.Position = GoalPosition + (Agent.PhysicsCenter - GoalPosition).normalized * fleeDistance;
             goal.Owner = null;
         }
 #if UNITY_EDITOR

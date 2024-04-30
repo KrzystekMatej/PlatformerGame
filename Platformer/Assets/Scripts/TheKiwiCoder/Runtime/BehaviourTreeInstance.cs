@@ -17,14 +17,8 @@ namespace TheKiwiCoder
         {
             get
             {
-                if (runtimeTree != null)
-                {
-                    return runtimeTree;
-                }
-                else
-                {
-                    return behaviourTree;
-                }
+                if (runtimeTree) return runtimeTree;
+                else return behaviourTree;
             }
         }
 
@@ -51,10 +45,7 @@ namespace TheKiwiCoder
                 ApplyBlackboardOverrides();
                 runtimeTree.Bind(context);
             }
-            else
-            {
-                runtimeTree = null;
-            }
+            else runtimeTree = null;
         }
 
         void ApplyBlackboardOverrides()

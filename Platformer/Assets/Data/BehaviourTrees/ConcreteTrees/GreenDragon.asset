@@ -17,13 +17,10 @@ MonoBehaviour:
   nodes:
   - rid: 7407168234541285394
   - rid: 7407168234541285465
-  - rid: 7407168234541285472
   - rid: 7407168234541285588
-  - rid: 7407168309800468493
   - rid: 7407168309800468494
   - rid: 7888084646981010256
   - rid: 7888084646981010257
-  - rid: 7888084646981010258
   - rid: 7888084646981010262
   - rid: 7888084646981010281
   - rid: 7888084650115465232
@@ -35,6 +32,8 @@ MonoBehaviour:
   - rid: 7888084719887450208
   - rid: 7888084729195397896
   - rid: 7888084729195397897
+  - rid: 7888085100154061034
+  - rid: 7888085100154061035
   treeState: 0
   blackboard:
     keys:
@@ -42,7 +41,7 @@ MonoBehaviour:
     - rid: 7888084650115466008
     - rid: 7888084650115466009
     - rid: 7888084650115466010
-  viewPosition: {x: 509, y: 438, z: 0}
+  viewPosition: {x: 34, y: -243, z: 0}
   viewScale: {x: 0.57175326, y: 0.57175326, z: 1}
   references:
     version: 2
@@ -84,24 +83,6 @@ MonoBehaviour:
         restartOnSuccess: 1
         restartOnFailure: 1
         maxRepeats: 0
-    - rid: 7407168234541285472
-      type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: a332e1b20a74e574fafd3dbeffdef4a8
-        position: {x: 1020, y: 750}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        targetPipeline:
-          reference:
-            rid: 7888084650115466008
-          defaultValue: {fileID: 0}
     - rid: 7407168234541285588
       type: {class: SubTree, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -118,23 +99,6 @@ MonoBehaviour:
         logStop: 0
         treeAsset: {fileID: 11400000, guid: 441da56c00914ba4c8ec381cd76c55b7, type: 2}
         treeInstance: {fileID: 0}
-    - rid: 7407168309800468493
-      type: {class: Sequencer, ns: TheKiwiCoder, asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 69ac4f59887956c4ab0790a769b74623
-        position: {x: 1155, y: 495}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 0
-        logStart: 0
-        logState: 0
-        logStop: 0
-        children:
-        - rid: 7407168234541285472
-        - rid: 7888084729195397897
     - rid: 7407168309800468494
       type: {class: InterruptSelector, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -152,7 +116,7 @@ MonoBehaviour:
         children:
         - rid: 7407168234541285588
         - rid: 7888084646981010262
-        - rid: 7407168309800468493
+        - rid: 7888085100154061034
     - rid: 7888084646981010256
       type: {class: GotHit, ns: , asm: Assembly-CSharp}
       data:
@@ -190,24 +154,6 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         duration: 3
-    - rid: 7888084646981010258
-      type: {class: SwitchSteeringPipeline, ns: , asm: Assembly-CSharp}
-      data:
-        state: 0
-        started: 0
-        guid: 0a5f3340b0c3d434094b1806993f6775
-        position: {x: 405, y: 765}
-        blackboard:
-          keys: []
-        description: 
-        drawGizmos: 1
-        logStart: 0
-        logState: 0
-        logStop: 0
-        targetPipeline:
-          reference:
-            rid: 7888084650115466009
-          defaultValue: {fileID: 0}
     - rid: 7888084646981010260
       type: {class: Collider2DKey, ns: TheKiwiCoder, asm: Assembly-CSharp}
       data:
@@ -231,7 +177,6 @@ MonoBehaviour:
         logStop: 0
         children:
         - rid: 7888084646981010256
-        - rid: 7888084646981010258
         - rid: 7888084719887450208
     - rid: 7888084646981010281
       type: {class: Failure, ns: TheKiwiCoder, asm: Assembly-CSharp}
@@ -302,7 +247,7 @@ MonoBehaviour:
         logState: 0
         logStop: 0
         child:
-          rid: 7888084729195397896
+          rid: 7888085100154061035
     - rid: 7888084719887450186
       type: {class: ChangeMaxSpeed, ns: , asm: Assembly-CSharp}
       data:
@@ -388,7 +333,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6f1f4093121de1c459e3a44550fff2fd
-        position: {x: 825, y: 1740}
+        position: {x: 825, y: 1980}
         blackboard:
           keys: []
         description: 
@@ -418,7 +363,7 @@ MonoBehaviour:
         state: 0
         started: 0
         guid: 6c67b59ae2524784086eef884ef5c9c2
-        position: {x: 1290, y: 765}
+        position: {x: 1110, y: 690}
         blackboard:
           keys: []
         description: 
@@ -426,3 +371,43 @@ MonoBehaviour:
         logStart: 0
         logState: 0
         logStop: 0
+    - rid: 7888085100154061034
+      type: {class: ManageSteeringTask, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: af30d21c73683df4e93c5cc7be336df6
+        position: {x: 1080, y: 525}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7888084729195397897
+        newPipeline:
+          reference:
+            rid: 7888084650115466008
+          defaultValue: {fileID: 0}
+    - rid: 7888085100154061035
+      type: {class: ManageSteeringTask, ns: , asm: Assembly-CSharp}
+      data:
+        state: 0
+        started: 0
+        guid: 1c5c12fd0b5e354429f8ec8a8f7dd005
+        position: {x: 795, y: 1770}
+        blackboard:
+          keys: []
+        description: 
+        drawGizmos: 1
+        logStart: 0
+        logState: 0
+        logStop: 0
+        child:
+          rid: 7888084729195397896
+        newPipeline:
+          reference:
+            rid: 7888084650115466009
+          defaultValue: {fileID: 0}

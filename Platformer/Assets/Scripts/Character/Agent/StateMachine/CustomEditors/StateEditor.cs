@@ -17,7 +17,7 @@ public class StateEditor : Editor
     {
         TransitionManager transitionManager = FindObjectOfType<TransitionManager>();
         SerializedObject serializedManager = new SerializedObject(transitionManager);
-        if (transitionManager != null)
+        if (transitionManager)
         {
             availableTransitions = serializedManager
                 .FindProperty("availableTransitions")

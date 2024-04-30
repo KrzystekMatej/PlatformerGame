@@ -17,13 +17,13 @@ public class MaterialCheck : MonoBehaviour
         {
             Collider2D collider = obj.GetComponent<Collider2D>();
             Rigidbody2D rigidBody = obj.GetComponent<Rigidbody2D>();
-            if (collider != null && testMaterials.Any(m => collider.sharedMaterial == m))
+            if (collider && testMaterials.Any(m => collider.sharedMaterial == m))
             {
                 Debug.Log($"Object with name '{obj.name}' has physic material named '{collider.sharedMaterial.name}' on Collider2D component.");
                 found = true;
             }
 
-            if (rigidBody != null && testMaterials.Any(m => rigidBody.sharedMaterial == m))
+            if (rigidBody && testMaterials.Any(m => rigidBody.sharedMaterial == m))
             {
                 Debug.Log($"Object with name '{obj.name}' has physic material named '{rigidBody.sharedMaterial.name}' on Rigidbody component.");
                 found = true;

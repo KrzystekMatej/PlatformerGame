@@ -1369,6 +1369,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9057417481030304527}
     - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: OnFallOut.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092985079729, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: OnDeathComplete.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
@@ -1739,8 +1743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectCollider: {fileID: 9057417480644603259}
   detector: {fileID: 11400000, guid: 708502a5e0ca59942a0f9cfa554fbde3, type: 2}
+  physicsCollider: {fileID: 9057417480644603259}
   boxCastXOffset: 0
   boxCastYOffset: -0.5
   boxCastWidth: 0.7
@@ -1828,7 +1832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4fe9118c32c8e469379e57a5fdb58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerCollider: {fileID: 0}
+  triggerCollider: {fileID: 4396555839418528185}
   triggerMask:
     serializedVersion: 2
     m_Bits: 128

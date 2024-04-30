@@ -8,7 +8,31 @@ public static class MathUtility
 {
     public const int UnblockPositionAttemptCount = 16;
     public const float CirclePathRatio = 8f;
-    public const float LongDistance = 10000;
+    public const float LongDistance = 10000f;
+
+
+    public static int GetCircularIndex(int index, int length)
+    {
+        int qZeroRounding = index / length;
+        int roundingCorrection = ((index ^ length) < 0) && (index % length != 0) ? 1 : 0;
+        int qNegInfRounding = qZeroRounding - roundingCorrection;
+        int r = index - length * qNegInfRounding;
+        return r;
+    }
+    public static float GetRandomBinomial()
+    {
+        return UnityEngine.Random.value - UnityEngine.Random.value;
+    }
+
+    public static bool IsAngleConvexCC(Vector3 a, Vector3 b)
+    {
+        return Vector3.Cross(a, b).z >= 0;
+    }
+
+    public static float GetVectorRadAngle(Vector2 vector)
+    {
+        return Mathf.Atan2(vector.y, vector.x);
+    }
 
     public static Vector2 PolarCoordinatesToVector2(float angleRad, float magnitude)
     {
@@ -46,58 +70,6 @@ public static class MathUtility
         Vector2 offsetPoint2 = normal2 * radius;
 
         return (Vector2)FindLineLineIntersection(offsetPoint1, ingoing, offsetPoint2, outgoing);
-    }
-
-    public static Vector2 CalculateStopOffset(Vector2 currentVelocity, float maxForce)
-    {
-        return -new Vector2(CalculateStopDistance(currentVelocity.x, maxForce), CalculateStopDistance(currentVelocity.y, maxForce));
-    }
-
-    public static float CalculateStopDistance(float currentSpeed, float maxForce)
-    {
-        return currentSpeed * currentSpeed / (maxForce * 2);
-    }
-
-    public static float CalculateTimeToStop(float currentSpeed, float maxForce)
-    {
-        return currentSpeed / maxForce;
-    }
-
-    public static float GetVectorRadAngle(Vector2 vector)
-    {
-        return Mathf.Atan2(vector.y, vector.x);
-    }
-
-    public static float GetRandomBinomial()
-    {
-        return UnityEngine.Random.value - UnityEngine.Random.value;
-    }
-
-    public static int GetCircularIndex(int index, int length)
-    {
-        int qZeroRounding = index / length;
-        int roundingCorrection = ((index ^ length) < 0) && (index % length != 0) ? 1 : 0;
-        int qNegInfRounding = qZeroRounding - roundingCorrection;
-        int r = index - length * qNegInfRounding;
-        return r;
-    }
-
-    public static bool IsAngleConvexCC(Vector3 a, Vector3 b)
-    {
-        return Vector3.Cross(a, b).z >= 0;
-    }
-
-    public static float GetScalarProjectionOnSegment(Vector2 startPoint, Vector2 endPoint, Vector2 position)
-    {
-        Vector2 u = position - startPoint;
-        Vector2 v = endPoint - startPoint;
-
-        float segmentLength = v.magnitude;
-        if (segmentLength == 0) return 0;
-
-        Vector2 n = v / segmentLength;
-
-        return Mathf.Clamp(Vector2.Dot(u, n), 0, segmentLength);
     }
 
     public static int FindLineCircleIntersections(Vector2 point, Vector2 direction, Vector2 center, float radius, Vector2[] intersections)
@@ -150,43 +122,6 @@ public static class MathUtility
         return a + t * u;
     }
 
-    public static float GetSignedArea(Vector2[] points)
-    {
-        float area = 0;
-
-        for (int i = 0; i < points.Length; i++)
-        {
-            Vector2 a = points[i];
-            Vector2 b = points[(i + 1) % points.Length];
-
-            area += a.x * b.y - b.x * a.y;
-        }
-
-        return area / 2;
-    }
-
-    public static bool IsPointInsidePolygon(Vector2 point, Vector2[] polygonPoints)
-    {
-        int intersections = 0;
-        for (int i = 0; i < polygonPoints.Length; i++)
-        {
-            Vector2 a = polygonPoints[i];
-            Vector2 b = polygonPoints[(i + 1) % polygonPoints.Length];
-
-            if ((a.y > point.y) != (b.y > point.y))
-            {
-                float intersectX = (b.x - a.x) * (point.y - a.y) / (b.y - a.y) + a.x;
-
-                if (point.x < intersectX)
-                {
-                    intersections++;
-                }
-            }
-        }
-
-        return (intersections % 2) == 1;
-    }
-
     public static float GetEnclosingCircleRadius(Collider2D collider)
     {
         if (collider is CircleCollider2D circleCollider) return circleCollider.radius;
@@ -216,6 +151,25 @@ public static class MathUtility
         }
 
         return null;
+    }
+
+    public static bool IsPointInsidePolygon(Vector2 point, Vector2[] polygonPoints)
+    {
+        bool inside = false;
+        for (int i = 0; i < polygonPoints.Length; i++)
+        {
+            Vector2 a = polygonPoints[i];
+            Vector2 b = polygonPoints[(i + 1) % polygonPoints.Length];
+
+            if ((a.y > point.y) != (b.y > point.y))
+            {
+                float intersectX = (b.x - a.x) * (point.y - a.y) / (b.y - a.y) + a.x;
+
+                if (point.x < intersectX) inside = !inside;
+            }
+        }
+
+        return inside;
     }
 
     public static Vector2[] GetBoxColliderPath(BoxCollider2D collider)
@@ -330,19 +284,5 @@ public static class MathUtility
         {
             throw new ArgumentException("Not allowed collider type.");
         }
-    }
-
-    public static Vector2[] GetDirectionsInCircle(int resolution)
-    {
-        float angleStep = 360 / resolution;
-        float angle = 0;
-        Vector2[] directions = new Vector2[resolution];
-        for (int i = 0; i < resolution; i++)
-        {
-            directions[i] = Quaternion.Euler(0, 0, angle) * Vector2.right;
-            angle += angleStep;
-        }
-
-        return directions;
     }
 }

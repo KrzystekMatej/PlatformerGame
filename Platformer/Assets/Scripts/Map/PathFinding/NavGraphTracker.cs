@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class NavGraphTracker : MonoBehaviour
 {
+    [field: SerializeField]
+    public NavGraphNode Current { get; private set; }
     [SerializeField]
     private string navGraphName;
     [SerializeField]
@@ -11,7 +13,6 @@ public class NavGraphTracker : MonoBehaviour
 
 
     public NavGraph NavGraph { get; private set; }
-    public NavGraphNode Current { get; private set; }
     private AgentManager agent;
 
     private void Awake()
@@ -22,7 +23,7 @@ public class NavGraphTracker : MonoBehaviour
 
     private void OnEnable()
     {
-        if (NavGraph != null) StartCoroutine(UpdateTracker());
+        if (NavGraph) StartCoroutine(UpdateTracker());
     }
 
     private IEnumerator UpdateTracker()

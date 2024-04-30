@@ -1107,6 +1107,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 4983029550968296733, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: m_TagString
+      value: EditorOnly
+      objectReference: {fileID: 0}
     - target: {fileID: 8585655606025026546, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
       propertyPath: m_RootOrder
       value: 3

@@ -10,15 +10,18 @@ public class SeekToPathTarget : ActionNode
     [SerializeField]
     NodeProperty<SeekTargeter> seekTargeter;
 
+    private Vector2 pathTarget;
+
     protected override void OnStart()
     {
-        seekTargeter.Value.MaxSeekDistance = float.PositiveInfinity;
-        seekTargeter.Value.GoalPosition = pathTargeter.Value.GetPathTarget();
-        seekTargeter.Value.GoalOwner = null;
+        pathTarget = pathTargeter.Value.GetPathTarget();
     }
 
     protected override ProcessState OnUpdate()
     {
+        seekTargeter.Value.MaxSeekDistance = float.PositiveInfinity;
+        seekTargeter.Value.GoalPosition = pathTarget;
+        seekTargeter.Value.GoalOwner = null;
         return context.Steering.Recalculate();
     }
 

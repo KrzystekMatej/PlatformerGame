@@ -12,9 +12,8 @@ public class SaveManager : GlobalComponent<SaveManager>
         return PlayerPrefs.GetInt(reachedLevelKey);
     }
 
-    public void SaveLevelProgress()
+    public void SaveLevelProgress(int toSave)
     {
-        int currentLevel = SceneController.Instance.GetCurrentLevelIndex();
-        if (currentLevel != -1 && currentLevel > GetReachedLevel()) PlayerPrefs.SetInt(reachedLevelKey, currentLevel);
+        if (toSave > GetReachedLevel()) PlayerPrefs.SetInt(reachedLevelKey, toSave);
     }
 }

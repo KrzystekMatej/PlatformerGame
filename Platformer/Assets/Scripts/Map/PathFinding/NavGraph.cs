@@ -277,6 +277,16 @@ public class NavGraph : MonoBehaviour
     {
         shortestPathTable = new (int, float)[Nodes.Count, Nodes.Count];
 
+
+        for (int i = 0; i < Nodes.Count; i++)
+        {
+            for (int j = 0; j < Nodes.Count; j++)
+            {
+                shortestPathTable[i, j] = (-1, -1f);
+            }
+        }
+
+
         for (int source = 0; source < Nodes.Count; source++)
         {
             DijkstraShortestPath(Nodes[source], (current) => false);
@@ -289,7 +299,7 @@ public class NavGraph : MonoBehaviour
                     int current = target;
                     NodeSearchState currentState = searchStates[current];
 
-                    while (current != source && currentState.From != null && searchStates[currentState.From.Index].SearchId == searchCount)
+                    while (current != source && currentState.From && searchStates[currentState.From.Index].SearchId == searchCount)
                     {
                         float length = currentState.GCost + Vector2.Distance(Nodes[current].transform.position, Nodes[target].transform.position);
                         shortestPathTable[currentState.From.Index, target] = (current, length);

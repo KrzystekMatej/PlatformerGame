@@ -111,7 +111,7 @@ public class WeaponManager : MonoBehaviour
         Collider2D collider = GetComponentInParent<Collider2D>();
         OrientationController orientationController = GetComponentInParent<AgentManager>().GetComponentInChildren<OrientationController>();
         AttackingWeapon weapon = GetWeapon();
-        if (weapon != null) weapon.DrawGizmos(collider.bounds.center, orientationController.CurrentOrientation);
+        if (weapon) weapon.DrawGizmos(collider.bounds.center, orientationController.CurrentOrientation);
     }
 #endif
 }

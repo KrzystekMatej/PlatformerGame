@@ -18,7 +18,7 @@ public class WinningPoint : MonoBehaviour
     public void WinningPointReached()
     {
         audioSource.Play();
-        SaveManager.Instance.SaveLevelProgress();
+        SaveManager.Instance.SaveLevelProgress(SceneController.Instance.GetCurrentLevelIndex() + 1);
         StartCoroutine(LoadNextScene());
     }
 

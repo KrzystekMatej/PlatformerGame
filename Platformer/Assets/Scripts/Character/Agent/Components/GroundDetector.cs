@@ -3,9 +3,9 @@ using UnityEngine;
 public class GroundDetector : MonoBehaviour
 {
     [SerializeField]
-    private Collider2D objectCollider;
-    [SerializeField]
     private CastDetector detector;
+    [SerializeField]
+    private Collider2D physicsCollider;
 
     public bool Detected { get; private set; }
     public RaycastHit2D Hit { get; private set; }
@@ -35,13 +35,13 @@ public class GroundDetector : MonoBehaviour
 
     private void Awake()
     {
-        objectCollider = objectCollider == null ? GetComponent<Collider2D>() : objectCollider;
+        physicsCollider = physicsCollider ? physicsCollider : GetComponent<Collider2D>();
     }
 
     private void FixedUpdate()
     {
-        int detectionCount = detector.Detect(objectCollider.bounds.center);
-        Detected = (detectionCount > 0) && detector.Hits[0].collider.IsTouching(objectCollider);
+        int detectionCount = detector.Detect(physicsCollider.bounds.center);
+        Detected = (detectionCount > 0) && detector.Hits[0].collider.IsTouching(physicsCollider);
         Hit = detector.Hits[0];
     }
 
@@ -50,7 +50,7 @@ public class GroundDetector : MonoBehaviour
         if (Detected)
         {
             GroundSoundProvider soundProvider = Hit.collider.GetComponent<GroundSoundProvider>();
-            if (soundProvider != null) return soundProvider.GetSound(stateType);
+            if (soundProvider) return soundProvider.GetSound(stateType);
         }
 
         return null;
@@ -59,9 +59,9 @@ public class GroundDetector : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        if (!objectCollider || !detector) return;
+        if (!physicsCollider || !detector) return;
         detector.GizmoColor = Detected ? gizmoColorDetected : gizmoColorNotDetected;
-        detector.DrawGizmos(objectCollider.bounds.center);
+        detector.DrawGizmos(physicsCollider.bounds.center);
     }
 
 #endif

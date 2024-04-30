@@ -972,7 +972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectCollider: {fileID: 1358706499210097814}
+  physicsCollider: {fileID: 1358706499210097814}
   detector: {fileID: 11400000, guid: 306620065ec8342449a23b0c851af83e, type: 2}
   boxCastXOffset: 0.02
   boxCastYOffset: -0.92

@@ -8,7 +8,7 @@ public class AttackState : State
     protected override void HandleEnter()
     {
         agent.WeaponManager.SetWeaponVisibility(true);
-        if (agent.GroundDetector != null && agent.GroundDetector.Detected) agent.RigidBody.velocity = Vector3.zero;
+        if (agent.GroundDetector && agent.GroundDetector.Detected) agent.RigidBody.velocity = Vector3.zero;
 
         agent.AudioFeedback.PlaySpecificSound(agent.WeaponManager.GetWeapon().WeaponSound);
         agent.WeaponManager.GetWeapon().Attack(agent.TriggerCollider, agent.OrientationController.CurrentOrientation, HitMask);

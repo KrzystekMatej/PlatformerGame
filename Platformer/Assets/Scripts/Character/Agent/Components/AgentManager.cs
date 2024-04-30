@@ -79,7 +79,7 @@ public class AgentManager : MonoBehaviour, IHittable
     public void Hit(int attackDamage)
     {
         if (!HealthManager.IsAlive()) return;
-        if (Invulnerability != null)
+        if (Invulnerability)
         {
             if (Invulnerability.IsActive) return;
             else StartCoroutine(Invulnerability.Run(StateMachine.Factory));

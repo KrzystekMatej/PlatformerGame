@@ -21,7 +21,7 @@ public abstract class Item : MonoBehaviour
 
     public void OnDestroy()
     {
-        if (transform.parent != null)
+        if (transform.parent)
         {
             Destroy(transform.parent.gameObject);
         }

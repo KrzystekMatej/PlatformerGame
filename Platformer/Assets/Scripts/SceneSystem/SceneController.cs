@@ -37,7 +37,7 @@ public class SceneController : GlobalComponent<SceneController>
     public int GetCurrentLevelIndex()
     {
         int levelIndex = SceneManager.GetActiveScene().buildIndex - startLevelIndex;
-        if (levelIndex >= startLevelIndex)
+        if (levelIndex >= 0)
         {
             return levelIndex;
         }

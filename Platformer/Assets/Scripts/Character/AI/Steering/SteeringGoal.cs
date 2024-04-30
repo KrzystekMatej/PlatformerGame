@@ -39,7 +39,7 @@ public class SteeringGoal
         set
         {
             owner = value;
-            HasOwner = owner != null;
+            HasOwner = owner;
         }
     }
 

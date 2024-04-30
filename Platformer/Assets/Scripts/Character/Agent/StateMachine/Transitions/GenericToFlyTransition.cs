@@ -9,6 +9,6 @@ public class GenericToFlyTransition : StateTransition
 
     public override bool IsTriggered(AgentManager agent)
     {
-        return IsInterruptAllowed(InterruptMask.AnimationComplete, agent.StateMachine.InterruptFilter) && (agent.GroundDetector == null || !agent.GroundDetector.Detected);
+        return IsInterruptAllowed(InterruptMask.AnimationComplete, agent.StateMachine.InterruptFilter) && (!agent.GroundDetector || !agent.GroundDetector.Detected);
     }
 }
