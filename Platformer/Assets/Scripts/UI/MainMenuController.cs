@@ -13,15 +13,25 @@ public class MainMenuController : MonoBehaviour
     private void Start()
     {
         InitSelectLevelMenu();
+        for (int i = 0; i < levels.Count; i++)
+        {
+            int levelIndex = i;
+            levels[i].onClick.AddListener(() => LoadLevel(levelIndex));
+        }
     }
 
-    public void SelectLevelClicked()
+    public void StartGame()
+    {
+        SceneController.Instance.LoadNextScene();
+    }
+
+    public void SelectLevel()
     {
         mainPanel.SetActive(false);
         selectLevelPanel.SetActive(true);
     }
 
-    public void MainMenuClicked()
+    public void MainMenu()
     {
         mainPanel.SetActive(true);
         selectLevelPanel.SetActive(false);
@@ -39,6 +49,11 @@ public class MainMenuController : MonoBehaviour
         {
             levels[i].interactable = true;
         }
+    }
+
+    public void LoadLevel(int levelIndex)
+    {
+        SceneController.Instance.LoadLevelByIndex(levelIndex);
     }
 
     public void ExitGame()

@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb3cb813ca10e83419251f57d098c97d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playActivationSound: 1
+  activationSound: {fileID: 11400000, guid: 10beff9f9250f1a4c9e770f56619a228, type: 2}
 --- !u!114 &6874109316580370648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,10 +179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c4fe9118c32c8e469379e57a5fdb58b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerCollider: {fileID: 0}
   triggerMask:
     serializedVersion: 2
     m_Bits: 8
-  triggerTag: 
   <TriggerCounter>k__BackingField: 0
   OnEnter:
     m_PersistentCalls:

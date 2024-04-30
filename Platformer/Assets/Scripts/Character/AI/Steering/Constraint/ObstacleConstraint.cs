@@ -41,8 +41,8 @@ public class ObstacleConstraint : Constraint
 
         for (int i = 0; i < pointPath.Count - 1; i++)
         {
-            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], Agent.PhysicsRadius, obstacleMask);
-            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], Agent.PhysicsRadius, obstacleMask);
+            Vector2? nonBlockStart = MathUtility.UnblockPosition(pointPath[i], agent.PhysicsRadius, obstacleMask);
+            Vector2? nonBlockEnd = MathUtility.UnblockPosition(pointPath[i + 1], agent.PhysicsRadius, obstacleMask);
 
             if (!nonBlockStart.HasValue || !nonBlockEnd.HasValue)
             {
@@ -54,7 +54,7 @@ public class ObstacleConstraint : Constraint
             pointPath[i + 1] = nonBlockEnd.Value;
 
             Vector2 segmentVector = pointPath[i + 1] - pointPath[i];
-            hit = Physics2D.CircleCast(pointPath[i], Agent.PhysicsRadius, segmentVector, segmentVector.magnitude, obstacleMask);
+            hit = Physics2D.CircleCast(pointPath[i], agent.PhysicsRadius, segmentVector, segmentVector.magnitude, obstacleMask);
 
             if (hit)
             {
@@ -73,14 +73,14 @@ public class ObstacleConstraint : Constraint
         NavGraph navGraph = hit.collider.GetComponentInChildren<NavGraph>();
         if (!navGraph) return false;
 
-        NavPath navPath = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], Agent.PhysicsRadius, navGraph);
+        NavPath navPath = GetAvoidancePath(pointPath[problemSegmentIndex], pointPath[problemSegmentIndex + 1], agent.PhysicsRadius, navGraph);
         if (navPath == null) return false;
 
 #if UNITY_EDITOR
         gizmoPath = navPath;
 #endif
 
-        goal.Position = navPath.Nodes[1].GetExpandedPosition(Agent.PhysicsRadius);
+        goal.Position = navPath.Nodes[1].GetExpandedPosition(agent.PhysicsRadius);
         return true;
     }
 
@@ -108,11 +108,11 @@ public class ObstacleConstraint : Constraint
         {
             Gizmos.DrawLine
             (
-                gizmoPath.Nodes[i].GetExpandedPosition(Agent.PhysicsRadius),
-                gizmoPath.Nodes[i + 1].GetExpandedPosition(Agent.PhysicsRadius)
+                gizmoPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius),
+                gizmoPath.Nodes[i + 1].GetExpandedPosition(agent.PhysicsRadius)
             );
-            Gizmos.DrawWireSphere(gizmoPath.Nodes[i].GetExpandedPosition(Agent.PhysicsRadius), 0.3f);
-            Gizmos.DrawWireSphere(gizmoPath.Nodes[i+1].GetExpandedPosition(Agent.PhysicsRadius), 0.3f);
+            Gizmos.DrawWireSphere(gizmoPath.Nodes[i].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
+            Gizmos.DrawWireSphere(gizmoPath.Nodes[i+1].GetExpandedPosition(agent.PhysicsRadius), 0.3f);
         }
     }
 #endif

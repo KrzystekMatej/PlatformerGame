@@ -10,9 +10,9 @@ using UnityEngine;
 public class BackgroundController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject current;
+    private BackgroundData current;
     [SerializeField]
-    private GameObject next;
+    private BackgroundData next;
     private ICinemachineCamera virtualCamera;
     [SerializeField]
     [Range(0, 1)]
@@ -27,28 +27,14 @@ public class BackgroundController : MonoBehaviour
     [Range(0.5f, 1f)]
     private float rightLimit = 0.75f;
 
-    BackgroundData backgroundData;
-    BackgroundData tempBackgroundData;
-
     Vector3 lastCameraPosition;
 
     private void Awake()
     {
-        InitializeBackgroundData();
-
+        current.Initialize();
+        next.Initialize();
         Camera.main.GetComponent<CinemachineBrain>().m_CameraActivatedEvent.AddListener(OnCameraActivated);
         enabled = false;
-    }
-
-    private void InitializeBackgroundData()
-    {
-        var currentSprites = current.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
-        var nextSprites = next.GetComponentsInChildren<SpriteRenderer>().OrderBy(s => s.bounds.center.x);
-
-        backgroundData.CurrentBounds = GetBounds(currentSprites);
-        backgroundData.NextBounds = GetBounds(nextSprites);
-
-        tempBackgroundData = backgroundData;
     }
 
     private void OnCameraActivated(ICinemachineCamera incomingVcam, ICinemachineCamera outgoingVcam)
@@ -58,52 +44,37 @@ public class BackgroundController : MonoBehaviour
         enabled = true;
     }
 
-    private (float startX, float length) GetBounds(IOrderedEnumerable<SpriteRenderer> sprites)
-    {
-
-        float rightX = sprites.Last().bounds.center.x + sprites.Last().bounds.size.x / 2;
-        float leftX = sprites.First().bounds.center.x - sprites.First().bounds.size.x / 2;
-        return (sprites.First().bounds.center.x - sprites.First().bounds.size.x / 2, rightX - leftX);
-    }
-
     private void FixedUpdate()
     {
         Vector3 currentCameraPosition = virtualCamera.State.FinalPosition;
+        Vector2 currentLeftUp = (Vector2)current.Owner.transform.position + current.Offset;
+        Vector2 nextLeftUp = (Vector2)next.Owner.transform.position + next.Offset;
 
         ApplyParallaxEffect(currentCameraPosition);
-        ShiftNext(currentCameraPosition.x);
-        SwitchBackgrounds(currentCameraPosition.x);
+        ShiftNext(currentCameraPosition.x, currentLeftUp, nextLeftUp);
+        SwitchBackgrounds(currentCameraPosition.x, nextLeftUp);
 
         lastCameraPosition = currentCameraPosition;
     }
 
-    private void ShiftNext(float currentCameraPositionX)
+    private void ShiftNext(float currentCameraPositionX, Vector2 currentLeftUp, Vector2 nextLeftUp)
     {
-        if (!backgroundData.IsOnLeft && currentCameraPositionX < backgroundData.CurrentBounds.startX + leftLimit * backgroundData.CurrentBounds.length)
+        bool isOnLeft = nextLeftUp.x < currentLeftUp.x;
+        if (!isOnLeft && currentCameraPositionX < currentLeftUp.x + leftLimit * current.Size.x)
         {
-            Vector3 shift = new Vector3(backgroundData.CurrentBounds.length + backgroundData.NextBounds.length, 0, 0);
-            next.transform.position -= shift;
-            backgroundData.NextBounds.startX -= shift.x;
-            backgroundData.IsOnLeft = true;
+            next.Owner.transform.position -= new Vector3(current.Size.x + next.Size.x, 0, 0);
         }
-        else if (backgroundData.IsOnLeft && currentCameraPositionX > backgroundData.CurrentBounds.startX + rightLimit * backgroundData.CurrentBounds.length)
+        else if (isOnLeft && currentCameraPositionX > currentLeftUp.x + rightLimit * current.Size.x)
         {
-            Vector3 shift = new Vector3(backgroundData.CurrentBounds.length + backgroundData.NextBounds.length, 0, 0);
-            next.transform.position += shift;
-            backgroundData.NextBounds.startX += shift.x;
-            backgroundData.IsOnLeft = false;
+            next.Owner.transform.position += new Vector3(current.Size.x + next.Size.x, 0, 0);
         }
     }
 
-    private void SwitchBackgrounds(float currentCameraPositionX)
+    private void SwitchBackgrounds(float currentCameraPositionX, Vector2 nextLeftUp)
     {
-        if (currentCameraPositionX > backgroundData.NextBounds.startX && currentCameraPositionX < backgroundData.NextBounds.startX + backgroundData.NextBounds.length)
+        if (currentCameraPositionX > nextLeftUp.x && currentCameraPositionX < nextLeftUp.x + next.Size.x)
         {
             Utility.SwapReferences(ref current, ref next);
-            var tempCurrentBounds = backgroundData.CurrentBounds;
-            backgroundData.CurrentBounds = backgroundData.NextBounds;
-            backgroundData.NextBounds = tempCurrentBounds;
-            backgroundData.IsOnLeft = !backgroundData.IsOnLeft;
         }
     }
 
@@ -111,24 +82,20 @@ public class BackgroundController : MonoBehaviour
     {
         Vector3 shift = new Vector3((currentCameraPosition.x - lastCameraPosition.x) * horizontalParallax, (currentCameraPosition.y - lastCameraPosition.y) * verticalParallax);
         transform.position += shift;
-        backgroundData.CurrentBounds.startX += shift.x;
-        backgroundData.NextBounds.startX += shift.x;
-    }
-
-
-    public void CacheBackgroundData()
-    {
-        tempBackgroundData = backgroundData;
-    }
-
-    public void RestoreBackgroundData()
-    {
-        backgroundData = tempBackgroundData;
     }
 
     public bool IsFollowed(AgentManager agent)
     {
         if (virtualCamera == null) return false;
         return agent == virtualCamera.Follow.GetComponent<AgentManager>();
+    }
+
+    private void OnDrawGizmos()
+    {
+        current.Initialize();
+        next.Initialize();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(current.Owner.transform.position + (Vector3)current.Offset + new Vector3(current.Size.x, -current.Size.y, 0)/2, current.Size);
+        Gizmos.DrawWireCube(next.Owner.transform.position + (Vector3)next.Offset + new Vector3(next.Size.x, -next.Size.y, 0) / 2, next.Size);
     }
 }

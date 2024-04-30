@@ -45,6 +45,8 @@ public class OrientationController : MonoBehaviour
             transform.localScale.z
         );
 
-        transform.position = new Vector2(transform.position.x - CurrentOrientation.x * objectCollider.offset.x * 2, transform.position.y);
+
+        float shift = objectCollider.transform.position.x - transform.position.x;
+        transform.position = new Vector2(transform.position.x - shift * 2, transform.position.y);
     }
 }

@@ -16,6 +16,7 @@ public class ManageSteeringTask : DecoratorNode
 
     protected override void OnStart()
     {
+        if (context.Steering.CurrentPipeline == newPipeline.Value) return;
         lastPipeline = context.Steering.CurrentPipeline;
         if (context.Steering.SwitchPipeline(newPipeline.Value))
         {
@@ -41,9 +42,10 @@ public class ManageSteeringTask : DecoratorNode
 
     protected override void OnStop()
     {
+        if (context.Steering.CurrentPipeline == newPipeline.Value) return;
+        newPipeline.Value.Disable();
         if (state != ProcessState.Running && context.Steering.SwitchPipeline(lastPipeline))
         {
-            newPipeline.Value.Disable();
             lastPipeline.Enable();
         }
     }

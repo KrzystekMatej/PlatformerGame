@@ -17,7 +17,7 @@ public class ArriveTargeter : Targeter
 
     public override ProcessState Target(SteeringGoal goal)
     {
-        float distance = Vector2.Distance(Agent.PhysicsCenter, goal.Position);
+        float distance = Vector2.Distance(agent.PhysicsCenter, goal.Position);
         float arriveRadius = this.arriveRadius;
 
         if (goal.HasOwner)
@@ -39,8 +39,8 @@ public class ArriveTargeter : Targeter
 #endif
 
 
-        if (slowRadius != 0 && distance <= slowRadius) goal.Speed = Agent.InstanceData.MaxSpeed * distance / slowRadius;
-        else goal.Speed = Agent.InstanceData.MaxSpeed;
+        if (slowRadius != 0 && distance <= slowRadius) goal.Speed = agent.InstanceData.MaxSpeed * distance / slowRadius;
+        else goal.Speed = agent.InstanceData.MaxSpeed;
 
         return ProcessState.Running;
     }

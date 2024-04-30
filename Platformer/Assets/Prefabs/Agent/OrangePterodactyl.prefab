@@ -628,6 +628,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616260, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.07364987
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616260, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.544975
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
       value: 0.9002319
@@ -638,11 +646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.07364987
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
-      value: -0.544975
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction
@@ -1203,6 +1211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Current>k__BackingField: {fileID: 0}
   navGraphName: FlySpace
   quantizationUpdateInterval: 0
 --- !u!114 &8189875991959016071 stripped

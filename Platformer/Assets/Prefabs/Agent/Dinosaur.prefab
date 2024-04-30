@@ -400,6 +400,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616260, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.3033774
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616260, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6047922
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
       value: 1.3562001
@@ -410,11 +418,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.30337745
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.y
-      value: -0.60479224
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Direction
@@ -932,8 +940,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c6a179315bcb5c478c7c209d78bfda4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  physicsCollider: {fileID: 499778371479014627}
   detector: {fileID: 11400000, guid: d7b8d8f7c9da87145893bb5b73af76c8, type: 2}
+  physicsCollider: {fileID: 499778371479014627}
   boxCastXOffset: -0.07
   boxCastYOffset: -0.28
   boxCastWidth: 0.7

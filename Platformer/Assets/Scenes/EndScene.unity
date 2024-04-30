@@ -447,17 +447,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 974026275}
   m_CullTransparentMesh: 1
---- !u!114 &1089212123 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1088177429590332120, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
-  m_PrefabInstance: {fileID: 1977542168}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc6e5a7930bcb5469540f20d887b7d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1132867439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,6 +993,7 @@ GameObject:
   - component: {fileID: 1838371022}
   - component: {fileID: 1838371021}
   - component: {fileID: 1838371020}
+  - component: {fileID: 1838371023}
   m_Layer: 5
   m_Name: ButtonPanel
   m_TagString: Untagged
@@ -1095,6 +1085,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838371018}
   m_CullTransparentMesh: 1
+--- !u!114 &1838371023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838371018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2b40b861ede3346a9a1d516dbe3fe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1977542168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1103,6 +1105,514 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[0]
+      value: 7888085121204486414
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[1]
+      value: 7888085121204486415
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[2]
+      value: 7888085121204486416
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[3]
+      value: 7888085121204486417
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[4]
+      value: 7888085121204486418
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[5]
+      value: 7888085121204486419
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[6]
+      value: 7888085121204486420
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[7]
+      value: 7888085121204486421
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[8]
+      value: 7888085121204486422
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[9]
+      value: 7888085121204486423
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[10]
+      value: 7888085121204486424
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[11]
+      value: 7888085121204486425
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[12]
+      value: 7888085121204486426
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[13]
+      value: 7888085121204486427
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[14]
+      value: 7888085121204486428
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[15]
+      value: 7888085121204486429
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[16]
+      value: 7888085121204486430
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: availableTransitions.Array.data[17]
+      value: 7888085121204486431
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486378]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486379]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486380]
+      value: Assembly-CSharp ClimbToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486381]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486382]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486383]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486384]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486385]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486386]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486387]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486388]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486389]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486390]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486391]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486392]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486393]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486394]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486395]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486396]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486397]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486398]
+      value: Assembly-CSharp ClimbToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486399]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486400]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486401]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486402]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486403]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486404]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486405]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486406]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486407]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486408]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486409]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486410]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486411]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486412]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486413]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486414]
+      value: Assembly-CSharp AttackToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486415]
+      value: Assembly-CSharp AttackToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486416]
+      value: Assembly-CSharp ClimbToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486417]
+      value: Assembly-CSharp ClimbToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486418]
+      value: Assembly-CSharp ClimbToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486419]
+      value: Assembly-CSharp FallToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486420]
+      value: Assembly-CSharp FallToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486421]
+      value: Assembly-CSharp GenericToAttackTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486422]
+      value: Assembly-CSharp GenericToClimbTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486423]
+      value: Assembly-CSharp GenericToDieTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486424]
+      value: Assembly-CSharp GenericToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486425]
+      value: Assembly-CSharp GenericToFlyTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486426]
+      value: Assembly-CSharp GenericToHurtTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486427]
+      value: Assembly-CSharp GenericToJumpTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486428]
+      value: Assembly-CSharp HurtToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486429]
+      value: Assembly-CSharp IdleToWalkTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486430]
+      value: Assembly-CSharp JumpToFallTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486431]
+      value: Assembly-CSharp WalkToIdleTransition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486378].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486379].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486380].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486381].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486382].<TargetState>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486383].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486384].<TargetState>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486385].<TargetState>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486386].<TargetState>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486387].<TargetState>k__BackingField
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486388].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486389].<TargetState>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486390].<TargetState>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486391].<TargetState>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486392].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486393].<TargetState>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486394].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486395].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486396].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486397].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486398].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486399].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486400].<TargetState>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486401].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486402].<TargetState>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486403].<TargetState>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486404].<TargetState>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486405].<TargetState>k__BackingField
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486406].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486407].<TargetState>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486408].<TargetState>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486409].<TargetState>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486410].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486411].<TargetState>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486412].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486413].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486414].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486415].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486416].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486417].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486418].<TargetState>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486419].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486420].<TargetState>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486421].<TargetState>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486422].<TargetState>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486423].<TargetState>k__BackingField
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486424].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486425].<TargetState>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486426].<TargetState>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486427].<TargetState>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486428].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486429].<TargetState>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486430].<TargetState>k__BackingField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+      propertyPath: managedReferences[7888085121204486431].<TargetState>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4983029550968296733, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
       propertyPath: m_Name
       value: SceneSystem
@@ -1155,8 +1665,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1897017986988327886, guid: da7b78001b3cf3941ad9037bfabfbfe6, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1264,7 +1773,7 @@ PrefabInstance:
     - target: {fileID: 2116696578972537759, guid: a76af90e86ab11840a475c8f4a4c710c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1089212123}
+      objectReference: {fileID: 1838371023}
     - target: {fileID: 2116696578972537759, guid: a76af90e86ab11840a475c8f4a4c710c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -1275,7 +1784,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2116696578972537759, guid: a76af90e86ab11840a475c8f4a4c710c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: SceneController, Assembly-CSharp
+      value: EndingMenuController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2116696578972537759, guid: a76af90e86ab11840a475c8f4a4c710c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName

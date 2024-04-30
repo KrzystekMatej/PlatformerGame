@@ -19,7 +19,7 @@ public class DirectActuator : Actuator
 
         if (goal.HasPosition)
         {
-            path.Add(Agent.PhysicsCenter);
+            path.Add(agent.PhysicsCenter);
             path.Add(goal.Position);
         }
 
@@ -35,10 +35,10 @@ public class DirectActuator : Actuator
         if (goal.HasSpeed)
         {
             Vector2 targetVelocity = goalDirection * goal.Speed;
-            Vector2 force = targetVelocity - Agent.RigidBody.velocity;
+            Vector2 force = targetVelocity - agent.RigidBody.velocity;
             return SteeringOutput.Running(force / timeToTarget);
         }
-        else return SteeringOutput.Running(goalDirection * Agent.InstanceData.MaxForce);
+        else return SteeringOutput.Running(goalDirection * agent.InstanceData.MaxForce);
     }
 
 #if UNITY_EDITOR

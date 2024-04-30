@@ -9,10 +9,23 @@ public class GlobalComponent<T> : MonoBehaviour where T : MonoBehaviour
 
     protected virtual void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this as T;
+            DontDestroyOnLoad(Instance);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 #if UNITY_EDITOR
+    private void Start()
+    {
         var instances = FindObjectsOfType<T>();
         if (instances.Count() > 1) Debug.LogWarning("Multiple instances of global component present in current scene.");
-#endif
-        Instance = this as T;
+        //float shift = objectCollider.transform.position.x - transform.position.x;
+        //transform.position = new Vector2(transform.position.x - shift * 2, transform.position.y);
     }
+#endif
 }

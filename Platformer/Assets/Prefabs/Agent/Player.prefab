@@ -1176,13 +1176,25 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 52a8a9480403f914db4355634c7662c7, type: 2}
+    - target: {fileID: 7363741092666616260, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2634125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616260, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.01183385
+      objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Size.x
       value: 0.92041016
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: m_Offset.x
-      value: -0.26341248
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363741092666616261, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7363741092666616262, guid: 42da28ef36f915243b026eb6251b4dc5, type: 3}
       propertyPath: detector
@@ -1791,6 +1803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbdd9a779529ff42902701df26ecc89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Current>k__BackingField: {fileID: 0}
   navGraphName: FlySpace
   quantizationUpdateInterval: 0.1
 --- !u!114 &7184499124817944392

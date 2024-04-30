@@ -5,11 +5,11 @@ using UnityEngine;
 
 public abstract class PipelineComponent : MonoBehaviour
 {
-    public AgentManager Agent { get; private set; }
+    protected AgentManager agent { get; private set; }
 
     protected virtual void Awake()
     {
-        Agent = GetComponentInParent<AIInputController>().GetComponentInChildren<AgentManager>();
+        agent = GetComponentInParent<AIInputController>().GetComponentInChildren<AgentManager>();
     }
 
     public virtual void Enable() { }

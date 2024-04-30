@@ -7,16 +7,16 @@ using UnityEngine.Events;
 public class Checkpoint : MonoBehaviour
 {
     [SerializeField]
-    private bool playActivationSound = true;
+    private Sound activationSound;
     private AgentManager respawnTarget;
-    private RespawnSystem respawnSystem;
     private TriggerFilter triggerDetector;
+    private AudioSource audioSource;
 
 
     private void Awake()
     {
-        respawnSystem = GetComponentInParent<RespawnSystem>();
         triggerDetector = GetComponent<TriggerFilter>();
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -27,22 +27,12 @@ public class Checkpoint : MonoBehaviour
         respawnTarget.OnRespawnRequired.RemoveAllListeners();
         respawnTarget.OnRespawnRequired.AddListener(RespawnPlayer);
 
-        foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
-        {
-            if (controller.IsFollowed(respawnTarget)) controller.CacheBackgroundData();
-        }
-
-        if (playActivationSound) respawnTarget.AudioFeedback.PlaySpecificSound(respawnSystem.ActivationSound);
+        respawnTarget.AudioFeedback.PlaySpecificSound(activationSound);
     }
 
     private void RespawnPlayer()
     {
         respawnTarget.transform.position = GetComponent<Collider2D>().bounds.center;
-
-        foreach (BackgroundController controller in respawnSystem.BackgroundControllers)
-        {
-            if (controller.IsFollowed(respawnTarget)) controller.RestoreBackgroundData();
-        }
     }
 
     public void ResetCheckpoint()

@@ -21,13 +21,13 @@ public class PathTargeter : Targeter
     public void Recalculate()
     {
         path.SetPoints(waypoints);
-        path.Recalculate(Agent);
+        path.Recalculate(agent);
     }
 
     public Vector2 GetPathTarget()
     {
         Recalculate();
-        return path.CalculateGoalWithCoherence(Agent);
+        return path.CalculateGoalWithCoherence(agent);
     }
 
 
@@ -35,9 +35,9 @@ public class PathTargeter : Targeter
     {
         if (isDynamic) Recalculate();
 
-        goal.Position = path.CalculateGoalWithCoherence(Agent);
+        goal.Position = path.CalculateGoalWithCoherence(agent);
         
-        return path.ReachedEnd(Agent, goal.Position) ? ProcessState.Success : ProcessState.Running;
+        return path.ReachedEnd(agent, goal.Position) ? ProcessState.Success : ProcessState.Running;
     }
 
 #if UNITY_EDITOR
