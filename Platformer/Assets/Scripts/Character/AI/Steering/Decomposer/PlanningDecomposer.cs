@@ -43,10 +43,14 @@ public class PlanningDecomposer : Decomposer
 
         if (IsGoalVisible(nonBlockAgent.Value, goal.Position, agentRadius)) return true;
 
-        navPath = GetNavPath(goal);
+        navPath = GetNavPath(goal, nonBlockAgent.Value, agentRadius);
         if (navPath == null) return false;
 
-        goal.Position = GetMostDistantReachablePosition(nonBlockAgent.Value, agentRadius);
+        int goalNodeIndex = GetMostDistantNodeIndex(nonBlockAgent.Value, agentRadius, navPath.Nodes);
+        if (goalNodeIndex == -1) goalNodeIndex = 0;
+        navPath.Nodes.RemoveRange(0, goalNodeIndex);
+        goal.Position = navPath.Nodes[0].GetExpandedPosition(agentRadius);
+
         return true;
     }
 
@@ -56,7 +60,7 @@ public class PlanningDecomposer : Decomposer
         return !Physics2D.CircleCast(agentPosition, agentRadius, goalVector, goalVector.magnitude, agentTracker.NavGraph.WallMask);
     }
 
-    private NavPath GetNavPath(SteeringGoal goal)
+    private NavPath GetNavPath(SteeringGoal goal, Vector2 agentPosition, float enclosingCircleRadius)
     {
         NavGraphNode startNode = agentTracker.Current;
         NavGraphNode endNode = QuantizeGoal(goal);
@@ -76,6 +80,11 @@ public class PlanningDecomposer : Decomposer
                         if (navPath.Nodes[i] == newNavPath.Nodes[j])
                         {
                             var oldPathPart = navPath.Nodes.Take(i);
+                            if (GetMostDistantNodeIndex(agentPosition, enclosingCircleRadius, oldPathPart.ToList()) == -1)
+                            {
+                                return newNavPath;
+                            }
+
                             var newPathPart = newNavPath.Nodes.Skip(j);
                             newNavPath.Nodes = oldPathPart.Concat(newPathPart).ToList();
                             return newNavPath;
@@ -102,19 +111,19 @@ public class PlanningDecomposer : Decomposer
         return agentTracker.NavGraph.QuantizePosition(goal.Position);
     }
 
-    private Vector2 GetMostDistantReachablePosition(Vector2 agentPosition, float enclosingCircleRadius)
+    private int GetMostDistantNodeIndex(Vector2 agentPosition, float enclosingCircleRadius, List<NavGraphNode> nodes)
     {
-        for (int i = navPath.Nodes.Count - 1; i > 0; i--)
+        for (int i = nodes.Count - 1; i >= 0; i--)
         {
-            Vector2 expandedPosition = navPath.Nodes[i].GetExpandedPosition(enclosingCircleRadius);
+            Vector2 expandedPosition = nodes[i].GetExpandedPosition(enclosingCircleRadius);
             Vector2 nodeVector = expandedPosition - agentPosition;
             if (!Physics2D.CircleCast(agentPosition, enclosingCircleRadius, nodeVector, nodeVector.magnitude, agentTracker.NavGraph.WallMask))
             {
-                return expandedPosition;
+                return i;
             }
         }
 
-        return navPath.Nodes[0].GetExpandedPosition(enclosingCircleRadius);
+        return -1;
     }
 
     public override void Disable()

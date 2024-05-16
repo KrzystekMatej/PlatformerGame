@@ -71,4 +71,9 @@ public class NavPath : IComparable<NavPath>
             yield return Nodes[i].GetExpandedPosition(radius);
         }
     }
+
+    public void Log()
+    {
+        Nodes.ForEach(n => Debug.Log(n));
+    }
 }
